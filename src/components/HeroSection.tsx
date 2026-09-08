@@ -105,11 +105,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </div>
 
         {/* Main Headline */}
-        <h1 className="font-heading font-extrabold text-[2.9rem] sm:text-[4.2rem] lg:text-[4.9rem] text-[#0E1117] leading-[1.06] tracking-tight mb-8 select-none">
+        <h1 className="font-heading font-extrabold text-[clamp(2.35rem,5.5vw,4.85rem)] text-[#0E1117] leading-[1.06] tracking-tight mb-7 sm:mb-8 select-none">
           Powering Your<br />
           <span className="text-[#E51E2B] relative inline-block">
             Digital
-            <span className="absolute left-0 bottom-1.5 w-full h-1.5 bg-[#E51E2B]/15 rounded-full" />
+            <span className="absolute left-0 bottom-1 sm:bottom-1.5 w-full h-1 sm:h-1.5 bg-[#E51E2B]/15 rounded-full" />
           </span>{' '}
           World.
         </h1>

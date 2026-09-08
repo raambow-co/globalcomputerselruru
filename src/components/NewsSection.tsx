@@ -162,7 +162,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           </div>
 
           {/* Section Headline */}
-          <h2 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-[2.85rem] text-[#0E1117] leading-[1.12] tracking-tight mb-4">
+          <h2 className="font-heading font-extrabold text-[clamp(1.85rem,4vw,2.85rem)] text-[#0E1117] leading-[1.12] tracking-tight mb-4">
             Stay Ahead of{' '}
             <span className="text-[#E51E2B] relative inline-block">
               Technology.
@@ -171,7 +171,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           </h2>
 
           {/* Supporting Lead Copy */}
-          <p className="text-[1.02rem] sm:text-[1.1rem] text-[#4A5364] leading-relaxed font-normal">
+          <p className="text-[1.02rem] sm:text-[1.1rem] text-[#4A5364] leading-relaxed font-normal max-w-xl">
             Discover the latest arrivals, technology updates and solutions from Global Computers.
           </p>
         </div>
@@ -182,7 +182,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           {/* LEFT: Featured Story Visual Article (7 Columns on LG) */}
           <div
             onClick={() => setSelectedStory(featuredStory)}
-            className="lg:col-span-7 group cursor-pointer bg-white rounded-3xl p-8 sm:p-10 border border-black/[0.07] shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(229,30,43,0.07)] hover:border-[#E51E2B]/25 flex flex-col justify-between relative overflow-hidden"
+            className="lg:col-span-7 group cursor-pointer bg-white rounded-3xl p-8 sm:p-10 border border-black/[0.07] shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(229,30,43,0.07)] hover:border-[#E51E2B]/25 active:scale-[0.995] flex flex-col justify-between relative overflow-hidden"
           >
             {/* Subtle red corner glow indicator */}
             <div className="absolute top-0 right-0 w-44 h-44 bg-[radial-gradient(circle_at_100%_0%,rgba(229,30,43,0.04),transparent_70%)] pointer-events-none transition-opacity duration-300 group-hover:opacity-100" />
@@ -203,7 +203,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
               </div>
 
               {/* Featured Headline */}
-              <h3 className="font-heading font-extrabold text-2xl sm:text-[2.1rem] text-[#0E1117] leading-[1.18] tracking-tight mb-3.5 group-hover:text-[#E51E2B] transition-colors duration-200">
+              <h3 className="font-heading font-extrabold text-[clamp(1.45rem,2.5vw,2.15rem)] text-[#0E1117] leading-[1.18] tracking-tight mb-3.5 group-hover:text-[#E51E2B] transition-colors duration-200">
                 {featuredStory.title}
               </h3>
 

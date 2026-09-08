@@ -31,53 +31,108 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
     status: string;
   } | null>(null);
 
-  // Mouse & Parallax Coordinates with Lerp
-  const mouseState = useRef({
+  // Mouse, Touch & Parallax Coordinates with High-Refresh Lerp
+  const physicsState = useRef({
     targetX: 0,
     targetY: 0,
     currentX: 0,
     currentY: 0,
+    isVisible: true,
+    lastTime: performance.now(),
   });
 
   const layerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    // 1. Intersection Observer to completely pause rendering when scrolled out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        physicsState.current.isVisible = entry.isIntersecting;
+      },
+      { threshold: 0.05 }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    // 2. Tab visibility change handler
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        physicsState.current.isVisible = false;
+      } else if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        physicsState.current.isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // 3. Mouse Move Handler
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
-      mouseState.current.targetX = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      mouseState.current.targetY = (e.clientY - innerHeight / 2) / (innerHeight / 2);
+      physicsState.current.targetX = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+      physicsState.current.targetY = (e.clientY - innerHeight / 2) / (innerHeight / 2);
 
       if (activeTooltip) {
+        // Prevent tooltip from overflowing screen edges
+        const tooltipX = Math.min(e.clientX + 20, innerWidth - 280);
+        const tooltipY = Math.min(e.clientY + 20, innerHeight - 120);
         setActiveTooltip((prev) =>
-          prev ? { ...prev, x: e.clientX + 20, y: e.clientY + 20 } : null
+          prev ? { ...prev, x: tooltipX, y: tooltipY } : null
         );
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
+    // 4. Touch Move Handler for Mobile/Tablet micro-pan
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        const { innerWidth, innerHeight } = window;
+        const touch = e.touches[0];
+        physicsState.current.targetX = (touch.clientX - innerWidth / 2) / (innerWidth / 2);
+        physicsState.current.targetY = (touch.clientY - innerHeight / 2) / (innerHeight / 2);
+      }
+    };
 
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    // 5. High-FPS Physics Render Loop with Delta-time & Organic Harmonic Drift
     let animationFrameId: number;
-    const renderLoop = () => {
-      // Lerp smoothing
-      mouseState.current.currentX +=
-        (mouseState.current.targetX - mouseState.current.currentX) * 0.06;
-      mouseState.current.currentY +=
-        (mouseState.current.targetY - mouseState.current.currentY) * 0.06;
 
-      const curX = mouseState.current.currentX;
-      const curY = mouseState.current.currentY;
+    const renderLoop = (time: number) => {
+      if (physicsState.current.isVisible) {
+        const dt = Math.min((time - physicsState.current.lastTime) / 1000, 0.1);
+        physicsState.current.lastTime = time;
 
-      // Apply transformations to layers
-      layerRefs.current.forEach((layer) => {
-        if (!layer) return;
-        const depth = parseFloat(layer.getAttribute('data-depth') || '0.05');
-        const tx = curX * depth * 320;
-        const ty = curY * depth * 220;
-        const rx = -curY * depth * 12;
-        const ry = curX * depth * 12;
+        // Subtle ambient harmonic drift (adds organic life even when cursor is stationary)
+        const ambientX = Math.sin(time * 0.0008) * 0.04;
+        const ambientY = Math.cos(time * 0.0006) * 0.04;
 
-        layer.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotateX(${rx}deg) rotateY(${ry}deg)`;
-      });
+        const effectiveTargetX = physicsState.current.targetX + ambientX;
+        const effectiveTargetY = physicsState.current.targetY + ambientY;
+
+        // Lerp smoothing formula calibrated for 60Hz - 240Hz screens
+        const lerpFactor = 1 - Math.pow(0.001, dt);
+        physicsState.current.currentX +=
+          (effectiveTargetX - physicsState.current.currentX) * lerpFactor;
+        physicsState.current.currentY +=
+          (effectiveTargetY - physicsState.current.currentY) * lerpFactor;
+
+        const curX = physicsState.current.currentX;
+        const curY = physicsState.current.currentY;
+
+        // Apply hardware-accelerated 3D transforms to depth planes
+        layerRefs.current.forEach((layer) => {
+          if (!layer) return;
+          const depth = parseFloat(layer.getAttribute('data-depth') || '0.05');
+          const tx = (curX * depth * 280).toFixed(2);
+          const ty = (curY * depth * 180).toFixed(2);
+          const rx = (-curY * depth * 10).toFixed(2);
+          const ry = (curX * depth * 10).toFixed(2);
+
+          layer.style.transform = `translate3d(${tx}px, ${ty}px, 0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+      }
 
       animationFrameId = requestAnimationFrame(renderLoop);
     };
@@ -85,7 +140,10 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
     animationFrameId = requestAnimationFrame(renderLoop);
 
     return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
       cancelAnimationFrame(animationFrameId);
     };
   }, [activeTooltip]);
@@ -99,7 +157,8 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       category: 'Core Components',
       status: '● Verified In Stock',
       image: '/assets/motherboard.png',
-      className: 'top-[10%] left-[1%] sm:left-[3%] lg:left-[5%] w-[220px] sm:w-[280px] lg:w-[330px] -rotate-6 opacity-40 sm:opacity-100',
+      className:
+        'top-[8%] sm:top-[10%] lg:top-[12%] left-[1%] sm:left-[3%] lg:left-[5%] w-[clamp(180px,22vw,330px)] -rotate-6 opacity-40 sm:opacity-100',
       depth: 0.03,
       hotspotLabel: 'Z790 Architecture',
       hotspotStyle: { top: '35%', right: '-20px' },
@@ -114,14 +173,15 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       category: 'Business Printers',
       status: '● Verified In Stock',
       image: '/assets/epson_printer.png',
-      className: 'top-[46%] left-[0.5%] sm:left-[2%] lg:left-[4%] w-[270px] sm:w-[350px] lg:w-[420px] rotate-2 opacity-40 sm:opacity-100',
+      className:
+        'top-[44%] sm:top-[46%] lg:top-[48%] left-[0.5%] sm:left-[2%] lg:left-[4%] w-[clamp(220px,26vw,410px)] rotate-2 opacity-40 sm:opacity-100',
       depth: 0.07,
       hotspotLabel: 'Epson EcoTank Pro',
       hotspotStyle: { bottom: '-15px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-printer',
       animationClass: 'animate-float-main',
     },
-    // 3. Foreground Hero Anchor Right Upper: UltraVision 4K Curved Display (Above Keyboard)
+    // 3. Foreground Hero Anchor Right Upper: UltraVision 4K Curved Display
     {
       id: 'monitor',
       name: 'UltraVision 4K Studio Display',
@@ -129,14 +189,15 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       category: 'Displays',
       status: '● Verified In Stock',
       image: '/assets/pro_monitor.png',
-      className: 'top-[10%] sm:top-[12%] lg:top-[14%] right-[1%] sm:right-[3%] lg:right-[5%] w-[260px] sm:w-[340px] lg:w-[410px] -rotate-2 opacity-40 sm:opacity-100',
+      className:
+        'top-[10%] sm:top-[12%] lg:top-[14%] right-[1%] sm:right-[3%] lg:right-[5%] w-[clamp(220px,26vw,410px)] -rotate-2 opacity-40 sm:opacity-100',
       depth: 0.05,
       hotspotLabel: 'UltraVision 4K',
       hotspotStyle: { top: '-12px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-monitor',
       animationClass: 'animate-float-2',
     },
-    // 4. Foreground Hero Anchor Right Lower: Mechanical Keyboard (Directly Below Display)
+    // 4. Foreground Hero Anchor Right Lower: Mechanical Keyboard
     {
       id: 'keyboard',
       name: 'AeroCNC Mechanical Keyboard',
@@ -144,7 +205,8 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       category: 'Peripherals',
       status: '● In Stock',
       image: '/assets/mech_keyboard.png',
-      className: 'top-[47%] sm:top-[49%] lg:top-[51%] right-[2%] sm:right-[3.5%] lg:right-[5.5%] w-[220px] sm:w-[280px] lg:w-[330px] rotate-2 opacity-40 sm:opacity-100',
+      className:
+        'top-[47%] sm:top-[49%] lg:top-[51%] right-[2%] sm:right-[3.5%] lg:right-[5.5%] w-[clamp(190px,21vw,330px)] rotate-2 opacity-40 sm:opacity-100',
       depth: 0.08,
       hotspotLabel: 'AeroCNC Keyboard',
       hotspotStyle: { bottom: '-12px', right: '15%' },
@@ -172,31 +234,35 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
             layerRefs.current[lIdx] = el;
           }}
           data-depth={layer.depth}
-          className="absolute inset-0 preserve-3d will-change-transform pointer-events-none"
+          className="absolute inset-0 preserve-3d will-change-transform pointer-events-none transform-gpu"
         >
           {layer.products.map((prod) => (
             <div
               key={prod.id}
               onClick={() => onSelectProduct(prod.name)}
               onMouseEnter={(e) => {
+                const { innerWidth, innerHeight } = window;
+                const tooltipX = Math.min(e.clientX + 20, innerWidth - 280);
+                const tooltipY = Math.min(e.clientY + 20, innerHeight - 120);
                 setActiveTooltip({
-                  x: e.clientX + 20,
-                  y: e.clientY + 20,
+                  x: tooltipX,
+                  y: tooltipY,
                   name: prod.name,
                   spec: prod.spec,
                   status: prod.status,
                 });
               }}
               onMouseLeave={() => setActiveTooltip(null)}
-              className={`absolute cursor-pointer pointer-events-auto transition-transform duration-300 hover:scale-105 hover:z-30 group ${prod.className}`}
+              className={`absolute cursor-pointer pointer-events-auto transition-transform duration-300 ease-out hover:scale-105 hover:z-30 group ${prod.className}`}
             >
               {/* Product Image with clean transparency and drop shadow */}
               <div className={prod.animationClass}>
                 <img
                   src={prod.image}
                   alt={prod.name}
-                  className={`w-full h-auto select-none pointer-events-auto ${prod.dropShadowClass}`}
+                  className={`w-full h-auto select-none pointer-events-auto ${prod.dropShadowClass} transition-all duration-300`}
                   loading="eager"
+                  decoding="async"
                 />
               </div>
 
@@ -243,3 +309,4 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
     </div>
   );
 };
+
