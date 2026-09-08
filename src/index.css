@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  --color-gc-red: #E51E2B;
+  --color-gc-red-hover: #D11724;
+  --color-gc-red-active: #BA121E;
+  --color-gc-red-tint: #FFF0F1;
+  --color-gc-charcoal: #0E1117;
+  --color-gc-charcoal-muted: #1C2028;
+  --color-gc-charcoal-secondary: #4A5364;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    scroll-behavior: smooth;
+  }
+}
+
+/* 3D Spatial Preserves */
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+/* Keyframe animations */
+@keyframes floatSlow1 {
+  0% { transform: translate3d(0, 0, 0) rotate(-8deg); }
+  50% { transform: translate3d(8px, -12px, 0) rotate(-6deg); }
+  100% { transform: translate3d(-6px, 6px, 0) rotate(-9deg); }
+}
+
+@keyframes floatSlow2 {
+  0% { transform: translate3d(0, 0, 0) rotate(6deg); }
+  50% { transform: translate3d(-8px, -14px, 0) rotate(4deg); }
+  100% { transform: translate3d(6px, -4px, 0) rotate(7deg); }
+}
+
+@keyframes floatSlow3 {
+  0% { transform: translate3d(0, 0, 0) rotate(-14deg); }
+  50% { transform: translate3d(6px, -10px, 0) rotate(-12deg); }
+  100% { transform: translate3d(-4px, 4px, 0) rotate(-15deg); }
+}
+
+@keyframes floatMain {
+  0% { transform: translate3d(0, 0, 0) rotate(2deg); }
+  50% { transform: translate3d(-6px, -12px, 0) rotate(3deg); }
+  100% { transform: translate3d(4px, -6px, 0) rotate(1deg); }
+}
+
+@keyframes pulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+
+.animate-float-1 {
+  animation: floatSlow1 9s ease-in-out infinite alternate;
+}
+
+.animate-float-2 {
+  animation: floatSlow2 10s ease-in-out infinite alternate;
+}
+
+.animate-float-3 {
+  animation: floatSlow3 8s ease-in-out infinite alternate;
+}
+
+.animate-float-main {
+  animation: floatMain 11s ease-in-out infinite alternate;
+}
+
+.animate-pulse-green {
+  animation: pulseGreen 2.2s infinite;
+}
+
+/* Custom drop-shadow filters for transparent PNGs */
+.drop-shadow-printer {
+  filter: drop-shadow(0 30px 45px rgba(15, 23, 42, 0.16));
+}
+
+.drop-shadow-monitor {
+  filter: drop-shadow(0 25px 40px rgba(15, 23, 42, 0.14));
+}
+
+.drop-shadow-keyboard {
+  filter: drop-shadow(0 20px 35px rgba(15, 23, 42, 0.16));
+}
+
+.drop-shadow-gpu {
+  filter: drop-shadow(0 25px 40px rgba(15, 23, 42, 0.14));
+}
+
+.drop-shadow-ram {
+  filter: drop-shadow(0 20px 30px rgba(15, 23, 42, 0.12));
+}
+
+.drop-shadow-motherboard {
+  filter: drop-shadow(0 25px 35px rgba(15, 23, 42, 0.1)) blur(0.4px);
+}
+
+.shadow-red-cta {
+  box-shadow: 0 10px 28px -4px rgba(229, 30, 43, 0.38);
+}
+
+.shadow-red-hover {
+  box-shadow: 0 14px 34px -4px rgba(229, 30, 43, 0.5);
+}
+
+.shadow-glass-card {
+  box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.04);
+}
