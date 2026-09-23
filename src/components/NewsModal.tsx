@@ -52,7 +52,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({
         {/* Modal Top Bar */}
         <div className="p-6 pb-4 border-b border-black/[0.06] flex items-center justify-between bg-slate-50/50">
           <div className="flex items-center gap-3">
-            <span className="font-mono text-[0.68rem] font-extrabold tracking-wider bg-[#FFF0F1] text-[#E51E2B] px-2.5 py-1 rounded-full uppercase">
+            <span className="font-mono text-[0.68rem] font-extrabold tracking-wider bg-[#FFF2EB] text-[#F15A24] px-2.5 py-1 rounded-full uppercase">
               {story.category}
             </span>
             <div className="flex items-center gap-1.5 text-[#828E9E] font-mono text-[0.72rem]">
@@ -87,7 +87,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({
           {/* Visual Showcase Box */}
           <div className="relative bg-gradient-to-b from-slate-50 to-slate-100/80 rounded-2xl p-6 border border-black/[0.06] overflow-hidden flex items-center justify-center">
             {/* Subtle radial glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(229,30,43,0.06),transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(241, 90, 36,0.06),transparent_70%)]" />
             <img
               src={story.image}
               alt={story.imageAlt}
@@ -104,15 +104,15 @@ export const NewsModal: React.FC<NewsModalProps> = ({
 
           {/* Key Highlights Bullet Cards */}
           {story.highlights && story.highlights.length > 0 && (
-            <div className="bg-[#FFF0F1]/50 border border-[#E51E2B]/15 rounded-2xl p-5 space-y-2.5">
-              <div className="flex items-center gap-2 text-[#E51E2B] font-heading font-bold text-[0.84rem] uppercase tracking-wider">
+            <div className="bg-[#FFF2EB]/50 border border-[#F15A24]/15 rounded-2xl p-5 space-y-2.5">
+              <div className="flex items-center gap-2 text-[#F15A24] font-heading font-bold text-[0.84rem] uppercase tracking-wider">
                 <ShieldCheck size={16} />
                 <span>Showroom Highlights &amp; Assurance</span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
                 {story.highlights.map((point, idx) => (
                   <div key={idx} className="flex items-start gap-2 text-[0.84rem] text-[#0E1117]">
-                    <CheckCircle2 size={15} className="text-[#E51E2B] flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 size={15} className="text-[#F15A24] flex-shrink-0 mt-0.5" />
                     <span>{point}</span>
                   </div>
                 ))}
@@ -125,7 +125,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({
         {/* Modal Action Footer */}
         <div className="p-6 bg-white border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2 text-[0.82rem] text-[#828E9E]">
-            <Tag size={14} className="text-[#E51E2B]" />
+            <Tag size={14} className="text-[#F15A24]" />
             <span>Available at Global Computers Eluru Showroom</span>
           </div>
 
@@ -135,7 +135,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({
               onClose();
               onInquire(story.productInquiryName || story.title);
             }}
-            className="w-full sm:w-auto px-6 py-3 bg-[#E51E2B] hover:bg-[#D11724] active:bg-[#BA121E] text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-red-cta transition-all hover:shadow-red-hover hover:-translate-y-0.5 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all hover:shadow-orange-hover hover:-translate-y-0.5 cursor-pointer"
           >
             <span>Inquire About This Hardware</span>
             <ArrowRight size={16} />

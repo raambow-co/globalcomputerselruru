@@ -25,55 +25,50 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
           : 'bg-white/80 backdrop-blur-md border-b border-black/[0.05]'
       }`}
     >
-      <div className="max-w-[1360px] mx-auto px-6 h-20 flex items-center justify-between">
+      <div className="max-w-[1360px] mx-auto px-6 h-16 flex items-center justify-between">
         {/* Brand Logo Wordmark */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-9 h-9 bg-[#0E1117] rounded-lg relative flex items-center justify-center transition-transform duration-200 group-hover:scale-105 shadow-sm">
-            <div className="w-3.5 h-3.5 border-2 border-white rounded-[3px]" />
-            <div className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#E51E2B] rounded-full shadow-[0_0_6px_#E51E2B]" />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className="font-heading font-extrabold text-[1.2rem] tracking-wider text-[#0E1117]">
-              GLOBAL
-            </span>
-            <span className="font-mono text-[0.62rem] font-semibold tracking-[0.22em] text-[#E51E2B] mt-0.5">
-              COMPUTERS
-            </span>
-          </div>
+        <a href="#" className="flex items-center gap-2 group py-1">
+          <img
+            src="/assets/gce_logo.png"
+            alt="Global Computer Services"
+            className="h-10 sm:h-11 w-auto max-w-[190px] object-contain transition-transform duration-200 group-hover:scale-105 select-none"
+          />
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-6">
           {[
             { label: 'Home', href: '#' },
-            { label: "What's New", href: '#updates', highlight: true },
-            { label: 'Showroom Products', href: '#updates' },
-            { label: 'Enterprise Fleet', href: '#updates' },
-            { label: 'Eluru Showroom', href: '#updates' },
+            { label: 'Offers & Deals', href: '#deals', highlight: true, badge: 'OFFERS' },
+            { label: 'Inside Technology', href: '#technology-showcase' },
+            { label: "What's New", href: '#updates' },
+            { label: 'Client Reviews', href: '#reviews' },
+            { label: 'FAQ', href: '#faq' },
+            { label: 'Eluru Showroom', href: '#location' },
           ].map((link, idx) => (
             <a
               key={link.label}
               href={link.href}
-              className={`text-[0.92rem] font-medium transition-colors duration-200 flex items-center gap-1.5 ${
+              className={`text-[0.84rem] font-medium transition-colors duration-200 flex items-center gap-1.5 ${
                 idx === 0
                   ? 'text-[#0E1117] font-semibold'
                   : 'text-[#4A5364] hover:text-[#0E1117]'
               }`}
             >
-              {link.highlight && <span className="w-1.5 h-1.5 bg-[#E51E2B] rounded-full animate-pulse" />}
-              {link.label}
+              {link.highlight && <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full animate-pulse" />}
+              <span>{link.label}</span>
             </a>
           ))}
         </nav>
 
         {/* Action Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={onOpenEnquiry}
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-[#E51E2B]/30 text-[#E51E2B] font-semibold text-[0.88rem] transition-all duration-200 hover:bg-[#E51E2B] hover:text-white hover:shadow-[0_4px_16px_rgba(229,30,43,0.25)] hover:-translate-y-0.5 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#F15A24]/30 text-[#F15A24] font-semibold text-[0.8rem] transition-all duration-200 hover:bg-[#F15A24] hover:text-white hover:shadow-[0_4px_16px_rgba(241, 90, 36,0.25)] hover:-translate-y-0.5 cursor-pointer"
           >
-            <span className="w-1.5 h-1.5 bg-[#E51E2B] rounded-full animate-ping group-hover:bg-white" />
+            <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full animate-ping group-hover:bg-white" />
             <span>Enquire Now</span>
           </button>
 
@@ -84,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
             className="md:hidden p-2 text-[#0E1117] hover:bg-black/5 rounded-lg transition-colors cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
@@ -93,16 +88,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
       {mobileMenuOpen && (
         <div className="md:hidden bg-white/98 backdrop-blur-xl border-b border-black/10 px-6 py-6 shadow-xl animate-in fade-in slide-in-from-top-4 duration-200">
           <div className="flex flex-col space-y-4">
-            {['Home', 'About Global Computers', 'Products & Hardware', 'Enterprise Services', 'Client Reviews', 'Contact & Showroom'].map((label, idx) => (
+            {[
+              { label: 'Home', href: '#' },
+              { label: 'Special Offers & Deals', href: '#deals' },
+              { label: 'Inside Technology', href: '#technology-showcase' },
+              { label: "What's New in Tech", href: '#updates' },
+              { label: 'Customer Experiences', href: '#reviews' },
+              { label: 'Frequently Asked Questions', href: '#faq' },
+              { label: 'Eluru Showroom & Location', href: '#location' },
+            ].map((item, idx) => (
               <a
-                key={label}
-                href="#"
+                key={item.label}
+                href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`text-[1.05rem] font-semibold ${
-                  idx === 0 ? 'text-[#E51E2B]' : 'text-[#0E1117]'
+                className={`text-[1rem] font-semibold ${
+                  idx === 0 ? 'text-[#F15A24]' : 'text-[#0E1117]'
                 }`}
               >
-                {label}
+                {item.label}
               </a>
             ))}
             <div className="pt-4 border-t border-black/10">
@@ -112,10 +115,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
                   setMobileMenuOpen(false);
                   onOpenEnquiry();
                 }}
-                className="w-full py-3 bg-[#E51E2B] text-white rounded-xl font-semibold flex items-center justify-center gap-2 shadow-red-cta"
+                className="w-full py-2.5 bg-[#F15A24] text-white rounded-xl font-semibold flex items-center justify-center gap-2 shadow-orange-cta text-[0.92rem]"
               >
                 <span>Enquire Now</span>
-                <ArrowRight size={18} />
+                <ArrowRight size={16} />
               </button>
             </div>
           </div>

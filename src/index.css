@@ -4,10 +4,10 @@
   --font-heading: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-  --color-gc-red: #E51E2B;
-  --color-gc-red-hover: #D11724;
-  --color-gc-red-active: #BA121E;
-  --color-gc-red-tint: #FFF0F1;
+  --color-gc-orange: #F15A24;
+  --color-gc-orange-hover: #D94814;
+  --color-gc-orange-active: #C03C0D;
+  --color-gc-orange-tint: #FFF2EB;
   --color-gc-charcoal: #0E1117;
   --color-gc-charcoal-muted: #1C2028;
   --color-gc-charcoal-secondary: #4A5364;
@@ -121,12 +121,12 @@
   filter: drop-shadow(0 20px 30px rgba(15, 23, 42, 0.09));
 }
 
-.shadow-red-cta {
-  box-shadow: 0 10px 28px -4px rgba(229, 30, 43, 0.38);
+.shadow-orange-cta {
+  box-shadow: 0 10px 28px -4px rgba(241, 90, 36, 0.38);
 }
 
-.shadow-red-hover {
-  box-shadow: 0 14px 34px -4px rgba(229, 30, 43, 0.52);
+.shadow-orange-hover {
+  box-shadow: 0 14px 34px -4px rgba(241, 90, 36, 0.52);
 }
 
 .shadow-glass-card {

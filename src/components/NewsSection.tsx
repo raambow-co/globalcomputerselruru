@@ -87,7 +87,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
       {/* 1. Subtle Background Linework & Technical Grid Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         {/* Soft Ambient Radial Light */}
-        <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(229,30,43,0.025)_0%,rgba(250,251,253,0)_100%)]" />
+        <div className="absolute top-1/4 right-0 w-[550px] h-[550px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241, 90, 36,0.025)_0%,rgba(250,251,253,0)_100%)]" />
         <div className="absolute bottom-10 left-0 w-[450px] h-[450px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(15,23,42,0.015)_0%,rgba(250,251,253,0)_100%)]" />
 
         {/* Minimal Grid Coordinates SVG */}
@@ -119,7 +119,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
             cy="35%"
             r="420"
             fill="none"
-            stroke="rgba(229, 30, 43, 0.035)"
+            stroke="rgba(241, 90, 36, 0.035)"
             strokeWidth="1.2"
             strokeDasharray="6 8"
           />
@@ -155,8 +155,8 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           
           {/* Eyebrow Badge */}
           <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.07] shadow-xs mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#E51E2B]" />
-            <span className="font-mono text-[0.7rem] font-bold tracking-[0.18em] text-[#E51E2B] uppercase">
+            <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
+            <span className="font-mono text-[0.7rem] font-bold tracking-[0.18em] text-[#F15A24] uppercase">
               WHAT'S NEW
             </span>
           </div>
@@ -164,9 +164,9 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           {/* Section Headline */}
           <h2 className="font-heading font-extrabold text-[clamp(1.85rem,4vw,2.85rem)] text-[#0E1117] leading-[1.12] tracking-tight mb-4">
             Stay Ahead of{' '}
-            <span className="text-[#E51E2B] relative inline-block">
+            <span className="text-[#F15A24] relative inline-block">
               Technology.
-              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#E51E2B]/15 rounded-full" />
+              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
 
@@ -182,17 +182,17 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           {/* LEFT: Featured Story Visual Article (7 Columns on LG) */}
           <div
             onClick={() => setSelectedStory(featuredStory)}
-            className="lg:col-span-7 group cursor-pointer bg-white rounded-3xl p-8 sm:p-10 border border-black/[0.07] shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(229,30,43,0.07)] hover:border-[#E51E2B]/25 active:scale-[0.995] flex flex-col justify-between relative overflow-hidden"
+            className="lg:col-span-7 group cursor-pointer bg-white rounded-3xl p-8 sm:p-10 border border-black/[0.07] shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(241, 90, 36,0.07)] hover:border-[#F15A24]/25 active:scale-[0.995] flex flex-col justify-between relative overflow-hidden"
           >
             {/* Subtle red corner glow indicator */}
-            <div className="absolute top-0 right-0 w-44 h-44 bg-[radial-gradient(circle_at_100%_0%,rgba(229,30,43,0.04),transparent_70%)] pointer-events-none transition-opacity duration-300 group-hover:opacity-100" />
+            <div className="absolute top-0 right-0 w-44 h-44 bg-[radial-gradient(circle_at_100%_0%,rgba(241, 90, 36,0.04),transparent_70%)] pointer-events-none transition-opacity duration-300 group-hover:opacity-100" />
 
             {/* Top Meta Header */}
             <div>
               <div className="flex items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#E51E2B] animate-ping" />
-                  <span className="font-mono text-[0.72rem] font-bold tracking-widest text-[#E51E2B] uppercase">
+                  <span className="w-2 h-2 rounded-full bg-[#F15A24] animate-ping" />
+                  <span className="font-mono text-[0.72rem] font-bold tracking-widest text-[#F15A24] uppercase">
                     {featuredStory.category}
                   </span>
                 </div>
@@ -203,7 +203,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
               </div>
 
               {/* Featured Headline */}
-              <h3 className="font-heading font-extrabold text-[clamp(1.45rem,2.5vw,2.15rem)] text-[#0E1117] leading-[1.18] tracking-tight mb-3.5 group-hover:text-[#E51E2B] transition-colors duration-200">
+              <h3 className="font-heading font-extrabold text-[clamp(1.45rem,2.5vw,2.15rem)] text-[#0E1117] leading-[1.18] tracking-tight mb-3.5 group-hover:text-[#F15A24] transition-colors duration-200">
                 {featuredStory.title}
               </h3>
 
@@ -216,7 +216,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
             {/* 3D Realistic Product Composition (Breaks Frame Into Whitespace) */}
             <div className="relative my-4 sm:my-6 py-6 flex items-center justify-center">
               {/* Subtle Red Graphic Halo Ring Behind Hardware */}
-              <div className="absolute w-[240px] sm:w-[320px] h-[240px] sm:h-[320px] rounded-full bg-gradient-to-tr from-[#FFF0F1] to-white border border-[#E51E2B]/10 transition-transform duration-500 group-hover:scale-105 pointer-events-none" />
+              <div className="absolute w-[240px] sm:w-[320px] h-[240px] sm:h-[320px] rounded-full bg-gradient-to-tr from-[#FFF2EB] to-white border border-[#F15A24]/10 transition-transform duration-500 group-hover:scale-105 pointer-events-none" />
 
               {/* 3D Hardware Display Render */}
               <div className="relative z-10 w-full max-w-[420px] sm:max-w-[480px] transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]">
@@ -230,7 +230,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
 
               {/* Floating Spec Capsule Tag */}
               <div className="absolute bottom-2 left-4 sm:left-6 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-black/10 shadow-sm flex items-center gap-2 transition-transform duration-200 group-hover:-translate-y-1">
-                <Sparkles size={13} className="text-[#E51E2B]" />
+                <Sparkles size={13} className="text-[#F15A24]" />
                 <span className="font-mono text-[0.68rem] font-semibold text-[#0E1117]">
                   4K IPS · Frameless Curved
                 </span>
@@ -239,9 +239,9 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
 
             {/* Featured Story Action CTA */}
             <div className="pt-6 border-t border-black/[0.05] flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 text-[0.92rem] font-semibold text-[#0E1117] group-hover:text-[#E51E2B] transition-colors duration-200">
+              <div className="inline-flex items-center gap-2 text-[0.92rem] font-semibold text-[#0E1117] group-hover:text-[#F15A24] transition-colors duration-200">
                 <span>Explore Update</span>
-                <div className="w-7 h-7 rounded-full bg-slate-100 group-hover:bg-[#E51E2B] group-hover:text-white flex items-center justify-center transition-all duration-200 group-hover:translate-x-1.5 shadow-2xs">
+                <div className="w-7 h-7 rounded-full bg-slate-100 group-hover:bg-[#F15A24] group-hover:text-white flex items-center justify-center transition-all duration-200 group-hover:translate-x-1.5 shadow-2xs">
                   <ArrowRight size={14} />
                 </div>
               </div>
@@ -258,14 +258,14 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
               <div
                 key={story.id}
                 onClick={() => setSelectedStory(story)}
-                className="group cursor-pointer bg-white rounded-3xl p-6 sm:p-8 border border-black/[0.07] shadow-[0_6px_24px_rgba(15,23,42,0.025)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(229,30,43,0.06)] hover:border-[#E51E2B]/20 flex flex-col justify-between relative overflow-hidden"
+                className="group cursor-pointer bg-white rounded-3xl p-6 sm:p-8 border border-black/[0.07] shadow-[0_6px_24px_rgba(15,23,42,0.025)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(241, 90, 36,0.06)] hover:border-[#F15A24]/20 flex flex-col justify-between relative overflow-hidden"
               >
                 {/* Top Category & Date */}
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-3.5">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#E51E2B]" />
-                      <span className="font-mono text-[0.66rem] font-bold tracking-wider text-[#E51E2B] uppercase">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24]" />
+                      <span className="font-mono text-[0.66rem] font-bold tracking-wider text-[#F15A24] uppercase">
                         {story.category}
                       </span>
                     </div>
@@ -276,7 +276,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
                   </div>
 
                   {/* Title */}
-                  <h4 className="font-heading font-bold text-[1.28rem] sm:text-[1.38rem] text-[#0E1117] leading-tight tracking-tight mb-2.5 group-hover:text-[#E51E2B] transition-colors duration-200">
+                  <h4 className="font-heading font-bold text-[1.28rem] sm:text-[1.38rem] text-[#0E1117] leading-tight tracking-tight mb-2.5 group-hover:text-[#F15A24] transition-colors duration-200">
                     {story.title}
                   </h4>
 
@@ -290,12 +290,12 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
                 <div className="pt-4 border-t border-black/[0.05] flex items-center justify-between gap-4">
                   
                   {/* Expanding Red Accent Line + Arrow Action */}
-                  <div className="inline-flex items-center gap-2 text-[0.86rem] font-semibold text-[#0E1117] group-hover:text-[#E51E2B] transition-colors duration-200">
-                    <div className="w-0 group-hover:w-3 h-[2px] bg-[#E51E2B] rounded-full transition-all duration-300" />
+                  <div className="inline-flex items-center gap-2 text-[0.86rem] font-semibold text-[#0E1117] group-hover:text-[#F15A24] transition-colors duration-200">
+                    <div className="w-0 group-hover:w-3 h-[2px] bg-[#F15A24] rounded-full transition-all duration-300" />
                     <span>Read Briefing</span>
                     <ArrowUpRight
                       size={15}
-                      className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#828E9E] group-hover:text-[#E51E2B]"
+                      className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 text-[#828E9E] group-hover:text-[#F15A24]"
                     />
                   </div>
 
@@ -325,12 +325,12 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
           <button
             type="button"
             onClick={() => setSelectedStory(featuredStory)}
-            className="group inline-flex items-center gap-2 text-[0.92rem] font-semibold text-[#4A5364] hover:text-[#E51E2B] transition-colors duration-200 cursor-pointer"
+            className="group inline-flex items-center gap-2 text-[0.92rem] font-semibold text-[#4A5364] hover:text-[#F15A24] transition-colors duration-200 cursor-pointer"
           >
             <span>View All Showroom Updates</span>
             <ArrowRight
               size={15}
-              className="transition-transform duration-200 group-hover:translate-x-1.5 text-[#828E9E] group-hover:text-[#E51E2B]"
+              className="transition-transform duration-200 group-hover:translate-x-1.5 text-[#828E9E] group-hover:text-[#F15A24]"
             />
           </button>
         </div>

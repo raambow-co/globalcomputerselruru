@@ -86,8 +86,8 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
         <div className="p-6 border-b border-black/[0.06] flex items-start justify-between">
           <div>
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="w-1.5 h-1.5 bg-[#E51E2B] rounded-full animate-pulse" />
-              <span className="font-mono text-[0.68rem] font-bold tracking-widest text-[#E51E2B] uppercase">
+              <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full animate-pulse" />
+              <span className="font-mono text-[0.68rem] font-bold tracking-widest text-[#F15A24] uppercase">
                 SHOWROOM INVENTORY ENQUIRY
               </span>
             </div>
@@ -114,12 +114,12 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-[0.84rem] font-semibold text-[#0E1117] mb-1">
-                  Product Category <span className="text-[#E51E2B]">*</span>
+                  Product Category <span className="text-[#F15A24]">*</span>
                 </label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   required
                 >
                   <option value="printers">Epson EcoTank &amp; Precision Fleet Printers</option>
@@ -140,7 +140,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                   value={model}
                   onChange={(e) => setModel(e.target.value)}
                   placeholder="e.g., Epson EcoTank Pro ET-5850 or RTX 24GB Studio"
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                 />
               </div>
 
@@ -152,7 +152,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                   <select
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   >
                     <option value="1">1 Unit (Single Item)</option>
                     <option value="2-5">2 - 5 Units (Team Setup)</option>
@@ -168,7 +168,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                   <select
                     value={timeline}
                     onChange={(e) => setTimeline(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   >
                     <option value="immediate">Immediate / Same-Day Dispatch</option>
                     <option value="this-week">Within This Week</option>
@@ -187,7 +187,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[0.84rem] font-semibold text-[#0E1117] mb-1">
-                    Your Name <span className="text-[#E51E2B]">*</span>
+                    Your Name <span className="text-[#F15A24]">*</span>
                   </label>
                   <input
                     type="text"
@@ -195,13 +195,13 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Rajesh Sharma"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   />
                 </div>
 
                 <div>
                   <label className="block text-[0.84rem] font-semibold text-[#0E1117] mb-1">
-                    Business Email <span className="text-[#E51E2B]">*</span>
+                    Business Email <span className="text-[#F15A24]">*</span>
                   </label>
                   <input
                     type="email"
@@ -209,7 +209,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@company.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   />
                 </div>
               </div>
@@ -217,7 +217,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-[0.84rem] font-semibold text-[#0E1117] mb-1">
-                    Phone Number <span className="text-[#E51E2B]">*</span>
+                    Phone Number <span className="text-[#F15A24]">*</span>
                   </label>
                   <input
                     type="tel"
@@ -225,7 +225,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="+91 98765 43210"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   />
                 </div>
 
@@ -238,16 +238,16 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
                     placeholder="e.g. Apex Studio"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#E51E2B] focus:ring-2 focus:ring-[#E51E2B]/10 outline-none transition-all"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.92rem] text-[#0E1117] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
                   />
                 </div>
               </div>
 
               {/* Showroom Guarantee Box */}
-              <div className="flex items-start gap-3 bg-[#FFF0F1] border border-[#E51E2B]/20 rounded-xl p-3.5 text-left">
-                <ShieldCheck className="w-5 h-5 text-[#E51E2B] flex-shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 bg-[#FFF2EB] border border-[#F15A24]/20 rounded-xl p-3.5 text-left">
+                <ShieldCheck className="w-5 h-5 text-[#F15A24] flex-shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-[0.82rem] text-[#E51E2B] block font-semibold">
+                  <strong className="text-[0.82rem] text-[#F15A24] block font-semibold">
                     Official Showroom Guarantee
                   </strong>
                   <p className="text-[0.78rem] text-[#4A5364] leading-snug">
@@ -258,7 +258,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
 
               <button
                 type="submit"
-                className="w-full py-3.5 bg-[#E51E2B] hover:bg-[#D11724] text-white font-semibold text-[0.98rem] rounded-xl flex items-center justify-center gap-2 shadow-red-cta transition-all hover:shadow-red-hover hover:-translate-y-0.5"
+                className="w-full py-3.5 bg-[#F15A24] hover:bg-[#D94814] text-white font-semibold text-[0.98rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all hover:shadow-orange-hover hover:-translate-y-0.5"
               >
                 <span>Request Availability Status</span>
                 <ArrowRight size={18} />
@@ -266,7 +266,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
             </form>
           ) : (
             <div className="text-center py-6 animate-in zoom-in-95 duration-200">
-              <div className="w-16 h-16 bg-[#FFF0F1] text-[#E51E2B] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#FFF2EB] text-[#F15A24] rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle2 size={36} />
               </div>
               <h3 className="font-heading font-extrabold text-2xl text-[#0E1117] mb-2">
@@ -280,7 +280,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
                 <span className="font-mono text-[0.68rem] text-[#828E9E] font-semibold tracking-wider">
                   ENQUIRY TRACKING ID
                 </span>
-                <span className="font-mono text-xl font-bold text-[#E51E2B]">
+                <span className="font-mono text-xl font-bold text-[#F15A24]">
                   {trackingId}
                 </span>
               </div>
