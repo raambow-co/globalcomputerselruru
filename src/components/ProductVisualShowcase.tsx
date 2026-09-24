@@ -1,41 +1,51 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, ArrowUpRight, CheckCircle2, ChevronRight, Eye, Layers, ShieldCheck, Sparkles, Zap } from 'lucide-react';
+import { 
+  Sparkles, 
+  ShieldCheck, 
+  ArrowRight, 
+  Wrench, 
+  Monitor, 
+  Laptop, 
+  Camera, 
+  Fingerprint, 
+  Printer, 
+  CheckCircle2, 
+  PhoneCall, 
+  ExternalLink,
+  Layers,
+  Cpu,
+  Zap,
+  HardDrive
+} from 'lucide-react';
 
 interface ProductVisualShowcaseProps {
-  onOpenAvailability: (productName?: string) => void;
+  onOpenAvailability: (serviceOrBrandName?: string) => void;
 }
 
-interface ShowcaseProduct {
+export interface BrandService {
   id: string;
-  category: string;
-  categorySlug: 'all' | 'printers' | 'monitors' | 'motherboards' | 'gpus' | 'ram' | 'keyboards';
   name: string;
-  editorialTitle: string;
+  logo: string;
+  categories: ('pcs' | 'laptops' | 'cameras' | 'biometrics' | 'printers')[];
+  categoryLabel: string;
+  serviceOfferings: string[];
   tagline: string;
-  description: string;
-  specs: string[];
-  image: string;
-  imageAlt: string;
-  positionDesktop: string;
-  depth: number;
-  rotation: string;
-  annotationLabel: string;
-  annotationValue: string;
-  markerCoordinate: string;
-  zIndex: number;
-  shadowClass: string;
+  warrantyBadge: string;
+  // Spatial coordinates for floating dispersed canvas (percentages)
+  posAll: { top: string; left: string; depth: number; anim: string };
+  posCategory: { [key: string]: { top: string; left: string } };
 }
 
 export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
   onOpenAvailability,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [activeCategory, setActiveCategory] = useState<string>('all');
-  const [activeProductId, setActiveProductId] = useState<string | null>('epson-printer');
-  const [hoveredProduct, setHoveredProduct] = useState<ShowcaseProduct | null>(null);
+  const [activeTab, setActiveTab] = useState<string>('all');
+  const [selectedBrandId, setSelectedBrandId] = useState<string>('hp');
+  const [hoveredBrandId, setHoveredBrandId] = useState<string | null>(null);
 
-  // High-performance physics state for subtle smooth parallax
-  const parallaxState = useRef({
+  // Parallax physics for floating in air effect
+  const physicsState = useRef({
     targetX: 0,
     targetY: 0,
     currentX: 0,
@@ -46,717 +56,620 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
 
   const layerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
-  const products: ShowcaseProduct[] = [
-    // 1. Center / Foreground Hero: Epson EcoTank Pro Series Printer
+  const brands: BrandService[] = [
+    // 1. HP (PCs, Laptops)
     {
-      id: 'epson-printer',
-      category: 'Business Printing',
-      categorySlug: 'printers',
-      name: 'Epson EcoTank Pro Series',
-      editorialTitle: 'EPSON PRINTERS',
-      tagline: 'Reliable printing solutions for modern workspaces.',
-      description:
-        'Engineered with PrecisionCore Heat-Free technology for high-volume enterprise efficiency, ultra-low running costs, and crisp laser-quality output.',
-      specs: ['PrecisionCore Heat-Free', 'High-Yield Ink Reservoirs', 'Enterprise Fleet Ready'],
-      image: '/assets/epson_printer.png',
-      imageAlt: 'Epson EcoTank Pro High-Efficiency Business Printer',
-      positionDesktop: 'top-[36%] left-[32%] -translate-x-1/2 -translate-y-1/2 w-[clamp(280px,32vw,480px)]',
-      depth: 0.08,
-      rotation: 'rotate-1',
-      annotationLabel: 'PRECISION',
-      annotationValue: 'Heat-Free 4800dpi',
-      markerCoordinate: '01 / PRT',
-      zIndex: 30,
-      shadowClass: 'drop-shadow-[0_28px_46px_rgba(15,23,42,0.16)]',
+      id: 'hp',
+      name: 'HP',
+      logo: '/assets/brands/01_HP.png',
+      categories: ['pcs', 'laptops'],
+      categoryLabel: "PC & Laptop Services",
+      tagline: 'Desktops, ProBooks, Pavilion, EliteBook & OMEN Servicing & Upgrades',
+      warrantyBadge: 'Authorized Spares & Support',
+      serviceOfferings: ['Motherboard Chip-Level Repair', 'Screen & Hinge Replacement', 'High-Speed NVMe SSD Upgrade', 'Thermal Paste Re-pasting'],
+      posAll: { top: '8%', left: '8%', depth: 0.04, anim: 'animate-float-1' },
+      posCategory: { pcs: { top: '20%', left: '15%' }, laptops: { top: '20%', left: '15%' } },
     },
-    // 2. Behind Center at Perspective: UltraVision 4K Studio Display
+    // 2. Dell (PCs, Laptops)
     {
-      id: 'pro-monitor',
-      category: 'Professional Displays',
-      categorySlug: 'monitors',
-      name: 'UltraVision 4K Studio Display',
-      editorialTitle: 'PROFESSIONAL MONITORS',
-      tagline: 'Clear, reliable displays for work and productivity.',
-      description:
-        'Frameless curved IPS architecture with factory-calibrated color accuracy, eye-comfort certified backlighting, and USB-C single-cable power delivery.',
-      specs: ['4K UHD IPS Curved', '99% DCI-P3 Color Accuracy', 'Hardware Calibrated'],
-      image: '/assets/pro_monitor.png',
-      imageAlt: 'UltraVision 4K Frameless Studio Display',
-      positionDesktop: 'top-[16%] left-[58%] -translate-x-1/2 -translate-y-1/2 w-[clamp(260px,30vw,460px)]',
-      depth: 0.04,
-      rotation: '-rotate-2',
-      annotationLabel: 'CLARITY',
-      annotationValue: '99% DCI-P3 Delta E < 1',
-      markerCoordinate: '02 / DISP',
-      zIndex: 20,
-      shadowClass: 'drop-shadow-[0_24px_40px_rgba(15,23,42,0.13)]',
+      id: 'dell',
+      name: 'Dell',
+      logo: '/assets/brands/02_Dell.png',
+      categories: ['pcs', 'laptops'],
+      categoryLabel: "PC & Laptop Services",
+      tagline: 'OptiPlex, Inspiron, Vostro, Latitude & Alienware Diagnostics',
+      warrantyBadge: 'Original Component Diagnostics',
+      serviceOfferings: ['Power Supply Unit (PSU) Repairs', 'Display & Backlight Repair', 'RAM & Graphics Upgrades', 'Original Battery Replacements'],
+      posAll: { top: '12%', left: '38%', depth: 0.07, anim: 'animate-float-2' },
+      posCategory: { pcs: { top: '20%', left: '50%' }, laptops: { top: '20%', left: '50%' } },
     },
-    // 3. Right Foreground / Diagonal Edge: AeroCNC Mechanical Keyboard
+    // 3. Lenovo (PCs, Laptops)
     {
-      id: 'mech-keyboard',
-      category: 'Precision Peripherals',
-      categorySlug: 'keyboards',
-      name: 'AeroCNC Mechanical Keyboard',
-      editorialTitle: 'PRECISION PERIPHERALS',
-      tagline: 'Tactile accuracy and durable industrial craftsmanship.',
-      description:
-        'CNC-milled solid anodized aluminum chassis with custom lubricated mechanical switches, PBT double-shot keycaps, and ergonomic typing pitch.',
-      specs: ['Anodized Solid Aluminum', 'Hot-Swappable Switches', 'Acoustic Sound Dampening'],
-      image: '/assets/mech_keyboard.png',
-      imageAlt: 'AeroCNC Custom Aluminum Mechanical Keyboard',
-      positionDesktop: 'top-[68%] left-[64%] -translate-x-1/2 -translate-y-1/2 w-[clamp(220px,24vw,360px)]',
-      depth: 0.09,
-      rotation: 'rotate-4',
-      annotationLabel: 'TACTILITY',
-      annotationValue: 'CNC Milled Chassis',
-      markerCoordinate: '03 / INP',
-      zIndex: 35,
-      shadowClass: 'drop-shadow-[0_20px_34px_rgba(15,23,42,0.14)]',
+      id: 'lenovo',
+      name: 'Lenovo',
+      logo: '/assets/brands/03_Lenovo.png',
+      categories: ['pcs', 'laptops'],
+      categoryLabel: "PC & Laptop Services",
+      tagline: 'ThinkPad, IdeaPad, Legion & ThinkCentre Commercial Maintenance',
+      warrantyBadge: 'Genuine Parts Certified',
+      serviceOfferings: ['Keyboard & Trackpad Repair', 'Liquid Spill Diagnostics', 'BIOS & Firmware Recovery', 'Custom RAM Expansions'],
+      posAll: { top: '10%', left: '68%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { pcs: { top: '20%', left: '80%' }, laptops: { top: '20%', left: '80%' } },
     },
-    // 4. Left Mid-depth: Z790 Workstation Motherboard
+    // 4. Apple (PCs)
     {
-      id: 'z790-motherboard',
-      category: 'Workstation Architecture',
-      categorySlug: 'motherboards',
-      name: 'Z790 Workstation Motherboard',
-      editorialTitle: 'WORKSTATION PLATFORMS',
-      tagline: 'Enterprise-grade thermal engineering and stability.',
-      description:
-        'Multi-layer server-grade PCB with fortified PCIe 5.0 lanes, massive metallic VRM heatsinks, and dual 2.5G LAN for uninterrupted compute workflows.',
-      specs: ['PCIe 5.0 x16 Reinforced', '18+1+1 Digital Power Phase', 'Multi M.2 Thermal Shields'],
-      image: '/assets/motherboard.png',
-      imageAlt: 'Z790 Enterprise Workstation Motherboard',
-      positionDesktop: 'top-[22%] left-[14%] -translate-x-1/2 -translate-y-1/2 w-[clamp(190px,21vw,320px)]',
-      depth: 0.03,
-      rotation: '-rotate-6',
-      annotationLabel: 'RELIABILITY',
-      annotationValue: 'Server-Grade VRM',
-      markerCoordinate: '04 / MB',
-      zIndex: 15,
-      shadowClass: 'drop-shadow-[0_18px_30px_rgba(15,23,42,0.1)]',
+      id: 'apple',
+      name: 'Apple',
+      logo: '/assets/brands/04_Apple.png',
+      categories: ['pcs'],
+      categoryLabel: "Mac & Apple Desktop Services",
+      tagline: 'iMac, Mac mini, Mac Studio & Mac Pro Precision Troubleshooting',
+      warrantyBadge: 'Specialist Mac Technicians',
+      serviceOfferings: ['macOS Clean Setup & Migration', 'Logic Board Micro-Soldering', 'Thermal Management Cleaning', 'SSD Storage Expansion'],
+      posAll: { top: '26%', left: '22%', depth: 0.08, anim: 'animate-float-main' },
+      posCategory: { pcs: { top: '60%', left: '30%' } },
     },
-    // 5. Left Lower Mid-depth: Pro Graphics Card GPU
+    // 5. Toshiba (PCs)
     {
-      id: 'pro-gpu',
-      category: 'Graphics & Compute',
-      categorySlug: 'gpus',
-      name: 'Apex RTX Studio Graphics Card',
-      editorialTitle: 'GRAPHICS ACCELERATORS',
-      tagline: 'Dedicated visual computing for creator and CAD workloads.',
-      description:
-        'Triple axial-tech cooling system with vapor chamber base, dedicated AI Tensor cores, and high-bandwidth VRAM for real-time 3D rendering.',
-      specs: ['16GB High-Speed GDDR6X', 'Vapor Chamber Cooling', 'Dedicated Hardware Ray Tracing'],
-      image: '/assets/gpu_card.png',
-      imageAlt: 'Apex RTX Studio Dedicated Graphics Card',
-      positionDesktop: 'top-[64%] left-[15%] -translate-x-1/2 -translate-y-1/2 w-[clamp(190px,22vw,330px)]',
-      depth: 0.05,
-      rotation: 'rotate-3',
-      annotationLabel: 'PERFORMANCE',
-      annotationValue: 'Tensor Compute 85 TFLOPS',
-      markerCoordinate: '05 / GPU',
-      zIndex: 22,
-      shadowClass: 'drop-shadow-[0_22px_36px_rgba(15,23,42,0.13)]',
+      id: 'toshiba',
+      name: 'Toshiba',
+      logo: '/assets/brands/05_Toshiba.png',
+      categories: ['pcs'],
+      categoryLabel: "PC & Storage Services",
+      tagline: 'Desktop Systems, Hard Drives & Industrial Storage Solutions',
+      warrantyBadge: 'Enterprise Storage Support',
+      serviceOfferings: ['Data Recovery & Forensics', 'Hard Drive Replacement', 'Power Distribution Repair', 'Legacy System Maintenance'],
+      posAll: { top: '24%', left: '52%', depth: 0.03, anim: 'animate-float-1' },
+      posCategory: { pcs: { top: '60%', left: '70%' } },
     },
-    // 6. Right Top Mid-depth: High-Speed DDR5 RAM Modules
+    // 6. ASUS (Laptops)
     {
-      id: 'ddr5-ram',
-      category: 'Performance Memory',
-      categorySlug: 'ram',
-      name: 'Vanguard DDR5 Memory Kit',
-      editorialTitle: 'HIGH-SPEED MEMORY',
-      tagline: 'Ultra-low latency modules engineered for zero bottleneck performance.',
-      description:
-        'Precision hand-sorted memory ICs paired with sleek brushed aluminum thermal spreaders and on-die ECC error correction for maximum workstation uptime.',
-      specs: ['6400MHz Low Latency', 'On-Die ECC Protection', 'Brushed Aluminum Heatspreader'],
-      image: '/assets/ram_modules.png',
-      imageAlt: 'Vanguard High-Performance DDR5 Workstation RAM Kit',
-      positionDesktop: 'top-[22%] left-[84%] -translate-x-1/2 -translate-y-1/2 w-[clamp(180px,20vw,300px)]',
-      depth: 0.05,
-      rotation: '-rotate-8',
-      annotationLabel: 'EFFICIENCY',
-      annotationValue: 'DDR5 6400 CL32',
-      markerCoordinate: '06 / MEM',
-      zIndex: 18,
-      shadowClass: 'drop-shadow-[0_16px_28px_rgba(15,23,42,0.11)]',
+      id: 'asus',
+      name: 'ASUS',
+      logo: '/assets/brands/06_ASUS.png',
+      categories: ['laptops'],
+      categoryLabel: "Laptop & Gaming Services",
+      tagline: 'ROG, TUF Gaming, ZenBook & VivoBook Performance Tuning',
+      warrantyBadge: 'Gaming & ROG Specialists',
+      serviceOfferings: ['GPU & VRAM Chip Diagnostics', 'Dual-Fan Cooling Overhaul', 'OLED Screen Replacement', 'Gaming BIOS Optimization'],
+      posAll: { top: '25%', left: '82%', depth: 0.06, anim: 'animate-float-2' },
+      posCategory: { laptops: { top: '60%', left: '30%' } },
+    },
+    // 7. Acer (Laptops)
+    {
+      id: 'acer',
+      name: 'Acer',
+      logo: '/assets/brands/07_Acer.png',
+      categories: ['laptops'],
+      categoryLabel: "Laptop Services",
+      tagline: 'Predator, Nitro, Aspire & Swift Professional Care',
+      warrantyBadge: 'Multi-Model Diagnostic Support',
+      serviceOfferings: ['Hinge & Chassis Repair', 'Motherboard Power IC Fix', 'Type-C Port Micro-Soldering', 'Performance Boost Upgrades'],
+      posAll: { top: '40%', left: '10%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { laptops: { top: '60%', left: '70%' } },
+    },
+    // 8. Epson (Printers)
+    {
+      id: 'epson',
+      name: 'Epson',
+      logo: '/assets/brands/08_Epson.png',
+      categories: ['printers'],
+      categoryLabel: "Printer & Printhead Services",
+      tagline: 'EcoTank, L-Series, WorkForce & Commercial Plotters Servicing',
+      warrantyBadge: 'Direct PrecisionCore Support',
+      serviceOfferings: ['Printhead Ultrasonic Cleaning', 'Waste Ink Pad Reset & Replacement', 'Paper Feed Roller Alignment', 'Continuous Ink Tank Overhaul'],
+      posAll: { top: '42%', left: '36%', depth: 0.09, anim: 'animate-float-main' },
+      posCategory: { printers: { top: '25%', left: '20%' } },
+    },
+    // 9. TVS Electronics (Printers)
+    {
+      id: 'tvs',
+      name: 'TVS Electronics',
+      logo: '/assets/brands/09_TVS_Electronics.png',
+      categories: ['printers'],
+      categoryLabel: "POS & Dot Matrix Printers",
+      tagline: 'Dot Matrix, Thermal Receipt Printers & Commercial POS Systems',
+      warrantyBadge: 'Billing & POS Specialist',
+      serviceOfferings: ['Ribbon Mechanism Replacement', 'Printhead Pin Alignment', 'Thermal Head Calibration', 'Commercial POS Maintenance'],
+      posAll: { top: '38%', left: '64%', depth: 0.04, anim: 'animate-float-1' },
+      posCategory: { printers: { top: '25%', left: '70%' } },
+    },
+    // 10. Canon (Printers)
+    {
+      id: 'canon',
+      name: 'Canon',
+      logo: '/assets/brands/10_Canon.png',
+      categories: ['printers'],
+      categoryLabel: "Laser & Inkjet Printer Services",
+      tagline: 'PIXMA, imageCLASS, MAXIFY & Laser Multi-Function Printers',
+      warrantyBadge: 'Genuine Toner & Cartridge Support',
+      serviceOfferings: ['Laser Drum Unit Reconditioning', 'Logic Board Firmware Updates', 'Toner Cartridge Servicing', 'Color Calibration Tuning'],
+      posAll: { top: '56%', left: '18%', depth: 0.07, anim: 'animate-float-2' },
+      posCategory: { printers: { top: '65%', left: '30%' } },
+    },
+    // 11. Brother (Printers)
+    {
+      id: 'brother',
+      name: 'Brother',
+      logo: '/assets/brands/11_Brother.png',
+      categories: ['printers'],
+      categoryLabel: "Monochrome & Color Printers",
+      tagline: 'DCP Series, High-Speed Duplex Laser & Network Printers',
+      warrantyBadge: 'High-Volume Maintenance Care',
+      serviceOfferings: ['Fuser Unit Replacement', 'Network Wi-Fi Card Repair', 'Duplex Jam Resolution', 'OEM Ink & Toner Supplies'],
+      posAll: { top: '54%', left: '48%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { printers: { top: '65%', left: '70%' } },
+    },
+    // 12. eSSL (Biometrics)
+    {
+      id: 'essl',
+      name: 'eSSL',
+      logo: '/assets/brands/12_eSSL.png',
+      categories: ['biometrics'],
+      categoryLabel: "Biometric & Attendance Solutions",
+      tagline: 'Fingerprint, Face Recognition & RFID Access Control Terminals',
+      warrantyBadge: 'Security Hardware Specialist',
+      serviceOfferings: ['Optical Sensor Replacement', 'Time-Attendance Software Sync', 'Access Controller Wiring & Setup', 'Firmware Security Updates'],
+      posAll: { top: '52%', left: '80%', depth: 0.08, anim: 'animate-float-main' },
+      posCategory: { biometrics: { top: '30%', left: '25%' } },
+    },
+    // 13. BioMax (Biometrics)
+    {
+      id: 'biomax',
+      name: 'BioMax',
+      logo: '/assets/brands/13_BioMax.png',
+      categories: ['biometrics'],
+      categoryLabel: "Biometrics & Time-Trackers",
+      tagline: 'AI Face Attendance, Palm Scanners & Enterprise Turnstiles',
+      warrantyBadge: 'Enterprise Attendance Integration',
+      serviceOfferings: ['Cloud Attendance Sync Setup', 'Camera Module Calibration', 'Electromagnetic Lock Integration', 'On-Site Machine Servicing'],
+      posAll: { top: '70%', left: '8%', depth: 0.03, anim: 'animate-float-1' },
+      posCategory: { biometrics: { top: '30%', left: '75%' } },
+    },
+    // 14. Intercom (Biometrics & Security)
+    {
+      id: 'intercom',
+      name: 'Intercom',
+      logo: '/assets/brands/14_Intercom.png',
+      categories: ['biometrics'],
+      categoryLabel: "Communication & Access Devices",
+      tagline: 'Video Door Phones, Commercial Intercoms & Multi-Unit Systems',
+      warrantyBadge: 'Two-Way Audio/Video Support',
+      serviceOfferings: ['EPABX & Intercom Cabling', 'Audio Amplifier Troubleshooting', 'Video Door Screen Repair', 'Multi-Office Channel Setup'],
+      posAll: { top: '72%', left: '34%', depth: 0.06, anim: 'animate-float-2' },
+      posCategory: { biometrics: { top: '70%', left: '50%' } },
+    },
+    // 15. Hikvision (CC Cameras)
+    {
+      id: 'hikvision',
+      name: 'Hikvision',
+      logo: '/assets/brands/15_Hikvision.png',
+      categories: ['cameras'],
+      categoryLabel: "CCTV & IP Surveillance",
+      tagline: 'ColorVu, Turbo HD, 4K IP Dome & Bullet Surveillance Systems',
+      warrantyBadge: 'Leading CCTV Brand Solutions',
+      serviceOfferings: ['NVR/DVR Channel Configuration', 'Night-Vision IR Sensor Alignment', 'CAT6 / BNC Cable Diagnostics', 'Mobile App Remote View Setup'],
+      posAll: { top: '68%', left: '62%', depth: 0.08, anim: 'animate-float-main' },
+      posCategory: { cameras: { top: '25%', left: '20%' } },
+    },
+    // 16. CP Plus (CC Cameras)
+    {
+      id: 'cpplus',
+      name: 'CP Plus',
+      logo: '/assets/brands/16_CP_Plus.png',
+      categories: ['cameras'],
+      categoryLabel: "Smart Security & CCTV",
+      tagline: 'EzyKam Wi-Fi, HD Analog & Commercial 16/32-Channel NVRs',
+      warrantyBadge: 'Certified Surveillance Support',
+      serviceOfferings: ['Hard Disk Surveillance Error Fix', 'PTZ 360° Motor Repair', 'Power Supply SMPS Overhaul', 'On-Site Installation & Aligning'],
+      posAll: { top: '85%', left: '20%', depth: 0.04, anim: 'animate-float-1' },
+      posCategory: { cameras: { top: '25%', left: '70%' } },
+    },
+    // 17. Dahua (CC Cameras)
+    {
+      id: 'dahua',
+      name: 'Dahua',
+      logo: '/assets/brands/17_Dahua.png',
+      categories: ['cameras'],
+      categoryLabel: "Commercial Video Surveillance",
+      tagline: 'Full-Color AI Detection, Thermal Cameras & Smart Security Solutions',
+      warrantyBadge: 'Enterprise Video Analytics',
+      serviceOfferings: ['PoE Switch & Network Setup', 'AI Motion Trigger Calibration', 'Firmware Hardening & Recovery', 'Annual Maintenance Contracts (AMC)'],
+      posAll: { top: '82%', left: '48%', depth: 0.07, anim: 'animate-float-2' },
+      posCategory: { cameras: { top: '65%', left: '30%' } },
+    },
+    // 18. D-Link (CC Cameras / Networking)
+    {
+      id: 'dlink',
+      name: 'D-Link',
+      logo: '/assets/brands/18_D_Link.png',
+      categories: ['cameras'],
+      categoryLabel: "Surveillance & Networking",
+      tagline: 'PoE Switches, Wi-Fi Cloud Cameras, Routers & Network Racks',
+      warrantyBadge: 'High-Speed Networking Care',
+      serviceOfferings: ['Gigabit Switch Troubleshooting', 'Long-Range Wi-Fi Link Setup', 'IP Camera Subnet Routing', 'Network Rack Cable Dressing'],
+      posAll: { top: '84%', left: '76%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { cameras: { top: '65%', left: '70%' } },
     },
   ];
 
-  // Selected spotlighted product
-  const currentFocusedProduct =
-    hoveredProduct ||
-    products.find((p) => p.id === activeProductId) ||
-    products[0];
-
+  // Mouse move handler for organic 3D spatial float
   useEffect(() => {
-    // 1. Intersection Observer to preserve frame rate when off-screen
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        parallaxState.current.isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.05 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    // 2. Mouse Move Listener
     const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
       const { innerWidth, innerHeight } = window;
-      parallaxState.current.targetX = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      parallaxState.current.targetY = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-    };
-
-    // 3. Touch Move Listener for Mobile
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        const { innerWidth, innerHeight } = window;
-        const touch = e.touches[0];
-        parallaxState.current.targetX = (touch.clientX - innerWidth / 2) / (innerWidth / 2);
-        parallaxState.current.targetY = (touch.clientY - innerHeight / 2) / (innerHeight / 2);
-      }
+      physicsState.current.targetX = (e.clientX - innerWidth / 2) / (innerWidth / 2);
+      physicsState.current.targetY = (e.clientY - innerHeight / 2) / (innerHeight / 2);
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
-    // 4. Smooth Animation Lerp Physics Loop
-    let animationFrameId: number;
-
+    let animationId: number;
     const renderLoop = (time: number) => {
-      if (parallaxState.current.isVisible) {
-        const dt = Math.min((time - parallaxState.current.lastTime) / 1000, 0.1);
-        parallaxState.current.lastTime = time;
+      if (physicsState.current.isVisible) {
+        const dt = Math.min((time - physicsState.current.lastTime) / 1000, 0.1);
+        physicsState.current.lastTime = time;
 
-        // Subtle ambient natural float drift
-        const ambientX = Math.sin(time * 0.0006) * 0.03;
-        const ambientY = Math.cos(time * 0.0005) * 0.03;
+        const ambientX = Math.sin(time * 0.0007) * 0.03;
+        const ambientY = Math.cos(time * 0.0006) * 0.03;
 
-        const targetX = parallaxState.current.targetX + ambientX;
-        const targetY = parallaxState.current.targetY + ambientY;
+        const targetX = physicsState.current.targetX + ambientX;
+        const targetY = physicsState.current.targetY + ambientY;
 
-        const lerpFactor = 1 - Math.pow(0.002, dt);
-        parallaxState.current.currentX +=
-          (targetX - parallaxState.current.currentX) * lerpFactor;
-        parallaxState.current.currentY +=
-          (targetY - parallaxState.current.currentY) * lerpFactor;
+        physicsState.current.currentX += (targetX - physicsState.current.currentX) * 0.06;
+        physicsState.current.currentY += (targetY - physicsState.current.currentY) * 0.06;
 
-        const cx = parallaxState.current.currentX;
-        const cy = parallaxState.current.currentY;
+        const curX = physicsState.current.currentX;
+        const curY = physicsState.current.currentY;
 
-        products.forEach((prod) => {
-          const el = layerRefs.current[prod.id];
+        Object.keys(layerRefs.current).forEach((brandId) => {
+          const el = layerRefs.current[brandId];
           if (!el) return;
-
-          const tx = (cx * prod.depth * 240).toFixed(2);
-          const ty = (cy * prod.depth * 150).toFixed(2);
-          const rx = (-cy * prod.depth * 8).toFixed(2);
-          const ry = (cx * prod.depth * 8).toFixed(2);
-
-          el.style.transform = `translate3d(${tx}px, ${ty}px, 0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+          const depth = parseFloat(el.getAttribute('data-depth') || '0.05');
+          const tx = (curX * depth * 140).toFixed(2);
+          const ty = (curY * depth * 100).toFixed(2);
+          el.style.transform = `translate3d(${tx}px, ${ty}px, 0px)`;
         });
       }
-
-      animationFrameId = requestAnimationFrame(renderLoop);
+      animationId = requestAnimationFrame(renderLoop);
     };
 
-    animationFrameId = requestAnimationFrame(renderLoop);
+    animationId = requestAnimationFrame(renderLoop);
 
     return () => {
-      observer.disconnect();
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
-  // Category filter triggers
   const categories = [
-    { id: 'all', label: 'All Showcase' },
-    { id: 'printers', label: 'Epson Printers' },
-    { id: 'monitors', label: 'Pro Monitors' },
-    { id: 'keyboards', label: 'Peripherals' },
-    { id: 'motherboards', label: 'Motherboards' },
-    { id: 'gpus', label: 'Graphics / GPUs' },
-    { id: 'ram', label: 'Memory / RAM' },
+    { id: 'all', label: 'All Services & Brands', icon: Layers, count: 18 },
+    { id: 'pcs', label: "PC's", icon: Monitor, count: 5 },
+    { id: 'laptops', label: 'Laptops', icon: Laptop, count: 5 },
+    { id: 'cameras', label: 'CC Cameras', icon: Camera, count: 4 },
+    { id: 'biometrics', label: 'Bio Metric', icon: Fingerprint, count: 3 },
+    { id: 'printers', label: 'Printers', icon: Printer, count: 4 },
   ];
 
-  const handleCategorySelect = (catId: string) => {
-    setActiveCategory(catId);
-    if (catId === 'all') {
-      setActiveProductId('epson-printer');
-    } else {
-      const match = products.find((p) => p.categorySlug === catId);
-      if (match) {
-        setActiveProductId(match.id);
-      }
-    }
-  };
+  // Filtered brands: in 'all', every brand appears exactly once without duplicates
+  const visibleBrands = activeTab === 'all'
+    ? brands
+    : brands.filter((b) => b.categories.includes(activeTab as any));
+
+  const activeSelectedBrand = brands.find((b) => b.id === (hoveredBrandId || selectedBrandId)) || brands[0];
 
   return (
     <section
       id="technology-showcase"
       ref={containerRef}
-      className="relative bg-white text-[#0E1117] py-24 sm:py-32 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-20 sm:py-28 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
-      {/* 1. White Studio Lighting & Subtle Architectural Depth Grid */}
+      {/* 1. Spatial Linework & Coordinate Architecture Background (Clean Studio White Theme) */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        <div className="absolute top-1/4 left-1/3 w-[750px] h-[750px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.025)_0%,rgba(255,255,255,0)_100%)]" />
         
-        {/* Soft Studio Directional Overhead Keylight (Pure White Center, Gentle Falloff) */}
-        <div className="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[1100px] h-[650px] bg-[radial-gradient(50%_50%_at_50%_40%,rgba(255,255,255,1)_0%,rgba(247,249,252,0.85)_60%,rgba(255,255,255,0)_100%)]" />
-
-        {/* Studio Floor Soft Contact Horizon Shadow */}
-        <div className="absolute top-[62%] left-1/2 -translate-x-1/2 w-[1300px] h-[340px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(15,23,42,0.025)_0%,rgba(15,23,42,0)_70%)]" />
-
-        {/* Architectural Geometry Linework Pattern */}
-        <svg
-          className="absolute inset-0 w-full h-full opacity-65"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        {/* Spatial Grid Pattern */}
+        <svg className="absolute inset-0 w-full h-full opacity-60" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern
-              id="studioGrid"
-              width="160"
-              height="160"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 160 0 L 0 0 0 160"
-                fill="none"
-                stroke="rgba(15, 23, 42, 0.025)"
-                strokeWidth="1"
-              />
+            <pattern id="brandsGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+              <path d="M 120 0 L 0 0 0 120" fill="none" stroke="rgba(15, 23, 42, 0.022)" strokeWidth="1" />
               <circle cx="0" cy="0" r="1.5" fill="rgba(15, 23, 42, 0.06)" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#studioGrid)" />
-
-          {/* Large Minimal Studio Horizon Circles */}
-          <circle
-            cx="50%"
-            cy="52%"
-            r="440"
-            fill="none"
-            stroke="rgba(241, 90, 36, 0.04)"
-            strokeWidth="1.2"
-            strokeDasharray="10 12"
-          />
-          <circle
-            cx="50%"
-            cy="52%"
-            r="680"
-            fill="none"
-            stroke="rgba(15, 23, 42, 0.02)"
-            strokeWidth="1"
-          />
+          <rect width="100%" height="100%" fill="url(#brandsGrid)" />
+          
+          <circle cx="50%" cy="50%" r="360" fill="none" stroke="rgba(241, 90, 36, 0.035)" strokeWidth="1.2" strokeDasharray="8 8" />
+          <circle cx="50%" cy="50%" r="560" fill="none" stroke="rgba(15, 23, 42, 0.02)" strokeWidth="1" />
         </svg>
 
-        {/* Fine Technical Spatial Corner Markers */}
-        <div className="absolute top-12 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">EXP.INSIDE_TECH</span>
+        {/* Technical Coordinate Corner Markers */}
+        <div className="absolute top-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+          + <span className="text-[#64748B]">SERVICES.SPATIAL_MATRIX</span>
         </div>
-        <div className="absolute top-12 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">STUDIO.3D_WHITE</span>
+        <div className="absolute top-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+          + <span className="text-[#64748B]">OEM.VERIFIED_CHANNELS</span>
         </div>
         <div className="absolute bottom-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">HARDWARE.VERIFIED</span>
+          + <span className="text-[#64748B]">MULTI_BRAND.SUPPORT</span>
         </div>
         <div className="absolute bottom-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ELURU.HEADQUARTERS</span>
+          + <span className="text-[#64748B]">ELURU.CENTRAL_DESK</span>
         </div>
       </div>
 
-      {/* 2. Compact Editorial Introduction */}
-      <div className="relative z-20 max-w-[1240px] mx-auto px-6 sm:px-8 text-center mb-8 sm:mb-12">
+      <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-8">
         
-        {/* Eyebrow Badge */}
-        <div className="inline-flex items-center gap-2.5 bg-white px-4 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-5 transition-transform duration-200 hover:scale-[1.02]">
-          <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
-          <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
-            INSIDE THE TECHNOLOGY
-          </span>
-          <span className="w-1 h-1 bg-black/20 rounded-full" />
-          <span className="font-mono text-[0.66rem] text-[#64748B] tracking-wider uppercase">
-            STUDIO SHOWCASE
-          </span>
+        {/* 2. Editorial Section Header */}
+        <div className="max-w-3xl mb-8 sm:mb-12 text-left">
+          
+          {/* Eyebrow Badge */}
+          <div className="inline-flex items-center gap-2.5 bg-[#FAFBFD] px-4 py-1.5 rounded-full border border-black/[0.08] shadow-2xs mb-4">
+            <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
+            <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
+              SERVICES &amp; SUPPORTED BRANDS
+            </span>
+          </div>
+
+          {/* Main Headline */}
+          <h2 className="font-heading font-extrabold text-[clamp(2.1rem,4.2vw,3.4rem)] text-[#0E1117] leading-[1.08] tracking-tight mb-4 select-none">
+            Expert Multi-Brand<br />
+            <span className="text-[#F15A24] relative inline-block">
+              Sales, Services &amp; Solutions.
+              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+            </span>
+          </h2>
+
+          <p className="text-[1.02rem] sm:text-[1.1rem] text-[#4A5364] leading-relaxed font-normal max-w-2xl">
+            Authorized multi-brand computer hardware sales, precision chip-level laptop servicing, enterprise CC camera surveillance, biometric access control, and commercial printing systems in Eluru.
+          </p>
         </div>
 
-        {/* Section Headline */}
-        <h2 className="font-heading font-extrabold text-[clamp(2.1rem,4.5vw,3.65rem)] text-[#0E1117] leading-[1.08] tracking-tight mb-4 select-none">
-          Built Around{' '}
-          <span className="text-[#F15A24] relative inline-block">
-            Better Technology.
-            <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
-          </span>
-        </h2>
-
-        {/* Compact Supporting Editorial Lead */}
-        <p className="text-[0.98rem] sm:text-[1.12rem] text-[#4A5364] leading-relaxed max-w-2xl mx-auto font-normal">
-          From everyday computing to professional business environments, we bring together reliable hardware and practical technology solutions.
-        </p>
-
-        {/* Interactive Category Filter Pills */}
-        <div className="mt-8 flex items-center justify-center flex-wrap gap-2 sm:gap-2.5">
+        {/* 3. Category Filter Navigation Bar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 sm:mb-12 no-scrollbar">
           {categories.map((cat) => {
-            const isSelected = activeCategory === cat.id;
+            const Icon = cat.icon;
+            const isSelected = activeTab === cat.id;
+
             return (
               <button
                 key={cat.id}
                 type="button"
-                onClick={() => handleCategorySelect(cat.id)}
-                className={`px-4 py-2 rounded-full font-mono text-[0.74rem] font-medium tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                onClick={() => {
+                  setActiveTab(cat.id);
+                  // select first brand in category
+                  const firstInCat = cat.id === 'all' 
+                    ? brands[0] 
+                    : brands.find((b) => b.categories.includes(cat.id as any));
+                  if (firstInCat) setSelectedBrandId(firstInCat.id);
+                }}
+                className={`px-4 sm:px-5 py-2.5 rounded-xl font-heading text-[0.88rem] sm:text-[0.92rem] font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-2.5 ${
                   isSelected
-                    ? 'bg-[#0E1117] text-white shadow-sm border border-[#0E1117]'
-                    : 'bg-white/80 hover:bg-white text-[#4A5364] hover:text-[#0E1117] border border-black/[0.08] hover:border-black/20 shadow-2xs'
+                    ? 'bg-[#F15A24] text-white shadow-orange-cta scale-[1.02]'
+                    : 'bg-[#FAFBFD] hover:bg-slate-100 text-[#4A5364] hover:text-[#0E1117] border border-black/[0.06] hover:border-black/15 shadow-2xs'
                 }`}
               >
-                {isSelected && <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full" />}
+                <Icon size={16} className={isSelected ? 'text-white' : 'text-[#F15A24]'} />
                 <span>{cat.label}</span>
+                <span
+                  className={`font-mono text-[0.72rem] px-2 py-0.5 rounded-full ${
+                    isSelected ? 'bg-white/20 text-white font-bold' : 'bg-black/5 text-[#828E9E]'
+                  }`}
+                >
+                  {cat.count}
+                </span>
               </button>
             );
           })}
         </div>
-      </div>
 
-      {/* 3. Main Immersive 3D Technology Gallery Viewport (Desktop Full Interactive Composition) */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto min-h-[580px] sm:min-h-[720px] lg:min-h-[820px] px-4 my-2 hidden md:block">
-        
-        {/* Editorial Minimal Background Technical Annotations */}
-        <div className="absolute inset-0 pointer-events-none z-0">
-          {/* Subtle Thin Red Accent Coordinate Lines */}
-          <div className="absolute top-[28%] left-[26%] flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
-            <div className="w-16 h-[1px] bg-[#F15A24]/30" />
-            <span className="font-mono text-[0.62rem] font-bold text-[#F15A24] tracking-widest uppercase">
-              PRECISION
-            </span>
-          </div>
-
-          <div className="absolute top-[18%] right-[22%] flex items-center gap-2">
-            <span className="font-mono text-[0.62rem] font-bold text-[#64748B] tracking-widest uppercase">
-              PERFORMANCE
-            </span>
-            <div className="w-16 h-[1px] bg-black/10" />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#0E1117]/40" />
-          </div>
-
-          <div className="absolute bottom-[24%] left-[20%] flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24]/60" />
-            <div className="w-20 h-[1px] bg-[#F15A24]/20" />
-            <span className="font-mono text-[0.62rem] font-bold text-[#F15A24] tracking-widest uppercase">
-              RELIABILITY
-            </span>
-          </div>
-
-          <div className="absolute bottom-[22%] right-[18%] flex items-center gap-2">
-            <span className="font-mono text-[0.62rem] font-bold text-[#64748B] tracking-widest uppercase">
-              ENTERPRISE READY
-            </span>
-            <div className="w-12 h-[1px] bg-black/10" />
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          </div>
-        </div>
-
-        {/* 3D Hardware Objects Spatial Layer */}
-        <div className="absolute inset-0 preserve-3d perspective-1200">
-          {products.map((product) => {
-            const isDimmed =
-              activeCategory !== 'all' && product.categorySlug !== activeCategory;
-            const isFocused =
-              activeProductId === product.id || hoveredProduct?.id === product.id;
-
-            return (
-              <div
-                key={product.id}
-                ref={(el) => {
-                  layerRefs.current[product.id] = el;
-                }}
-                onClick={() => {
-                  setActiveProductId(product.id);
-                  onOpenAvailability(product.name);
-                }}
-                onMouseEnter={() => {
-                  setHoveredProduct(product);
-                  setActiveProductId(product.id);
-                }}
-                onMouseLeave={() => setHoveredProduct(null)}
-                style={{ zIndex: isFocused ? 45 : product.zIndex }}
-                className={`absolute cursor-pointer transition-all duration-500 ease-out will-change-transform transform-gpu ${
-                  product.positionDesktop
-                } ${
-                  isDimmed
-                    ? 'opacity-25 grayscale scale-95 pointer-events-none'
-                    : 'opacity-100'
-                } ${isFocused ? 'scale-[1.04]' : 'scale-100 hover:scale-[1.02]'}`}
-              >
-                {/* 3D Hardware Image with Multi-Layer Drop Shadow */}
-                <div className={`relative transition-transform duration-300 ${product.rotation}`}>
-                  <img
-                    src={product.image}
-                    alt={product.imageAlt}
-                    className={`w-full h-auto object-contain select-none pointer-events-auto ${product.shadowClass} transition-all duration-300`}
-                    loading="eager"
-                  />
-
-                  {/* Micro Editorial Marker Coordinate */}
-                  <div className="absolute -top-3 left-2 bg-white/90 backdrop-blur-md px-2 py-0.5 rounded border border-black/10 shadow-2xs">
-                    <span className="font-mono text-[0.58rem] font-bold text-[#0E1117] tracking-wider">
-                      {product.markerCoordinate}
-                    </span>
-                  </div>
-
-                  {/* Red Pulse Hotspot Dot */}
-                  <div className="absolute bottom-4 right-4 flex items-center justify-center">
-                    <span className="absolute w-4 h-4 bg-[#F15A24]/20 rounded-full animate-ping" />
-                    <span className="relative w-2 h-2 bg-[#F15A24] rounded-full shadow-xs" />
-                  </div>
-                </div>
-
-                {/* Subtle Floating Editorial Annotation (Active on Hover/Selection) */}
-                {isFocused && (
-                  <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 translate-y-full w-max max-w-[280px] bg-white/95 backdrop-blur-xl p-3.5 rounded-2xl border border-black/[0.08] shadow-[0_16px_36px_rgba(15,23,42,0.12)] z-50 animate-in fade-in zoom-in-95 duration-200">
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="font-mono text-[0.62rem] font-bold tracking-widest text-[#F15A24] uppercase">
-                        {product.editorialTitle}
-                      </span>
-                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
-                    </div>
-
-                    <p className="text-[0.78rem] text-[#333D4B] font-medium leading-snug mb-2.5">
-                      {product.tagline}
-                    </p>
-
-                    <div className="flex items-center justify-between pt-2 border-t border-black/[0.06]">
-                      <span className="font-mono text-[0.68rem] font-bold text-[#F15A24] flex items-center gap-1 group-hover:underline">
-                        <span>Check Availability</span>
-                        <ArrowRight size={12} />
-                      </span>
-                      <span className="font-mono text-[0.58rem] text-[#828E9E]">
-                        {product.annotationValue}
-                      </span>
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Editorial Inspector Dock (Bottom Center Overview Card) */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 w-full max-w-[780px] px-4">
-          <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-5 sm:p-6 border border-black/[0.08] shadow-[0_20px_50px_rgba(15,23,42,0.08)] flex flex-col sm:flex-row items-center justify-between gap-5 transition-all duration-300 hover:border-black/15">
+        {/* 4. Spatial Floating in Air Interactive Arena + Detail HUD */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          {/* LEFT/CENTER: 3D Spatial Floating in Air Canvas (8 Columns on LG) */}
+          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-3xl border border-black/[0.08] shadow-[0_16px_50px_rgba(15,23,42,0.04)] overflow-hidden relative min-h-[520px] sm:min-h-[620px] p-6 sm:p-8 flex flex-col justify-between select-none">
             
-            {/* Left Hardware Info */}
-            <div className="flex items-center gap-4 text-left w-full sm:w-auto">
-              <div className="w-14 h-14 rounded-xl bg-[#F8F9FA] border border-black/[0.06] p-1.5 flex items-center justify-center flex-shrink-0">
-                <img
-                  src={currentFocusedProduct.image}
-                  alt={currentFocusedProduct.name}
-                  className="w-full h-full object-contain drop-shadow-xs"
-                />
-              </div>
+            {/* Ambient Radial Ring Lighting inside the Arena */}
+            <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(250,251,253,0)_100%)] pointer-events-none" />
 
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
-                  <span className="font-mono text-[0.68rem] font-bold text-[#F15A24] tracking-wider uppercase">
-                    {currentFocusedProduct.category}
-                  </span>
-                </div>
-                <h4 className="font-heading font-bold text-[1.12rem] text-[#0E1117] leading-tight mt-0.5">
-                  {currentFocusedProduct.name}
-                </h4>
-                <p className="text-[0.8rem] text-[#64748B] mt-0.5 line-clamp-1">
-                  {currentFocusedProduct.tagline}
-                </p>
-              </div>
-            </div>
-
-            {/* Right Action Trigger */}
-            <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-              <button
-                type="button"
-                onClick={() => onOpenAvailability(currentFocusedProduct.name)}
-                className="w-full sm:w-auto px-5 py-2.5 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.88rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
-              >
-                <span>Check Availability</span>
-                <ArrowRight size={14} />
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      {/* 4. Mobile & Tablet Vertical Recomposition (Large High-Resolution Cards, Touch Friendly) */}
-      <div className="md:hidden px-6 space-y-6">
-        {products.map((prod) => (
-          <div
-            key={prod.id}
-            onClick={() => onOpenAvailability(prod.name)}
-            className="group bg-white rounded-3xl p-6 border border-black/[0.08] shadow-[0_8px_30px_rgba(15,23,42,0.03)] active:scale-[0.99] transition-all duration-200 flex flex-col justify-between relative overflow-hidden"
-          >
-            {/* Top Coordinate & Badge */}
-            <div className="flex items-center justify-between mb-4">
+            {/* Arena Header Coordinates */}
+            <div className="flex items-center justify-between gap-4 z-20 mb-4 pb-3 border-b border-black/[0.05]">
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
-                <span className="font-mono text-[0.7rem] font-bold text-[#F15A24] tracking-widest uppercase">
-                  {prod.editorialTitle}
+                <span className="w-2 h-2 rounded-full bg-[#F15A24] animate-ping" />
+                <span className="font-mono text-[0.72rem] font-bold text-[#0E1117] uppercase tracking-wider">
+                  FLOATING BRAND MATRIX
+                </span>
+                <span className="hidden sm:inline font-mono text-[0.68rem] text-slate-400">
+                  · {visibleBrands.length} BRANDS IN VIEW
                 </span>
               </div>
-              <span className="font-mono text-[0.66rem] text-[#9AA5B5] bg-[#F8F9FA] px-2 py-0.5 rounded border border-black/[0.06]">
-                {prod.markerCoordinate}
-              </span>
-            </div>
 
-            {/* Large 3D Hardware Image */}
-            <div className="py-6 flex items-center justify-center relative">
-              <div className="absolute w-48 h-48 rounded-full bg-[#FFF2EB]/70 pointer-events-none" />
-              <img
-                src={prod.image}
-                alt={prod.imageAlt}
-                className="relative z-10 w-full max-w-[260px] h-auto object-contain drop-shadow-[0_20px_32px_rgba(15,23,42,0.12)]"
-                loading="lazy"
-              />
-            </div>
-
-            {/* Product Meta */}
-            <div>
-              <h3 className="font-heading font-bold text-[1.25rem] text-[#0E1117] mb-1">
-                {prod.name}
-              </h3>
-              <p className="text-[0.88rem] text-[#4A5364] leading-relaxed mb-4">
-                {prod.description}
-              </p>
-
-              {/* Specs Pills */}
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {prod.specs.map((s) => (
-                  <span
-                    key={s}
-                    className="font-mono text-[0.64rem] bg-[#F4F6F8] text-[#333D4B] px-2.5 py-1 rounded-md border border-black/[0.04]"
-                  >
-                    {s}
-                  </span>
-                ))}
+              <div className="font-mono text-[0.68rem] text-[#828E9E] flex items-center gap-1.5">
+                <Sparkles size={12} className="text-[#F15A24]" />
+                <span>Hover / Click Any Logo to Inspect Services</span>
               </div>
             </div>
 
-            {/* Action Button */}
-            <div className="pt-4 border-t border-black/[0.06] flex items-center justify-between">
-              <span className="font-mono text-[0.74rem] font-bold text-[#F15A24] flex items-center gap-1.5">
-                <span>Check Availability</span>
-                <ArrowRight size={14} />
-              </span>
-              <span className="font-mono text-[0.64rem] text-[#828E9E]">
-                {prod.annotationValue}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
+            {/* The Floating Logos Arena Surface */}
+            <div className="relative w-full h-[420px] sm:h-[500px] overflow-hidden">
+              {visibleBrands.map((brand, idx) => {
+                const isHovered = (hoveredBrandId || selectedBrandId) === brand.id;
+                
+                // Determine layout coordinates
+                let topPos = brand.posAll.top;
+                let leftPos = brand.posAll.left;
 
-      {/* 5. Lower Section Statement & Brand Assurance */}
-      <div className="relative z-20 max-w-[1240px] mx-auto px-6 sm:px-8 mt-20 sm:mt-28">
-        
-        {/* Subtle Horizontal Divider with Centered Brand Knot */}
-        <div className="relative flex items-center justify-center mb-16">
-          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-black/[0.08] to-transparent" />
-          <div className="absolute bg-white px-4 flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24]" />
-            <span className="font-mono text-[0.64rem] font-bold tracking-[0.25em] text-[#828E9E] uppercase">
-              GLOBAL COMPUTERS ASSURANCE
-            </span>
-          </div>
-        </div>
+                if (activeTab !== 'all' && brand.posCategory[activeTab]) {
+                  topPos = brand.posCategory[activeTab].top;
+                  leftPos = brand.posCategory[activeTab].left;
+                }
 
-        {/* Two-Column Editorial Statement */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* Main Statement Typography */}
-          <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
-              <span className="font-mono text-[0.68rem] font-bold text-[#F15A24] tracking-wider uppercase">
-                HARDWARE INTEGRITY
-              </span>
-            </div>
-            
-            <h3 className="font-heading font-extrabold text-[clamp(1.9rem,3.6vw,3.1rem)] text-[#0E1117] leading-[1.12] tracking-tight mb-5">
-              Technology that{' '}
-              <span className="text-[#F15A24] relative inline-block">
-                works.
-                <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
-              </span>{' '}
-              Solutions that{' '}
-              <span className="underline decoration-[#F15A24] decoration-2 underline-offset-4">
-                last.
-              </span>
-            </h3>
+                return (
+                  <div
+                    key={brand.id}
+                    ref={(el) => {
+                      layerRefs.current[brand.id] = el;
+                    }}
+                    data-depth={brand.posAll.depth}
+                    onClick={() => {
+                      setSelectedBrandId(brand.id);
+                      setHoveredBrandId(brand.id);
+                    }}
+                    onMouseEnter={() => setHoveredBrandId(brand.id)}
+                    onMouseLeave={() => setHoveredBrandId(null)}
+                    style={{
+                      top: topPos,
+                      left: leftPos,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    className={`absolute cursor-pointer transition-all duration-500 ease-out z-20 ${brand.posAll.anim} ${
+                      isHovered ? 'scale-115 z-40' : 'hover:scale-105'
+                    }`}
+                  >
+                    {/* Floating Brand Card with Crisp White Drop Shadow */}
+                    <div
+                      className={`relative bg-white p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center justify-center min-w-[90px] sm:min-w-[110px] max-w-[130px] ${
+                        isHovered
+                          ? 'border-[#F15A24] shadow-[0_16px_38px_rgba(241,90,36,0.22)] ring-2 ring-[#F15A24]/20'
+                          : 'border-black/[0.08] shadow-[0_10px_25px_rgba(15,23,42,0.06)] hover:border-[#F15A24]/40 hover:shadow-[0_12px_30px_rgba(241,90,36,0.12)]'
+                      }`}
+                    >
+                      {/* Logo Image */}
+                      <div className="w-14 h-10 sm:w-16 sm:h-11 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={brand.logo}
+                          alt={`${brand.name} Authorized Service & Sales`}
+                          className="max-h-full max-w-full object-contain select-none transition-transform duration-200"
+                          loading="lazy"
+                        />
+                      </div>
 
-            <p className="text-[1.02rem] sm:text-[1.08rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
-              Every system and component in our Eluru showroom undergoes rigorous physical inspection and benchmark testing to ensure dependable performance in corporate offices, educational institutions, and home studios.
-            </p>
-          </div>
+                      {/* Brand Label */}
+                      <span
+                        className={`font-heading font-bold text-[0.76rem] sm:text-[0.82rem] mt-1.5 transition-colors ${
+                          isHovered ? 'text-[#F15A24]' : 'text-[#0E1117]'
+                        }`}
+                      >
+                        {brand.name}
+                      </span>
 
-          {/* Three Pillar Specification Badges */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            {[
-              {
-                title: 'BUSINESS READY',
-                desc: 'Turnkey enterprise hardware with direct invoice and bulk warranty support.',
-                icon: ShieldCheck,
-              },
-              {
-                title: 'PROFESSIONAL HARDWARE',
-                desc: '100% genuine components sourced exclusively through authorized OEM channels.',
-                icon: Zap,
-              },
-              {
-                title: 'RELIABLE SUPPORT',
-                desc: 'Immediate on-site and showroom technical guidance from certified specialists in Eluru.',
-                icon: CheckCircle2,
-              },
-            ].map((pillar) => {
-              const IconComponent = pillar.icon;
-              return (
-                <div
-                  key={pillar.title}
-                  className="bg-[#FAFBFD] rounded-2xl p-4 sm:p-5 border border-black/[0.06] flex items-start gap-4 transition-all duration-200 hover:bg-white hover:border-[#F15A24]/25 hover:shadow-sm"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-white border border-black/[0.06] flex items-center justify-center flex-shrink-0 text-[#F15A24] shadow-2xs">
-                    <IconComponent size={20} />
-                  </div>
-                  <div>
-                    <div className="font-mono text-[0.72rem] font-bold tracking-wider text-[#0E1117] uppercase mb-0.5">
-                      {pillar.title}
+                      {/* Mini Verified Dot */}
+                      {isHovered && (
+                        <div className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#F15A24] text-white rounded-full flex items-center justify-center shadow-xs text-[0.6rem] font-bold animate-pulse">
+                          ✓
+                        </div>
+                      )}
                     </div>
-                    <p className="text-[0.84rem] text-[#64748B] leading-snug">
-                      {pillar.desc}
-                    </p>
                   </div>
+                );
+              })}
+            </div>
+
+            {/* Floating Arena Footer Status Bar */}
+            <div className="pt-3 border-t border-black/[0.05] flex items-center justify-between text-[0.78rem] text-slate-500 z-20">
+              <span className="flex items-center gap-1.5">
+                <ShieldCheck size={14} className="text-[#F15A24]" />
+                <span className="font-medium text-[#0E1117]">100% Genuine Box-Pack &amp; Certified Component Spares</span>
+              </span>
+              <span className="font-mono text-[0.7rem] text-[#F15A24] font-semibold hidden sm:inline">
+                ELURU SERVICE DESK
+              </span>
+            </div>
+
+          </div>
+
+          {/* RIGHT: Live Interactive Brand Service HUD Card (4 Columns on LG) */}
+          <div className="lg:col-span-4 flex flex-col gap-6">
+            
+            {/* Selected Brand Detail Card */}
+            <div className="bg-white rounded-3xl border border-black/[0.08] p-6 sm:p-7 shadow-[0_12px_40px_rgba(15,23,42,0.05)] text-left relative overflow-hidden transition-all duration-300">
+              
+              {/* Brand Top Highlight Accent */}
+              <div className="h-1 w-full bg-gradient-to-r from-[#F15A24] via-[#FF7844] to-[#F15A24] absolute top-0 left-0 right-0" />
+
+              {/* Logo Header Banner */}
+              <div className="flex items-center justify-between gap-4 mb-5 pt-2">
+                <div className="bg-[#FAFBFD] p-3 rounded-2xl border border-black/[0.06] shadow-2xs flex items-center justify-center w-24 h-16">
+                  <img
+                    src={activeSelectedBrand.logo}
+                    alt={activeSelectedBrand.name}
+                    className="max-h-full max-w-full object-contain"
+                  />
                 </div>
-              );
-            })}
+
+                <div className="text-right">
+                  <span className="font-mono text-[0.64rem] font-bold tracking-wider bg-[#FFF2EB] text-[#F15A24] px-2.5 py-1 rounded-full uppercase border border-[#F15A24]/15 block">
+                    {activeSelectedBrand.warrantyBadge}
+                  </span>
+                  <span className="font-mono text-[0.66rem] text-slate-400 mt-1 block">
+                    {activeSelectedBrand.categoryLabel}
+                  </span>
+                </div>
+              </div>
+
+              {/* Title & Tagline */}
+              <h3 className="font-heading font-extrabold text-[1.35rem] text-[#0E1117] leading-tight mb-2">
+                {activeSelectedBrand.name} Services &amp; Sales
+              </h3>
+              
+              <p className="text-[0.88rem] text-[#64748B] leading-relaxed mb-6 font-normal">
+                {activeSelectedBrand.tagline}
+              </p>
+
+              {/* Service Capabilities Checklist */}
+              <div className="mb-6 pt-5 border-t border-black/[0.06]">
+                <span className="font-mono text-[0.68rem] font-bold tracking-wider text-slate-400 uppercase mb-3 block">
+                  AVAILABLE SERVICE CAPABILITIES
+                </span>
+                
+                <div className="space-y-2.5">
+                  {activeSelectedBrand.serviceOfferings.map((offering, i) => (
+                    <div key={i} className="flex items-start gap-2.5 text-[0.85rem] text-[#0E1117] font-medium">
+                      <CheckCircle2 size={15} className="text-[#F15A24] flex-shrink-0 mt-0.5" />
+                      <span>{offering}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Direct Enquiry for this Brand */}
+              <div className="space-y-3 pt-4 border-t border-black/[0.06]">
+                <button
+                  type="button"
+                  onClick={() => onOpenAvailability(`${activeSelectedBrand.name} ${activeSelectedBrand.categoryLabel}`)}
+                  className="w-full py-3.5 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all duration-200 hover:shadow-orange-hover hover:-translate-y-0.5 cursor-pointer"
+                >
+                  <span>Book {activeSelectedBrand.name} Service / Enquiry</span>
+                  <ArrowRight size={15} />
+                </button>
+
+                <a
+                  href="#location"
+                  className="w-full py-2.5 bg-[#FAFBFD] hover:bg-slate-100 text-[#0E1117] font-semibold text-[0.84rem] rounded-xl flex items-center justify-center gap-1.5 transition-colors border border-black/[0.06] cursor-pointer"
+                >
+                  <span>Visit Eluru Service Showroom</span>
+                  <ExternalLink size={13} className="text-[#828E9E]" />
+                </a>
+              </div>
+
+            </div>
+
+            {/* Quick Consultation Badge */}
+            <div className="bg-[#FAFBFD] rounded-2xl border border-black/[0.06] p-4 flex items-center gap-3.5 text-left shadow-2xs">
+              <div className="w-10 h-10 rounded-xl bg-[#FFF2EB] text-[#F15A24] flex items-center justify-center flex-shrink-0">
+                <PhoneCall size={18} />
+              </div>
+              <div className="leading-tight">
+                <span className="font-heading font-bold text-[0.88rem] text-[#0E1117] block">
+                  Need Immediate Technical Assistance?
+                </span>
+                <span className="text-[0.78rem] text-slate-500 mt-0.5 block">
+                  Call or visit our direct tech desk on Main Road, Powerpet, Eluru.
+                </span>
+              </div>
+            </div>
+
           </div>
 
-        </div>
-
-        {/* Direct Action Row */}
-        <div className="mt-12 pt-8 border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 text-[0.86rem] text-[#64748B]">
-            <span className="w-2 h-2 bg-emerald-500 rounded-full" />
-            <span>Showroom open for direct physical inspection in Eluru</span>
-          </div>
-
-          <button
-            type="button"
-            onClick={() => onOpenAvailability()}
-            className="w-full sm:w-auto px-7 py-3.5 bg-[#0E1117] hover:bg-black text-white rounded-xl font-semibold text-[0.92rem] flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer shadow-sm"
-          >
-            <span>Check Full Showroom Availability</span>
-            <ArrowRight size={15} />
-          </button>
         </div>
 
       </div>
