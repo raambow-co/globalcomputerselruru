@@ -57,7 +57,8 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
   const layerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const brands: BrandService[] = [
-    // 1. HP (PCs, Laptops)
+    // --- INNER CORE RING (Radius ~16% Y, 19% X around center 50%, 50%) ---
+    // 1. HP (Inner Top)
     {
       id: 'hp',
       name: 'HP',
@@ -67,10 +68,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'Desktops, ProBooks, Pavilion, EliteBook & OMEN Servicing & Upgrades',
       warrantyBadge: 'Authorized Spares & Support',
       serviceOfferings: ['Motherboard Chip-Level Repair', 'Screen & Hinge Replacement', 'High-Speed NVMe SSD Upgrade', 'Thermal Paste Re-pasting'],
-      posAll: { top: '11%', left: '12%', depth: 0.04, anim: 'animate-float-1' },
-      posCategory: { pcs: { top: '24%', left: '25%' }, laptops: { top: '24%', left: '25%' } },
+      posAll: { top: '34%', left: '50%', depth: 0.04, anim: 'animate-float-1' },
+      posCategory: { pcs: { top: '24%', left: '26%' }, laptops: { top: '24%', left: '26%' } },
     },
-    // 2. Dell (PCs, Laptops)
+    // 2. Dell (Inner Top-Right)
     {
       id: 'dell',
       name: 'Dell',
@@ -80,10 +81,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'OptiPlex, Inspiron, Vostro, Latitude & Alienware Diagnostics',
       warrantyBadge: 'Original Component Diagnostics',
       serviceOfferings: ['Power Supply Unit (PSU) Repairs', 'Display & Backlight Repair', 'RAM & Graphics Upgrades', 'Original Battery Replacements'],
-      posAll: { top: '11%', left: '38%', depth: 0.07, anim: 'animate-float-2' },
-      posCategory: { pcs: { top: '24%', left: '75%' }, laptops: { top: '24%', left: '75%' } },
+      posAll: { top: '42%', left: '68%', depth: 0.07, anim: 'animate-float-2' },
+      posCategory: { pcs: { top: '24%', left: '74%' }, laptops: { top: '24%', left: '74%' } },
     },
-    // 3. Lenovo (PCs, Laptops)
+    // 3. Lenovo (Inner Bottom-Right / Center Core)
     {
       id: 'lenovo',
       name: 'Lenovo',
@@ -93,10 +94,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'ThinkPad, IdeaPad, Legion & ThinkCentre Commercial Maintenance',
       warrantyBadge: 'Genuine Parts Certified',
       serviceOfferings: ['Keyboard & Trackpad Repair', 'Liquid Spill Diagnostics', 'BIOS & Firmware Recovery', 'Custom RAM Expansions'],
-      posAll: { top: '11%', left: '64%', depth: 0.05, anim: 'animate-float-3' },
+      posAll: { top: '58%', left: '68%', depth: 0.05, anim: 'animate-float-3' },
       posCategory: { pcs: { top: '50%', left: '50%' }, laptops: { top: '50%', left: '50%' } },
     },
-    // 4. Apple (PCs)
+    // 4. Apple (Inner Bottom)
     {
       id: 'apple',
       name: 'Apple',
@@ -106,49 +107,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'iMac, Mac mini, Mac Studio & Mac Pro Precision Troubleshooting',
       warrantyBadge: 'Specialist Mac Technicians',
       serviceOfferings: ['macOS Clean Setup & Migration', 'Logic Board Micro-Soldering', 'Thermal Management Cleaning', 'SSD Storage Expansion'],
-      posAll: { top: '11%', left: '88%', depth: 0.08, anim: 'animate-float-main' },
-      posCategory: { pcs: { top: '74%', left: '25%' } },
+      posAll: { top: '66%', left: '50%', depth: 0.08, anim: 'animate-float-main' },
+      posCategory: { pcs: { top: '76%', left: '26%' } },
     },
-    // 5. Toshiba (PCs)
-    {
-      id: 'toshiba',
-      name: 'Toshiba',
-      logo: '/assets/brands/05_Toshiba.png',
-      categories: ['pcs'],
-      categoryLabel: "PC & Storage Services",
-      tagline: 'Desktop Systems, Hard Drives & Industrial Storage Solutions',
-      warrantyBadge: 'Enterprise Storage Support',
-      serviceOfferings: ['Data Recovery & Forensics', 'Hard Drive Replacement', 'Power Distribution Repair', 'Legacy System Maintenance'],
-      posAll: { top: '28%', left: '20%', depth: 0.03, anim: 'animate-float-1' },
-      posCategory: { pcs: { top: '74%', left: '75%' } },
-    },
-    // 6. ASUS (Laptops)
-    {
-      id: 'asus',
-      name: 'ASUS',
-      logo: '/assets/brands/06_ASUS.png',
-      categories: ['laptops'],
-      categoryLabel: "Laptop & Gaming Services",
-      tagline: 'ROG, TUF Gaming, ZenBook & VivoBook Performance Tuning',
-      warrantyBadge: 'Gaming & ROG Specialists',
-      serviceOfferings: ['GPU & VRAM Chip Diagnostics', 'Dual-Fan Cooling Overhaul', 'OLED Screen Replacement', 'Gaming BIOS Optimization'],
-      posAll: { top: '28%', left: '50%', depth: 0.06, anim: 'animate-float-2' },
-      posCategory: { laptops: { top: '74%', left: '25%' } },
-    },
-    // 7. Acer (Laptops)
-    {
-      id: 'acer',
-      name: 'Acer',
-      logo: '/assets/brands/07_Acer.png',
-      categories: ['laptops'],
-      categoryLabel: "Laptop Services",
-      tagline: 'Predator, Nitro, Aspire & Swift Professional Care',
-      warrantyBadge: 'Multi-Model Diagnostic Support',
-      serviceOfferings: ['Hinge & Chassis Repair', 'Motherboard Power IC Fix', 'Type-C Port Micro-Soldering', 'Performance Boost Upgrades'],
-      posAll: { top: '28%', left: '80%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { laptops: { top: '74%', left: '75%' } },
-    },
-    // 8. Epson (Printers)
+    // 5. Epson (Inner Bottom-Left)
     {
       id: 'epson',
       name: 'Epson',
@@ -158,88 +120,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'EcoTank, L-Series, WorkForce & Commercial Plotters Servicing',
       warrantyBadge: 'Direct PrecisionCore Support',
       serviceOfferings: ['Printhead Ultrasonic Cleaning', 'Waste Ink Pad Reset & Replacement', 'Paper Feed Roller Alignment', 'Continuous Ink Tank Overhaul'],
-      posAll: { top: '45%', left: '12%', depth: 0.09, anim: 'animate-float-main' },
-      posCategory: { printers: { top: '28%', left: '28%' } },
+      posAll: { top: '58%', left: '32%', depth: 0.09, anim: 'animate-float-main' },
+      posCategory: { printers: { top: '26%', left: '28%' } },
     },
-    // 9. TVS Electronics (Printers)
-    {
-      id: 'tvs',
-      name: 'TVS Electronics',
-      logo: '/assets/brands/09_TVS_Electronics.png',
-      categories: ['printers'],
-      categoryLabel: "POS & Dot Matrix Printers",
-      tagline: 'Dot Matrix, Thermal Receipt Printers & Commercial POS Systems',
-      warrantyBadge: 'Billing & POS Specialist',
-      serviceOfferings: ['Ribbon Mechanism Replacement', 'Printhead Pin Alignment', 'Thermal Head Calibration', 'Commercial POS Maintenance'],
-      posAll: { top: '45%', left: '38%', depth: 0.04, anim: 'animate-float-1' },
-      posCategory: { printers: { top: '28%', left: '72%' } },
-    },
-    // 10. Canon (Printers)
-    {
-      id: 'canon',
-      name: 'Canon',
-      logo: '/assets/brands/10_Canon.png',
-      categories: ['printers'],
-      categoryLabel: "Laser & Inkjet Printer Services",
-      tagline: 'PIXMA, imageCLASS, MAXIFY & Laser Multi-Function Printers',
-      warrantyBadge: 'Genuine Toner & Cartridge Support',
-      serviceOfferings: ['Laser Drum Unit Reconditioning', 'Logic Board Firmware Updates', 'Toner Cartridge Servicing', 'Color Calibration Tuning'],
-      posAll: { top: '45%', left: '64%', depth: 0.07, anim: 'animate-float-2' },
-      posCategory: { printers: { top: '70%', left: '28%' } },
-    },
-    // 11. Brother (Printers)
-    {
-      id: 'brother',
-      name: 'Brother',
-      logo: '/assets/brands/11_Brother.png',
-      categories: ['printers'],
-      categoryLabel: "Monochrome & Color Printers",
-      tagline: 'DCP Series, High-Speed Duplex Laser & Network Printers',
-      warrantyBadge: 'High-Volume Maintenance Care',
-      serviceOfferings: ['Fuser Unit Replacement', 'Network Wi-Fi Card Repair', 'Duplex Jam Resolution', 'OEM Ink & Toner Supplies'],
-      posAll: { top: '45%', left: '88%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { printers: { top: '70%', left: '72%' } },
-    },
-    // 12. eSSL (Biometrics)
-    {
-      id: 'essl',
-      name: 'eSSL',
-      logo: '/assets/brands/12_eSSL.png',
-      categories: ['biometrics'],
-      categoryLabel: "Biometric & Attendance Solutions",
-      tagline: 'Fingerprint, Face Recognition & RFID Access Control Terminals',
-      warrantyBadge: 'Security Hardware Specialist',
-      serviceOfferings: ['Optical Sensor Replacement', 'Time-Attendance Software Sync', 'Access Controller Wiring & Setup', 'Firmware Security Updates'],
-      posAll: { top: '63%', left: '20%', depth: 0.08, anim: 'animate-float-main' },
-      posCategory: { biometrics: { top: '28%', left: '28%' } },
-    },
-    // 13. BioMax (Biometrics)
-    {
-      id: 'biomax',
-      name: 'BioMax',
-      logo: '/assets/brands/13_BioMax.png',
-      categories: ['biometrics'],
-      categoryLabel: "Biometrics & Time-Trackers",
-      tagline: 'AI Face Attendance, Palm Scanners & Enterprise Turnstiles',
-      warrantyBadge: 'Enterprise Attendance Integration',
-      serviceOfferings: ['Cloud Attendance Sync Setup', 'Camera Module Calibration', 'Electromagnetic Lock Integration', 'On-Site Machine Servicing'],
-      posAll: { top: '63%', left: '50%', depth: 0.03, anim: 'animate-float-1' },
-      posCategory: { biometrics: { top: '28%', left: '72%' } },
-    },
-    // 14. Intercom (Biometrics & Security)
-    {
-      id: 'intercom',
-      name: 'Intercom',
-      logo: '/assets/brands/14_Intercom.png',
-      categories: ['biometrics'],
-      categoryLabel: "Communication & Access Devices",
-      tagline: 'Video Door Phones, Commercial Intercoms & Multi-Unit Systems',
-      warrantyBadge: 'Two-Way Audio/Video Support',
-      serviceOfferings: ['EPABX & Intercom Cabling', 'Audio Amplifier Troubleshooting', 'Video Door Screen Repair', 'Multi-Office Channel Setup'],
-      posAll: { top: '63%', left: '80%', depth: 0.06, anim: 'animate-float-2' },
-      posCategory: { biometrics: { top: '70%', left: '50%' } },
-    },
-    // 15. Hikvision (CC Cameras)
+    // 6. Hikvision (Inner Top-Left)
     {
       id: 'hikvision',
       name: 'Hikvision',
@@ -249,10 +133,77 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'ColorVu, Turbo HD, 4K IP Dome & Bullet Surveillance Systems',
       warrantyBadge: 'Leading CCTV Brand Solutions',
       serviceOfferings: ['NVR/DVR Channel Configuration', 'Night-Vision IR Sensor Alignment', 'CAT6 / BNC Cable Diagnostics', 'Mobile App Remote View Setup'],
-      posAll: { top: '80%', left: '12%', depth: 0.08, anim: 'animate-float-main' },
-      posCategory: { cameras: { top: '28%', left: '28%' } },
+      posAll: { top: '42%', left: '32%', depth: 0.08, anim: 'animate-float-main' },
+      posCategory: { cameras: { top: '26%', left: '28%' } },
     },
-    // 16. CP Plus (CC Cameras)
+
+    // --- MID ORBIT RING (Radius ~26% Y, 33% X around center 50%, 50%) ---
+    // 7. ASUS (Mid Right)
+    {
+      id: 'asus',
+      name: 'ASUS',
+      logo: '/assets/brands/06_ASUS.png',
+      categories: ['laptops'],
+      categoryLabel: "Laptop & Gaming Services",
+      tagline: 'ROG, TUF Gaming, ZenBook & VivoBook Performance Tuning',
+      warrantyBadge: 'Gaming & ROG Specialists',
+      serviceOfferings: ['GPU & VRAM Chip Diagnostics', 'Dual-Fan Cooling Overhaul', 'OLED Screen Replacement', 'Gaming BIOS Optimization'],
+      posAll: { top: '50%', left: '84%', depth: 0.06, anim: 'animate-float-2' },
+      posCategory: { laptops: { top: '76%', left: '26%' } },
+    },
+    // 8. Acer (Mid Bottom-Right)
+    {
+      id: 'acer',
+      name: 'Acer',
+      logo: '/assets/brands/07_Acer.png',
+      categories: ['laptops'],
+      categoryLabel: "Laptop Services",
+      tagline: 'Predator, Nitro, Aspire & Swift Professional Care',
+      warrantyBadge: 'Multi-Model Diagnostic Support',
+      serviceOfferings: ['Hinge & Chassis Repair', 'Motherboard Power IC Fix', 'Type-C Port Micro-Soldering', 'Performance Boost Upgrades'],
+      posAll: { top: '74%', left: '68%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { laptops: { top: '76%', left: '74%' } },
+    },
+    // 9. Canon (Mid Bottom-Left)
+    {
+      id: 'canon',
+      name: 'Canon',
+      logo: '/assets/brands/10_Canon.png',
+      categories: ['printers'],
+      categoryLabel: "Laser & Inkjet Printer Services",
+      tagline: 'PIXMA, imageCLASS, MAXIFY & Laser Multi-Function Printers',
+      warrantyBadge: 'Genuine Toner & Cartridge Support',
+      serviceOfferings: ['Laser Drum Unit Reconditioning', 'Logic Board Firmware Updates', 'Toner Cartridge Servicing', 'Color Calibration Tuning'],
+      posAll: { top: '74%', left: '32%', depth: 0.07, anim: 'animate-float-2' },
+      posCategory: { printers: { top: '74%', left: '28%' } },
+    },
+    // 10. Brother (Mid Left)
+    {
+      id: 'brother',
+      name: 'Brother',
+      logo: '/assets/brands/11_Brother.png',
+      categories: ['printers'],
+      categoryLabel: "Monochrome & Color Printers",
+      tagline: 'DCP Series, High-Speed Duplex Laser & Network Printers',
+      warrantyBadge: 'High-Volume Maintenance Care',
+      serviceOfferings: ['Fuser Unit Replacement', 'Network Wi-Fi Card Repair', 'Duplex Jam Resolution', 'OEM Ink & Toner Supplies'],
+      posAll: { top: '50%', left: '16%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { printers: { top: '74%', left: '72%' } },
+    },
+    // 11. TVS Electronics (Mid Top-Left)
+    {
+      id: 'tvs',
+      name: 'TVS Electronics',
+      logo: '/assets/brands/09_TVS_Electronics.png',
+      categories: ['printers'],
+      categoryLabel: "POS & Dot Matrix Printers",
+      tagline: 'Dot Matrix, Thermal Receipt Printers & Commercial POS Systems',
+      warrantyBadge: 'Billing & POS Specialist',
+      serviceOfferings: ['Ribbon Mechanism Replacement', 'Printhead Pin Alignment', 'Thermal Head Calibration', 'Commercial POS Maintenance'],
+      posAll: { top: '26%', left: '32%', depth: 0.04, anim: 'animate-float-1' },
+      posCategory: { printers: { top: '26%', left: '72%' } },
+    },
+    // 12. CP Plus (Mid Top-Right)
     {
       id: 'cpplus',
       name: 'CP Plus',
@@ -262,10 +213,64 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'EzyKam Wi-Fi, HD Analog & Commercial 16/32-Channel NVRs',
       warrantyBadge: 'Certified Surveillance Support',
       serviceOfferings: ['Hard Disk Surveillance Error Fix', 'PTZ 360° Motor Repair', 'Power Supply SMPS Overhaul', 'On-Site Installation & Aligning'],
-      posAll: { top: '80%', left: '38%', depth: 0.04, anim: 'animate-float-1' },
-      posCategory: { cameras: { top: '28%', left: '72%' } },
+      posAll: { top: '26%', left: '68%', depth: 0.04, anim: 'animate-float-1' },
+      posCategory: { cameras: { top: '26%', left: '72%' } },
     },
-    // 17. Dahua (CC Cameras)
+
+    // --- OUTER PERIMETER RING (Radius ~37% Y, 41% X around center 50%, 50%) ---
+    // 13. Toshiba (Outer North/Top Apex)
+    {
+      id: 'toshiba',
+      name: 'Toshiba',
+      logo: '/assets/brands/05_Toshiba.png',
+      categories: ['pcs'],
+      categoryLabel: "PC & Storage Services",
+      tagline: 'Desktop Systems, Hard Drives & Industrial Storage Solutions',
+      warrantyBadge: 'Enterprise Storage Support',
+      serviceOfferings: ['Data Recovery & Forensics', 'Hard Drive Replacement', 'Power Distribution Repair', 'Legacy System Maintenance'],
+      posAll: { top: '11%', left: '50%', depth: 0.03, anim: 'animate-float-1' },
+      posCategory: { pcs: { top: '76%', left: '74%' } },
+    },
+    // 14. eSSL (Outer Top-Right)
+    {
+      id: 'essl',
+      name: 'eSSL',
+      logo: '/assets/brands/12_eSSL.png',
+      categories: ['biometrics'],
+      categoryLabel: "Biometric & Attendance Solutions",
+      tagline: 'Fingerprint, Face Recognition & RFID Access Control Terminals',
+      warrantyBadge: 'Security Hardware Specialist',
+      serviceOfferings: ['Optical Sensor Replacement', 'Time-Attendance Software Sync', 'Access Controller Wiring & Setup', 'Firmware Security Updates'],
+      posAll: { top: '16%', left: '85%', depth: 0.08, anim: 'animate-float-main' },
+      posCategory: { biometrics: { top: '24%', left: '50%' } },
+    },
+    // 15. BioMax (Outer Bottom-Right)
+    {
+      id: 'biomax',
+      name: 'BioMax',
+      logo: '/assets/brands/13_BioMax.png',
+      categories: ['biometrics'],
+      categoryLabel: "Biometrics & Time-Trackers",
+      tagline: 'AI Face Attendance, Palm Scanners & Enterprise Turnstiles',
+      warrantyBadge: 'Enterprise Attendance Integration',
+      serviceOfferings: ['Cloud Attendance Sync Setup', 'Camera Module Calibration', 'Electromagnetic Lock Integration', 'On-Site Machine Servicing'],
+      posAll: { top: '82%', left: '85%', depth: 0.03, anim: 'animate-float-1' },
+      posCategory: { biometrics: { top: '74%', left: '72%' } },
+    },
+    // 16. Intercom (Outer South/Bottom Apex)
+    {
+      id: 'intercom',
+      name: 'Intercom',
+      logo: '/assets/brands/14_Intercom.png',
+      categories: ['biometrics'],
+      categoryLabel: "Communication & Access Devices",
+      tagline: 'Video Door Phones, Commercial Intercoms & Multi-Unit Systems',
+      warrantyBadge: 'Two-Way Audio/Video Support',
+      serviceOfferings: ['EPABX & Intercom Cabling', 'Audio Amplifier Troubleshooting', 'Video Door Screen Repair', 'Multi-Office Channel Setup'],
+      posAll: { top: '86%', left: '50%', depth: 0.06, anim: 'animate-float-2' },
+      posCategory: { biometrics: { top: '74%', left: '28%' } },
+    },
+    // 17. Dahua (Outer Bottom-Left)
     {
       id: 'dahua',
       name: 'Dahua',
@@ -275,10 +280,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'Full-Color AI Detection, Thermal Cameras & Smart Security Solutions',
       warrantyBadge: 'Enterprise Video Analytics',
       serviceOfferings: ['PoE Switch & Network Setup', 'AI Motion Trigger Calibration', 'Firmware Hardening & Recovery', 'Annual Maintenance Contracts (AMC)'],
-      posAll: { top: '80%', left: '64%', depth: 0.07, anim: 'animate-float-2' },
-      posCategory: { cameras: { top: '70%', left: '28%' } },
+      posAll: { top: '82%', left: '15%', depth: 0.07, anim: 'animate-float-2' },
+      posCategory: { cameras: { top: '74%', left: '28%' } },
     },
-    // 18. D-Link (CC Cameras / Networking)
+    // 18. D-Link (Outer Top-Left)
     {
       id: 'dlink',
       name: 'D-Link',
@@ -288,8 +293,8 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       tagline: 'PoE Switches, Wi-Fi Cloud Cameras, Routers & Network Racks',
       warrantyBadge: 'High-Speed Networking Care',
       serviceOfferings: ['Gigabit Switch Troubleshooting', 'Long-Range Wi-Fi Link Setup', 'IP Camera Subnet Routing', 'Network Rack Cable Dressing'],
-      posAll: { top: '80%', left: '88%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { cameras: { top: '70%', left: '72%' } },
+      posAll: { top: '16%', left: '15%', depth: 0.05, anim: 'animate-float-3' },
+      posCategory: { cameras: { top: '74%', left: '72%' } },
     },
   ];
 
@@ -462,20 +467,20 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* LEFT/CENTER: 3D Spatial Floating in Air Canvas (8 Columns on LG) */}
-          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-3xl border border-black/[0.08] shadow-[0_16px_50px_rgba(15,23,42,0.04)] relative min-h-[580px] sm:min-h-[660px] md:min-h-[700px] p-6 sm:p-8 flex flex-col justify-between select-none">
+          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-3xl border border-black/[0.08] shadow-[0_16px_50px_rgba(15,23,42,0.04)] relative min-h-[620px] sm:min-h-[700px] md:min-h-[740px] p-6 sm:p-8 flex flex-col justify-between select-none">
             
             {/* Ambient Radial Ring Lighting inside the Arena */}
-            <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(250,251,253,0)_100%)] pointer-events-none rounded-3xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.04)_0%,rgba(250,251,253,0)_100%)] pointer-events-none rounded-3xl" />
 
             {/* Arena Header Coordinates */}
             <div className="flex items-center justify-between gap-4 z-20 mb-3 pb-3 border-b border-black/[0.05]">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#F15A24] animate-ping" />
                 <span className="font-mono text-[0.72rem] font-bold text-[#0E1117] uppercase tracking-wider">
-                  FLOATING BRAND MATRIX
+                  RADIAL BRAND CONSTELLATION
                 </span>
                 <span className="hidden sm:inline font-mono text-[0.68rem] text-slate-400">
-                  · {visibleBrands.length} BRANDS IN VIEW
+                  · {visibleBrands.length} BRANDS IN ORBIT
                 </span>
               </div>
 
@@ -485,8 +490,25 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
               </div>
             </div>
 
-            {/* The Floating Logos Arena Surface */}
-            <div className="relative w-full h-[480px] sm:h-[540px] md:h-[580px]">
+            {/* The Floating Logos Arena Surface with Central Anchor */}
+            <div className="relative w-full h-[520px] sm:h-[580px] md:h-[620px]">
+              
+              {/* CENTRAL ANCHOR BASE / ORBITAL CORE */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 flex flex-col items-center justify-center">
+                {/* Orbital radar rings */}
+                <div className="absolute w-[170px] h-[170px] rounded-full border border-[#F15A24]/15 animate-ping opacity-20" style={{ animationDuration: '4.5s' }} />
+                <div className="absolute w-[260px] h-[260px] sm:w-[320px] sm:h-[320px] rounded-full border border-dashed border-[#F15A24]/15" />
+                <div className="absolute w-[420px] h-[420px] sm:w-[500px] sm:h-[500px] rounded-full border border-black/[0.035]" />
+                
+                {/* Core Center Emblem */}
+                <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#F15A24]/20 shadow-[0_4px_20px_rgba(241,90,36,0.10)] flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[#F15A24] animate-pulse" />
+                  <span className="font-mono text-[0.64rem] sm:text-[0.70rem] font-extrabold text-[#0E1117] tracking-wider uppercase">
+                    {activeTab === 'all' ? 'CENTRAL TECH HUB' : `${categories.find(c => c.id === activeTab)?.label} CORE`}
+                  </span>
+                </div>
+              </div>
+
               {visibleBrands.map((brand, idx) => {
                 const isHovered = (hoveredBrandId || selectedBrandId) === brand.id;
                 
@@ -530,7 +552,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                       <div
                         className={`relative bg-white border transition-all duration-300 flex flex-col items-center justify-center ${
                           activeTab === 'all'
-                            ? 'p-2.5 sm:p-3.5 rounded-2xl min-w-[86px] sm:min-w-[106px] max-w-[124px]'
+                            ? 'p-2 sm:p-3 rounded-2xl min-w-[82px] sm:min-w-[100px] max-w-[118px]'
                             : 'p-4 sm:p-6 rounded-2xl sm:rounded-3xl min-w-[145px] sm:min-w-[185px] md:min-w-[210px] max-w-[240px]'
                         } ${
                           isHovered
@@ -542,7 +564,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                         <div
                           className={`flex items-center justify-center overflow-hidden ${
                             activeTab === 'all'
-                              ? 'w-12 h-9 sm:w-16 sm:h-11'
+                              ? 'w-12 h-8 sm:w-15 sm:h-10'
                               : 'w-24 h-14 sm:w-32 sm:h-20 md:w-36 md:h-22'
                           }`}
                         >
@@ -558,7 +580,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                         <span
                           className={`font-heading font-bold transition-colors ${
                             activeTab === 'all'
-                              ? 'text-[0.74rem] sm:text-[0.80rem] mt-1'
+                              ? 'text-[0.72rem] sm:text-[0.78rem] mt-1'
                               : 'text-[0.96rem] sm:text-[1.12rem] font-extrabold mt-2.5'
                           } ${
                             isHovered ? 'text-[#F15A24]' : 'text-[#0E1117]'
