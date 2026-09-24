@@ -68,7 +68,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Authorized Spares & Support',
       serviceOfferings: ['Motherboard Chip-Level Repair', 'Screen & Hinge Replacement', 'High-Speed NVMe SSD Upgrade', 'Thermal Paste Re-pasting'],
       posAll: { top: '8%', left: '8%', depth: 0.04, anim: 'animate-float-1' },
-      posCategory: { pcs: { top: '20%', left: '15%' }, laptops: { top: '20%', left: '15%' } },
+      posCategory: { pcs: { top: '24%', left: '22%' }, laptops: { top: '24%', left: '22%' } },
     },
     // 2. Dell (PCs, Laptops)
     {
@@ -81,7 +81,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Original Component Diagnostics',
       serviceOfferings: ['Power Supply Unit (PSU) Repairs', 'Display & Backlight Repair', 'RAM & Graphics Upgrades', 'Original Battery Replacements'],
       posAll: { top: '12%', left: '38%', depth: 0.07, anim: 'animate-float-2' },
-      posCategory: { pcs: { top: '20%', left: '50%' }, laptops: { top: '20%', left: '50%' } },
+      posCategory: { pcs: { top: '24%', left: '78%' }, laptops: { top: '24%', left: '78%' } },
     },
     // 3. Lenovo (PCs, Laptops)
     {
@@ -94,7 +94,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Genuine Parts Certified',
       serviceOfferings: ['Keyboard & Trackpad Repair', 'Liquid Spill Diagnostics', 'BIOS & Firmware Recovery', 'Custom RAM Expansions'],
       posAll: { top: '10%', left: '68%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { pcs: { top: '20%', left: '80%' }, laptops: { top: '20%', left: '80%' } },
+      posCategory: { pcs: { top: '50%', left: '50%' }, laptops: { top: '50%', left: '50%' } },
     },
     // 4. Apple (PCs)
     {
@@ -107,7 +107,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Specialist Mac Technicians',
       serviceOfferings: ['macOS Clean Setup & Migration', 'Logic Board Micro-Soldering', 'Thermal Management Cleaning', 'SSD Storage Expansion'],
       posAll: { top: '26%', left: '22%', depth: 0.08, anim: 'animate-float-main' },
-      posCategory: { pcs: { top: '60%', left: '30%' } },
+      posCategory: { pcs: { top: '76%', left: '24%' } },
     },
     // 5. Toshiba (PCs)
     {
@@ -120,7 +120,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Enterprise Storage Support',
       serviceOfferings: ['Data Recovery & Forensics', 'Hard Drive Replacement', 'Power Distribution Repair', 'Legacy System Maintenance'],
       posAll: { top: '24%', left: '52%', depth: 0.03, anim: 'animate-float-1' },
-      posCategory: { pcs: { top: '60%', left: '70%' } },
+      posCategory: { pcs: { top: '76%', left: '76%' } },
     },
     // 6. ASUS (Laptops)
     {
@@ -133,7 +133,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Gaming & ROG Specialists',
       serviceOfferings: ['GPU & VRAM Chip Diagnostics', 'Dual-Fan Cooling Overhaul', 'OLED Screen Replacement', 'Gaming BIOS Optimization'],
       posAll: { top: '25%', left: '82%', depth: 0.06, anim: 'animate-float-2' },
-      posCategory: { laptops: { top: '60%', left: '30%' } },
+      posCategory: { laptops: { top: '76%', left: '24%' } },
     },
     // 7. Acer (Laptops)
     {
@@ -146,7 +146,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Multi-Model Diagnostic Support',
       serviceOfferings: ['Hinge & Chassis Repair', 'Motherboard Power IC Fix', 'Type-C Port Micro-Soldering', 'Performance Boost Upgrades'],
       posAll: { top: '40%', left: '10%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { laptops: { top: '60%', left: '70%' } },
+      posCategory: { laptops: { top: '76%', left: '76%' } },
     },
     // 8. Epson (Printers)
     {
@@ -159,7 +159,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Direct PrecisionCore Support',
       serviceOfferings: ['Printhead Ultrasonic Cleaning', 'Waste Ink Pad Reset & Replacement', 'Paper Feed Roller Alignment', 'Continuous Ink Tank Overhaul'],
       posAll: { top: '42%', left: '36%', depth: 0.09, anim: 'animate-float-main' },
-      posCategory: { printers: { top: '25%', left: '20%' } },
+      posCategory: { printers: { top: '28%', left: '28%' } },
     },
     // 9. TVS Electronics (Printers)
     {
@@ -172,7 +172,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Billing & POS Specialist',
       serviceOfferings: ['Ribbon Mechanism Replacement', 'Printhead Pin Alignment', 'Thermal Head Calibration', 'Commercial POS Maintenance'],
       posAll: { top: '38%', left: '64%', depth: 0.04, anim: 'animate-float-1' },
-      posCategory: { printers: { top: '25%', left: '70%' } },
+      posCategory: { printers: { top: '28%', left: '72%' } },
     },
     // 10. Canon (Printers)
     {
@@ -185,7 +185,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Genuine Toner & Cartridge Support',
       serviceOfferings: ['Laser Drum Unit Reconditioning', 'Logic Board Firmware Updates', 'Toner Cartridge Servicing', 'Color Calibration Tuning'],
       posAll: { top: '56%', left: '18%', depth: 0.07, anim: 'animate-float-2' },
-      posCategory: { printers: { top: '65%', left: '30%' } },
+      posCategory: { printers: { top: '72%', left: '28%' } },
     },
     // 11. Brother (Printers)
     {
@@ -198,7 +198,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'High-Volume Maintenance Care',
       serviceOfferings: ['Fuser Unit Replacement', 'Network Wi-Fi Card Repair', 'Duplex Jam Resolution', 'OEM Ink & Toner Supplies'],
       posAll: { top: '54%', left: '48%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { printers: { top: '65%', left: '70%' } },
+      posCategory: { printers: { top: '72%', left: '72%' } },
     },
     // 12. eSSL (Biometrics)
     {
@@ -211,7 +211,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Security Hardware Specialist',
       serviceOfferings: ['Optical Sensor Replacement', 'Time-Attendance Software Sync', 'Access Controller Wiring & Setup', 'Firmware Security Updates'],
       posAll: { top: '52%', left: '80%', depth: 0.08, anim: 'animate-float-main' },
-      posCategory: { biometrics: { top: '30%', left: '25%' } },
+      posCategory: { biometrics: { top: '30%', left: '28%' } },
     },
     // 13. BioMax (Biometrics)
     {
@@ -224,7 +224,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Enterprise Attendance Integration',
       serviceOfferings: ['Cloud Attendance Sync Setup', 'Camera Module Calibration', 'Electromagnetic Lock Integration', 'On-Site Machine Servicing'],
       posAll: { top: '70%', left: '8%', depth: 0.03, anim: 'animate-float-1' },
-      posCategory: { biometrics: { top: '30%', left: '75%' } },
+      posCategory: { biometrics: { top: '30%', left: '72%' } },
     },
     // 14. Intercom (Biometrics & Security)
     {
@@ -237,7 +237,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Two-Way Audio/Video Support',
       serviceOfferings: ['EPABX & Intercom Cabling', 'Audio Amplifier Troubleshooting', 'Video Door Screen Repair', 'Multi-Office Channel Setup'],
       posAll: { top: '72%', left: '34%', depth: 0.06, anim: 'animate-float-2' },
-      posCategory: { biometrics: { top: '70%', left: '50%' } },
+      posCategory: { biometrics: { top: '72%', left: '50%' } },
     },
     // 15. Hikvision (CC Cameras)
     {
@@ -250,7 +250,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Leading CCTV Brand Solutions',
       serviceOfferings: ['NVR/DVR Channel Configuration', 'Night-Vision IR Sensor Alignment', 'CAT6 / BNC Cable Diagnostics', 'Mobile App Remote View Setup'],
       posAll: { top: '68%', left: '62%', depth: 0.08, anim: 'animate-float-main' },
-      posCategory: { cameras: { top: '25%', left: '20%' } },
+      posCategory: { cameras: { top: '28%', left: '28%' } },
     },
     // 16. CP Plus (CC Cameras)
     {
@@ -263,7 +263,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Certified Surveillance Support',
       serviceOfferings: ['Hard Disk Surveillance Error Fix', 'PTZ 360° Motor Repair', 'Power Supply SMPS Overhaul', 'On-Site Installation & Aligning'],
       posAll: { top: '85%', left: '20%', depth: 0.04, anim: 'animate-float-1' },
-      posCategory: { cameras: { top: '25%', left: '70%' } },
+      posCategory: { cameras: { top: '28%', left: '72%' } },
     },
     // 17. Dahua (CC Cameras)
     {
@@ -276,7 +276,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'Enterprise Video Analytics',
       serviceOfferings: ['PoE Switch & Network Setup', 'AI Motion Trigger Calibration', 'Firmware Hardening & Recovery', 'Annual Maintenance Contracts (AMC)'],
       posAll: { top: '82%', left: '48%', depth: 0.07, anim: 'animate-float-2' },
-      posCategory: { cameras: { top: '65%', left: '30%' } },
+      posCategory: { cameras: { top: '72%', left: '28%' } },
     },
     // 18. D-Link (CC Cameras / Networking)
     {
@@ -289,7 +289,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       warrantyBadge: 'High-Speed Networking Care',
       serviceOfferings: ['Gigabit Switch Troubleshooting', 'Long-Range Wi-Fi Link Setup', 'IP Camera Subnet Routing', 'Network Rack Cable Dressing'],
       posAll: { top: '84%', left: '76%', depth: 0.05, anim: 'animate-float-3' },
-      posCategory: { cameras: { top: '65%', left: '70%' } },
+      posCategory: { cameras: { top: '72%', left: '72%' } },
     },
   ];
 
@@ -518,19 +518,31 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                       transform: 'translate(-50%, -50%)',
                     }}
                     className={`absolute cursor-pointer transition-all duration-500 ease-out z-20 ${brand.posAll.anim} ${
-                      isHovered ? 'scale-115 z-40' : 'hover:scale-105'
+                      isHovered 
+                        ? (activeTab === 'all' ? 'scale-115 z-40' : 'scale-108 z-40') 
+                        : (activeTab === 'all' ? 'hover:scale-105' : 'hover:scale-104')
                     }`}
                   >
                     {/* Floating Brand Card with Crisp White Drop Shadow */}
                     <div
-                      className={`relative bg-white p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center justify-center min-w-[90px] sm:min-w-[110px] max-w-[130px] ${
+                      className={`relative bg-white border transition-all duration-300 flex flex-col items-center justify-center ${
+                        activeTab === 'all'
+                          ? 'p-3 sm:p-4 rounded-2xl min-w-[90px] sm:min-w-[110px] max-w-[130px]'
+                          : 'p-4 sm:p-6 rounded-2xl sm:rounded-3xl min-w-[145px] sm:min-w-[185px] md:min-w-[210px] max-w-[240px]'
+                      } ${
                         isHovered
-                          ? 'border-[#F15A24] shadow-[0_16px_38px_rgba(241,90,36,0.22)] ring-2 ring-[#F15A24]/20'
-                          : 'border-black/[0.08] shadow-[0_10px_25px_rgba(15,23,42,0.06)] hover:border-[#F15A24]/40 hover:shadow-[0_12px_30px_rgba(241,90,36,0.12)]'
+                          ? 'border-[#F15A24] shadow-[0_18px_42px_rgba(241,90,36,0.24)] ring-2 ring-[#F15A24]/20'
+                          : 'border-black/[0.08] shadow-[0_10px_25px_rgba(15,23,42,0.06)] hover:border-[#F15A24]/40 hover:shadow-[0_14px_34px_rgba(241,90,36,0.14)]'
                       }`}
                     >
                       {/* Logo Image */}
-                      <div className="w-14 h-10 sm:w-16 sm:h-11 flex items-center justify-center overflow-hidden">
+                      <div
+                        className={`flex items-center justify-center overflow-hidden ${
+                          activeTab === 'all'
+                            ? 'w-14 h-10 sm:w-16 sm:h-11'
+                            : 'w-24 h-14 sm:w-32 sm:h-20 md:w-36 md:h-22'
+                        }`}
+                      >
                         <img
                           src={brand.logo}
                           alt={`${brand.name} Authorized Service & Sales`}
@@ -541,16 +553,27 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
 
                       {/* Brand Label */}
                       <span
-                        className={`font-heading font-bold text-[0.76rem] sm:text-[0.82rem] mt-1.5 transition-colors ${
+                        className={`font-heading font-bold transition-colors ${
+                          activeTab === 'all'
+                            ? 'text-[0.76rem] sm:text-[0.82rem] mt-1.5'
+                            : 'text-[0.96rem] sm:text-[1.12rem] font-extrabold mt-2.5'
+                        } ${
                           isHovered ? 'text-[#F15A24]' : 'text-[#0E1117]'
                         }`}
                       >
                         {brand.name}
                       </span>
 
+                      {/* Category-Specific Badge */}
+                      {activeTab !== 'all' && (
+                        <span className="font-mono text-[0.62rem] sm:text-[0.68rem] text-slate-400 mt-1 uppercase tracking-wider">
+                          Authorized Spares
+                        </span>
+                      )}
+
                       {/* Mini Verified Dot */}
                       {isHovered && (
-                        <div className="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#F15A24] text-white rounded-full flex items-center justify-center shadow-xs text-[0.6rem] font-bold animate-pulse">
+                        <div className="absolute -top-1.5 -right-1.5 w-4 h-4 sm:w-5 sm:h-5 bg-[#F15A24] text-white rounded-full flex items-center justify-center shadow-xs text-[0.6rem] sm:text-[0.7rem] font-bold animate-pulse">
                           ✓
                         </div>
                       )}
