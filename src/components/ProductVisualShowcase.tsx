@@ -418,10 +418,6 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
               <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
-
-          <p className="text-[1.02rem] sm:text-[1.1rem] text-[#4A5364] leading-relaxed font-normal max-w-2xl">
-            Authorized multi-brand computer hardware sales, precision chip-level laptop servicing, enterprise CC camera surveillance, biometric access control, and commercial printing systems in Eluru.
-          </p>
         </div>
 
         {/* 3. Category Filter Navigation Bar */}
