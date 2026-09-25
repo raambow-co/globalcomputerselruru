@@ -252,15 +252,15 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
             </span>
           </div>
 
-          {/* 4 Side-by-Side Clean Team Placeholder Frames */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
+          {/* 4 Side-by-Side Team Placeholder Frames (Touch-Swipeable on Mobile, Grid on Desktop) */}
+          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
             {teamMembers.map((member) => {
               const Icon = member.icon;
 
               return (
                 <div
                   key={member.id}
-                  className="group bg-white rounded-2xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-[#F15A24]/30 hover:shadow-[0_12px_30px_rgba(241,90,36,0.08)] flex flex-col justify-between text-left relative overflow-hidden"
+                  className="min-w-[260px] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center group bg-white rounded-2xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-[#F15A24]/30 hover:shadow-[0_12px_30px_rgba(241,90,36,0.08)] flex flex-col justify-between text-left relative overflow-hidden"
                 >
                   {/* Top Category Tag */}
                   <div>

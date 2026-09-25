@@ -204,8 +204,8 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
           </p>
         </div>
 
-        {/* 3. 4 Side-By-Side Interactive QR Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 items-stretch">
+        {/* 3. 4 Side-By-Side Interactive QR Cards (Touch-Swipeable on Mobile, Grid on Desktop) */}
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
           {socialChannels.map((channel) => {
             const Icon = channel.icon;
             const isHovered = hoveredCard === channel.id;
@@ -215,7 +215,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                 key={channel.id}
                 onMouseEnter={() => setHoveredCard(channel.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`group bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${channel.brandBorder} ${
+                className={`min-w-[270px] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center group bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${channel.brandBorder} ${
                   isHovered
                     ? 'shadow-[0_18px_45px_rgba(15,23,42,0.08)] -translate-y-1.5'
                     : 'border-black/[0.08] shadow-[0_6px_24px_rgba(15,23,42,0.03)]'
