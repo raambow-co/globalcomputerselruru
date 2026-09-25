@@ -42,7 +42,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
             { label: 'Offers & Deals', href: '#deals', highlight: true, badge: 'OFFERS' },
             { label: 'Inside Technology', href: '#technology-showcase' },
             { label: "What's New", href: '#updates' },
-            { label: 'Client Reviews', href: '#reviews' },
+            { label: 'Social & QRs', href: '#social-media' },
+            { label: 'Leadership', href: '#leadership' },
             { label: 'FAQ', href: '#faq' },
             { label: 'Eluru Showroom', href: '#location' },
           ].map((link, idx) => (
@@ -93,7 +94,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
               { label: 'Special Offers & Deals', href: '#deals' },
               { label: 'Inside Technology', href: '#technology-showcase' },
               { label: "What's New in Tech", href: '#updates' },
-              { label: 'Customer Experiences', href: '#reviews' },
+              { label: 'Connect on Social Media', href: '#social-media' },
+              { label: 'Founder & Leadership', href: '#leadership' },
               { label: 'Frequently Asked Questions', href: '#faq' },
               { label: 'Eluru Showroom & Location', href: '#location' },
             ].map((item, idx) => (

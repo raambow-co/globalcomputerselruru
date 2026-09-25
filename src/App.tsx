@@ -4,7 +4,6 @@ import { HeroSection } from './components/HeroSection';
 import { OffersDealsSection } from './components/OffersDealsSection';
 import { ProductVisualShowcase } from './components/ProductVisualShowcase';
 import { NewsSection } from './components/NewsSection';
-import { CustomerReviewsSection } from './components/CustomerReviewsSection';
 import { RatingsTrustSection } from './components/RatingsTrustSection';
 import { LeadershipSection } from './components/LeadershipSection';
 import { FAQSection } from './components/FAQSection';
@@ -52,11 +51,6 @@ export const App: React.FC = () => {
         {/* Editorial Technology Newsroom & Latest Updates */}
         <NewsSection
           onOpenEnquiry={(name) => handleOpenEnquiry(name)}
-        />
-
-        {/* Customer Experiences & Editorial Testimonials */}
-        <CustomerReviewsSection
-          onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Customer Feedback Inquiry')}
         />
 
         {/* Connect with Us on Social Media (4 QR Codes) */}
