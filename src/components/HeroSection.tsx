@@ -70,6 +70,32 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           />
           <circle cx="50%" cy="47%" r="380" fill="url(#ringGlow)" />
         </svg>
+
+        {/* Minimal Precision Corner Accents */}
+        <div className="absolute top-8 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
+        <div className="absolute top-8 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
+        <div className="absolute bottom-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 1V13H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="1" cy="13" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
+        <div className="absolute bottom-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M13 1V13H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="13" cy="13" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
       </div>
 
       {/* 2. 3D Spatial Product Canvas (Floating Transparent Hardware) */}

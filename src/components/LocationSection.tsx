@@ -56,6 +56,20 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
             strokeDasharray="8 8"
           />
         </svg>
+
+        {/* Minimal Precision Corner Accents */}
+        <div className="absolute top-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
+        <div className="absolute top-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
       </div>
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 w-full">

@@ -209,12 +209,18 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
           />
         </svg>
 
-        {/* Technical Corner Markers */}
-        <div className="absolute top-6 left-6 sm:left-14 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SEC.FAQ_MATRIX</span>
+        {/* Minimal Precision Corner Accents */}
+        <div className="absolute top-6 left-6 sm:left-14 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
         </div>
-        <div className="absolute top-6 right-6 sm:right-14 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">KEY_ANSWERS</span>
+        <div className="absolute top-6 right-6 sm:right-14 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
         </div>
       </div>
 

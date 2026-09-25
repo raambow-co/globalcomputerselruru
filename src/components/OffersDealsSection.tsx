@@ -157,6 +157,20 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
       {/* 1. Ambient Background Glow */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(250,251,253,0)_100%)]" />
+
+        {/* Minimal Precision Corner Accents */}
+        <div className="absolute top-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
+        <div className="absolute top-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+          </svg>
+        </div>
       </div>
 
       <div className="relative z-10 max-w-[1140px] mx-auto px-4 sm:px-6 w-full">
