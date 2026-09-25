@@ -6,6 +6,7 @@ import { ProductVisualShowcase } from './components/ProductVisualShowcase';
 import { NewsSection } from './components/NewsSection';
 import { CustomerReviewsSection } from './components/CustomerReviewsSection';
 import { RatingsTrustSection } from './components/RatingsTrustSection';
+import { LeadershipSection } from './components/LeadershipSection';
 import { FAQSection } from './components/FAQSection';
 import { EnquirySection } from './components/EnquirySection';
 import { LocationSection } from './components/LocationSection';
@@ -58,9 +59,14 @@ export const App: React.FC = () => {
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Customer Feedback Inquiry')}
         />
 
-        {/* Verified Ratings & Brand Trust Assurance */}
+        {/* Connect with Us on Social Media (4 QR Codes) */}
         <RatingsTrustSection
-          onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Ratings & Reputation Inquiry')}
+          onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Social Channels Inquiry')}
+        />
+
+        {/* Founder, Leadership & Showroom Team Section */}
+        <LeadershipSection
+          onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Leadership & Team Inquiry')}
         />
 
         {/* Primary Consultation & Product Availability Enquiry Section */}
