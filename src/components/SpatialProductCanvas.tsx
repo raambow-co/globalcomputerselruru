@@ -158,7 +158,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● Verified In Stock',
       image: '/assets/motherboard.png',
       className:
-        'top-[8%] sm:top-[10%] lg:top-[11%] left-[1.5%] sm:left-[3%] lg:left-[4.5%] w-[clamp(145px,17vw,260px)] -rotate-6 opacity-40 sm:opacity-100',
+        'top-[7%] sm:top-[10%] lg:top-[11%] left-[2%] sm:left-[3%] lg:left-[4.5%] w-[84px] xs:w-[105px] sm:w-[155px] md:w-[205px] lg:w-[260px] -rotate-6 opacity-100',
       depth: 0.03,
       hotspotLabel: 'Z790 Architecture',
       hotspotStyle: { top: '35%', right: '-15px' },
@@ -174,7 +174,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● Verified In Stock',
       image: '/assets/epson_printer.png',
       className:
-        'top-[47%] sm:top-[49%] lg:top-[50%] left-[1%] sm:left-[2.5%] lg:left-[4%] w-[clamp(175px,20vw,315px)] rotate-2 opacity-40 sm:opacity-100',
+        'top-[56%] xs:top-[54%] sm:top-[50%] lg:top-[50%] left-[2%] sm:left-[2.5%] lg:left-[4%] w-[94px] xs:w-[118px] sm:w-[180px] md:w-[245px] lg:w-[315px] rotate-2 opacity-100',
       depth: 0.07,
       hotspotLabel: 'Epson EcoTank Pro',
       hotspotStyle: { bottom: '-10px', left: '50%', transform: 'translateX(-50%)' },
@@ -190,7 +190,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● Verified In Stock',
       image: '/assets/pro_monitor.png',
       className:
-        'top-[9%] sm:top-[11%] lg:top-[12%] right-[1.5%] sm:right-[3%] lg:right-[4.5%] w-[clamp(175px,20.5vw,320px)] -rotate-2 opacity-40 sm:opacity-100',
+        'top-[7%] sm:top-[11%] lg:top-[12%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[96px] xs:w-[120px] sm:w-[185px] md:w-[255px] lg:w-[320px] -rotate-2 opacity-100',
       depth: 0.05,
       hotspotLabel: 'UltraVision 4K',
       hotspotStyle: { top: '-10px', left: '50%', transform: 'translateX(-50%)' },
@@ -206,7 +206,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● In Stock',
       image: '/assets/mech_keyboard.png',
       className:
-        'top-[49%] sm:top-[51%] lg:top-[52%] right-[1.5%] sm:right-[3%] lg:right-[4.5%] w-[clamp(150px,17.5vw,265px)] rotate-2 opacity-40 sm:opacity-100',
+        'top-[58%] xs:top-[55%] sm:top-[52%] lg:top-[52%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[86px] xs:w-[108px] sm:w-[160px] md:w-[215px] lg:w-[265px] rotate-2 opacity-100',
       depth: 0.08,
       hotspotLabel: 'AeroCNC Keyboard',
       hotspotStyle: { bottom: '-10px', right: '12%' },
@@ -270,10 +270,10 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
               {prod.hotspotLabel && (
                 <div
                   style={prod.hotspotStyle}
-                  className="absolute flex items-center gap-1 bg-white/95 backdrop-blur-md px-2.5 py-0.5 rounded-full border border-black/10 shadow-md text-[#0E1117] transition-all duration-200 group-hover:border-[#F15A24]/40 group-hover:-translate-y-0.5"
+                  className="absolute hidden xs:flex items-center gap-1 bg-white/95 backdrop-blur-md px-2 sm:px-2.5 py-0.5 rounded-full border border-black/10 shadow-md text-[#0E1117] transition-all duration-200 group-hover:border-[#F15A24]/40 group-hover:-translate-y-0.5"
                 >
                   <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full animate-ping" />
-                  <span className="font-mono text-[0.6rem] font-semibold whitespace-nowrap">
+                  <span className="font-mono text-[0.55rem] sm:text-[0.6rem] font-semibold whitespace-nowrap">
                     {prod.hotspotLabel}
                   </span>
                 </div>
