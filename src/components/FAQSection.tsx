@@ -1,26 +1,24 @@
 import React, { useState } from 'react';
-import { ArrowRight, Minus, Plus, HelpCircle, MessageSquare } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 
 interface FAQSectionProps {
-  onOpenEnquiry: (topic?: string) => void;
+  onOpenEnquiry?: (topic?: string) => void;
 }
 
 interface FAQItem {
   id: string;
   number: string;
-  category: 'all' | 'products' | 'availability' | 'services' | 'support';
   question: string;
   answer: string;
 }
 
-export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
+export const FAQSection: React.FC<FAQSectionProps> = () => {
   const [openId, setOpenId] = useState<string | null>('faq-1');
 
-  const faqs: FAQItem[] = [
+  const faqsLeft: FAQItem[] = [
     {
       id: 'faq-1',
       number: '01',
-      category: 'availability',
       question: 'How can I check whether a product is available in stock?',
       answer:
         'Use the Check Product Availability button on the website or message us with your required model. Our Eluru showroom team will instantly confirm live inventory, pricing, and dispatch timelines.',
@@ -28,7 +26,6 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
     {
       id: 'faq-2',
       number: '02',
-      category: 'services',
       question: 'Do you supply computers and hardware for businesses & offices?',
       answer:
         'Yes. We provide turnkey enterprise desktop workstation setups, school computer lab packages, and commercial hardware fleets with genuine OEM warranties and GST input tax invoices.',
@@ -36,7 +33,6 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
     {
       id: 'faq-3',
       number: '03',
-      category: 'products',
       question: 'Do you provide Epson EcoTank printers and genuine ink supplies?',
       answer:
         'Yes. We are an authorized provider for Epson EcoTank all-in-one printers, heavy-duty duplex office printers, and 100% genuine replacement ink bottle sets with on-site maintenance support.',
@@ -44,7 +40,6 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
     {
       id: 'faq-4',
       number: '04',
-      category: 'products',
       question: 'Can I get custom PC workstation builds, components, and 4K displays?',
       answer:
         'Yes. You can configure custom workstation builds with latest Intel/AMD processors, Z-series motherboards, GPUs, DDR5 RAM, and UltraVision color-accurate displays with free professional assembly.',
@@ -52,10 +47,47 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
     {
       id: 'faq-5',
       number: '05',
-      category: 'support',
-      question: 'Where is your showroom located and do you provide support?',
+      question: 'Where is your showroom located and what are your working hours?',
       answer:
-        'Our showroom is on Main Road, Powerpet, Eluru. We provide dedicated hardware consultation, direct OEM warranty support, and prompt tech specialist assistance Monday to Saturday (9:30 AM – 8:30 PM).',
+        'Our showroom is located on Main Road, Powerpet, Eluru. We are open Monday to Saturday from 9:30 AM to 8:30 PM for hardware consultation, testing, and direct sales.',
+    },
+  ];
+
+  const faqsRight: FAQItem[] = [
+    {
+      id: 'faq-6',
+      number: '06',
+      question: 'Do you provide chip-level servicing and repairs for laptops?',
+      answer:
+        'Yes. We have in-house micro-soldering and diagnostic specialists for chip-level motherboard repairs, display panel replacements, GPU rework, and liquid damage recovery for HP, Dell, Lenovo, ASUS, and Acer.',
+    },
+    {
+      id: 'faq-7',
+      number: '07',
+      question: 'Do you offer CCTV surveillance and biometric attendance installation?',
+      answer:
+        'Yes. We design and install commercial CCTV setups (Hikvision, CP Plus, Dahua) and biometric fingerprint/facial recognition systems (eSSL, BioMax) for offices, shops, and residences in Eluru.',
+    },
+    {
+      id: 'faq-8',
+      number: '08',
+      question: 'Are all products sold with 100% genuine manufacturer warranty?',
+      answer:
+        'Absolutely. Every desktop, laptop, printer, and component comes brand new in factory sealed packaging with official manufacturer warranty and valid GST tax invoice.',
+    },
+    {
+      id: 'faq-9',
+      number: '09',
+      question: 'Can I upgrade my existing laptop with SSD storage and RAM?',
+      answer:
+        'Yes. We provide same-day high-speed NVMe/SATA SSD upgrades and DDR4/DDR5 RAM expansions with complete OS migration and data preservation for immediate performance gains.',
+    },
+    {
+      id: 'faq-10',
+      number: '10',
+      question: 'Do you provide Annual Maintenance Contracts (AMC) for corporate offices?',
+      answer:
+        'Yes. We offer comprehensive and non-comprehensive AMC plans covering regular preventive maintenance, network cabling, printer servicing, and urgent on-site technical support for business fleets.',
     },
   ];
 
@@ -63,10 +95,79 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
 
+  const renderFaqColumn = (items: FAQItem[]) => (
+    <div className="divide-y divide-black/[0.07] border-t border-b border-black/[0.07]">
+      {items.map((faq) => {
+        const isOpen = openId === faq.id;
+
+        return (
+          <div
+            key={faq.id}
+            className="py-4 sm:py-4.5 group transition-all duration-200"
+          >
+            {/* Question Header Button */}
+            <button
+              type="button"
+              onClick={() => toggleFAQ(faq.id)}
+              aria-expanded={isOpen}
+              className="w-full flex items-start justify-between gap-3.5 text-left transition-transform duration-200 group-hover:translate-x-0.5 cursor-pointer focus:outline-none"
+            >
+              <div className="flex items-start gap-3 sm:gap-3.5">
+                {/* Number Indicator */}
+                <span
+                  className={`font-mono text-[0.70rem] sm:text-[0.74rem] font-bold mt-0.5 transition-colors duration-200 flex-shrink-0 ${
+                    isOpen
+                      ? 'text-[#F15A24]'
+                      : 'text-[#828E9E] group-hover:text-[#F15A24]'
+                  }`}
+                >
+                  {faq.number}
+                </span>
+
+                {/* Question Title */}
+                <span
+                  className={`font-heading text-[0.92rem] sm:text-[0.98rem] tracking-tight leading-snug transition-colors duration-200 ${
+                    isOpen
+                      ? 'font-bold text-[#0E1117]'
+                      : 'font-semibold text-[#1C2028] group-hover:text-[#F15A24]'
+                  }`}
+                >
+                  {faq.question}
+                </span>
+              </div>
+
+              {/* Minimalist Plus/Minus Control */}
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
+                  isOpen
+                    ? 'bg-[#F15A24] text-white border-[#F15A24] shadow-2xs'
+                    : 'bg-white text-[#828E9E] group-hover:text-[#0E1117] border-black/10 group-hover:border-black/20 shadow-2xs'
+                }`}
+              >
+                {isOpen ? <Minus size={12} /> : <Plus size={12} />}
+              </div>
+            </button>
+
+            {/* Smooth Collapsible Answer Container */}
+            {isOpen && (
+              <div className="mt-3 pl-6 sm:pl-7 pr-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div className="border-l-2 border-[#F15A24] pl-3 py-0.5">
+                  <p className="text-[0.84rem] sm:text-[0.88rem] text-[#4A5364] leading-relaxed font-normal">
+                    {faq.answer}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+
   return (
     <section
       id="faq"
-      className="relative bg-white text-[#0E1117] py-20 sm:py-28 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-16 sm:py-24 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Studio Ambient Lighting & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -109,24 +210,18 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
         </svg>
 
         {/* Technical Corner Markers */}
-        <div className="absolute top-12 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SEC.FAQ</span>
+        <div className="absolute top-8 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+          + <span className="text-[#64748B]">SEC.FAQ_MATRIX</span>
         </div>
-        <div className="absolute top-12 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">KNOWLEDGE.DESK</span>
-        </div>
-        <div className="absolute bottom-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">CLARITY.DIRECT</span>
-        </div>
-        <div className="absolute bottom-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ELURU.SUPPORT</span>
+        <div className="absolute top-8 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+          + <span className="text-[#64748B]">10_KEY_ANSWERS</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[900px] mx-auto px-5 sm:px-8">
+      <div className="relative z-10 max-w-[1240px] mx-auto px-5 sm:px-8">
         
         {/* 2. CENTERED REFINED HEADER */}
-        <div className="mb-8 sm:mb-10 text-center flex flex-col items-center">
+        <div className="mb-10 sm:mb-12 text-center flex flex-col items-center">
           
           {/* Pill Badge with Orange Highlight Tag */}
           <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-3.5 w-fit">
@@ -137,7 +232,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-black text-[clamp(1.6rem,2.8vw,2.25rem)] text-[#0E1117] leading-[1.1] tracking-tight select-none">
+          <h2 className="font-heading font-black text-[clamp(1.7rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight select-none">
             Questions?{' '}
             <span className="text-[#F15A24] relative inline-block pb-0.5">
               We’ve Got Answers.
@@ -147,77 +242,17 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
 
         </div>
 
-        {/* 3. Sleek Centered Compact Accordion Container */}
-        <div className="w-full max-w-2xl mx-auto">
-          
-          {/* Clean Horizontal Question Rows */}
-          <div className="divide-y divide-black/[0.07] border-t border-b border-black/[0.07]">
-            {faqs.map((faq) => {
-              const isOpen = openId === faq.id;
-
-              return (
-                <div
-                  key={faq.id}
-                  className="py-4 sm:py-4.5 group transition-all duration-200"
-                >
-                  {/* Question Header Button */}
-                  <button
-                    type="button"
-                    onClick={() => toggleFAQ(faq.id)}
-                    aria-expanded={isOpen}
-                    className="w-full flex items-start justify-between gap-4 text-left transition-transform duration-200 group-hover:translate-x-0.5 cursor-pointer focus:outline-none"
-                  >
-                    <div className="flex items-start gap-3 sm:gap-4">
-                      {/* Number Indicator */}
-                      <span
-                        className={`font-mono text-[0.72rem] sm:text-[0.76rem] font-bold mt-0.5 transition-colors duration-200 ${
-                          isOpen
-                            ? 'text-[#F15A24]'
-                            : 'text-[#828E9E] group-hover:text-[#F15A24]'
-                        }`}
-                      >
-                        {faq.number}
-                      </span>
-
-                      {/* Question Title */}
-                      <span
-                        className={`font-heading text-[0.95rem] sm:text-[1.04rem] tracking-tight leading-snug transition-colors duration-200 ${
-                          isOpen
-                            ? 'font-bold text-[#0E1117]'
-                            : 'font-semibold text-[#1C2028] group-hover:text-[#F15A24]'
-                        }`}
-                      >
-                        {faq.question}
-                      </span>
-                    </div>
-
-                    {/* Minimalist Plus/Minus Control */}
-                    <div
-                      className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
-                        isOpen
-                          ? 'bg-[#F15A24] text-white border-[#F15A24] shadow-2xs'
-                          : 'bg-white text-[#828E9E] group-hover:text-[#0E1117] border-black/10 group-hover:border-black/20 shadow-2xs'
-                      }`}
-                    >
-                      {isOpen ? <Minus size={13} /> : <Plus size={13} />}
-                    </div>
-                  </button>
-
-                  {/* Smooth Collapsible Answer Container */}
-                  {isOpen && (
-                    <div className="mt-3 pl-7 sm:pl-8 pr-3 sm:pr-6 animate-in fade-in slide-in-from-top-2 duration-200">
-                      <div className="border-l-2 border-[#F15A24] pl-3.5 sm:pl-4 py-0.5">
-                        <p className="text-[0.88rem] sm:text-[0.92rem] text-[#4A5364] leading-relaxed font-normal">
-                          {faq.answer}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
+        {/* 3. Sleek 2-Column (5 on Left + 5 on Right) FAQ Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
+          {/* Column 1 (01 - 05) */}
+          <div>
+            {renderFaqColumn(faqsLeft)}
           </div>
 
+          {/* Column 2 (06 - 10) */}
+          <div>
+            {renderFaqColumn(faqsRight)}
+          </div>
         </div>
 
       </div>
