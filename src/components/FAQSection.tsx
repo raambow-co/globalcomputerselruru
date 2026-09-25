@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ArrowRight, ChevronRight, HelpCircle, MessageSquare, Minus, Plus, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { ArrowRight, Minus, Plus } from 'lucide-react';
 
 interface FAQSectionProps {
   onOpenEnquiry: (topic?: string) => void;
@@ -14,19 +14,7 @@ interface FAQItem {
 }
 
 export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const hardwareRef = useRef<HTMLDivElement>(null);
   const [openId, setOpenId] = useState<string | null>('faq-1');
-
-  // Parallax physics loop for the 3D studio motherboard/hardware
-  const physicsState = useRef({
-    targetX: 0,
-    targetY: 0,
-    currentX: 0,
-    currentY: 0,
-    isVisible: true,
-    lastTime: performance.now(),
-  });
 
   const faqs: FAQItem[] = [
     {
@@ -71,84 +59,6 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
     },
   ];
 
-  const filteredFaqs = faqs;
-
-  useEffect(() => {
-    // 1. Intersection Observer
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        physicsState.current.isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.05 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    // 2. Mouse Move Listener
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      physicsState.current.targetX = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      physicsState.current.targetY = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        const { innerWidth, innerHeight } = window;
-        const touch = e.touches[0];
-        physicsState.current.targetX = (touch.clientX - innerWidth / 2) / (innerWidth / 2);
-        physicsState.current.targetY = (touch.clientY - innerHeight / 2) / (innerHeight / 2);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-
-    // 3. Smooth Delta-time Lerp loop
-    let frameId: number;
-    const renderLoop = (time: number) => {
-      if (physicsState.current.isVisible) {
-        const dt = Math.min((time - physicsState.current.lastTime) / 1000, 0.1);
-        physicsState.current.lastTime = time;
-
-        const ambientX = Math.sin(time * 0.0006) * 0.02;
-        const ambientY = Math.cos(time * 0.0005) * 0.02;
-
-        const targetX = physicsState.current.targetX + ambientX;
-        const targetY = physicsState.current.targetY + ambientY;
-
-        const lerpFactor = 1 - Math.pow(0.002, dt);
-        physicsState.current.currentX +=
-          (targetX - physicsState.current.currentX) * lerpFactor;
-        physicsState.current.currentY +=
-          (targetY - physicsState.current.currentY) * lerpFactor;
-
-        if (hardwareRef.current) {
-          const cx = physicsState.current.currentX;
-          const cy = physicsState.current.currentY;
-          const tx = (cx * 16).toFixed(2);
-          const ty = (cy * 12).toFixed(2);
-          const rx = (-cy * 5).toFixed(2);
-          const ry = (cx * 5).toFixed(2);
-
-          hardwareRef.current.style.transform = `translate3d(${tx}px, ${ty}px, 0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        }
-      }
-
-      frameId = requestAnimationFrame(renderLoop);
-    };
-
-    frameId = requestAnimationFrame(renderLoop);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      cancelAnimationFrame(frameId);
-    };
-  }, []);
-
   const toggleFAQ = (id: string) => {
     setOpenId((prev) => (prev === id ? null : id));
   };
@@ -156,13 +66,12 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
   return (
     <section
       id="faq"
-      ref={containerRef}
-      className="relative bg-white text-[#0E1117] py-24 sm:py-32 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-20 sm:py-28 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Studio Ambient Lighting & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         {/* Soft Ambient Directional Lighting */}
-        <div className="absolute top-1/4 left-1/4 w-[650px] h-[650px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241, 90, 36,0.018)_0%,rgba(255,255,255,0)_100%)]" />
+        <div className="absolute top-1/4 left-1/4 w-[650px] h-[650px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.018)_0%,rgba(255,255,255,0)_100%)]" />
 
         {/* Minimal Grid SVG */}
         <svg
@@ -216,103 +125,56 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8">
         
-        {/* 2. Compact Section Introduction */}
-        <div className="max-w-2xl mb-16 sm:mb-20 text-left">
-          
-          {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2.5 bg-white px-4 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-5">
-            <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
-              NEED TO KNOW?
-            </span>
-          </div>
-
-          {/* Main Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(2.1rem,4.2vw,3.4rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-4 select-none">
-            Questions?{' '}
-            <span className="text-[#F15A24] relative inline-block">
-              We’ve Got Answers.
-              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
-            </span>
-          </h2>
-
-          {/* Concise Supporting Text */}
-          <p className="text-[1.02rem] sm:text-[1.12rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
-            Find quick answers to common questions about our products, availability and technology solutions.
-          </p>
-        </div>
-
-        {/* 3. Main Asymmetrical Editorial Layout (Left: Brand Statement & 3D Element; Right: Accordion) */}
+        {/* 2. Main 2-Column Editorial Layout (Left: Exact Screenshot Header & Support Card; Right: 5 FAQs Accordion) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           
-          {/* LEFT COLUMN: Editorial Typography, Subtle 3D Hardware & Direct Action (5 Columns on LG) */}
-          <div className="lg:col-span-5 flex flex-col justify-between relative lg:sticky lg:top-28">
+          {/* LEFT COLUMN: Exactly matching the uploaded design */}
+          <div className="lg:col-span-5 flex flex-col justify-start relative lg:sticky lg:top-28 text-left">
             
-            {/* Editorial Statement Typography */}
-            <div className="relative z-10 mb-8">
-              <h3 className="font-heading font-extrabold text-[clamp(1.85rem,3.2vw,2.75rem)] text-[#0E1117] leading-[1.14] tracking-tight mb-4">
-                Let’s make<br />
-                technology<br />
-                <span className="text-[#F15A24] relative inline-block">
-                  simple.
-                  <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/20 rounded-full" />
-                </span>
-              </h3>
+            {/* Pill Badge with Orange Highlight Tag */}
+            <div className="inline-flex items-center gap-2.5 bg-white px-3.5 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-6 w-fit">
+              <span className="w-3.5 h-[3px] bg-[#F15A24] rounded-full" />
+              <span className="bg-[#F15A24] text-white font-mono text-[0.70rem] font-black tracking-[0.18em] px-2.5 py-0.5 rounded-sm uppercase">
+                NEED TO KNOW?
+              </span>
+            </div>
 
-              <p className="text-[0.98rem] text-[#4A5364] leading-relaxed max-w-sm mb-6">
-                Not finding what you’re looking for? Our team can help you identify the right solution for your requirements.
+            {/* Main Headline */}
+            <h2 className="font-heading font-black text-[clamp(2.4rem,4.4vw,3.8rem)] text-[#0E1117] leading-[1.04] tracking-tight mb-6 select-none">
+              Questions?<br />
+              <span className="text-[#F15A24] relative inline-block pb-1">
+                We’ve Got Answers.
+                <span className="absolute left-0 bottom-0 w-full h-[3.5px] bg-[#F15A24] rounded-full" />
+              </span>
+            </h2>
+
+            {/* Supporting Help Card */}
+            <div className="bg-[#FAFBFD] rounded-2xl border border-black/[0.06] p-5 max-w-sm shadow-2xs mt-2">
+              <p className="text-[0.92rem] text-[#4A5364] leading-relaxed mb-4 font-normal">
+                Looking for specific hardware pricing, bulk supply, or custom build assistance? Our specialists are ready to help.
               </p>
 
-              {/* Direct Text CTA Action */}
               <button
                 type="button"
                 onClick={() => onOpenEnquiry('General Consultation & FAQ')}
-                className="group inline-flex items-center gap-2 font-mono text-[0.84rem] font-bold text-[#F15A24] hover:text-[#C03C0D] transition-colors duration-200 cursor-pointer"
+                className="group inline-flex items-center gap-2 font-mono text-[0.82rem] font-bold text-[#F15A24] hover:text-[#C03C0D] transition-colors duration-200 cursor-pointer"
               >
-                <span>Talk to Our Team</span>
+                <span>Talk to Our Specialists</span>
                 <ArrowRight
-                  size={15}
+                  size={14}
                   className="transition-transform duration-200 group-hover:translate-x-1.5"
                 />
               </button>
             </div>
 
-            {/* Subtle Studio 3D Hardware Element (Partially behind/adjacent with delicate parallax) */}
-            <div className="relative my-4 flex items-center justify-center min-h-[220px] sm:min-h-[260px]">
-              
-              {/* Studio Backdrop Disc */}
-              <div className="absolute w-[220px] h-[220px] rounded-full bg-gradient-to-tr from-[#FFF2EB]/60 to-[#FAFBFD] border border-[#F15A24]/10 pointer-events-none" />
-
-              {/* 3D Hardware Object */}
-              <div
-                ref={hardwareRef}
-                className="relative z-10 w-full max-w-[280px] transition-transform duration-300 ease-out will-change-transform transform-gpu opacity-90"
-              >
-                <img
-                  src="/assets/motherboard.png"
-                  alt="Z790 Workstation Motherboard Architecture"
-                  className="w-full h-auto object-contain select-none drop-shadow-[0_18px_30px_rgba(15,23,42,0.11)]"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Micro Technical Tag */}
-              <div className="absolute bottom-1 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full border border-black/10 shadow-2xs z-20 flex items-center gap-1.5 whitespace-nowrap">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24]" />
-                <span className="font-mono text-[0.62rem] font-medium text-[#0E1117]">
-                  Hardware Consultation Desk
-                </span>
-              </div>
-            </div>
-
           </div>
 
-          {/* RIGHT COLUMN: Clean Minimalist Horizontal FAQ List (7 Columns on LG) */}
+          {/* RIGHT COLUMN: Clean Minimalist 5 FAQ Accordion List (7 Columns on LG) */}
           <div className="lg:col-span-7 flex flex-col">
             
             {/* Clean Horizontal Question Rows */}
             <div className="divide-y divide-black/[0.07]">
-              {filteredFaqs.map((faq) => {
+              {faqs.map((faq) => {
                 const isOpen = openId === faq.id;
 
                 return (
@@ -351,7 +213,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
                         </span>
                       </div>
 
-                      {/* Minimal Minimalist Plus/Minus Control */}
+                      {/* Minimalist Plus/Minus Control */}
                       <div
                         className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
                           isOpen
@@ -379,8 +241,8 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
             </div>
 
             {/* Bottom Transition Statement */}
-            <div className="mt-10 pt-8 border-t border-black/[0.07] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <span className="text-[0.92rem] font-medium text-[#4A5364]">
+            <div className="mt-8 pt-6 border-t border-black/[0.07] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <span className="text-[0.90rem] font-medium text-[#4A5364]">
                 Still have a question?
               </span>
 
