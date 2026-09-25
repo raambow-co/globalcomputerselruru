@@ -125,23 +125,23 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
 
       <div className="relative z-10 max-w-[1240px] mx-auto px-6 sm:px-8">
         
-        {/* 2. TOP-ALIGNED PROMINENT HEADER (Moved directly to the top) */}
-        <div className="mb-12 sm:mb-16 text-left max-w-3xl">
+        {/* 2. TOP-ALIGNED PROMINENT HEADER */}
+        <div className="mb-10 sm:mb-12 text-left max-w-2xl">
           
           {/* Pill Badge with Orange Highlight Tag */}
-          <div className="inline-flex items-center gap-2.5 bg-white px-3.5 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-5 w-fit">
+          <div className="inline-flex items-center gap-2.5 bg-white px-3.5 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-4 w-fit">
             <span className="w-3.5 h-[3px] bg-[#F15A24] rounded-full" />
-            <span className="bg-[#F15A24] text-white font-mono text-[0.70rem] font-black tracking-[0.18em] px-2.5 py-0.5 rounded-sm uppercase">
+            <span className="bg-[#F15A24] text-white font-mono text-[0.68rem] font-black tracking-[0.16em] px-2.5 py-0.5 rounded-sm uppercase">
               NEED TO KNOW?
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-black text-[clamp(2.5rem,4.8vw,4.2rem)] text-[#0E1117] leading-[1.04] tracking-tight select-none">
+          <h2 className="font-heading font-black text-[clamp(1.85rem,3.2vw,2.6rem)] text-[#0E1117] leading-[1.08] tracking-tight select-none">
             Questions?<br />
-            <span className="text-[#F15A24] relative inline-block pb-1">
+            <span className="text-[#F15A24] relative inline-block pb-0.5">
               We’ve Got Answers.
-              <span className="absolute left-0 bottom-0 w-full h-[3.5px] bg-[#F15A24] rounded-full" />
+              <span className="absolute left-0 bottom-0 w-full h-[2.5px] bg-[#F15A24] rounded-full" />
             </span>
           </h2>
 
@@ -158,7 +158,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
               return (
                 <div
                   key={faq.id}
-                  className="py-6 sm:py-7 group transition-all duration-200"
+                  className="py-5 sm:py-6 group transition-all duration-200"
                 >
                   {/* Question Header Button */}
                   <button
@@ -181,7 +181,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
 
                       {/* Question Title */}
                       <span
-                        className={`font-heading text-[1.05rem] sm:text-[1.2rem] tracking-tight leading-snug transition-colors duration-200 ${
+                        className={`font-heading text-[1.02rem] sm:text-[1.14rem] tracking-tight leading-snug transition-colors duration-200 ${
                           isOpen
                             ? 'font-bold text-[#0E1117]'
                             : 'font-semibold text-[#1C2028] group-hover:text-[#F15A24]'
@@ -193,13 +193,13 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
 
                     {/* Minimalist Plus/Minus Control */}
                     <div
-                      className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
                         isOpen
                           ? 'bg-[#F15A24] text-white border-[#F15A24] shadow-2xs'
                           : 'bg-white text-[#828E9E] group-hover:text-[#0E1117] border-black/10 group-hover:border-black/20 shadow-2xs'
                       }`}
                     >
-                      {isOpen ? <Minus size={15} /> : <Plus size={15} />}
+                      {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                     </div>
                   </button>
 
@@ -207,7 +207,7 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
                   {isOpen && (
                     <div className="mt-4 pl-10 sm:pl-12 pr-4 sm:pr-12 animate-in fade-in slide-in-from-top-2 duration-200">
                       <div className="border-l-2 border-[#F15A24] pl-4 sm:pl-5 py-1">
-                        <p className="text-[0.94rem] sm:text-[1.02rem] text-[#4A5364] leading-relaxed font-normal">
+                        <p className="text-[0.92rem] sm:text-[0.98rem] text-[#4A5364] leading-relaxed font-normal">
                           {faq.answer}
                         </p>
                       </div>
@@ -216,30 +216,6 @@ export const FAQSection: React.FC<FAQSectionProps> = ({ onOpenEnquiry }) => {
                 </div>
               );
             })}
-          </div>
-
-          {/* 4. Bottom Support Bar */}
-          <div className="mt-10 p-6 bg-[#FAFBFD] rounded-2xl border border-black/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-2xs">
-            <div>
-              <span className="font-heading font-bold text-[0.96rem] text-[#0E1117] block">
-                Still have a question or need a custom quote?
-              </span>
-              <span className="text-[0.84rem] text-[#64748B] mt-0.5 block">
-                Visit our showroom in Eluru or speak directly with our tech team.
-              </span>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => onOpenEnquiry('Direct Question / Enquiry')}
-              className="group inline-flex items-center gap-2 px-5 py-2.5 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-mono text-[0.82rem] font-bold rounded-xl shadow-orange-cta hover:shadow-orange-hover transition-all duration-200 cursor-pointer flex-shrink-0"
-            >
-              <span>Talk to Global Computers</span>
-              <ArrowRight
-                size={14}
-                className="transition-transform duration-200 group-hover:translate-x-1"
-              />
-            </button>
           </div>
 
         </div>
