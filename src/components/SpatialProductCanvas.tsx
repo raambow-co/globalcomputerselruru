@@ -149,7 +149,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
   }, [activeTooltip]);
 
   const products: ProductItem[] = [
-    // 1. Background Anchor Left Upper: Motherboard
+    // 1. Background Anchor Left Upper: Motherboard (Placed below navbar)
     {
       id: 'motherboard',
       name: 'Z790 Workstation Motherboard',
@@ -158,14 +158,14 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● Verified In Stock',
       image: '/assets/motherboard.png',
       className:
-        'top-[7%] sm:top-[10%] lg:top-[11%] left-[2%] sm:left-[3%] lg:left-[4.5%] w-[84px] xs:w-[105px] sm:w-[155px] md:w-[205px] lg:w-[260px] -rotate-6 opacity-100',
+        'top-[12%] xs:top-[11.5%] sm:top-[10%] lg:top-[11%] left-[2%] sm:left-[3%] lg:left-[4.5%] w-[80px] xs:w-[98px] sm:w-[155px] md:w-[205px] lg:w-[260px] -rotate-6 opacity-100',
       depth: 0.03,
       hotspotLabel: 'Z790 Architecture',
       hotspotStyle: { top: '35%', right: '-15px' },
       dropShadowClass: 'drop-shadow-motherboard',
       animationClass: 'animate-float-1',
     },
-    // 2. Foreground Hero Anchor Left Lower: Epson EcoTank Pro Printer
+    // 2. Foreground Hero Anchor Left Lower: Epson EcoTank Pro Printer (Placed below buttons)
     {
       id: 'printer',
       name: 'Epson EcoTank Pro Series',
@@ -174,14 +174,14 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● Verified In Stock',
       image: '/assets/epson_printer.png',
       className:
-        'top-[56%] xs:top-[54%] sm:top-[50%] lg:top-[50%] left-[2%] sm:left-[2.5%] lg:left-[4%] w-[94px] xs:w-[118px] sm:w-[180px] md:w-[245px] lg:w-[315px] rotate-2 opacity-100',
+        'top-[73%] xs:top-[70%] sm:top-[53%] lg:top-[50%] left-[2%] sm:left-[2.5%] lg:left-[4%] w-[88px] xs:w-[110px] sm:w-[180px] md:w-[245px] lg:w-[315px] rotate-2 opacity-100',
       depth: 0.07,
       hotspotLabel: 'Epson EcoTank Pro',
       hotspotStyle: { bottom: '-10px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-printer',
       animationClass: 'animate-float-main',
     },
-    // 3. Foreground Hero Anchor Right Upper: UltraVision 4K Curved Display
+    // 3. Foreground Hero Anchor Right Upper: UltraVision 4K Curved Display (Placed below navbar)
     {
       id: 'monitor',
       name: 'UltraVision 4K Studio Display',
@@ -190,14 +190,14 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● Verified In Stock',
       image: '/assets/pro_monitor.png',
       className:
-        'top-[7%] sm:top-[11%] lg:top-[12%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[96px] xs:w-[120px] sm:w-[185px] md:w-[255px] lg:w-[320px] -rotate-2 opacity-100',
+        'top-[12%] xs:top-[11.5%] sm:top-[11%] lg:top-[12%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[90px] xs:w-[112px] sm:w-[185px] md:w-[255px] lg:w-[320px] -rotate-2 opacity-100',
       depth: 0.05,
       hotspotLabel: 'UltraVision 4K',
       hotspotStyle: { top: '-10px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-monitor',
       animationClass: 'animate-float-2',
     },
-    // 4. Foreground Hero Anchor Right Lower: Mechanical Keyboard
+    // 4. Foreground Hero Anchor Right Lower: Mechanical Keyboard (Placed below buttons)
     {
       id: 'keyboard',
       name: 'AeroCNC Mechanical Keyboard',
@@ -206,7 +206,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       status: '● In Stock',
       image: '/assets/mech_keyboard.png',
       className:
-        'top-[58%] xs:top-[55%] sm:top-[52%] lg:top-[52%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[86px] xs:w-[108px] sm:w-[160px] md:w-[215px] lg:w-[265px] rotate-2 opacity-100',
+        'top-[74%] xs:top-[71%] sm:top-[55%] lg:top-[52%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[82px] xs:w-[102px] sm:w-[160px] md:w-[215px] lg:w-[265px] rotate-2 opacity-100',
       depth: 0.08,
       hotspotLabel: 'AeroCNC Keyboard',
       hotspotStyle: { bottom: '-10px', right: '12%' },
