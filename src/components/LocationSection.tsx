@@ -15,7 +15,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
   return (
     <section
       id="location"
-      className="relative bg-white text-[#0E1117] py-24 sm:py-32 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Architectural White Studio Linework & Subtle Coordinate System */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -58,32 +58,26 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
         </svg>
 
         {/* Technical Corner Coordinate Markers */}
-        <div className="absolute top-12 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">LOC.ELURU_AP</span>
         </div>
-        <div className="absolute top-12 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">GEO.16.7103N_81.1043E</span>
-        </div>
-        <div className="absolute bottom-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SHOWROOM.PHYSICAL</span>
-        </div>
-        <div className="absolute bottom-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ANDHRA_PRADESH.IN</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Asymmetric Two-Column Editorial Layout (Left 40% / Right 60%) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
           {/* LEFT SIDE: Editorial Information & Direct Navigation (5 Columns on LG ~ 42%) */}
           <div className="lg:col-span-5 flex flex-col justify-between text-left">
             
             {/* Eyebrow Badge */}
-            <div className="inline-flex items-center gap-2.5 bg-white px-4 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-5 self-start">
-              <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
-              <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
+            <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-3 self-start">
+              <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
+              <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
                 VISIT GLOBAL COMPUTERS
               </span>
             </div>
@@ -230,7 +224,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
               {/* Map Surface View */}
               {mapMode === 'architectural' ? (
                 /* Clean High-End Architectural Map Drawing */
-                <div className="relative w-full h-[360px] sm:h-[420px] bg-[#F7F9FC] overflow-hidden select-none">
+                <div className="relative w-full h-[260px] sm:h-[300px] md:h-[320px] bg-[#F7F9FC] overflow-hidden select-none">
                   
                   {/* Subtle Vector Street & Canal Geometry SVG */}
                   <svg
@@ -347,7 +341,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 </div>
               ) : (
                 /* Live Interactive Google Map Embed (Clean Light Theme) */
-                <div className="relative w-full h-[360px] sm:h-[420px]">
+                <div className="relative w-full h-[260px] sm:h-[300px] md:h-[320px]">
                   <iframe
                     title="Global Computer Services Eluru Location"
                     src="https://maps.google.com/maps?q=16.7102582,81.1043477&hl=en&z=17&output=embed"

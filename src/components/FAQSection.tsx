@@ -103,19 +103,19 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
         return (
           <div
             key={faq.id}
-            className="py-4 sm:py-4.5 group transition-all duration-200"
+            className="py-2.5 sm:py-3 group transition-all duration-200"
           >
             {/* Question Header Button */}
             <button
               type="button"
               onClick={() => toggleFAQ(faq.id)}
               aria-expanded={isOpen}
-              className="w-full flex items-start justify-between gap-3.5 text-left transition-transform duration-200 group-hover:translate-x-0.5 cursor-pointer focus:outline-none"
+              className="w-full flex items-start justify-between gap-3 text-left transition-transform duration-200 group-hover:translate-x-0.5 cursor-pointer focus:outline-none"
             >
-              <div className="flex items-start gap-3 sm:gap-3.5">
+              <div className="flex items-start gap-2.5 sm:gap-3">
                 {/* Number Indicator */}
                 <span
-                  className={`font-mono text-[0.70rem] sm:text-[0.74rem] font-bold mt-0.5 transition-colors duration-200 flex-shrink-0 ${
+                  className={`font-mono text-[0.68rem] sm:text-[0.72rem] font-bold mt-0.5 transition-colors duration-200 flex-shrink-0 ${
                     isOpen
                       ? 'text-[#F15A24]'
                       : 'text-[#828E9E] group-hover:text-[#F15A24]'
@@ -126,7 +126,7 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
 
                 {/* Question Title */}
                 <span
-                  className={`font-heading text-[0.92rem] sm:text-[0.98rem] tracking-tight leading-snug transition-colors duration-200 ${
+                  className={`font-heading text-[0.88rem] sm:text-[0.92rem] tracking-tight leading-snug transition-colors duration-200 ${
                     isOpen
                       ? 'font-bold text-[#0E1117]'
                       : 'font-semibold text-[#1C2028] group-hover:text-[#F15A24]'
@@ -138,21 +138,21 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
 
               {/* Minimalist Plus/Minus Control */}
               <div
-                className={`w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
+                className={`w-5.5 h-5.5 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 border ${
                   isOpen
                     ? 'bg-[#F15A24] text-white border-[#F15A24] shadow-2xs'
                     : 'bg-white text-[#828E9E] group-hover:text-[#0E1117] border-black/10 group-hover:border-black/20 shadow-2xs'
                 }`}
               >
-                {isOpen ? <Minus size={12} /> : <Plus size={12} />}
+                {isOpen ? <Minus size={11} /> : <Plus size={11} />}
               </div>
             </button>
 
             {/* Smooth Collapsible Answer Container */}
             {isOpen && (
-              <div className="mt-3 pl-6 sm:pl-7 pr-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                <div className="border-l-2 border-[#F15A24] pl-3 py-0.5">
-                  <p className="text-[0.84rem] sm:text-[0.88rem] text-[#4A5364] leading-relaxed font-normal">
+              <div className="mt-2 pl-5 sm:pl-6 pr-2 animate-in fade-in slide-in-from-top-1 duration-200">
+                <div className="border-l-2 border-[#F15A24] pl-2.5 py-0.5">
+                  <p className="text-[0.80rem] sm:text-[0.84rem] text-[#4A5364] leading-relaxed font-normal">
                     {faq.answer}
                   </p>
                 </div>
@@ -167,7 +167,7 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
   return (
     <section
       id="faq"
-      className="relative bg-white text-[#0E1117] py-16 sm:py-24 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-10 sm:py-14 min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Studio Ambient Lighting & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">

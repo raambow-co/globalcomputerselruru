@@ -152,7 +152,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
   return (
     <section
       id="deals"
-      className="relative bg-[#FAFBFD] text-[#0E1117] py-12 sm:py-16 overflow-hidden border-t border-black/[0.06] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-[#FAFBFD] text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.06] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Ambient Background Glow & Markers */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -165,18 +165,18 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1140px] mx-auto px-4 sm:px-6">
+      <div className="relative z-10 max-w-[1140px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Clean Minimal Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mb-5 sm:mb-6 text-center sm:text-left">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 mb-4 sm:mb-5 text-center sm:text-left">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-white px-3 py-0.5 rounded-full border border-black/[0.08] shadow-2xs mb-1.5">
+            <div className="inline-flex items-center gap-1.5 bg-white px-3 py-0.5 rounded-full border border-black/[0.08] shadow-2xs mb-1">
               <Flame className="w-3 h-3 text-[#F15A24] animate-bounce" />
               <span className="font-mono text-[0.64rem] font-bold tracking-[0.14em] text-[#F15A24] uppercase">
                 SHOWROOM EXCLUSIVES
               </span>
             </div>
-            <h2 className="font-heading font-extrabold text-[clamp(1.5rem,2.8vw,2.2rem)] text-[#0E1117] tracking-tight leading-tight">
+            <h2 className="font-heading font-extrabold text-[clamp(1.4rem,2.4vw,1.9rem)] text-[#0E1117] tracking-tight leading-tight">
               Latest Offers &amp; <span className="text-[#F15A24]">Special Deals.</span>
             </h2>
           </div>
@@ -186,9 +186,9 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             <button
               type="button"
               onClick={() => setIsUploadOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-white hover:bg-[#FFF2EB] text-[#F15A24] border border-[#F15A24]/30 hover:border-[#F15A24] font-semibold text-[0.78rem] rounded-lg shadow-2xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-[#FFF2EB] text-[#F15A24] border border-[#F15A24]/30 hover:border-[#F15A24] font-semibold text-[0.76rem] rounded-lg shadow-2xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
             >
-              <Upload size={13} />
+              <Upload size={12} />
               <span>Upload Offer</span>
             </button>
 
@@ -199,7 +199,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
                 title="Remove this offer"
                 className="p-1.5 bg-white hover:bg-red-50 text-slate-400 hover:text-red-500 border border-black/10 rounded-lg transition-colors cursor-pointer"
               >
-                <Trash2 size={15} />
+                <Trash2 size={14} />
               </button>
             )}
           </div>
@@ -215,7 +215,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
           <div className="h-1 w-full bg-gradient-to-r from-[#F15A24] via-[#FF7844] to-[#F15A24]" />
 
           {/* Image Slide Area */}
-          <div className="relative w-full h-[260px] sm:h-[340px] md:h-[380px] bg-[#FAFBFD] flex items-center justify-center p-4 sm:p-8 overflow-hidden select-none">
+          <div className="relative w-full h-[210px] sm:h-[260px] md:h-[290px] bg-[#FAFBFD] flex items-center justify-center p-3 sm:p-6 overflow-hidden select-none">
             
             {/* Background Subtle Gradient Glow */}
             <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.05)_0%,rgba(250,251,253,0)_100%)] pointer-events-none" />

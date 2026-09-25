@@ -102,7 +102,7 @@ export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
     <section
       id="trust-ratings"
       ref={containerRef}
-      className="relative bg-white text-[#0E1117] py-24 sm:py-32 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Subtle White Studio Environment & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -145,44 +145,38 @@ export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
         </svg>
 
         {/* Technical Corner Markers */}
-        <div className="absolute top-12 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">SEC.RATINGS</span>
         </div>
-        <div className="absolute top-12 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">REPUTATION.GENUINE</span>
-        </div>
-        <div className="absolute bottom-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">VERIFICATION.PUBLIC</span>
-        </div>
-        <div className="absolute bottom-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ELURU.LOCAL_PRESENCE</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1240px] mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Section Introduction */}
-        <div className="max-w-2xl mb-16 sm:mb-20 text-left">
+        <div className="max-w-2xl mb-4 sm:mb-5 text-left">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2.5 bg-white px-4 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-5">
-            <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
+          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-2">
+            <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
+            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
               TRUSTED BY CUSTOMERS
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(2.1rem,4.2vw,3.4rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-4 select-none">
+          <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-1.5 select-none">
             Good Technology.{' '}
             <span className="text-[#F15A24] relative inline-block">
               Better Experience.
-              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
 
           {/* Concise Supporting Text */}
-          <p className="text-[1.02rem] sm:text-[1.12rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
+          <p className="text-[0.88rem] sm:text-[0.94rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
             See the reputation built through customer experiences and reliable technology solutions.
           </p>
         </div>
@@ -191,7 +185,7 @@ export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="bg-[#FAFBFD] rounded-3xl border border-black/[0.07] p-8 sm:p-12 lg:p-16 shadow-[0_12px_45px_rgba(15,23,42,0.03)] relative overflow-hidden transition-all duration-300 hover:border-[#F15A24]/20 hover:shadow-[0_20px_55px_rgba(241, 90, 36,0.04)]"
+          className="bg-[#FAFBFD] rounded-2xl border border-black/[0.07] p-5 sm:p-7 lg:p-8 shadow-[0_12px_45px_rgba(15,23,42,0.03)] relative overflow-hidden transition-all duration-300 hover:border-[#F15A24]/20 hover:shadow-[0_20px_55px_rgba(241, 90, 36,0.04)]"
         >
           {/* Subtle Top-Right Ambient Red Radial Halo */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_100%_0%,rgba(241, 90, 36,0.045),transparent_70%)] pointer-events-none" />

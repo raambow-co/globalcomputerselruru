@@ -92,7 +92,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
   return (
     <section
       id="enquiry"
-      className="relative bg-white text-[#0E1117] py-14 sm:py-20 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Studio Ambient Lighting & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -135,15 +135,15 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
         </svg>
 
         {/* Technical Corner Markers */}
-        <div className="absolute top-8 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">SEC.ENQUIRY</span>
         </div>
-        <div className="absolute top-8 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">DIRECT.DISPATCH</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-5 sm:px-8">
+      <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Side-By-Side One-Screen Hero Composition (Left: Info / Story; Right: Interactive Compact Form) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">

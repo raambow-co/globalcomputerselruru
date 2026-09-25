@@ -367,7 +367,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     <section
       id="technology-showcase"
       ref={containerRef}
-      className="relative bg-white text-[#0E1117] py-20 sm:py-28 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Spatial Linework & Coordinate Architecture Background (Clean Studio White Theme) */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -388,45 +388,45 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
         </svg>
 
         {/* Technical Coordinate Corner Markers */}
-        <div className="absolute top-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">SERVICES.SPATIAL_MATRIX</span>
         </div>
-        <div className="absolute top-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">OEM.VERIFIED_CHANNELS</span>
         </div>
-        <div className="absolute bottom-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute bottom-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">MULTI_BRAND.SUPPORT</span>
         </div>
-        <div className="absolute bottom-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute bottom-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">ELURU.CENTRAL_DESK</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-8">
+      <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Editorial Section Header */}
-        <div className="max-w-3xl mb-8 sm:mb-12 text-left">
+        <div className="max-w-3xl mb-4 sm:mb-5 text-left">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2.5 bg-[#FAFBFD] px-4 py-1.5 rounded-full border border-black/[0.08] shadow-2xs mb-4">
-            <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
+          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3 py-1 rounded-full border border-black/[0.08] shadow-2xs mb-2">
+            <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
+            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
               SERVICES &amp; SUPPORTED BRANDS
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(2.1rem,4.2vw,3.4rem)] text-[#0E1117] leading-[1.08] tracking-tight mb-4 select-none">
+          <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.4rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-2 select-none">
             Expert Multi-Brand<br />
             <span className="text-[#F15A24] relative inline-block">
               Sales, Services &amp; Solutions.
-              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
         </div>
 
         {/* 3. Category Filter Navigation Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 sm:mb-12 no-scrollbar">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 mb-4 sm:mb-5 no-scrollbar">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = activeTab === cat.id;
@@ -443,16 +443,16 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                     : brands.find((b) => b.categories.includes(cat.id as any));
                   if (firstInCat) setSelectedBrandId(firstInCat.id);
                 }}
-                className={`px-4 sm:px-5 py-2.5 rounded-xl font-heading text-[0.88rem] sm:text-[0.92rem] font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-2.5 ${
+                className={`px-3.5 py-1.5 rounded-lg font-heading text-[0.80rem] sm:text-[0.84rem] font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                   isSelected
                     ? 'bg-[#F15A24] text-white shadow-orange-cta scale-[1.02]'
                     : 'bg-[#FAFBFD] hover:bg-slate-100 text-[#4A5364] hover:text-[#0E1117] border border-black/[0.06] hover:border-black/15 shadow-2xs'
                 }`}
               >
-                <Icon size={16} className={isSelected ? 'text-white' : 'text-[#F15A24]'} />
+                <Icon size={14} className={isSelected ? 'text-white' : 'text-[#F15A24]'} />
                 <span>{cat.label}</span>
                 <span
-                  className={`font-mono text-[0.72rem] px-2 py-0.5 rounded-full ${
+                  className={`font-mono text-[0.66rem] px-1.5 py-0.2 rounded-full ${
                     isSelected ? 'bg-white/20 text-white font-bold' : 'bg-black/5 text-[#828E9E]'
                   }`}
                 >
@@ -464,10 +464,10 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
         </div>
 
         {/* 4. Spatial Floating in Air Interactive Arena + Detail HUD */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
           {/* LEFT/CENTER: 3D Spatial Floating in Air Canvas (8 Columns on LG) */}
-          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-3xl border border-black/[0.08] shadow-[0_16px_50px_rgba(15,23,42,0.04)] relative min-h-[620px] sm:min-h-[700px] md:min-h-[740px] p-6 sm:p-8 flex flex-col justify-between select-none">
+          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] relative min-h-[460px] sm:min-h-[500px] md:min-h-[520px] p-4 sm:p-5 flex flex-col justify-between select-none">
             
             {/* Ambient Radial Ring Lighting inside the Arena */}
             <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.04)_0%,rgba(250,251,253,0)_100%)] pointer-events-none rounded-3xl" />
@@ -491,7 +491,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
             </div>
 
             {/* The Floating Logos Arena Surface with Central Anchor */}
-            <div className="relative w-full h-[520px] sm:h-[580px] md:h-[620px]">
+            <div className="relative w-full h-[400px] sm:h-[440px] md:h-[460px]">
               
               {/* CENTRAL ANCHOR BASE / ORBITAL CORE */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 flex flex-col items-center justify-center">

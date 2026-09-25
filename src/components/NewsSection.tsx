@@ -82,7 +82,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
   return (
     <section
       id="updates"
-      className="relative py-24 sm:py-32 bg-[#FAFBFD] text-[#0E1117] overflow-hidden border-t border-black/[0.04]"
+      className="relative py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center bg-[#FAFBFD] text-[#0E1117] overflow-hidden border-t border-black/[0.04]"
     >
       {/* 1. Subtle Background Linework & Technical Grid Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -134,119 +134,113 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
         </svg>
 
         {/* Subtle Technical Markers */}
-        <div className="absolute top-12 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#A0ABBB]">
+        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#A0ABBB]">
           + <span className="text-[#828E9E]">SEC.NEWSROOM</span>
         </div>
-        <div className="absolute top-12 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#A0ABBB]">
+        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#A0ABBB]">
           + <span className="text-[#828E9E]">LOC.ELURU</span>
-        </div>
-        <div className="absolute bottom-8 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#A0ABBB]">
-          + <span className="text-[#828E9E]">FEED.VERIFIED</span>
-        </div>
-        <div className="absolute bottom-8 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#A0ABBB]">
-          + <span className="text-[#828E9E]">DISPATCH.READY</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1240px] mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Section Header (Editorial Style) */}
-        <div className="max-w-2xl mb-16 sm:mb-20">
+        <div className="max-w-2xl mb-4 sm:mb-5">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.07] shadow-xs mb-4">
+          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.07] shadow-xs mb-2">
             <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
-            <span className="font-mono text-[0.7rem] font-bold tracking-[0.18em] text-[#F15A24] uppercase">
+            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
               WHAT'S NEW
             </span>
           </div>
 
           {/* Section Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(1.85rem,4vw,2.85rem)] text-[#0E1117] leading-[1.12] tracking-tight mb-4">
+          <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.12] tracking-tight mb-1.5">
             Stay Ahead of{' '}
             <span className="text-[#F15A24] relative inline-block">
               Technology.
-              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
 
           {/* Supporting Lead Copy */}
-          <p className="text-[1.02rem] sm:text-[1.1rem] text-[#4A5364] leading-relaxed font-normal max-w-xl">
+          <p className="text-[0.88rem] sm:text-[0.94rem] text-[#4A5364] leading-relaxed font-normal max-w-xl">
             Discover the latest arrivals, technology updates and solutions from Global Computers.
           </p>
         </div>
 
         {/* 3. Main Editorial Layout (Asymmetric: 1 Large Left + 2 Stacked Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch">
           
           {/* LEFT: Featured Story Visual Article (7 Columns on LG) */}
           <div
             onClick={() => setSelectedStory(featuredStory)}
-            className="lg:col-span-7 group cursor-pointer bg-white rounded-3xl p-8 sm:p-10 border border-black/[0.07] shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(241, 90, 36,0.07)] hover:border-[#F15A24]/25 active:scale-[0.995] flex flex-col justify-between relative overflow-hidden"
+            className="lg:col-span-7 group cursor-pointer bg-white rounded-2xl p-5 sm:p-6 border border-black/[0.07] shadow-[0_8px_30px_rgba(15,23,42,0.03)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(241, 90, 36,0.07)] hover:border-[#F15A24]/25 active:scale-[0.995] flex flex-col justify-between relative overflow-hidden"
           >
             {/* Subtle red corner glow indicator */}
             <div className="absolute top-0 right-0 w-44 h-44 bg-[radial-gradient(circle_at_100%_0%,rgba(241, 90, 36,0.04),transparent_70%)] pointer-events-none transition-opacity duration-300 group-hover:opacity-100" />
 
             {/* Top Meta Header */}
             <div>
-              <div className="flex items-center justify-between gap-4 mb-6">
-                <div className="flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#F15A24] animate-ping" />
-                  <span className="font-mono text-[0.72rem] font-bold tracking-widest text-[#F15A24] uppercase">
+              <div className="flex items-center justify-between gap-4 mb-3">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24] animate-ping" />
+                  <span className="font-mono text-[0.66rem] font-bold tracking-widest text-[#F15A24] uppercase">
                     {featuredStory.category}
                   </span>
                 </div>
 
-                <span className="font-mono text-[0.74rem] text-[#828E9E] tracking-wider">
+                <span className="font-mono text-[0.68rem] text-[#828E9E] tracking-wider">
                   {featuredStory.date}
                 </span>
               </div>
 
               {/* Featured Headline */}
-              <h3 className="font-heading font-extrabold text-[clamp(1.45rem,2.5vw,2.15rem)] text-[#0E1117] leading-[1.18] tracking-tight mb-3.5 group-hover:text-[#F15A24] transition-colors duration-200">
+              <h3 className="font-heading font-extrabold text-[clamp(1.25rem,2vw,1.6rem)] text-[#0E1117] leading-[1.18] tracking-tight mb-2 group-hover:text-[#F15A24] transition-colors duration-200">
                 {featuredStory.title}
               </h3>
 
               {/* Description */}
-              <p className="text-[0.96rem] sm:text-[1.02rem] text-[#4A5364] leading-relaxed max-w-lg mb-6">
+              <p className="text-[0.84rem] sm:text-[0.88rem] text-[#4A5364] leading-relaxed max-w-lg mb-3">
                 {featuredStory.description}
               </p>
             </div>
 
-            {/* 3D Realistic Product Composition (Breaks Frame Into Whitespace) */}
-            <div className="relative my-4 sm:my-6 py-6 flex items-center justify-center">
+            {/* 3D Realistic Product Composition */}
+            <div className="relative my-2 py-2 flex items-center justify-center">
               {/* Subtle Red Graphic Halo Ring Behind Hardware */}
-              <div className="absolute w-[240px] sm:w-[320px] h-[240px] sm:h-[320px] rounded-full bg-gradient-to-tr from-[#FFF2EB] to-white border border-[#F15A24]/10 transition-transform duration-500 group-hover:scale-105 pointer-events-none" />
+              <div className="absolute w-[180px] sm:w-[220px] h-[180px] sm:h-[220px] rounded-full bg-gradient-to-tr from-[#FFF2EB] to-white border border-[#F15A24]/10 transition-transform duration-500 group-hover:scale-105 pointer-events-none" />
 
               {/* 3D Hardware Display Render */}
-              <div className="relative z-10 w-full max-w-[420px] sm:max-w-[480px] transition-transform duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]">
+              <div className="relative z-10 w-full max-w-[320px] sm:max-w-[360px] transition-transform duration-500 ease-out group-hover:-translate-y-1 group-hover:scale-[1.02]">
                 <img
                   src={featuredStory.image}
                   alt={featuredStory.imageAlt}
-                  className="w-full h-auto object-contain select-none drop-shadow-[0_25px_40px_rgba(15,23,42,0.14)] transition-all duration-300 group-hover:drop-shadow-[0_32px_48px_rgba(15,23,42,0.18)]"
+                  className="w-full h-[140px] sm:h-[160px] object-contain select-none drop-shadow-[0_18px_30px_rgba(15,23,42,0.12)] transition-all duration-300 group-hover:drop-shadow-[0_24px_38px_rgba(15,23,42,0.16)]"
                   loading="lazy"
                 />
               </div>
 
               {/* Floating Spec Capsule Tag */}
-              <div className="absolute bottom-2 left-4 sm:left-6 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-black/10 shadow-sm flex items-center gap-2 transition-transform duration-200 group-hover:-translate-y-1">
-                <Sparkles size={13} className="text-[#F15A24]" />
-                <span className="font-mono text-[0.68rem] font-semibold text-[#0E1117]">
+              <div className="absolute bottom-1 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full border border-black/10 shadow-xs flex items-center gap-1.5 transition-transform duration-200 group-hover:-translate-y-0.5">
+                <Sparkles size={11} className="text-[#F15A24]" />
+                <span className="font-mono text-[0.64rem] font-semibold text-[#0E1117]">
                   4K IPS · Frameless Curved
                 </span>
               </div>
             </div>
 
             {/* Featured Story Action CTA */}
-            <div className="pt-6 border-t border-black/[0.05] flex items-center justify-between">
-              <div className="inline-flex items-center gap-2 text-[0.92rem] font-semibold text-[#0E1117] group-hover:text-[#F15A24] transition-colors duration-200">
+            <div className="pt-3 border-t border-black/[0.05] flex items-center justify-between">
+              <div className="inline-flex items-center gap-2 text-[0.84rem] font-semibold text-[#0E1117] group-hover:text-[#F15A24] transition-colors duration-200">
                 <span>Explore Update</span>
-                <div className="w-7 h-7 rounded-full bg-slate-100 group-hover:bg-[#F15A24] group-hover:text-white flex items-center justify-center transition-all duration-200 group-hover:translate-x-1.5 shadow-2xs">
-                  <ArrowRight size={14} />
+                <div className="w-6 h-6 rounded-full bg-slate-100 group-hover:bg-[#F15A24] group-hover:text-white flex items-center justify-center transition-all duration-200 group-hover:translate-x-1 shadow-2xs">
+                  <ArrowRight size={12} />
                 </div>
               </div>
 
-              <span className="font-mono text-[0.7rem] text-[#828E9E] uppercase tracking-wider hidden sm:inline">
+              <span className="font-mono text-[0.66rem] text-[#828E9E] uppercase tracking-wider hidden sm:inline">
                 Read Briefing · 2 min
               </span>
             </div>
@@ -317,7 +311,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
         </div>
 
         {/* 4. Section Footer (Clean Minimal Text Navigation) */}
-        <div className="mt-14 sm:mt-16 flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 border-t border-black/[0.06]">
+        <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-black/[0.06]">
           <div className="text-[0.84rem] text-[#828E9E] font-mono">
             UPDATES VERIFIED BY GLOBAL COMPUTERS EDITORIAL DESK
           </div>

@@ -232,7 +232,7 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
     <section
       id="reviews"
       ref={containerRef}
-      className="relative bg-white text-[#0E1117] py-24 sm:py-32 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Minimal White Studio Environment & Technical Coordinate Grid */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -276,50 +276,44 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
         </svg>
 
         {/* Technical Corner Markers */}
-        <div className="absolute top-12 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">SEC.TESTIMONIALS</span>
         </div>
-        <div className="absolute top-12 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">FEEDBACK.VERIFIED</span>
-        </div>
-        <div className="absolute bottom-10 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">TRUST.AUTHENTIC</span>
-        </div>
-        <div className="absolute bottom-10 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ELURU.RELATIONSHIPS</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1280px] mx-auto px-6 sm:px-8">
+      <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Section Introduction */}
-        <div className="max-w-2xl mb-16 sm:mb-20">
+        <div className="max-w-2xl mb-4 sm:mb-5">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2.5 bg-white px-4 py-1.5 rounded-full border border-black/[0.08] shadow-xs mb-5">
-            <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.72rem] font-bold tracking-[0.2em] text-[#F15A24] uppercase">
+          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-2">
+            <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
+            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
               CUSTOMER EXPERIENCES
             </span>
           </div>
 
           {/* Main Heading */}
-          <h2 className="font-heading font-extrabold text-[clamp(2.1rem,4.2vw,3.4rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-4 select-none">
+          <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-2 select-none">
             Technology That{' '}
             <span className="text-[#F15A24] relative inline-block">
               Earns Trust.
-              <span className="absolute left-0 bottom-1 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
 
           {/* Concise Supporting Text */}
-          <p className="text-[1.02rem] sm:text-[1.12rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
+          <p className="text-[0.88rem] sm:text-[0.94rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
             Every interaction matters. Discover what customers have to say about their experience with Global Computers.
           </p>
         </div>
 
         {/* 3. Main Asymmetrical Layout: Large Featured Editorial Testimonial + Realistic 3D Metaphor */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch mb-16 sm:mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch mb-6 sm:mb-8">
           
           {/* LEFT: Featured Dominant Testimonial Experience (7 Columns on LG) */}
           <div className="lg:col-span-7 bg-[#FAFBFD] rounded-3xl p-8 sm:p-12 border border-black/[0.07] shadow-[0_12px_40px_rgba(15,23,42,0.035)] flex flex-col justify-between relative overflow-hidden transition-all duration-300">
