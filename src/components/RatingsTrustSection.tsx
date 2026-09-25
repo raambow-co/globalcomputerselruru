@@ -125,7 +125,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
   return (
     <section
       id="social-media"
-      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-6 sm:py-10 md:py-12 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Ambient Studio Geometry & Grid */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -168,10 +168,10 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
         </svg>
 
         {/* Technical Corner Markers */}
-        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-4 left-4 sm:left-12 font-mono text-[0.60rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">SEC.SOCIAL_HUB</span>
         </div>
-        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-4 right-4 sm:right-12 font-mono text-[0.60rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">4_DIRECT_CHANNELS</span>
         </div>
       </div>
@@ -179,18 +179,18 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
       <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Centered Section Header */}
-        <div className="max-w-3xl mx-auto mb-6 sm:mb-8 text-center flex flex-col items-center">
+        <div className="max-w-3xl mx-auto mb-4 sm:mb-6 text-center flex flex-col items-center">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3.5 py-1 rounded-full border border-black/[0.08] shadow-2xs mb-2.5">
+          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3 py-0.5 rounded-full border border-black/[0.08] shadow-2xs mb-1.5">
             <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.66rem] font-black tracking-[0.18em] text-[#F15A24] uppercase">
+            <span className="font-mono text-[0.64rem] font-black tracking-[0.16em] text-[#F15A24] uppercase">
               CONNECT WITH US
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(1.7rem,3vw,2.5rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-2 select-none">
+          <h2 className="font-heading font-extrabold text-[clamp(1.5rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-1.5 select-none">
             Connect with Us on{' '}
             <span className="text-[#F15A24] relative inline-block">
               Social Media.
@@ -199,13 +199,13 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
           </h2>
 
           {/* Subtitle */}
-          <p className="text-[0.88rem] sm:text-[0.96rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
+          <p className="text-[0.82rem] sm:text-[0.92rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
             Scan any QR code with your smartphone or tap the links below for instant updates, live tech support, workstation videos &amp; showroom directions.
           </p>
         </div>
 
         {/* 3. 4 Side-By-Side Interactive QR Cards (Touch-Swipeable on Mobile, Grid on Desktop) */}
-        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
+        <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5 lg:gap-6 overflow-x-auto sm:overflow-visible pb-2 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
           {socialChannels.map((channel) => {
             const Icon = channel.icon;
             const isHovered = hoveredCard === channel.id;
@@ -215,10 +215,10 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                 key={channel.id}
                 onMouseEnter={() => setHoveredCard(channel.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`min-w-[270px] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center group bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${channel.brandBorder} ${
+                className={`w-[82vw] max-w-[285px] sm:w-auto sm:max-w-none flex-shrink-0 sm:flex-shrink snap-center group bg-white rounded-2xl p-3.5 sm:p-4.5 border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${channel.brandBorder} ${
                   isHovered
-                    ? 'shadow-[0_18px_45px_rgba(15,23,42,0.08)] -translate-y-1.5'
-                    : 'border-black/[0.08] shadow-[0_6px_24px_rgba(15,23,42,0.03)]'
+                    ? 'shadow-[0_18px_45px_rgba(15,23,42,0.08)] -translate-y-1'
+                    : 'border-black/[0.08] shadow-[0_4px_20px_rgba(15,23,42,0.03)]'
                 }`}
               >
                 {/* Top Subtle Brand Gradient Accent Bar */}
@@ -232,19 +232,19 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
 
                 {/* Card Top: Platform Icon, Badge & Title */}
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-3 pt-1">
+                  <div className="flex items-center justify-between gap-2 mb-2 pt-0.5">
                     {/* Platform Icon & Name */}
                     <div className="flex items-center gap-2">
                       <div
-                        className={`w-8 h-8 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110 shadow-2xs ${channel.brandBg}`}
+                        className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110 shadow-2xs ${channel.brandBg}`}
                       >
-                        <Icon size={18} className={channel.brandText} />
+                        <Icon size={16} className={channel.brandText} />
                       </div>
                       <div className="text-left">
-                        <h3 className="font-heading font-extrabold text-[1.05rem] text-[#0E1117] leading-tight">
+                        <h3 className="font-heading font-extrabold text-[0.98rem] sm:text-[1.05rem] text-[#0E1117] leading-tight">
                           {channel.name}
                         </h3>
-                        <span className="font-mono text-[0.62rem] text-slate-400 block -mt-0.5 truncate max-w-[120px]">
+                        <span className="font-mono text-[0.60rem] text-slate-400 block -mt-0.5 truncate max-w-[110px]">
                           {channel.handleOrSub}
                         </span>
                       </div>
@@ -252,7 +252,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
 
                     {/* Badge */}
                     <span
-                      className="font-mono text-[0.58rem] font-bold tracking-wider px-2 py-0.5 rounded-md uppercase"
+                      className="font-mono text-[0.55rem] font-bold tracking-wider px-2 py-0.5 rounded-md uppercase whitespace-nowrap"
                       style={{
                         backgroundColor: `${channel.accentColor}12`,
                         color: channel.accentColor,
@@ -263,11 +263,11 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                   </div>
 
                   {/* QR Code Direct Display without excess white space/frames */}
-                  <div className="relative my-3 flex items-center justify-center overflow-hidden group/qr">
+                  <div className="relative my-1.5 flex items-center justify-center overflow-hidden group/qr">
                     {/* Scanner Line Effect on Hover */}
                     {isHovered && (
                       <div
-                        className="absolute left-1/2 -translate-x-1/2 w-full max-w-[200px] h-[2px] z-20 pointer-events-none shadow-[0_0_8px_rgba(241,90,36,0.8)] animate-pulse"
+                        className="absolute left-1/2 -translate-x-1/2 w-full max-w-[195px] h-[2px] z-20 pointer-events-none shadow-[0_0_8px_rgba(241,90,36,0.8)] animate-pulse"
                         style={{
                           backgroundColor: channel.accentColor,
                           animation: 'qrScan 2s linear infinite alternate',
@@ -275,36 +275,36 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                       />
                     )}
 
-                    {/* Clean QR Code Image filling the space cleanly */}
-                    <div className="relative z-10 w-full max-w-[200px] flex items-center justify-center">
+                    {/* Clean Exact Cropped QR Code Image */}
+                    <div className="relative z-10 w-full max-w-[195px] flex items-center justify-center">
                       <img
                         src={channel.qrImage}
                         alt={`${channel.name} QR Code - Global Computers Eluru`}
-                        className="w-full h-auto object-contain select-none transition-transform duration-300 group-hover/qr:scale-103 rounded-lg"
+                        className="w-full h-auto object-contain select-none transition-transform duration-300 group-hover/qr:scale-102 rounded-lg"
                         loading="lazy"
                       />
                     </div>
 
                     {/* Micro Scan Helper Pill */}
-                    <div className="absolute bottom-2 z-20 bg-black/80 backdrop-blur-md px-2.5 py-0.5 rounded-full text-white font-mono text-[0.58rem] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md">
+                    <div className="absolute bottom-1.5 z-20 bg-black/80 backdrop-blur-md px-2 py-0.5 rounded-full text-white font-mono text-[0.55rem] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md">
                       <QrCode size={10} className="text-[#F15A24]" />
                       <span>Scan Code</span>
                     </div>
                   </div>
 
                   {/* Description */}
-                  <p className="text-[0.78rem] text-[#64748B] leading-relaxed text-left mb-3.5 font-normal line-clamp-2">
+                  <p className="text-[0.74rem] sm:text-[0.78rem] text-[#64748B] leading-snug text-left mb-2.5 font-normal line-clamp-2">
                     {channel.description}
                   </p>
                 </div>
 
                 {/* Bottom Action CTA Button */}
-                <div className="pt-2.5 border-t border-black/[0.05]">
+                <div className="pt-2 border-t border-black/[0.05]">
                   <a
                     href={channel.directUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-2.5 px-3 rounded-xl font-heading font-bold text-[0.82rem] flex items-center justify-center gap-2 transition-all duration-200 shadow-2xs hover:shadow-sm cursor-pointer group/btn"
+                    className="w-full py-2 px-3 rounded-xl font-heading font-bold text-[0.80rem] flex items-center justify-center gap-1.5 transition-all duration-200 shadow-2xs hover:shadow-sm cursor-pointer group/btn"
                     style={{
                       backgroundColor: isHovered ? channel.accentColor : '#F8FAFC',
                       color: isHovered ? '#FFFFFF' : '#1E293B',
@@ -313,7 +313,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                   >
                     <span>{channel.buttonText}</span>
                     <ArrowUpRight
-                      size={14}
+                      size={13}
                       className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
                     />
                   </a>

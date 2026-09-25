@@ -67,7 +67,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
   return (
     <section
       id="leadership"
-      className="relative bg-[#FAFBFD] text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-[#FAFBFD] text-[#0E1117] py-6 sm:py-10 md:py-12 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Subtle Ambient Studio Geometry Background */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
