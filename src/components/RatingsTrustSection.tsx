@@ -1,113 +1,136 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { ArrowUpRight, CheckCircle2, ExternalLink, ShieldCheck, Sparkles, Star } from 'lucide-react';
+import React, { useState } from 'react';
+import { 
+  ExternalLink, 
+  Sparkles, 
+  QrCode,
+  ArrowUpRight,
+  ShieldCheck,
+  CheckCircle2
+} from 'lucide-react';
 
-interface RatingsTrustSectionProps {
+const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 20, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+  </svg>
+);
+
+const YoutubeIcon: React.FC<{ size?: number; className?: string }> = ({ size = 20, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+);
+
+const GoogleMapsIcon: React.FC<{ size?: number; className?: string }> = ({ size = 20, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+  </svg>
+);
+
+const WhatsAppIcon: React.FC<{ size?: number; className?: string }> = ({ size = 20, className = '' }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+  </svg>
+);
+
+interface SocialMediaQRSectionProps {
   onOpenEnquiry?: (topic?: string) => void;
 }
 
-export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
+interface SocialCard {
+  id: string;
+  name: string;
+  badge: string;
+  qrImage: string;
+  directUrl: string;
+  description: string;
+  icon: React.ComponentType<{ size?: number; className?: string }>;
+  accentColor: string;
+  brandBg: string;
+  brandBorder: string;
+  brandText: string;
+  buttonText: string;
+  handleOrSub: string;
+}
+
+export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
   onOpenEnquiry,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const hardwareRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
-  // Parallax physics loop for the 3D hardware element
-  const physicsState = useRef({
-    targetX: 0,
-    targetY: 0,
-    currentX: 0,
-    currentY: 0,
-    isVisible: true,
-    lastTime: performance.now(),
-  });
-
-  useEffect(() => {
-    // 1. Intersection Observer to preserve frame rate when off-screen
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        physicsState.current.isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.05 }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    // 2. Mouse Move Listener for subtle parallax
-    const handleMouseMove = (e: MouseEvent) => {
-      const { innerWidth, innerHeight } = window;
-      physicsState.current.targetX = (e.clientX - innerWidth / 2) / (innerWidth / 2);
-      physicsState.current.targetY = (e.clientY - innerHeight / 2) / (innerHeight / 2);
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        const { innerWidth, innerHeight } = window;
-        const touch = e.touches[0];
-        physicsState.current.targetX = (touch.clientX - innerWidth / 2) / (innerWidth / 2);
-        physicsState.current.targetY = (touch.clientY - innerHeight / 2) / (innerHeight / 2);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-    window.addEventListener('touchmove', handleTouchMove, { passive: true });
-
-    // 3. Delta-time Lerp Smoothing Render Loop
-    let frameId: number;
-    const renderLoop = (time: number) => {
-      if (physicsState.current.isVisible) {
-        const dt = Math.min((time - physicsState.current.lastTime) / 1000, 0.1);
-        physicsState.current.lastTime = time;
-
-        const ambientX = Math.sin(time * 0.0006) * 0.025;
-        const ambientY = Math.cos(time * 0.0005) * 0.025;
-
-        const targetX = physicsState.current.targetX + ambientX;
-        const targetY = physicsState.current.targetY + ambientY;
-
-        const lerpFactor = 1 - Math.pow(0.002, dt);
-        physicsState.current.currentX +=
-          (targetX - physicsState.current.currentX) * lerpFactor;
-        physicsState.current.currentY +=
-          (targetY - physicsState.current.currentY) * lerpFactor;
-
-        if (hardwareRef.current) {
-          const cx = physicsState.current.currentX;
-          const cy = physicsState.current.currentY;
-          const tx = (cx * 22).toFixed(2);
-          const ty = (cy * 16).toFixed(2);
-          const rx = (-cy * 6).toFixed(2);
-          const ry = (cx * 6).toFixed(2);
-
-          hardwareRef.current.style.transform = `translate3d(${tx}px, ${ty}px, 0px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        }
-      }
-
-      frameId = requestAnimationFrame(renderLoop);
-    };
-
-    frameId = requestAnimationFrame(renderLoop);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
-      cancelAnimationFrame(frameId);
-    };
-  }, []);
+  const socialChannels: SocialCard[] = [
+    {
+      id: 'instagram',
+      name: 'Instagram',
+      badge: 'OFFICIAL PROFILE',
+      qrImage: '/assets/qr/qr_instagram.png',
+      directUrl: 'https://www.instagram.com/globalcomputerseluru',
+      description: 'Daily hardware arrivals, custom workstation builds & customer stories in Eluru.',
+      icon: InstagramIcon,
+      accentColor: '#E1306C',
+      brandBg: 'bg-gradient-to-br from-[#FFF0F5] to-white',
+      brandBorder: 'group-hover:border-[#E1306C]/40',
+      brandText: 'text-[#E1306C]',
+      buttonText: 'Open Instagram',
+      handleOrSub: '@GLOBALCOMPUTERSELURU',
+    },
+    {
+      id: 'youtube',
+      name: 'YouTube',
+      badge: 'TECH REVIEWS & BUILDS',
+      qrImage: '/assets/qr/qr_youtube.png',
+      directUrl: 'https://www.youtube.com/@globalcomputerseluru',
+      description: 'Workstation benchmarks, component walkthroughs & hardware unboxing videos.',
+      icon: YoutubeIcon,
+      accentColor: '#FF0000',
+      brandBg: 'bg-gradient-to-br from-[#FFF5F5] to-white',
+      brandBorder: 'group-hover:border-[#FF0000]/40',
+      brandText: 'text-[#FF0000]',
+      buttonText: 'Visit Channel',
+      handleOrSub: 'Global Computer Services',
+    },
+    {
+      id: 'google-maps',
+      name: 'Google Maps',
+      badge: 'SHOWROOM DIRECTIONS',
+      qrImage: '/assets/qr/qr_googlemaps.png',
+      directUrl: 'https://maps.google.com/?q=Global+Computers+Eluru',
+      description: 'Instant GPS showroom navigation, verified ratings & reviews on Main Road, Eluru.',
+      icon: GoogleMapsIcon,
+      accentColor: '#4285F4',
+      brandBg: 'bg-gradient-to-br from-[#F0F7FF] to-white',
+      brandBorder: 'group-hover:border-[#4285F4]/40',
+      brandText: 'text-[#4285F4]',
+      buttonText: 'Showroom Location',
+      handleOrSub: 'Powerpet, Eluru, AP',
+    },
+    {
+      id: 'whatsapp',
+      name: 'WhatsApp',
+      badge: 'LIVE TECH DESK',
+      qrImage: '/assets/qr/qr_whatsapp.png',
+      directUrl: 'https://wa.me/919848123456?text=Hi%20Global%20Computers,%20I%20would%20like%20to%20inquire%20about%20product%20availability%20and%20pricing',
+      description: 'Chat directly with our senior technicians for live stock availability and instant quotes.',
+      icon: WhatsAppIcon,
+      accentColor: '#25D366',
+      brandBg: 'bg-gradient-to-br from-[#F0FDF4] to-white',
+      brandBorder: 'group-hover:border-[#25D366]/40',
+      brandText: 'text-[#25D366]',
+      buttonText: 'Chat on WhatsApp',
+      handleOrSub: '+91 98481 23456',
+    },
+  ];
 
   return (
     <section
-      id="trust-ratings"
-      ref={containerRef}
+      id="social-media"
       className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
-      {/* 1. Subtle White Studio Environment & Technical Coordinate Geometry */}
+      {/* 1. White Ambient Studio Geometry & Grid */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         {/* Soft Ambient Directional Lighting */}
-        <div className="absolute -top-[10%] right-1/4 w-[700px] h-[550px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241, 90, 36,0.02)_0%,rgba(255,255,255,0)_100%)]" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.025)_0%,rgba(255,255,255,0)_100%)]" />
 
         {/* Minimal Grid SVG */}
         <svg
@@ -116,7 +139,7 @@ export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
         >
           <defs>
             <pattern
-              id="trustGrid"
+              id="socialGrid"
               width="140"
               height="140"
               patternUnits="userSpaceOnUse"
@@ -130,13 +153,13 @@ export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
               <circle cx="0" cy="0" r="1.5" fill="rgba(15, 23, 42, 0.05)" />
             </pattern>
           </defs>
-          <rect width="100%" height="100%" fill="url(#trustGrid)" />
+          <rect width="100%" height="100%" fill="url(#socialGrid)" />
 
-          {/* Large Minimal Studio Focal Rings */}
+          {/* Focal Concentric Rings */}
           <circle
-            cx="65%"
+            cx="50%"
             cy="50%"
-            r="420"
+            r="440"
             fill="none"
             stroke="rgba(241, 90, 36, 0.03)"
             strokeWidth="1.2"
@@ -146,201 +169,187 @@ export const RatingsTrustSection: React.FC<RatingsTrustSectionProps> = ({
 
         {/* Technical Corner Markers */}
         <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SEC.RATINGS</span>
+          + <span className="text-[#64748B]">SEC.SOCIAL_HUB</span>
         </div>
         <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">REPUTATION.GENUINE</span>
+          + <span className="text-[#64748B]">4_DIRECT_CHANNELS</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 w-full">
+      <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 w-full">
         
-        {/* 2. Section Introduction */}
-        <div className="max-w-2xl mb-4 sm:mb-5 text-left">
+        {/* 2. Centered Section Header */}
+        <div className="max-w-3xl mx-auto mb-6 sm:mb-8 text-center flex flex-col items-center">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-2">
+          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3.5 py-1 rounded-full border border-black/[0.08] shadow-2xs mb-2.5">
             <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
-              TRUSTED BY CUSTOMERS
+            <span className="font-mono text-[0.66rem] font-black tracking-[0.18em] text-[#F15A24] uppercase">
+              CONNECT WITH US
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-1.5 select-none">
-            Good Technology.{' '}
+          <h2 className="font-heading font-extrabold text-[clamp(1.7rem,3vw,2.5rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-2 select-none">
+            Connect with Us on{' '}
             <span className="text-[#F15A24] relative inline-block">
-              Better Experience.
+              Social Media.
               <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
 
-          {/* Concise Supporting Text */}
-          <p className="text-[0.88rem] sm:text-[0.94rem] text-[#4A5364] leading-relaxed max-w-xl font-normal">
-            See the reputation built through customer experiences and reliable technology solutions.
+          {/* Subtitle */}
+          <p className="text-[0.88rem] sm:text-[0.96rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
+            Scan any QR code with your smartphone or tap the links below for instant updates, live tech support, workstation videos &amp; showroom directions.
           </p>
         </div>
 
-        {/* 3. Main Editorial Trust Composition (Asymmetrical Showcase Canvas) */}
-        <div
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="bg-[#FAFBFD] rounded-2xl border border-black/[0.07] p-5 sm:p-7 lg:p-8 shadow-[0_12px_45px_rgba(15,23,42,0.03)] relative overflow-hidden transition-all duration-300 hover:border-[#F15A24]/20 hover:shadow-[0_20px_55px_rgba(241, 90, 36,0.04)]"
-        >
-          {/* Subtle Top-Right Ambient Red Radial Halo */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle_at_100%_0%,rgba(241, 90, 36,0.045),transparent_70%)] pointer-events-none" />
+        {/* 3. 4 Side-By-Side Interactive QR Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 items-stretch">
+          {socialChannels.map((channel) => {
+            const Icon = channel.icon;
+            const isHovered = hoveredCard === channel.id;
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            
-            {/* LEFT: Dominant Verified Rating & Trust Metrics (7 Columns on LG) */}
-            <div className="lg:col-span-7 flex flex-col justify-between z-20">
-              
-              {/* Primary Rating Display */}
-              <div className="mb-8">
-                
-                {/* Source & Verified Label */}
-                <div className="flex items-center gap-2.5 mb-4">
-                  <div className="inline-flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-black/[0.07] shadow-2xs">
-                    <ShieldCheck size={14} className="text-emerald-500" />
-                    <span className="font-mono text-[0.7rem] font-bold tracking-wider text-[#0E1117] uppercase">
-                      PUBLIC REPUTATION RECORD
+            return (
+              <div
+                key={channel.id}
+                onMouseEnter={() => setHoveredCard(channel.id)}
+                onMouseLeave={() => setHoveredCard(null)}
+                className={`group bg-white rounded-2xl p-4 sm:p-5 border transition-all duration-300 flex flex-col justify-between relative overflow-hidden ${channel.brandBorder} ${
+                  isHovered
+                    ? 'shadow-[0_18px_45px_rgba(15,23,42,0.08)] -translate-y-1.5'
+                    : 'border-black/[0.08] shadow-[0_6px_24px_rgba(15,23,42,0.03)]'
+                }`}
+              >
+                {/* Top Subtle Brand Gradient Accent Bar */}
+                <div
+                  className="h-1 w-full absolute top-0 left-0 right-0 transition-opacity duration-300"
+                  style={{
+                    backgroundColor: channel.accentColor,
+                    opacity: isHovered ? 1 : 0.6,
+                  }}
+                />
+
+                {/* Card Top: Platform Icon, Badge & Title */}
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3 pt-1">
+                    {/* Platform Icon & Name */}
+                    <div className="flex items-center gap-2">
+                      <div
+                        className={`w-8 h-8 rounded-xl flex items-center justify-center transition-transform duration-200 group-hover:scale-110 shadow-2xs ${channel.brandBg}`}
+                      >
+                        <Icon size={18} className={channel.brandText} />
+                      </div>
+                      <div className="text-left">
+                        <h3 className="font-heading font-extrabold text-[1.05rem] text-[#0E1117] leading-tight">
+                          {channel.name}
+                        </h3>
+                        <span className="font-mono text-[0.62rem] text-slate-400 block -mt-0.5 truncate max-w-[120px]">
+                          {channel.handleOrSub}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Badge */}
+                    <span
+                      className="font-mono text-[0.58rem] font-bold tracking-wider px-2 py-0.5 rounded-md uppercase"
+                      style={{
+                        backgroundColor: `${channel.accentColor}12`,
+                        color: channel.accentColor,
+                      }}
+                    >
+                      {channel.badge}
                     </span>
                   </div>
-                  <span className="font-mono text-[0.68rem] text-[#828E9E]">
-                    ELURU SHOWROOM
-                  </span>
-                </div>
 
-                {/* Rating Number + Stars Header */}
-                <div className="flex items-baseline gap-4 sm:gap-6 flex-wrap">
-                  <span className="font-heading font-black text-[clamp(4.2rem,8vw,6.5rem)] text-[#0E1117] leading-none tracking-tight transition-transform duration-300 group-hover:scale-[1.02]">
-                    4.8
-                  </span>
+                  {/* QR Code Container with High-Tech Laser Scan Animation */}
+                  <div className="relative my-2.5 p-3 bg-[#FAFBFD] rounded-xl border border-black/[0.06] flex items-center justify-center overflow-hidden group/qr">
+                    {/* Scanner Line Effect on Hover */}
+                    {isHovered && (
+                      <div
+                        className="absolute left-0 right-0 h-[2px] z-20 pointer-events-none shadow-[0_0_8px_rgba(241,90,36,0.8)] animate-pulse"
+                        style={{
+                          backgroundColor: channel.accentColor,
+                          animation: 'qrScan 2s linear infinite alternate',
+                        }}
+                      />
+                    )}
 
-                  <div className="flex flex-col justify-center">
-                    {/* Minimal, Crisp Red Stars */}
-                    <div className="flex items-center gap-1.5 mb-1.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          size={22}
-                          className="text-[#F15A24] fill-[#F15A24] transition-transform duration-200"
-                        />
-                      ))}
+                    {/* Clean Cropped QR Code Image */}
+                    <div className="relative z-10 w-full max-w-[160px] aspect-square flex items-center justify-center bg-white rounded-lg p-1.5 shadow-2xs">
+                      <img
+                        src={channel.qrImage}
+                        alt={`${channel.name} QR Code - Global Computers Eluru`}
+                        className="w-full h-full object-contain select-none transition-transform duration-300 group-hover/qr:scale-105"
+                        loading="lazy"
+                      />
                     </div>
 
-                    <div className="font-mono text-[0.78rem] font-semibold text-[#4A5364]">
-                      Overall Customer Rating
+                    {/* Micro Scan Helper Pill */}
+                    <div className="absolute bottom-1.5 z-20 bg-black/75 backdrop-blur-md px-2 py-0.5 rounded-full text-white font-mono text-[0.58rem] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                      <QrCode size={10} className="text-[#F15A24]" />
+                      <span>Scan Code</span>
                     </div>
                   </div>
+
+                  {/* Description */}
+                  <p className="text-[0.78rem] text-[#64748B] leading-relaxed text-left mb-3.5 font-normal line-clamp-2">
+                    {channel.description}
+                  </p>
                 </div>
 
-                {/* Verification Statement */}
-                <p className="text-[0.92rem] sm:text-[0.98rem] text-[#64748B] mt-4 leading-relaxed max-w-md">
-                  Based on verified customer feedback and Google Business Profile reviews in Eluru.
-                </p>
-              </div>
-
-              {/* Horizontal Editorial Information Separators */}
-              <div className="pt-8 border-t border-black/[0.07] grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4">
-                
-                {/* Metric 1 */}
-                <div className="border-l-2 border-[#F15A24] pl-4">
-                  <div className="font-mono text-[0.66rem] font-bold text-[#828E9E] uppercase tracking-widest mb-0.5">
-                    HARDWARE SOURCE
-                  </div>
-                  <div className="font-heading font-bold text-[1.05rem] text-[#0E1117]">
-                    100% Genuine
-                  </div>
-                  <div className="text-[0.76rem] text-[#64748B] mt-0.5">
-                    Direct OEM Channels
-                  </div>
-                </div>
-
-                {/* Metric 2 */}
-                <div className="border-l-2 border-black/[0.12] pl-4">
-                  <div className="font-mono text-[0.66rem] font-bold text-[#828E9E] uppercase tracking-widest mb-0.5">
-                    TESTING PROTOCOL
-                  </div>
-                  <div className="font-heading font-bold text-[1.05rem] text-[#0E1117]">
-                    Pre-Dispatch
-                  </div>
-                  <div className="text-[0.76rem] text-[#64748B] mt-0.5">
-                    Live Benchmarked
-                  </div>
-                </div>
-
-                {/* Metric 3 */}
-                <div className="border-l-2 border-black/[0.12] pl-4">
-                  <div className="font-mono text-[0.66rem] font-bold text-[#828E9E] uppercase tracking-widest mb-0.5">
-                    LOCAL SUPPORT
-                  </div>
-                  <div className="font-heading font-bold text-[1.05rem] text-[#0E1117]">
-                    Showroom Desk
-                  </div>
-                  <div className="text-[0.76rem] text-[#64748B] mt-0.5">
-                    Same-Day Assistance
-                  </div>
+                {/* Bottom Action CTA Button */}
+                <div className="pt-2.5 border-t border-black/[0.05]">
+                  <a
+                    href={channel.directUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-3 rounded-xl font-heading font-bold text-[0.82rem] flex items-center justify-center gap-2 transition-all duration-200 shadow-2xs hover:shadow-sm cursor-pointer group/btn"
+                    style={{
+                      backgroundColor: isHovered ? channel.accentColor : '#F8FAFC',
+                      color: isHovered ? '#FFFFFF' : '#1E293B',
+                      border: isHovered ? `1px solid ${channel.accentColor}` : '1px solid rgba(0,0,0,0.08)',
+                    }}
+                  >
+                    <span>{channel.buttonText}</span>
+                    <ArrowUpRight
+                      size={14}
+                      className="transition-transform duration-200 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
+                    />
+                  </a>
                 </div>
 
               </div>
+            );
+          })}
+        </div>
 
-            </div>
-
-            {/* RIGHT: Supporting 3D Hardware Object (Extending Subtly Behind with Studio Lighting) (5 Columns on LG) */}
-            <div className="lg:col-span-5 relative flex items-center justify-center min-h-[280px] sm:min-h-[340px]">
-              
-              {/* Studio Backdrop Disc */}
-              <div className="absolute w-[280px] sm:w-[340px] h-[280px] sm:h-[340px] rounded-full bg-white border border-[#F15A24]/10 shadow-[0_8px_30px_rgba(15,23,42,0.03)] pointer-events-none" />
-
-              {/* 3D Hardware Display with Studio Lighting */}
-              <div
-                ref={hardwareRef}
-                className="relative z-10 w-full max-w-[360px] transition-transform duration-300 ease-out will-change-transform transform-gpu"
-              >
-                <img
-                  src="/assets/pro_monitor.png"
-                  alt="UltraVision 4K Studio Display Hardware Architecture"
-                  className="w-full h-auto object-contain select-none drop-shadow-[0_26px_42px_rgba(15,23,42,0.14)]"
-                  loading="lazy"
-                />
-              </div>
-
-              {/* Floating Specification Capsule */}
-              <div className="absolute bottom-2 sm:bottom-4 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full border border-black/10 shadow-xs flex items-center gap-2 z-20">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24] animate-ping" />
-                <span className="font-mono text-[0.66rem] font-semibold text-[#0E1117]">
-                  OEM Manufacturer Backing
-                </span>
-              </div>
-            </div>
-
+        {/* 4. Bottom Quick Reassurance Bar */}
+        <div className="mt-6 sm:mt-8 pt-4 border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[0.78rem] text-slate-500">
+          <div className="flex items-center gap-2">
+            <ShieldCheck size={14} className="text-emerald-500" />
+            <span>Official verified handles for Global Computers, Main Road, Powerpet, Eluru</span>
           </div>
 
-          {/* 4. Bottom Subtle Link Action */}
-          <div className="mt-10 pt-6 border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div className="text-[0.84rem] text-[#64748B] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
-              <span>Public reviews verified via Google Business Profile &amp; direct client feedback</span>
-            </div>
-
-            <a
-              href="https://maps.google.com/?q=Global+Computers+Eluru"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 font-mono text-[0.78rem] font-bold text-[#F15A24] hover:text-[#C03C0D] transition-colors duration-200 group cursor-pointer"
-            >
-              <span>Read Customer Reviews on Google</span>
-              <ArrowUpRight
-                size={14}
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </a>
+          <div className="flex items-center gap-4 font-mono text-[0.70rem] text-[#828E9E]">
+            <span className="flex items-center gap-1">
+              <CheckCircle2 size={12} className="text-[#F15A24]" />
+              INSTANT RESPONSE
+            </span>
+            <span>·</span>
+            <span>UPDATED LIVE</span>
           </div>
-
         </div>
 
       </div>
+
+      {/* Global CSS for Scanner Animation */}
+      <style>{`
+        @keyframes qrScan {
+          0% { top: 8%; }
+          100% { top: 92%; }
+        }
+      `}</style>
     </section>
   );
 };

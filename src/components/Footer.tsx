@@ -66,7 +66,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
                 { label: 'Inside Technology', href: '#technology-showcase' },
                 { label: "What's New in Tech", href: '#updates' },
                 { label: 'Customer Experiences', href: '#reviews' },
-                { label: 'Verified Ratings', href: '#trust-ratings' },
+                { label: 'Social Media & QRs', href: '#social-media' },
                 { label: 'Eluru Showroom', href: '#location' },
               ].map((link) => (
                 <li key={link.label}>
