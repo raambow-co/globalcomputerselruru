@@ -68,14 +68,14 @@ export const App: React.FC = () => {
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'FAQ Direct Inquiry')}
         />
 
-        {/* Primary Consultation & Product Availability Enquiry Section */}
-        <EnquirySection
-          initialProduct={selectedProduct}
-        />
-
         {/* Physical Showroom Map & Directions Section */}
         <LocationSection
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Showroom Visit Inquiry')}
+        />
+
+        {/* Primary Consultation & Product Availability Enquiry Section (Just Above Footer) */}
+        <EnquirySection
+          initialProduct={selectedProduct}
         />
       </main>
 
