@@ -92,7 +92,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
   return (
     <section
       id="enquiry"
-      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-6 sm:py-10 md:py-14 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Studio Ambient Lighting & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -169,12 +169,12 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
             </h2>
 
             {/* Supporting Description Text */}
-            <p className="text-[0.98rem] sm:text-[1.04rem] text-[#4A5364] leading-relaxed mb-6 font-normal">
+            <p className="hidden sm:block text-[0.98rem] sm:text-[1.04rem] text-[#4A5364] leading-relaxed mb-6 font-normal">
               Looking for a specific product, computer hardware or a technology solution? Send us your requirement and our team will get back to you.
             </p>
 
             {/* Reassurance Points */}
-            <div className="space-y-2.5 pt-4 border-t border-black/[0.06]">
+            <div className="hidden sm:block space-y-2.5 pt-4 border-t border-black/[0.06]">
               <div className="flex items-center gap-2.5 text-[0.84rem] text-[#0E1117] font-medium">
                 <CheckCircle2 size={15} className="text-[#F15A24] flex-shrink-0" />
                 <span>Instant response from our Eluru showroom desk</span>

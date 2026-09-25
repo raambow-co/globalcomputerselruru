@@ -167,7 +167,7 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
   return (
     <section
       id="faq"
-      className="relative bg-white text-[#0E1117] py-10 sm:py-14 min-h-[calc(100vh-80px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-6 sm:py-10 md:py-14 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. White Studio Ambient Lighting & Technical Coordinate Geometry */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -210,29 +210,29 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
         </svg>
 
         {/* Technical Corner Markers */}
-        <div className="absolute top-8 left-8 sm:left-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
+        <div className="absolute top-6 left-6 sm:left-14 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
           + <span className="text-[#64748B]">SEC.FAQ_MATRIX</span>
         </div>
-        <div className="absolute top-8 right-8 sm:right-14 font-mono text-[0.66rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">10_KEY_ANSWERS</span>
+        <div className="absolute top-6 right-6 sm:right-14 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
+          + <span className="text-[#64748B]">KEY_ANSWERS</span>
         </div>
       </div>
 
-      <div className="relative z-10 max-w-[1240px] mx-auto px-5 sm:px-8">
+      <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-8">
         
         {/* 2. CENTERED REFINED HEADER */}
-        <div className="mb-10 sm:mb-12 text-center flex flex-col items-center">
+        <div className="mb-6 sm:mb-10 text-center flex flex-col items-center">
           
           {/* Pill Badge with Orange Highlight Tag */}
-          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-3.5 w-fit">
-            <span className="w-3 h-[2.5px] bg-[#F15A24] rounded-full" />
-            <span className="bg-[#F15A24] text-white font-mono text-[0.64rem] font-black tracking-[0.16em] px-2 py-0.5 rounded-sm uppercase">
+          <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-2.5 w-fit">
+            <span className="w-2.5 h-[2.5px] bg-[#F15A24] rounded-full" />
+            <span className="bg-[#F15A24] text-white font-mono text-[0.62rem] font-black tracking-[0.16em] px-2 py-0.5 rounded-sm uppercase">
               NEED TO KNOW?
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-black text-[clamp(1.7rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight select-none">
+          <h2 className="font-heading font-black text-[clamp(1.6rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight select-none">
             Questions?{' '}
             <span className="text-[#F15A24] relative inline-block pb-0.5">
               We’ve Got Answers.
@@ -242,15 +242,15 @@ export const FAQSection: React.FC<FAQSectionProps> = () => {
 
         </div>
 
-        {/* 3. Sleek 2-Column (5 on Left + 5 on Right) FAQ Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* Column 1 (01 - 05) */}
+        {/* 3. Sleek 2-Column FAQ Grid (5 FAQs on Mobile, 10 on Desktop) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-12 items-start">
+          {/* Column 1 (01 - 05) - Always visible on mobile & desktop */}
           <div>
             {renderFaqColumn(faqsLeft)}
           </div>
 
-          {/* Column 2 (06 - 10) */}
-          <div>
+          {/* Column 2 (06 - 10) - Hidden on mobile, visible on desktop */}
+          <div className="hidden md:block">
             {renderFaqColumn(faqsRight)}
           </div>
         </div>

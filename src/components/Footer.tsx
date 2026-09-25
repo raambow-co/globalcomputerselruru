@@ -11,134 +11,83 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
       id="footer"
       className="relative bg-[#080B10] text-white overflow-hidden border-t border-white/15 selection:bg-[#F15A24] selection:text-white"
     >
-      {/* Main Footer Body: Well Dispersed 4-Column Grid */}
-      <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-12 py-16 sm:py-20 bg-[#080B10]">
+      {/* Main Footer Body: Clean Minimal 2-Column Composition */}
+      <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-12 py-12 sm:py-16 bg-[#080B10]">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Brand & Showroom Summary Column (4 Columns on LG) */}
-          <div className="lg:col-span-4 text-left">
+          {/* Brand & Showroom Summary Column (7 Columns on LG) */}
+          <div className="lg:col-span-7 text-left">
             
             {/* Global Computers Logo Wordmark */}
-            <a href="#" className="inline-flex items-center gap-3 group mb-5 bg-white/95 px-3.5 py-2 rounded-xl shadow-md transition-transform duration-200 hover:scale-105">
+            <a href="#" className="inline-flex items-center gap-3 group mb-4 bg-white/95 px-3.5 py-2 rounded-xl shadow-md transition-transform duration-200 hover:scale-105">
               <img
                 src="/assets/gce_logo.png"
                 alt="Global Computer Services"
-                className="h-9 sm:h-10 w-auto object-contain select-none"
+                className="h-8 sm:h-9 w-auto object-contain select-none"
               />
             </a>
 
             {/* Brand Statement */}
-            <div className="font-mono text-[0.78rem] font-bold text-[#FF7844] tracking-wider uppercase mb-3">
+            <div className="font-mono text-[0.76rem] font-bold text-[#FF7844] tracking-wider uppercase mb-2">
               Technology. Hardware. Solutions.
             </div>
 
-            <p className="text-[0.96rem] text-slate-200 leading-relaxed mb-6 max-w-sm font-normal">
+            <p className="text-[0.92rem] text-slate-300 leading-relaxed mb-6 max-w-lg font-normal">
               Delivering verified genuine computer hardware, enterprise workstation setups, high-efficiency print fleets, and dependable technology support in Eluru.
             </p>
 
             {/* Quick Showroom Metadata */}
-            <div className="space-y-3 text-[0.88rem] text-slate-200">
-              <div className="flex items-start gap-3">
-                <MapPin size={16} className="text-[#FF7844] flex-shrink-0 mt-0.5" />
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[0.84rem] text-slate-200 pt-4 border-t border-white/10">
+              <div className="flex items-start gap-2.5">
+                <MapPin size={15} className="text-[#FF7844] flex-shrink-0 mt-0.5" />
                 <span className="text-slate-200 font-medium leading-snug">Main Road, Powerpet, Eluru — 534002</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Phone size={16} className="text-[#FF7844] flex-shrink-0" />
+              <div className="flex items-center gap-2.5">
+                <Phone size={15} className="text-[#FF7844] flex-shrink-0" />
                 <span className="text-white font-bold tracking-wide">+91 98481 23456</span>
               </div>
-              <div className="flex items-center gap-3">
-                <Clock size={16} className="text-[#FF7844] flex-shrink-0" />
+              <div className="flex items-center gap-2.5">
+                <Clock size={15} className="text-[#FF7844] flex-shrink-0" />
                 <span className="text-slate-300 font-medium">Mon – Sat: 9:30 AM – 8:30 PM</span>
               </div>
             </div>
 
           </div>
 
-          {/* Column 1: Explore (2 Columns on LG) */}
-          <div className="lg:col-span-2 text-left sm:pl-2">
-            <h4 className="font-mono text-[0.78rem] font-bold text-white tracking-[0.18em] uppercase mb-5 pb-2 border-b border-white/10">
-              EXPLORE
+          {/* Quick Navigation & Direct Action Column (5 Columns on LG) */}
+          <div className="lg:col-span-5 text-left flex flex-col justify-between">
+            <h4 className="font-mono text-[0.74rem] font-bold text-white tracking-[0.18em] uppercase mb-4 pb-2 border-b border-white/10">
+              QUICK NAVIGATION
             </h4>
-            <ul className="space-y-3.5 text-[0.94rem]">
+            
+            <div className="grid grid-cols-2 gap-2.5 mb-6 text-[0.88rem]">
               {[
                 { label: 'Home', href: '#' },
-                { label: 'Inside Technology', href: '#technology-showcase' },
-                { label: 'Founder & Leadership', href: '#leadership' },
+                { label: 'Multi-Brand Services', href: '#technology-showcase' },
+                { label: 'Founder & Team', href: '#leadership' },
                 { label: 'Social Media & QRs', href: '#social-media' },
-                { label: 'Eluru Showroom', href: '#location' },
+                { label: 'Product Enquiry', href: '#enquiry' },
+                { label: 'Eluru Showroom Map', href: '#location' },
               ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-150 inline-flex items-center gap-2 group font-medium"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-transparent group-hover:bg-[#F15A24] transition-colors" />
-                    <span>{link.label}</span>
-                  </a>
-                </li>
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-slate-300 hover:text-[#FF7844] transition-colors py-1 inline-flex items-center gap-2 group font-medium"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-transparent group-hover:bg-[#F15A24] transition-colors" />
+                  <span>{link.label}</span>
+                </a>
               ))}
-            </ul>
-          </div>
+            </div>
 
-          {/* Column 2: Technology (3 Columns on LG) */}
-          <div className="lg:col-span-3 text-left">
-            <h4 className="font-mono text-[0.78rem] font-bold text-white tracking-[0.18em] uppercase mb-5 pb-2 border-b border-white/10">
-              TECHNOLOGY
-            </h4>
-            <ul className="space-y-3.5 text-[0.94rem]">
-              {[
-                { label: 'Epson EcoTank Fleet Printers', href: '#technology-showcase' },
-                { label: 'UltraVision 4K Studio Displays', href: '#technology-showcase' },
-                { label: 'AeroCNC Precision Keyboards', href: '#technology-showcase' },
-                { label: 'Z790 Workstation Motherboards', href: '#technology-showcase' },
-                { label: 'Apex RTX Studio Graphics / GPUs', href: '#technology-showcase' },
-                { label: 'Vanguard High-Speed DDR5 Memory', href: '#technology-showcase' },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-150 inline-flex items-center gap-2 group font-medium"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-transparent group-hover:bg-[#F15A24] transition-colors" />
-                    <span>{link.label}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Column 3: Connect & Inquiry (3 Columns on LG) */}
-          <div className="lg:col-span-3 text-left">
-            <h4 className="font-mono text-[0.78rem] font-bold text-white tracking-[0.18em] uppercase mb-5 pb-2 border-b border-white/10">
-              CONNECT
-            </h4>
-            <ul className="space-y-3.5 text-[0.94rem] mb-6">
-              {[
-                { label: 'Check Product Availability', href: '#enquiry' },
-                { label: 'Frequently Asked Questions', href: '#faq' },
-                { label: 'Get Physical Directions', href: '#location' },
-                { label: 'Hardware Consultation Desk', href: '#enquiry' },
-              ].map((link) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-slate-300 hover:text-white hover:translate-x-1 transition-all duration-150 inline-flex items-center gap-2 group font-medium"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-transparent group-hover:bg-[#F15A24] transition-colors" />
-                    <span>{link.label}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Quick Action Button */}
+            {/* Direct Action Button */}
             <button
               type="button"
               onClick={() => onOpenEnquiry('Footer Quick Connect')}
               className="w-full px-4 py-3 bg-white/10 hover:bg-[#F15A24] text-white border border-white/20 hover:border-[#F15A24] rounded-xl font-mono text-[0.78rem] font-bold flex items-center justify-between transition-all duration-200 shadow-md cursor-pointer group"
             >
-              <span className="tracking-wider">DIRECT ENQUIRY DESK</span>
+              <span className="tracking-wider">DIRECT ENQUIRY &amp; CONSULTATION DESK</span>
               <ArrowUpRight size={16} className="text-slate-300 group-hover:text-white transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
           </div>
