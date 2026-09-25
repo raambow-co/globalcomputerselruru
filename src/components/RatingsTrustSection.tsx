@@ -262,12 +262,12 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                     </span>
                   </div>
 
-                  {/* QR Code Container with High-Tech Laser Scan Animation */}
-                  <div className="relative my-2.5 p-3 bg-[#FAFBFD] rounded-xl border border-black/[0.06] flex items-center justify-center overflow-hidden group/qr">
+                  {/* QR Code Direct Display without excess white space/frames */}
+                  <div className="relative my-3 flex items-center justify-center overflow-hidden group/qr">
                     {/* Scanner Line Effect on Hover */}
                     {isHovered && (
                       <div
-                        className="absolute left-0 right-0 h-[2px] z-20 pointer-events-none shadow-[0_0_8px_rgba(241,90,36,0.8)] animate-pulse"
+                        className="absolute left-1/2 -translate-x-1/2 w-full max-w-[200px] h-[2px] z-20 pointer-events-none shadow-[0_0_8px_rgba(241,90,36,0.8)] animate-pulse"
                         style={{
                           backgroundColor: channel.accentColor,
                           animation: 'qrScan 2s linear infinite alternate',
@@ -275,18 +275,18 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
                       />
                     )}
 
-                    {/* Clean Cropped QR Code Image */}
-                    <div className="relative z-10 w-full max-w-[160px] aspect-square flex items-center justify-center bg-white rounded-lg p-1.5 shadow-2xs">
+                    {/* Clean QR Code Image filling the space cleanly */}
+                    <div className="relative z-10 w-full max-w-[200px] flex items-center justify-center">
                       <img
                         src={channel.qrImage}
                         alt={`${channel.name} QR Code - Global Computers Eluru`}
-                        className="w-full h-full object-contain select-none transition-transform duration-300 group-hover/qr:scale-105"
+                        className="w-full h-auto object-contain select-none transition-transform duration-300 group-hover/qr:scale-103 rounded-lg"
                         loading="lazy"
                       />
                     </div>
 
                     {/* Micro Scan Helper Pill */}
-                    <div className="absolute bottom-1.5 z-20 bg-black/75 backdrop-blur-md px-2 py-0.5 rounded-full text-white font-mono text-[0.58rem] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                    <div className="absolute bottom-2 z-20 bg-black/80 backdrop-blur-md px-2.5 py-0.5 rounded-full text-white font-mono text-[0.58rem] flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md">
                       <QrCode size={10} className="text-[#F15A24]" />
                       <span>Scan Code</span>
                     </div>
