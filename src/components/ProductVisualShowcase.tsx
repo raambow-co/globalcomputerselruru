@@ -467,7 +467,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
           {/* LEFT/CENTER: 3D Spatial Floating in Air Canvas (8 Columns on LG) */}
-          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] relative min-h-[460px] sm:min-h-[500px] md:min-h-[520px] p-4 sm:p-5 flex flex-col justify-between select-none">
+          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] relative min-h-0 md:min-h-[520px] p-4 sm:p-5 flex flex-col justify-between select-none">
             
             {/* Ambient Radial Ring Lighting inside the Arena */}
             <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.04)_0%,rgba(250,251,253,0)_100%)] pointer-events-none rounded-3xl" />
@@ -490,8 +490,8 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
               </div>
             </div>
 
-            {/* The Floating Logos Arena Surface with Central Anchor */}
-            <div className="relative w-full h-[400px] sm:h-[440px] md:h-[460px]">
+            {/* Desktop View: The Floating Logos Arena Surface with Central Anchor */}
+            <div className="hidden md:block relative w-full h-[400px] sm:h-[440px] md:h-[460px]">
               
               {/* CENTRAL ANCHOR BASE / ORBITAL CORE */}
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10 flex flex-col items-center justify-center">
@@ -509,7 +509,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 </div>
               </div>
 
-              {visibleBrands.map((brand, idx) => {
+              {visibleBrands.map((brand) => {
                 const isHovered = (hoveredBrandId || selectedBrandId) === brand.id;
                 
                 // Determine layout coordinates
@@ -607,6 +607,60 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                   </div>
                 );
               })}
+            </div>
+
+            {/* Mobile View: Clean, High-Precision Touch Matrix Grid */}
+            <div className="block md:hidden w-full py-1">
+              <div className="grid grid-cols-3 gap-2.5 max-h-[380px] overflow-y-auto pr-1 no-scrollbar">
+                {visibleBrands.map((brand) => {
+                  const isSelected = (hoveredBrandId || selectedBrandId) === brand.id;
+
+                  return (
+                    <button
+                      key={brand.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedBrandId(brand.id);
+                        setHoveredBrandId(brand.id);
+                      }}
+                      className={`relative p-2.5 rounded-xl border flex flex-col items-center justify-center gap-1.5 transition-all duration-200 active:scale-95 text-center cursor-pointer ${
+                        isSelected
+                          ? 'bg-[#FFF6F2] border-[#F15A24] shadow-[0_4px_16px_rgba(241,90,36,0.18)] ring-2 ring-[#F15A24]/30'
+                          : 'bg-white border-black/[0.08] shadow-2xs hover:border-black/20'
+                      }`}
+                    >
+                      {/* Verified selection badge */}
+                      {isSelected && (
+                        <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#F15A24] text-white rounded-full flex items-center justify-center text-[0.55rem] font-bold shadow-xs">
+                          ✓
+                        </div>
+                      )}
+
+                      {/* Logo */}
+                      <div className="w-12 h-7 flex items-center justify-center overflow-hidden">
+                        <img
+                          src={brand.logo}
+                          alt={brand.name}
+                          className="max-h-full max-w-full object-contain"
+                          loading="lazy"
+                        />
+                      </div>
+
+                      {/* Name */}
+                      <span
+                        className={`font-heading text-[0.74rem] font-bold leading-none truncate max-w-full ${
+                          isSelected ? 'text-[#F15A24]' : 'text-[#0E1117]'
+                        }`}
+                      >
+                        {brand.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              <div className="text-center mt-2.5 font-mono text-[0.65rem] text-slate-400">
+                Tap any brand to view live service specs below ↓
+              </div>
             </div>
 
             {/* Floating Arena Footer Status Bar */}
