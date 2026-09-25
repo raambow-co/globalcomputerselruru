@@ -3,7 +3,6 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { OffersDealsSection } from './components/OffersDealsSection';
 import { ProductVisualShowcase } from './components/ProductVisualShowcase';
-import { NewsSection } from './components/NewsSection';
 import { RatingsTrustSection } from './components/RatingsTrustSection';
 import { LeadershipSection } from './components/LeadershipSection';
 import { FAQSection } from './components/FAQSection';
@@ -46,11 +45,6 @@ export const App: React.FC = () => {
         {/* 2. 3D Product Visual Showcase: Inside The Technology (Studio Showcase) */}
         <ProductVisualShowcase
           onOpenAvailability={(name) => handleOpenEnquiry(name)}
-        />
-        
-        {/* Editorial Technology Newsroom & Latest Updates */}
-        <NewsSection
-          onOpenEnquiry={(name) => handleOpenEnquiry(name)}
         />
 
         {/* Connect with Us on Social Media (4 QR Codes) */}
