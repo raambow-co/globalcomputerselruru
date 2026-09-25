@@ -152,17 +152,11 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
   return (
     <section
       id="deals"
-      className="relative bg-[#FAFBFD] text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.06] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-[#FAFBFD] text-[#0E1117] py-6 sm:py-10 md:py-12 overflow-hidden border-t border-black/[0.06] selection:bg-[#F15A24] selection:text-white"
     >
-      {/* 1. Ambient Background Glow & Markers */}
+      {/* 1. Ambient Background Glow */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(250,251,253,0)_100%)]" />
-        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">OFFERS.SLIDER_FEED</span>
-        </div>
-        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ELURU.SHOWROOM</span>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-[1140px] mx-auto px-4 sm:px-6 w-full">

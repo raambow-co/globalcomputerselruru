@@ -15,7 +15,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
   return (
     <section
       id="location"
-      className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      className="relative bg-white text-[#0E1117] py-6 sm:py-10 md:py-14 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
       {/* 1. Architectural White Studio Linework & Subtle Coordinate System */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
@@ -56,14 +56,6 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
             strokeDasharray="8 8"
           />
         </svg>
-
-        {/* Technical Corner Coordinate Markers */}
-        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">LOC.ELURU_AP</span>
-        </div>
-        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">GEO.16.7103N_81.1043E</span>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 w-full">

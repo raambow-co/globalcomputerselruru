@@ -108,14 +108,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
             strokeDasharray="8 8"
           />
         </svg>
-
-        {/* Technical Corner Coordinate Markers */}
-        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SEC.LEADERSHIP</span>
-        </div>
-        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">FOUNDER.MANAGEMENT</span>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-[1280px] mx-auto px-4 sm:px-6 w-full">
@@ -141,7 +133,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
           </h2>
 
           {/* Subtitle */}
-          <p className="text-[0.88rem] sm:text-[0.96rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
+          <p className="hidden sm:block text-[0.88rem] sm:text-[0.96rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
             Decades of technical mastery, transparent pricing, and unwavering dedication to delivering genuine hardware solutions in Eluru.
           </p>
         </div>

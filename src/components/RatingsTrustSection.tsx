@@ -166,14 +166,6 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
             strokeDasharray="8 8"
           />
         </svg>
-
-        {/* Technical Corner Markers */}
-        <div className="absolute top-4 left-4 sm:left-12 font-mono text-[0.60rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SEC.SOCIAL_HUB</span>
-        </div>
-        <div className="absolute top-4 right-4 sm:right-12 font-mono text-[0.60rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">4_DIRECT_CHANNELS</span>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-[1320px] mx-auto px-4 sm:px-6 w-full">

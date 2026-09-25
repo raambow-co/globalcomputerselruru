@@ -70,20 +70,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           />
           <circle cx="50%" cy="47%" r="380" fill="url(#ringGlow)" />
         </svg>
-
-        {/* Technical Crosshairs */}
-        <div className="absolute top-20 left-8 font-mono text-[0.62rem] tracking-widest text-[#A0ABBB] select-none">
-          + <span className="text-[#828E9E]">SYS.01</span>
-        </div>
-        <div className="absolute top-20 right-8 font-mono text-[0.62rem] tracking-widest text-[#A0ABBB] select-none">
-          + <span className="text-[#828E9E]">LOC.ELURU</span>
-        </div>
-        <div className="absolute bottom-5 left-8 font-mono text-[0.62rem] tracking-widest text-[#A0ABBB] select-none">
-          + <span className="text-[#828E9E]">GC.ELURU</span>
-        </div>
-        <div className="absolute bottom-5 right-8 font-mono text-[0.62rem] tracking-widest text-[#A0ABBB] select-none">
-          + <span className="text-[#828E9E]">ELURU.AP</span>
-        </div>
       </div>
 
       {/* 2. 3D Spatial Product Canvas (Floating Transparent Hardware) */}

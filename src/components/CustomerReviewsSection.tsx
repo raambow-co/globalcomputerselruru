@@ -108,14 +108,6 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
             strokeDasharray="8 8"
           />
         </svg>
-
-        {/* Technical Corner Markers */}
-        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SEC.VIDEO_EXPERIENCES</span>
-        </div>
-        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">AUTHENTIC_STORIES</span>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 w-full">

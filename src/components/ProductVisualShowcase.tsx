@@ -382,20 +382,6 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
           <circle cx="50%" cy="50%" r="360" fill="none" stroke="rgba(241, 90, 36, 0.035)" strokeWidth="1.2" strokeDasharray="8 8" />
           <circle cx="50%" cy="50%" r="560" fill="none" stroke="rgba(15, 23, 42, 0.02)" strokeWidth="1" />
         </svg>
-
-        {/* Technical Coordinate Corner Markers */}
-        <div className="absolute top-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">SERVICES.SPATIAL_MATRIX</span>
-        </div>
-        <div className="absolute top-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">OEM.VERIFIED_CHANNELS</span>
-        </div>
-        <div className="absolute bottom-6 left-6 sm:left-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">MULTI_BRAND.SUPPORT</span>
-        </div>
-        <div className="absolute bottom-6 right-6 sm:right-12 font-mono text-[0.62rem] tracking-widest text-[#9AA5B5]">
-          + <span className="text-[#64748B]">ELURU.CENTRAL_DESK</span>
-        </div>
       </div>
 
       <div className="relative z-10 max-w-[1360px] mx-auto px-4 sm:px-6 w-full">
