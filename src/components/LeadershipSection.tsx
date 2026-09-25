@@ -211,7 +211,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                   “Empowering Eluru with 100% genuine hardware, professional workstation engineering, and transparent local support has been our single guiding mission from day one.”
                 </blockquote>
 
-                <p className="text-[0.86rem] sm:text-[0.92rem] text-[#64748B] leading-relaxed mb-6 font-normal">
+                <p className="hidden sm:block text-[0.86rem] sm:text-[0.92rem] text-[#64748B] leading-relaxed mb-6 font-normal">
                   Under the leadership of Raju Pabolu, Global Computers has grown into the premier technology showroom in West Godavari district — providing trusted IT infrastructure, authorized laptop servicing, and turnkey enterprise computing for educational institutions, corporate offices, and tech enthusiasts.
                 </p>
               </div>
