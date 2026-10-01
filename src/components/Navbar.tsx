@@ -29,7 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
         {/* Brand Logo Wordmark */}
         <a href="#" className="flex items-center gap-2 group py-1">
           <img
-            src="/assets/gce_logo.png"
+            src="/assets/gce_logo.webp"
             alt="Global Computer Services"
             className="h-10 sm:h-11 w-auto max-w-[190px] object-contain transition-transform duration-200 group-hover:scale-105 select-none"
           />
@@ -40,9 +40,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
           {[
             { label: 'Home', href: '#' },
             { label: 'Offers & Deals', href: '#deals', highlight: true, badge: 'OFFERS' },
-            { label: 'Inside Technology', href: '#technology-showcase' },
+            { label: 'Client Reviews', href: '#reviews' },
             { label: 'Social & QRs', href: '#social-media' },
-            { label: 'Leadership', href: '#leadership' },
+            { label: 'Founder & Team', href: '#leadership' },
+            { label: 'Enquiry', href: '#enquiry' },
             { label: 'FAQ', href: '#faq' },
             { label: 'Eluru Showroom', href: '#location' },
           ].map((link, idx) => (
@@ -66,10 +67,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
           <button
             type="button"
             onClick={onOpenEnquiry}
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#F15A24]/30 text-[#F15A24] font-semibold text-[0.8rem] transition-all duration-200 hover:bg-[#F15A24] hover:text-white hover:shadow-[0_4px_16px_rgba(241, 90, 36,0.25)] hover:-translate-y-0.5 cursor-pointer"
+            className="hidden sm:inline-flex items-center gap-2 px-4.5 py-1.5 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-[#0E1117] font-bold text-[0.80rem] tracking-tight transition-all duration-300 shadow-[0_4px_16px_rgba(245,158,11,0.38)] hover:shadow-[0_6px_22px_rgba(245,158,11,0.55)] hover:-translate-y-0.5 active:translate-y-0 cursor-pointer group"
           >
-            <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full animate-ping group-hover:bg-white" />
+            <span className="w-1.5 h-1.5 bg-[#0E1117] rounded-full animate-ping" />
             <span>Enquire Now</span>
+            <ArrowRight size={13} className="text-[#0E1117] group-hover:translate-x-0.5 transition-transform" />
           </button>
 
           {/* Mobile Menu Toggle */}
@@ -91,9 +93,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
             {[
               { label: 'Home', href: '#' },
               { label: 'Special Offers & Deals', href: '#deals' },
-              { label: 'Inside Technology', href: '#technology-showcase' },
+              { label: 'Client Video Reviews', href: '#reviews' },
               { label: 'Connect on Social Media', href: '#social-media' },
               { label: 'Founder & Leadership', href: '#leadership' },
+              { label: 'Consultation & Enquiry', href: '#enquiry' },
               { label: 'Frequently Asked Questions', href: '#faq' },
               { label: 'Eluru Showroom & Location', href: '#location' },
             ].map((item, idx) => (
@@ -115,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
                   setMobileMenuOpen(false);
                   onOpenEnquiry();
                 }}
-                className="w-full py-2.5 bg-[#F15A24] text-white rounded-xl font-semibold flex items-center justify-center gap-2 shadow-orange-cta text-[0.92rem]"
+                className="w-full py-2.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-[#0E1117] rounded-xl font-bold flex items-center justify-center gap-2 shadow-yellow-cta text-[0.92rem] cursor-pointer"
               >
                 <span>Enquire Now</span>
                 <ArrowRight size={16} />

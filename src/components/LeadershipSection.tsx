@@ -145,11 +145,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
               <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
             </span>
           </h2>
-
-          {/* Subtitle */}
-          <p className="hidden sm:block text-[0.88rem] sm:text-[0.96rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
-            Decades of technical mastery, transparent pricing, and unwavering dedication to delivering genuine hardware solutions in Eluru.
-          </p>
         </div>
 
         {/* 3. Founder & Proprietor Hero Card */}
@@ -176,7 +171,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                 <div className="relative p-1.5 bg-white rounded-full shadow-lg">
                   <div className="w-36 h-36 sm:w-44 sm:h-44 md:w-48 md:h-48 rounded-full overflow-hidden border-2 border-[#F15A24]/30 shadow-inner bg-slate-100 flex items-center justify-center">
                     <img
-                      src="/assets/gce_founder.jpg"
+                      src="/assets/gce_founder.webp"
                       alt="Raju Pabolu - Founder & Proprietor of Global Computers Eluru"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                       loading="eager"
@@ -206,24 +201,13 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
             <div className="lg:col-span-8 flex flex-col justify-between text-left">
               
               <div>
-                {/* Vision Quote Header */}
-                <div className="inline-flex items-center gap-2 text-slate-400 font-mono text-[0.68rem] tracking-wider uppercase mb-3">
-                  <Award size={14} className="text-[#F15A24]" />
-                  <span>FOUNDER'S VISION &amp; LOCAL COMMITMENT</span>
-                </div>
-
-                {/* Inspiring Statement */}
-                <blockquote className="font-heading font-semibold text-[1.1rem] sm:text-[1.25rem] text-[#0E1117] leading-snug tracking-tight mb-4">
-                  “Empowering Eluru with 100% genuine hardware, professional workstation engineering, and transparent local support has been our single guiding mission from day one.”
-                </blockquote>
-
-                <p className="hidden sm:block text-[0.86rem] sm:text-[0.92rem] text-[#64748B] leading-relaxed mb-6 font-normal">
-                  Under the leadership of Raju Pabolu, Global Computers has grown into the premier technology showroom in West Godavari district — providing trusted IT infrastructure, authorized laptop servicing, and turnkey enterprise computing for educational institutions, corporate offices, and tech enthusiasts.
+                <p className="hidden sm:block text-[0.88rem] sm:text-[0.94rem] text-[#4A5364] leading-relaxed mb-6 font-normal">
+                  Under the leadership of Raju Pabolu, Global Computers has grown into the premier technology showroom in West Godavari district — providing trusted IT infrastructure, expert multi-brand laptop servicing, and turnkey enterprise computing for educational institutions, corporate offices, and tech enthusiasts.
                 </p>
               </div>
 
               {/* Three Trust Pillars */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-5 border-t border-black/[0.06]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 sm:pt-5 border-t-0 sm:border-t border-black/[0.06]">
                 <div className="flex items-start gap-2 text-[0.82rem] text-[#0E1117] font-medium">
                   <CheckCircle2 size={16} className="text-[#F15A24] flex-shrink-0 mt-0.5" />
                   <span>100% Genuine Box-Pack Hardware Only</span>
@@ -297,11 +281,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                         </span>
                       </div>
                     </div>
-
-                    {/* Role Description */}
-                    <p className="text-[0.78rem] text-[#64748B] leading-relaxed line-clamp-2">
-                      {member.role}
-                    </p>
                   </div>
 
                   {/* Frame Status Badge */}

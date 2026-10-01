@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
             {/* Global Computers Logo Wordmark */}
             <a href="#" className="inline-flex items-center gap-3 group mb-4 bg-white/95 px-3.5 py-2 rounded-xl shadow-md transition-transform duration-200 hover:scale-105">
               <img
-                src="/assets/gce_logo.png"
+                src="/assets/gce_logo.webp"
                 alt="Global Computer Services"
                 className="h-8 sm:h-9 w-auto object-contain select-none"
               />
@@ -37,8 +37,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
               Delivering verified genuine computer hardware, enterprise workstation setups, high-efficiency print fleets, and dependable technology support in Eluru.
             </p>
 
-            {/* Quick Showroom Metadata */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[0.84rem] text-slate-200 pt-4 border-t border-white/10">
+            {/* Quick Showroom Metadata (Hidden on Mobile for a clean minimal footer) */}
+            <div className="hidden sm:grid sm:grid-cols-3 gap-3 text-[0.84rem] text-slate-200 pt-4 border-t border-white/10">
               <div className="flex items-start gap-2.5">
                 <MapPin size={15} className="text-[#FF7844] flex-shrink-0 mt-0.5" />
                 <span className="text-slate-200 font-medium leading-snug">Main Road, Powerpet, Eluru — 534002</span>
@@ -64,10 +64,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
             <div className="grid grid-cols-2 gap-2.5 mb-6 text-[0.88rem]">
               {[
                 { label: 'Home', href: '#' },
-                { label: 'Multi-Brand Services', href: '#technology-showcase' },
-                { label: 'Founder & Team', href: '#leadership' },
+                { label: 'Offers & Deals', href: '#deals' },
+                { label: 'Client Video Reviews', href: '#reviews' },
                 { label: 'Social Media & QRs', href: '#social-media' },
+                { label: 'Founder & Team', href: '#leadership' },
                 { label: 'Product Enquiry', href: '#enquiry' },
+                { label: 'FAQ Desk', href: '#faq' },
                 { label: 'Eluru Showroom Map', href: '#location' },
               ].map((link) => (
                 <a
@@ -85,10 +87,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
             <button
               type="button"
               onClick={() => onOpenEnquiry('Footer Quick Connect')}
-              className="w-full px-4 py-3 bg-white/10 hover:bg-[#F15A24] text-white border border-white/20 hover:border-[#F15A24] rounded-xl font-mono text-[0.78rem] font-bold flex items-center justify-between transition-all duration-200 shadow-md cursor-pointer group"
+              className="w-full px-4 py-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-[#0E1117] rounded-xl font-mono text-[0.78rem] font-extrabold flex items-center justify-between transition-all duration-200 shadow-[0_4px_22px_rgba(245,158,11,0.35)] hover:shadow-[0_6px_28px_rgba(245,158,11,0.55)] cursor-pointer group"
             >
               <span className="tracking-wider">DIRECT ENQUIRY &amp; CONSULTATION DESK</span>
-              <ArrowUpRight size={16} className="text-slate-300 group-hover:text-white transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              <ArrowUpRight size={16} className="text-[#0E1117] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2.5]" />
             </button>
           </div>
 

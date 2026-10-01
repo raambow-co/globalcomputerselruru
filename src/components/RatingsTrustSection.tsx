@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ExternalLink, 
   Sparkles, 
   QrCode,
   ArrowUpRight,
   ShieldCheck,
-  CheckCircle2
+  CheckCircle2,
+  Heart,
+  Bell,
+  Navigation,
+  MessageSquare
 } from 'lucide-react';
 
 const InstagramIcon: React.FC<{ size?: number; className?: string }> = ({ size = 20, className = '' }) => (
@@ -57,14 +61,35 @@ interface SocialCard {
 export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
   onOpenEnquiry,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // Smooth mouse move parallax for 3D floating elements
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      setMousePos({ x, y });
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('mousemove', handleMouseMove);
+    }
+    return () => {
+      if (container) container.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   const socialChannels: SocialCard[] = [
     {
       id: 'instagram',
       name: 'Instagram',
       badge: 'OFFICIAL PROFILE',
-      qrImage: '/assets/qr/qr_instagram.png',
+      qrImage: '/assets/qr/qr_instagram.webp',
       directUrl: 'https://www.instagram.com/globalcomputerseluru',
       description: 'Daily hardware arrivals, custom workstation builds & customer stories in Eluru.',
       icon: InstagramIcon,
@@ -79,7 +104,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
       id: 'youtube',
       name: 'YouTube',
       badge: 'TECH REVIEWS & BUILDS',
-      qrImage: '/assets/qr/qr_youtube.png',
+      qrImage: '/assets/qr/qr_youtube.webp',
       directUrl: 'https://www.youtube.com/@globalcomputerseluru',
       description: 'Workstation benchmarks, component walkthroughs & hardware unboxing videos.',
       icon: YoutubeIcon,
@@ -94,7 +119,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
       id: 'google-maps',
       name: 'Google Maps',
       badge: 'SHOWROOM DIRECTIONS',
-      qrImage: '/assets/qr/qr_googlemaps.png',
+      qrImage: '/assets/qr/qr_googlemaps.webp',
       directUrl: 'https://maps.google.com/?q=Global+Computers+Eluru',
       description: 'Instant GPS showroom navigation, verified ratings & reviews on Main Road, Eluru.',
       icon: GoogleMapsIcon,
@@ -109,7 +134,7 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
       id: 'whatsapp',
       name: 'WhatsApp',
       badge: 'LIVE TECH DESK',
-      qrImage: '/assets/qr/qr_whatsapp.png',
+      qrImage: '/assets/qr/qr_whatsapp.webp',
       directUrl: 'https://wa.me/919848123456?text=Hi%20Global%20Computers,%20I%20would%20like%20to%20inquire%20about%20product%20availability%20and%20pricing',
       description: 'Chat directly with our senior technicians for live stock availability and instant quotes.',
       icon: WhatsAppIcon,
@@ -125,12 +150,13 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
   return (
     <section
       id="social-media"
-      className="relative bg-white text-[#0E1117] py-6 sm:py-10 md:py-12 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
+      ref={containerRef}
+      className="relative bg-white text-[#0E1117] py-8 sm:py-12 md:py-16 overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white perspective-1200"
     >
-      {/* 1. White Ambient Studio Geometry & Grid */}
+      {/* 1. Ambient Background & Technical Grids */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        {/* Soft Ambient Directional Lighting */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.025)_0%,rgba(255,255,255,0)_100%)]" />
+        {/* Soft Ambient Warm Glow */}
+        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(255,255,255,0)_100%)]" />
 
         {/* Minimal Grid SVG */}
         <svg
@@ -171,14 +197,123 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
         <div className="absolute top-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+            <circle cx="1" cy="1" r="2" fill="#E1306C" />
           </svg>
         </div>
         <div className="absolute top-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+            <circle cx="13" cy="1" r="2" fill="#25D366" />
           </svg>
+        </div>
+      </div>
+
+      {/* ======================================================== */}
+      {/* 2. CLASSIC FLOATING 3D SOCIAL MEDIA BRAND LOGOS (MID-AIR) */}
+      {/* ======================================================== */}
+
+      {/* A. 3D Floating Instagram Logo (Top Left Mid-Air Orbit) */}
+      <div 
+        className="hidden md:flex absolute top-8 sm:top-12 left-6 sm:left-10 lg:left-16 xl:left-24 z-20 pointer-events-none transition-transform duration-300 select-none animate-float-1"
+        style={{
+          transform: `translate3d(${mousePos.x * 32}px, ${mousePos.y * 32}px, 0) rotate(-6deg)`,
+        }}
+      >
+        <div className="relative group/logo">
+          {/* Ambient Glow */}
+          <div className="absolute -inset-2 bg-[#E1306C]/25 rounded-[1.6rem] blur-xl" />
+          
+          {/* 3D Icon Squircle */}
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-[1.35rem] sm:rounded-[1.5rem] bg-gradient-to-tr from-[#FFD600] via-[#FF0100] via-[#E1306C] to-[#833AB4] p-[2px] shadow-[0_22px_45px_-8px_rgba(225,48,108,0.5),0_8px_20px_-4px_rgba(0,0,0,0.25)] ring-1 ring-white/30 transition-transform duration-300 hover:scale-110">
+            {/* Top Glass Bevel Reflection */}
+            <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-[1.3rem] sm:rounded-t-[1.45rem] bg-gradient-to-b from-white/35 to-transparent pointer-events-none" />
+            
+            {/* Centered Clean Instagram Icon */}
+            <div className="w-full h-full flex items-center justify-center text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)]">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-9 sm:h-9">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* B. 3D Floating YouTube Logo (Top Right Mid-Air Orbit) */}
+      <div 
+        className="hidden md:flex absolute top-10 sm:top-14 right-6 sm:right-10 lg:right-16 xl:right-24 z-20 pointer-events-none transition-transform duration-300 select-none animate-float-2"
+        style={{
+          transform: `translate3d(${mousePos.x * -36}px, ${mousePos.y * 36}px, 0) rotate(5deg)`,
+        }}
+      >
+        <div className="relative group/logo">
+          {/* Ambient Glow */}
+          <div className="absolute -inset-2 bg-red-600/25 rounded-[1.6rem] blur-xl" />
+          
+          {/* 3D YouTube Plate */}
+          <div className="relative w-15 h-13 sm:w-18 sm:h-14 rounded-[1.2rem] sm:rounded-[1.4rem] bg-gradient-to-b from-[#FF2B2B] via-[#FF0000] to-[#CC0000] shadow-[0_22px_45px_-8px_rgba(255,0,0,0.48),0_8px_20px_-4px_rgba(0,0,0,0.25)] ring-1 ring-white/35 flex items-center justify-center transition-transform duration-300 hover:scale-110">
+            {/* Top Glass Reflection */}
+            <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-[1.15rem] sm:rounded-t-[1.35rem] bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
+            
+            {/* White YouTube Play Triangle */}
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="white" className="sm:w-7 sm:h-7 drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] ml-0.5">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* C. 3D Floating Google Maps Logo (Bottom Left Mid-Air Orbit) */}
+      <div 
+        className="hidden md:flex absolute bottom-8 sm:bottom-12 left-6 sm:left-12 lg:left-18 xl:left-28 z-20 pointer-events-none transition-transform duration-300 select-none animate-float-3"
+        style={{
+          transform: `translate3d(${mousePos.x * 26}px, ${mousePos.y * -26}px, 0) rotate(-4deg)`,
+        }}
+      >
+        <div className="relative group/logo">
+          {/* Ambient Multi-color Glow */}
+          <div className="absolute -inset-2 bg-blue-500/20 rounded-[1.6rem] blur-xl" />
+          
+          {/* 3D Google Maps Squircle */}
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-[1.35rem] sm:rounded-[1.5rem] bg-white p-2.5 shadow-[0_22px_45px_-8px_rgba(66,133,244,0.38),0_8px_20px_-4px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.08] flex items-center justify-center transition-transform duration-300 hover:scale-110">
+            {/* Top Glass Bevel Reflection */}
+            <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-[1.3rem] sm:rounded-t-[1.45rem] bg-gradient-to-b from-white/70 to-transparent pointer-events-none" />
+            
+            {/* Multi-color Google Maps SVG Pin */}
+            <svg width="34" height="34" viewBox="0 0 48 48" fill="none" className="sm:w-10 sm:h-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.18)]">
+              <path d="M24 4C15.16 4 8 11.16 8 20c0 11.88 13.62 20.88 14.2 21.25a3.5 3.5 0 0 0 3.6 0C26.38 40.88 40 31.88 40 20c0-8.84-7.16-16-16-16z" fill="#4285F4" />
+              <path d="M24 4C15.16 4 8 11.16 8 20c0 4.67 2.01 8.87 5.22 11.77L24 20V4z" fill="#EA4335" />
+              <path d="M24 20l-10.78 11.77C15.7 34.6 19.5 37.8 24 41.2V20z" fill="#FBBC05" />
+              <path d="M24 20v21.2c4.5-3.4 8.3-6.6 10.78-9.43L24 20z" fill="#34A853" />
+              <circle cx="24" cy="19" r="6.5" fill="#FFFFFF" />
+              <circle cx="24" cy="19" r="4" fill="#4285F4" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      {/* D. 3D Floating WhatsApp Logo (Bottom Right Mid-Air Orbit) */}
+      <div 
+        className="hidden md:flex absolute bottom-8 sm:bottom-12 right-6 sm:right-12 lg:right-18 xl:right-28 z-20 pointer-events-none transition-transform duration-300 select-none animate-float-main"
+        style={{
+          transform: `translate3d(${mousePos.x * -28}px, ${mousePos.y * -28}px, 0) rotate(4deg)`,
+        }}
+      >
+        <div className="relative group/logo">
+          {/* Ambient Glow */}
+          <div className="absolute -inset-2 bg-[#25D366]/25 rounded-[1.6rem] blur-xl" />
+          
+          {/* 3D WhatsApp Round Squircle */}
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-[1.35rem] sm:rounded-[1.5rem] bg-gradient-to-tr from-[#128C7E] via-[#25D366] to-[#34E875] p-[2px] shadow-[0_22px_45px_-8px_rgba(37,211,102,0.5),0_8px_20px_-4px_rgba(0,0,0,0.22)] ring-1 ring-white/35 flex items-center justify-center transition-transform duration-300 hover:scale-110">
+            {/* Top Glass Bevel Reflection */}
+            <div className="absolute inset-x-0 top-0 h-1/2 rounded-t-[1.3rem] sm:rounded-t-[1.45rem] bg-gradient-to-b from-white/40 to-transparent pointer-events-none" />
+            
+            {/* Centered White WhatsApp Icon */}
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="white" className="sm:w-9 sm:h-9 drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)]">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -188,24 +323,24 @@ export const RatingsTrustSection: React.FC<SocialMediaQRSectionProps> = ({
         <div className="max-w-3xl mx-auto mb-4 sm:mb-6 text-center flex flex-col items-center">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3 py-0.5 rounded-full border border-black/[0.08] shadow-2xs mb-1.5">
+          <div className="inline-flex items-center gap-2 bg-orange-50/90 px-3.5 py-0.5 rounded-full border border-orange-200/80 shadow-2xs mb-1.5">
             <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.64rem] font-black tracking-[0.16em] text-[#F15A24] uppercase">
-              CONNECT WITH US
+            <span className="font-mono text-[0.64rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
+              CONNECT WITH US &amp; SOCIAL HUBS
             </span>
           </div>
 
           {/* Main Headline */}
           <h2 className="font-heading font-extrabold text-[clamp(1.5rem,2.8vw,2.3rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-1.5 select-none">
             Connect with Us on{' '}
-            <span className="text-[#F15A24] relative inline-block">
+            <span className="text-[#F15A24] font-black relative inline-block">
               Social Media.
-              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/20 rounded-full" />
             </span>
           </h2>
 
-          {/* Subtitle */}
-          <p className="text-[0.82rem] sm:text-[0.92rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
+          {/* Subtitle (Hidden on Mobile) */}
+          <p className="hidden sm:block text-[0.82rem] sm:text-[0.92rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
             Scan any QR code with your smartphone or tap the links below for instant updates, live tech support, workstation videos &amp; showroom directions.
           </p>
         </div>

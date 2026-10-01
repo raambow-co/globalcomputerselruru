@@ -77,8 +77,8 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
         {/* 2. Asymmetric Two-Column Editorial Layout (Left 40% / Right 60%) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           
-          {/* LEFT SIDE: Editorial Information & Direct Navigation (5 Columns on LG ~ 42%) */}
-          <div className="lg:col-span-5 flex flex-col justify-between text-left">
+          {/* LEFT SIDE: Editorial Information & Direct Navigation (5 Columns on LG ~ 42%, below map on mobile) */}
+          <div className="order-2 lg:order-1 lg:col-span-5 flex flex-col justify-between text-left">
             
             {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-black/[0.08] shadow-xs mb-3 self-start">
@@ -163,10 +163,10 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 href={googleMapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3.5 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.95rem] rounded-xl flex items-center justify-center gap-2.5 shadow-orange-cta transition-all duration-200 hover:shadow-orange-hover hover:-translate-y-0.5 cursor-pointer group"
+                className="w-full sm:w-auto px-7 py-3.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 active:scale-98 text-[#0E1117] font-bold text-[0.95rem] rounded-xl flex items-center justify-center gap-2.5 shadow-yellow-cta transition-all duration-200 hover:shadow-yellow-hover hover:-translate-y-0.5 cursor-pointer group"
               >
                 <span>Get Directions</span>
-                <Navigation size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                <Navigation size={15} className="transition-transform duration-200 group-hover:translate-x-0.5 text-[#0E1117]" />
               </a>
 
               {/* Secondary Link: Contact Our Team */}
@@ -182,33 +182,33 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
 
           </div>
 
-          {/* RIGHT SIDE: Architectural Map & 3D Hardware Overlap (7 Columns on LG ~ 58%) */}
-          <div className="lg:col-span-7 relative">
+          {/* RIGHT SIDE: Architectural Map & 3D Hardware Overlap (7 Columns on LG ~ 58%, on top on mobile) */}
+          <div className="order-1 lg:order-2 lg:col-span-7 relative">
             
             {/* 1. Architectural Framing Map Container */}
-            <div className="bg-[#FAFBFD] rounded-3xl border border-black/[0.08] shadow-[0_16px_50px_rgba(15,23,42,0.04)] overflow-hidden relative min-h-[420px] sm:min-h-[480px] flex flex-col justify-between transition-all duration-300">
+            <div className="bg-[#FAFBFD] rounded-3xl border border-orange-200/80 shadow-[0_16px_50px_rgba(241,90,36,0.06)] overflow-hidden relative min-h-[420px] sm:min-h-[480px] flex flex-col justify-between transition-all duration-300">
               
-              {/* Map Canvas Header Bar */}
-              <div className="p-4 sm:p-5 border-b border-black/[0.06] bg-white/90 backdrop-blur-md flex items-center justify-between gap-4 z-20">
+              {/* Map Canvas Header Bar (Pale Orange Accent) */}
+              <div className="p-4 sm:p-5 border-b border-orange-200/70 bg-gradient-to-r from-orange-100/80 via-orange-50/90 to-orange-100/80 backdrop-blur-md flex items-center justify-between gap-4 z-20">
                 <div className="flex items-center gap-2.5">
                   <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse" />
                   <span className="font-mono text-[0.7rem] font-bold text-[#0E1117] uppercase tracking-wider">
                     ELURU SHOWROOM DESK
                   </span>
-                  <span className="hidden sm:inline font-mono text-[0.66rem] text-[#828E9E]">
+                  <span className="hidden sm:inline font-mono text-[0.66rem] text-slate-600 font-medium">
                     · OPEN TODAY
                   </span>
                 </div>
 
                 {/* Map View Toggle */}
-                <div className="flex items-center gap-1 bg-[#F4F6F8] p-1 rounded-xl border border-black/[0.04]">
+                <div className="flex items-center gap-1 bg-white/85 p-1 rounded-xl border border-orange-200/80 shadow-2xs">
                   <button
                     type="button"
                     onClick={() => setMapMode('architectural')}
-                    className={`px-3 py-1 rounded-lg font-mono text-[0.66rem] font-semibold transition-all duration-150 cursor-pointer ${
+                    className={`px-3 py-1 rounded-lg font-mono text-[0.66rem] font-bold transition-all duration-150 cursor-pointer ${
                       mapMode === 'architectural'
-                        ? 'bg-white text-[#0E1117] shadow-2xs'
-                        : 'text-[#64748B] hover:text-[#0E1117]'
+                        ? 'bg-[#F15A24] text-white shadow-xs'
+                        : 'text-slate-600 hover:text-[#0E1117]'
                     }`}
                   >
                     Architectural
@@ -216,13 +216,13 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                   <button
                     type="button"
                     onClick={() => setMapMode('interactive')}
-                    className={`px-3 py-1 rounded-lg font-mono text-[0.66rem] font-semibold transition-all duration-150 cursor-pointer ${
+                    className={`px-3 py-1 rounded-lg font-mono text-[0.66rem] font-bold transition-all duration-150 cursor-pointer ${
                       mapMode === 'interactive'
-                        ? 'bg-white text-[#0E1117] shadow-2xs'
-                        : 'text-[#64748B] hover:text-[#0E1117]'
+                        ? 'bg-[#F15A24] text-white shadow-xs'
+                        : 'text-slate-600 hover:text-[#0E1117]'
                     }`}
                   >
-                    Google Map
+                    Google Maps
                   </button>
                 </div>
               </div>
@@ -357,19 +357,19 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                 </div>
               )}
 
-              {/* Map Footer Bar */}
-              <div className="p-4 sm:p-5 bg-white border-t border-black/[0.06] flex items-center justify-between gap-4 z-20">
-                <div className="flex items-center gap-2 text-[0.82rem] text-[#64748B]">
-                  <span className="font-mono text-[0.72rem] text-[#0E1117] font-semibold">16.7103° N, 81.1043° E</span>
-                  <span className="hidden sm:inline text-black/20">|</span>
-                  <span className="hidden sm:inline">West Godavari District</span>
+              {/* Map Footer Bar (Pale Orange Accent) */}
+              <div className="p-4 sm:p-5 bg-gradient-to-r from-orange-100/80 via-orange-50/90 to-orange-100/80 border-t border-orange-200/70 flex items-center justify-between gap-4 z-20">
+                <div className="flex items-center gap-2 text-[0.82rem] text-slate-700">
+                  <span className="font-mono text-[0.72rem] text-[#0E1117] font-bold">16.7103° N, 81.1043° E</span>
+                  <span className="hidden sm:inline text-orange-400 font-bold">|</span>
+                  <span className="hidden sm:inline font-medium text-slate-700">West Godavari District</span>
                 </div>
 
                 <a
                   href={googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 font-mono text-[0.74rem] font-bold text-[#F15A24] hover:underline"
+                  className="inline-flex items-center gap-1.5 font-mono text-[0.74rem] font-bold text-white bg-[#F15A24] hover:bg-[#d84a18] px-3.5 py-1.5 rounded-lg border border-[#F15A24]/30 shadow-xs transition-all duration-150"
                 >
                   <span>Open in Google Maps</span>
                   <ExternalLink size={12} />

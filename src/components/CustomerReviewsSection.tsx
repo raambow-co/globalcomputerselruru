@@ -6,6 +6,7 @@ import {
   ExternalLink, 
   CheckCircle2, 
   Volume2, 
+  VolumeX,
   MessageCircle,
   ArrowUpRight
 } from 'lucide-react';
@@ -29,7 +30,7 @@ interface VideoReview {
   customerName: string;
   location: string;
   tag: string;
-  description: string;
+  description?: string;
   embedUrl: string;
   instagramUrl: string;
 }
@@ -38,6 +39,18 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
   onOpenEnquiry,
 }) => {
   const [activeTab, setActiveTab] = useState<'all' | 'reels'>('all');
+  const [mutedStates, setMutedStates] = useState<{ [key: string]: boolean }>({
+    'reel-1': true,
+    'reel-2': true,
+    'reel-3': true,
+  });
+
+  const toggleMute = (id: string) => {
+    setMutedStates((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   const videoReviews: VideoReview[] = [
     {
@@ -47,7 +60,6 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
       customerName: 'Verified Showroom Customer',
       location: 'Powerpet, Eluru Showroom',
       tag: 'CLIENT REEL & DELIVERY',
-      description: 'Real customer feedback on showroom consultation, authentic components, and same-day delivery.',
       embedUrl: 'https://www.instagram.com/p/Db-zPh2Tq7p/embed/',
       instagramUrl: 'https://www.instagram.com/p/Db-zPh2Tq7p/',
     },
@@ -58,9 +70,18 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
       customerName: 'Verified Showroom Customer',
       location: 'Eluru, Andhra Pradesh',
       tag: 'HARDWARE & WORKSTATION',
-      description: 'Customer review on custom PC architecture, seamless testing, and transparent pricing in Eluru.',
       embedUrl: 'https://www.instagram.com/p/DdI0i0kTvKB/embed/',
       instagramUrl: 'https://www.instagram.com/p/DdI0i0kTvKB/',
+    },
+    {
+      id: 'reel-3',
+      postId: 'Da7A88IzGnO',
+      title: 'Custom PC Architecture & Tech Consultation Experience',
+      customerName: 'Verified Showroom Customer',
+      location: 'Powerpet, Eluru Showroom',
+      tag: 'TECH CONSULTATION & DELIVERY',
+      embedUrl: 'https://www.instagram.com/p/Da7A88IzGnO/embed/',
+      instagramUrl: 'https://www.instagram.com/p/Da7A88IzGnO/',
     },
   ];
 
@@ -116,62 +137,35 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
         <div className="max-w-3xl mx-auto mb-6 sm:mb-8 text-center flex flex-col items-center">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3.5 py-1 rounded-full border border-black/[0.08] shadow-2xs mb-2.5">
+          <div className="inline-flex items-center gap-2 bg-amber-50 px-3.5 py-1 rounded-full border border-amber-200/80 shadow-2xs mb-2.5">
             <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
-            <span className="font-mono text-[0.66rem] font-black tracking-[0.18em] text-[#F15A24] uppercase">
+            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-amber-800 uppercase">
               REAL CLIENT STORIES &amp; VIDEO REVIEWS
             </span>
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-heading font-extrabold text-[clamp(1.7rem,3vw,2.5rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-2 select-none">
+          <h2 className="font-heading font-extrabold text-[clamp(1.7rem,3vw,2.5rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-0 select-none">
             Real Customers.{' '}
-            <span className="text-[#F15A24] relative inline-block">
+            <span className="text-[#F15A24] font-black relative inline-block">
               Real Experiences.
-              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/20 rounded-full" />
             </span>
           </h2>
-
-          {/* Subtitle */}
-          <p className="text-[0.88rem] sm:text-[0.96rem] text-[#4A5364] leading-relaxed max-w-2xl font-normal">
-            Watch authentic customer feedback and workstation deliveries recorded live at our Global Computers Eluru showroom.
-          </p>
         </div>
 
-        {/* 3. Side-by-Side In-Site Video Reviews Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto items-stretch">
+        {/* 3. Side-by-Side In-Site Video Reviews (Horizontal Swipeable on Mobile, 3-Column Grid on Desktop) */}
+        <div className="flex lg:grid lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto overflow-x-auto lg:overflow-visible pb-4 lg:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
           {videoReviews.map((video) => (
             <div
               key={video.id}
-              className="bg-white rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_50px_rgba(241,90,36,0.08)] transition-all duration-300 flex flex-col overflow-hidden group hover:border-[#F15A24]/30"
+              className="w-[85vw] max-w-[340px] sm:w-[350px] lg:w-auto flex-shrink-0 lg:flex-shrink snap-center bg-white rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] hover:shadow-[0_20px_50px_rgba(245,158,11,0.12)] transition-all duration-300 flex flex-col overflow-hidden group hover:border-amber-400/40"
             >
-              {/* Card Top Banner with Brand Accent */}
-              <div className="h-1 w-full bg-gradient-to-r from-[#F15A24] via-[#FF7844] to-[#F15A24]" />
-
-              {/* Video Info Header */}
-              <div className="p-4 sm:p-5 pb-3 flex items-center justify-between gap-3 border-b border-black/[0.05] bg-[#FAFBFD]">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#FFF0F5] to-white border border-[#E1306C]/20 flex items-center justify-center text-[#E1306C] shadow-2xs">
-                    <InstagramIcon size={16} />
-                  </div>
-                  <div className="text-left">
-                    <span className="font-heading font-extrabold text-[0.88rem] text-[#0E1117] block leading-tight">
-                      Global Computers Eluru
-                    </span>
-                    <span className="font-mono text-[0.62rem] text-slate-400 block -mt-0.5">
-                      @GLOBALCOMPUTERSELURU
-                    </span>
-                  </div>
-                </div>
-
-                <div className="inline-flex items-center gap-1.5 bg-[#FFF2EB] text-[#F15A24] font-mono text-[0.62rem] font-bold px-2.5 py-0.5 rounded-full border border-[#F15A24]/15">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#F15A24] animate-ping" />
-                  <span>{video.tag}</span>
-                </div>
-              </div>
+              {/* Card Top Banner with Aesthetic Yellow/Amber Accent */}
+              <div className="h-1.5 w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500" />
 
               {/* Direct In-Site Embedded Instagram Video Frame */}
-              <div className="relative w-full bg-[#080B10] flex items-center justify-center min-h-[460px] sm:min-h-[500px]">
+              <div className="relative w-full bg-[#080B10] flex items-center justify-center min-h-[460px] sm:min-h-[500px] overflow-hidden group/video">
                 <iframe
                   src={video.embedUrl}
                   title={video.title}
@@ -181,6 +175,21 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
                   allowTransparency={true}
                   allow="encrypted-media; autoplay"
                 />
+
+                {/* Small Instagram-style Mute / Unmute Toggle Button */}
+                <button
+                  type="button"
+                  onClick={() => toggleMute(video.id)}
+                  aria-label={mutedStates[video.id] ? "Unmute video" : "Mute video"}
+                  title={mutedStates[video.id] ? "Click to Unmute" : "Click to Mute"}
+                  className="absolute bottom-3 right-3 z-30 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/20 shadow-md flex items-center justify-center cursor-pointer transition-all duration-200 hover:scale-110 active:scale-95 group/mute"
+                >
+                  {mutedStates[video.id] ? (
+                    <VolumeX size={14} className="text-white/90 group-hover/mute:text-white" />
+                  ) : (
+                    <Volume2 size={14} className="text-emerald-400 group-hover/mute:text-emerald-300" />
+                  )}
+                </button>
               </div>
 
               {/* Video Card Footer Info */}
@@ -190,9 +199,11 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
                     {video.title}
                   </h3>
 
-                  <p className="text-[0.82rem] text-[#64748B] leading-relaxed mb-3">
-                    {video.description}
-                  </p>
+                  {video.description && (
+                    <p className="text-[0.82rem] text-[#64748B] leading-relaxed mb-3">
+                      {video.description}
+                    </p>
+                  )}
                 </div>
 
                 <div className="pt-3 border-t border-black/[0.05] flex items-center justify-between text-[0.76rem]">
@@ -218,7 +229,7 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
         </div>
 
         {/* 4. Bottom Reassurance Bar */}
-        <div className="mt-6 sm:mt-8 pt-4 border-t border-black/[0.06] max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[0.78rem] text-slate-500">
+        <div className="mt-6 sm:mt-8 pt-4 border-t border-black/[0.06] max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[0.78rem] text-slate-500">
           <div className="flex items-center gap-2">
             <CheckCircle2 size={14} className="text-[#F15A24]" />
             <span>Have you purchased or serviced your hardware with us? Share your feedback!</span>
@@ -227,10 +238,10 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
           <button
             type="button"
             onClick={() => onOpenEnquiry && onOpenEnquiry('Customer Video Feedback')}
-            className="font-heading font-bold text-[#F15A24] hover:underline cursor-pointer inline-flex items-center gap-1"
+            className="font-heading font-bold text-amber-800 hover:text-amber-900 bg-amber-50 hover:bg-amber-100/90 px-3.5 py-1.5 rounded-lg border border-amber-300/80 hover:border-amber-400 cursor-pointer inline-flex items-center gap-1.5 transition-all duration-200 shadow-2xs hover:shadow-xs"
           >
             <span>Share Your Showroom Story</span>
-            <ExternalLink size={12} />
+            <ExternalLink size={12} className="text-amber-700" />
           </button>
         </div>
 

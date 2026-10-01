@@ -198,10 +198,10 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
           </div>
 
           {/* RIGHT COLUMN: Compact One-Screen Form Interface (7 Columns on LG) */}
-          <div className="lg:col-span-7 bg-[#FAFBFD] rounded-3xl p-6 sm:p-8 md:p-9 border border-black/[0.07] shadow-[0_12px_40px_rgba(15,23,42,0.035)] relative overflow-hidden text-left">
+          <div className="lg:col-span-7 bg-gradient-to-br from-orange-100/40 via-[#FAFBFD] to-orange-50/60 rounded-3xl p-6 sm:p-8 md:p-9 border border-orange-200/80 shadow-[0_16px_50px_rgba(241,90,36,0.06)] relative overflow-hidden text-left">
             
             {/* Subtle Top-Right Accent Halo */}
-            <div className="absolute top-0 right-0 w-56 h-56 bg-[radial-gradient(circle_at_100%_0%,rgba(241,90,36,0.04),transparent_70%)] pointer-events-none" />
+            <div className="absolute top-0 right-0 w-56 h-56 bg-[radial-gradient(circle_at_100%_0%,rgba(241,90,36,0.08),transparent_70%)] pointer-events-none" />
 
             {!isSubmitted ? (
               <div>
@@ -228,7 +228,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                           className={`px-3 py-1 rounded-full font-mono text-[0.66rem] font-semibold tracking-wide transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                             isSelected
                               ? 'bg-[#0E1117] text-white shadow-2xs scale-[1.02]'
-                              : 'bg-white hover:bg-slate-100 text-[#4A5364] hover:text-[#0E1117] border border-black/[0.06]'
+                              : 'bg-white hover:bg-orange-50/60 text-[#4A5364] hover:text-[#0E1117] border border-orange-200/80'
                           }`}
                         >
                           {isSelected && <span className="w-1.5 h-1.5 bg-[#F15A24] rounded-full" />}
@@ -265,7 +265,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                           }
                         }}
                         placeholder="Your name"
-                        className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
+                        className="w-full bg-white border border-orange-200/70 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
                       />
                       {errors.fullName && (
                         <span className="font-mono text-[0.62rem] text-[#F15A24] mt-1 block">
@@ -294,7 +294,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                           }
                         }}
                         placeholder="Phone / WhatsApp number"
-                        className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
+                        className="w-full bg-white border border-orange-200/70 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
                       />
                       {errors.phoneNumber && (
                         <span className="font-mono text-[0.62rem] text-[#F15A24] mt-1 block">
@@ -328,7 +328,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                           }
                         }}
                         placeholder="e.g. Epson L3250, Dell Latitude..."
-                        className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
+                        className="w-full bg-white border border-orange-200/70 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
                       />
                       {errors.productRequirement && (
                         <span className="font-mono text-[0.62rem] text-[#F15A24] mt-1 block">
@@ -350,7 +350,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                           id="enquiry-type"
                           value={requirementType}
                           onChange={(e) => setRequirementType(e.target.value)}
-                          className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem] appearance-none pr-8 cursor-pointer"
+                          className="w-full bg-white border border-orange-200/70 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem] appearance-none pr-8 cursor-pointer"
                         >
                           <option value="Product Availability">Product Availability</option>
                           <option value="Computer / Desktop">Computer / Desktop</option>
@@ -386,7 +386,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
                         placeholder="1, 5..."
-                        className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
+                        className="w-full bg-white border border-orange-200/70 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
                       />
                     </div>
 
@@ -403,7 +403,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Any extra requirements..."
-                        className="w-full bg-white border border-black/10 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
+                        className="w-full bg-white border border-orange-200/70 rounded-xl px-3.5 py-2 text-[#0E1117] font-medium placeholder-[#9AA5B5] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/15 focus:outline-none transition-all duration-200 text-[0.90rem]"
                       />
                     </div>
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { OffersDealsSection } from './components/OffersDealsSection';
-import { ProductVisualShowcase } from './components/ProductVisualShowcase';
+import { CustomerReviewsSection } from './components/CustomerReviewsSection';
 import { RatingsTrustSection } from './components/RatingsTrustSection';
 import { LeadershipSection } from './components/LeadershipSection';
 import { FAQSection } from './components/FAQSection';
@@ -10,6 +10,7 @@ import { EnquirySection } from './components/EnquirySection';
 import { LocationSection } from './components/LocationSection';
 import { Footer } from './components/Footer';
 import { AvailabilityModal } from './components/AvailabilityModal';
+import { FloatingContactWidget } from './components/FloatingContactWidget';
 
 export const App: React.FC = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -42,17 +43,17 @@ export const App: React.FC = () => {
           onOpenEnquiry={(dealName) => handleOpenEnquiry(dealName || 'Special Offer Inquiry')}
         />
 
-        {/* 2. 3D Product Visual Showcase: Inside The Technology (Studio Showcase) */}
-        <ProductVisualShowcase
-          onOpenAvailability={(name) => handleOpenEnquiry(name)}
+        {/* 2. Real Customer Stories & Video Reviews Section */}
+        <CustomerReviewsSection
+          onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Customer Feedback Inquiry')}
         />
 
-        {/* Connect with Us on Social Media (4 QR Codes) */}
+        {/* 3. Connect with Us on Social Media (4 QR Codes) */}
         <RatingsTrustSection
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Social Channels Inquiry')}
         />
 
-        {/* Founder, Leadership & Showroom Team Section */}
+        {/* 4. Founder, Leadership & Showroom Team Section */}
         <LeadershipSection
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Leadership & Team Inquiry')}
         />
@@ -84,6 +85,9 @@ export const App: React.FC = () => {
         onClose={handleCloseEnquiry}
         initialProduct={selectedProduct}
       />
+
+      {/* Persistent Floating 3D WhatsApp & Phone Call Action Buttons */}
+      <FloatingContactWidget />
     </div>
   );
 };

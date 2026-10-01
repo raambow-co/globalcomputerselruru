@@ -29,7 +29,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
       'Immediate Physical Verification in Showroom',
       'Complete OEM Manufacturer Warranty',
     ],
-    image: '/assets/pro_monitor.png',
+    image: '/assets/pro_monitor.webp',
     imageAlt: 'UltraVision 4K Studio Display',
     productInquiryName: 'UltraVision 4K Studio Display (Showroom Arrival)',
   };
@@ -52,7 +52,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
         'Bulk Corporate Procurement Tier Pricing',
         'Direct Dedicated Business Support Specialist',
       ],
-      image: '/assets/epson_printer.png',
+      image: '/assets/epson_printer.webp',
       imageAlt: 'Epson EcoTank Pro Fleet Printer',
       productInquiryName: 'Enterprise Business Technology Package',
     },
@@ -65,7 +65,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
       description:
         'Direct OEM warranty backing, same-day physical inspection at our Eluru showroom, and certified enterprise deployment specialists.',
       fullContent: [
-        'At Global Computers, authenticity and client confidence stand paramount. Every component, motherboard, and workstation is sourced exclusively through authorized distributor channels.',
+        'At Global Computers, authenticity and client confidence stand paramount. Every component, motherboard, and workstation is sourced exclusively through verified OEM distributor channels.',
         'Clients can physically examine hardware, review real-time performance benchmarks, and consult with senior technical specialists prior to deployment.',
       ],
       highlights: [
@@ -73,7 +73,7 @@ export const NewsSection: React.FC<NewsSectionProps> = ({ onOpenEnquiry }) => {
         'Live Pre-Dispatch Hardware Testing',
         'Fast Local Warranty Assistance in Eluru',
       ],
-      image: '/assets/motherboard.png',
+      image: '/assets/motherboard.webp',
       imageAlt: 'Z790 Workstation Motherboard Architecture',
       productInquiryName: 'Genuine Hardware & Service Consultation',
     },

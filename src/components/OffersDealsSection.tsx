@@ -30,28 +30,28 @@ const DEFAULT_OFFERS: OfferSlide[] = [
     id: '1',
     badge: 'MEGA COMBO DEAL',
     offerTitle: 'Creator Studio 4K Workstation Bundle',
-    image: '/assets/pro_monitor.png',
+    image: '/assets/pro_monitor.webp',
     description: 'Special Festive Discount: Intel Core i9 14th Gen + RTX 4080 Super + 34" Curved 4K Display with ₹45,000 Instant Savings.',
   },
   {
     id: '2',
     badge: 'BUSINESS SPECIAL',
     offerTitle: 'Epson EcoTank Heavy-Duty Print Fleet',
-    image: '/assets/epson_printer.png',
+    image: '/assets/epson_printer.webp',
     description: 'Get Flat ₹4,500 Cashback + 2 Free Extra Genuine Ink Bottle Sets with every Epson EcoTank Duplex All-in-One.',
   },
   {
     id: '3',
     badge: 'HARDWARE COMBO',
     offerTitle: 'Z790 Workstation Board + DDR5 Fast RAM',
-    image: '/assets/motherboard.png',
+    image: '/assets/motherboard.webp',
     description: 'Save 18% on High-Speed Z790 PCIe 5.0 Motherboard + 32GB 6000MHz DDR5 Memory Combo Kit with Free Assembly.',
   },
   {
     id: '4',
     badge: 'LIMITED FLASH SALE',
     offerTitle: 'AeroCNC Solid Aluminum Mechanical Keyboard',
-    image: '/assets/mech_keyboard.png',
+    image: '/assets/mech_keyboard.webp',
     description: 'Flash Deal: 30% Flat Off on Anodized CNC Mechanical Keyboards with Free Braided Aviator Coiled Cable.',
   },
 ];
@@ -149,26 +149,45 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
 
   const currentOffer = offers[currentIndex] || offers[0];
 
+  // Dynamic colorful badge styling based on badge keyword
+  const getBadgeStyle = (badgeText?: string) => {
+    const text = (badgeText || '').toUpperCase();
+    if (text.includes('MEGA') || text.includes('WORKSTATION')) {
+      return 'bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-extrabold shadow-[0_4px_16px_rgba(245,158,11,0.4)]';
+    }
+    if (text.includes('BUSINESS') || text.includes('PRINT')) {
+      return 'bg-gradient-to-r from-[#F15A24] to-[#D94814] text-white shadow-orange-cta';
+    }
+    if (text.includes('HARDWARE') || text.includes('COMBO')) {
+      return 'bg-gradient-to-r from-slate-900 to-slate-800 text-amber-400 border border-amber-400/30 shadow-sm';
+    }
+    if (text.includes('FLASH') || text.includes('LIMITED')) {
+      return 'bg-gradient-to-r from-red-600 to-orange-600 text-white shadow-[0_4px_16px_rgba(220,38,38,0.35)]';
+    }
+    return 'bg-gradient-to-r from-[#F15A24] to-[#EA580C] text-white shadow-orange-cta';
+  };
+
   return (
     <section
       id="deals"
       className="relative bg-[#FAFBFD] text-[#0E1117] py-6 sm:py-10 md:py-12 overflow-hidden border-t border-black/[0.06] selection:bg-[#F15A24] selection:text-white"
     >
-      {/* 1. Ambient Background Glow */}
+      {/* 1. Ambient Background Multi-Color Glows */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(250,251,253,0)_100%)]" />
+        <div className="absolute top-1/4 left-1/3 w-[600px] h-[350px] bg-gradient-to-r from-amber-400/6 to-orange-500/6 blur-3xl" />
+        <div className="absolute bottom-10 right-1/4 w-[500px] h-[300px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.06)_0%,rgba(250,251,253,0)_100%)]" />
 
         {/* Minimal Precision Corner Accents */}
         <div className="absolute top-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+            <circle cx="1" cy="1" r="2" fill="#F59E0B" />
           </svg>
         </div>
         <div className="absolute top-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+            <circle cx="13" cy="1" r="2" fill="#F15A24" />
           </svg>
         </div>
       </div>
@@ -178,14 +197,17 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
         {/* 2. Clean Minimal Header */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 mb-4 sm:mb-5 text-center sm:text-left">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-white px-3 py-0.5 rounded-full border border-black/[0.08] shadow-2xs mb-1">
-              <Flame className="w-3 h-3 text-[#F15A24] animate-bounce" />
+            <div className="inline-flex items-center gap-1.5 bg-orange-50/90 px-3.5 py-0.5 rounded-full border border-orange-200/80 shadow-2xs mb-1">
+              <Flame className="w-3.5 h-3.5 text-[#F15A24] animate-bounce" />
               <span className="font-mono text-[0.64rem] font-bold tracking-[0.14em] text-[#F15A24] uppercase">
-                SHOWROOM EXCLUSIVES
+                SHOWROOM EXCLUSIVES &amp; PROMOS
               </span>
             </div>
             <h2 className="font-heading font-extrabold text-[clamp(1.4rem,2.4vw,1.9rem)] text-[#0E1117] tracking-tight leading-tight">
-              Latest Offers &amp; <span className="text-[#F15A24]">Special Deals.</span>
+              Latest Offers &amp;{' '}
+              <span className="text-[#F15A24] font-black">
+                Special Deals.
+              </span>
             </h2>
           </div>
 
@@ -194,9 +216,9 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             <button
               type="button"
               onClick={() => setIsUploadOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-[#FFF2EB] text-[#F15A24] border border-[#F15A24]/30 hover:border-[#F15A24] font-semibold text-[0.76rem] rounded-lg shadow-2xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100/90 text-amber-900 border border-amber-300/80 hover:border-amber-400 font-semibold text-[0.76rem] rounded-lg shadow-2xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
             >
-              <Upload size={12} />
+              <Upload size={12} className="text-amber-700" />
               <span>Upload Offer</span>
             </button>
 
@@ -219,14 +241,14 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
           onMouseLeave={() => setIsPaused(false)}
           className="relative bg-white rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.05)] overflow-hidden transition-all duration-300 group"
         >
-          {/* Top Brand Orange Accent Bar */}
-          <div className="h-1 w-full bg-gradient-to-r from-[#F15A24] via-[#FF7844] to-[#F15A24]" />
+          {/* Top Multi-Color Gradient Accent Bar */}
+          <div className="h-1.5 w-full bg-gradient-to-r from-[#F15A24] via-amber-400 to-[#F15A24]" />
 
           {/* Image Slide Area */}
           <div className="relative w-full h-[210px] sm:h-[260px] md:h-[290px] bg-[#FAFBFD] flex items-center justify-center p-3 sm:p-6 overflow-hidden select-none">
             
-            {/* Background Subtle Gradient Glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.05)_0%,rgba(250,251,253,0)_100%)] pointer-events-none" />
+            {/* Background Multi-Color Gradient Glow */}
+            <div className="absolute inset-0 bg-radial-aurora pointer-events-none opacity-60" />
 
             {/* Slide Image with Clean Transition */}
             <div className="relative z-10 w-full h-full flex items-center justify-center">
@@ -239,9 +261,9 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
               />
             </div>
 
-            {/* Floating Top-Left Badge */}
+            {/* Floating Top-Left Badge with Dynamic Vibrant Gradient */}
             {currentOffer.badge && (
-              <div className="absolute top-4 left-4 z-20 bg-[#F15A24] text-white font-mono text-[0.64rem] font-bold tracking-wider px-3 py-1 rounded-full shadow-orange-cta uppercase flex items-center gap-1">
+              <div className={`absolute top-4 left-4 z-20 font-mono text-[0.64rem] font-bold tracking-wider px-3 py-1 rounded-full uppercase flex items-center gap-1.5 ${getBadgeStyle(currentOffer.badge)}`}>
                 <Sparkles size={11} className="text-white animate-spin" style={{ animationDuration: '4s' }} />
                 <span>{currentOffer.badge}</span>
               </div>
@@ -258,7 +280,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             <button
               type="button"
               onClick={handlePrev}
-              className="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 hover:bg-[#F15A24] text-[#0E1117] hover:text-white border border-black/10 hover:border-transparent shadow-md flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
+              className="absolute left-2.5 sm:left-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 hover:bg-amber-400 text-[#0E1117] border border-black/10 hover:border-amber-400 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
               aria-label="Previous Offer Slide"
             >
               <ChevronLeft size={18} />
@@ -268,7 +290,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             <button
               type="button"
               onClick={handleNext}
-              className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 hover:bg-[#F15A24] text-[#0E1117] hover:text-white border border-black/10 hover:border-transparent shadow-md flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
+              className="absolute right-2.5 sm:right-4 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/95 hover:bg-amber-400 text-[#0E1117] border border-black/10 hover:border-amber-400 shadow-md flex items-center justify-center transition-all duration-200 hover:scale-110 active:scale-95 cursor-pointer"
               aria-label="Next Offer Slide"
             >
               <ChevronRight size={18} />
@@ -294,10 +316,10 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             <button
               type="button"
               onClick={() => onOpenEnquiry(currentOffer.offerTitle || currentOffer.description)}
-              className="w-full sm:w-auto px-5 py-2.5 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.84rem] rounded-lg flex items-center justify-center gap-1.5 shadow-orange-cta transition-all duration-200 hover:shadow-orange-hover hover:-translate-y-0.5 flex-shrink-0 cursor-pointer"
+              className="w-full sm:w-auto px-5.5 py-2.5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 active:scale-98 text-[#0E1117] font-bold text-[0.86rem] rounded-xl flex items-center justify-center gap-2 shadow-yellow-cta transition-all duration-200 hover:shadow-yellow-hover hover:-translate-y-0.5 flex-shrink-0 cursor-pointer group"
             >
               <span>Claim This Offer</span>
-              <ArrowRight size={14} />
+              <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform text-[#0E1117]" />
             </button>
           </div>
 
@@ -432,7 +454,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
                 <button
                   type="submit"
                   disabled={!newImage || !newDescription}
-                  className="w-full py-3 bg-[#F15A24] hover:bg-[#D94814] disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all cursor-pointer"
+                  className="w-full py-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 disabled:opacity-50 disabled:cursor-not-allowed text-[#0E1117] font-bold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-yellow-cta transition-all cursor-pointer"
                 >
                   <Plus size={16} />
                   <span>Publish Slide to Offers Section</span>

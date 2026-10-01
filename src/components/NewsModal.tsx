@@ -135,7 +135,7 @@ export const NewsModal: React.FC<NewsModalProps> = ({
               onClose();
               onInquire(story.productInquiryName || story.title);
             }}
-            className="w-full sm:w-auto px-6 py-3 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all hover:shadow-orange-hover hover:-translate-y-0.5 cursor-pointer"
+            className="w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 active:scale-98 text-[#0E1117] font-bold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-yellow-cta transition-all hover:shadow-yellow-hover hover:-translate-y-0.5 cursor-pointer"
           >
             <span>Inquire About This Hardware</span>
             <ArrowRight size={16} />

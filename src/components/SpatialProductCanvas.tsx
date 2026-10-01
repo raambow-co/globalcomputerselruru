@@ -149,66 +149,66 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
   }, [activeTooltip]);
 
   const products: ProductItem[] = [
-    // 1. Background Anchor Left Upper: Motherboard (Placed below navbar)
+    // 1. Background Anchor Left Upper: Motherboard (Moved down for navbar clearance, increased mobile size)
     {
       id: 'motherboard',
-      name: 'Z790 Workstation Motherboard',
-      spec: 'PCIe 5.0 · Dual LAN · Metallic VRM Heatsinks',
+      name: 'Gigabyte B760M Motherboard',
+      spec: 'LGA1700 · DDR5 Memory · PCIe 4.0 · Dual M.2 Slots',
       category: 'Core Components',
       status: '● Verified In Stock',
-      image: '/assets/motherboard.png',
+      image: '/assets/motherboardhero.webp',
       className:
-        'top-[12%] xs:top-[11.5%] sm:top-[10%] lg:top-[11%] left-[2%] sm:left-[3%] lg:left-[4.5%] w-[80px] xs:w-[98px] sm:w-[155px] md:w-[205px] lg:w-[260px] -rotate-6 opacity-100',
+        'top-[17%] xs:top-[16%] sm:top-[12%] lg:top-[12%] left-[2%] sm:left-[3%] lg:left-[4.5%] w-[92px] xs:w-[108px] sm:w-[135px] md:w-[175px] lg:w-[220px] -rotate-6 opacity-100',
       depth: 0.03,
-      hotspotLabel: 'Z790 Architecture',
+      hotspotLabel: 'Gigabyte B760M',
       hotspotStyle: { top: '35%', right: '-15px' },
       dropShadowClass: 'drop-shadow-motherboard',
       animationClass: 'animate-float-1',
     },
-    // 2. Foreground Hero Anchor Left Lower: Epson EcoTank Pro Printer (Placed below buttons)
+    // 2. Foreground Hero Anchor Left Lower: Epson EcoTank All-in-One Printer (Increased mobile size)
     {
       id: 'printer',
-      name: 'Epson EcoTank Pro Series',
-      spec: 'PrecisionCore Heat-Free Enterprise Printing',
+      name: 'Epson EcoTank All-in-One Series',
+      spec: 'PrecisionCore Heat-Free · Wi-Fi Direct · Borderless Printing',
       category: 'Business Printers',
       status: '● Verified In Stock',
-      image: '/assets/epson_printer.png',
+      image: '/assets/epsonprinterhero.webp',
       className:
-        'top-[73%] xs:top-[70%] sm:top-[53%] lg:top-[50%] left-[2%] sm:left-[2.5%] lg:left-[4%] w-[88px] xs:w-[110px] sm:w-[180px] md:w-[245px] lg:w-[315px] rotate-2 opacity-100',
+        'top-[75%] xs:top-[73%] sm:top-[56%] lg:top-[54%] left-[2%] sm:left-[2.5%] lg:left-[4%] w-[102px] xs:w-[118px] sm:w-[155px] md:w-[200px] lg:w-[255px] rotate-2 opacity-100',
       depth: 0.07,
-      hotspotLabel: 'Epson EcoTank Pro',
+      hotspotLabel: 'Epson EcoTank',
       hotspotStyle: { bottom: '-10px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-printer',
       animationClass: 'animate-float-main',
     },
-    // 3. Foreground Hero Anchor Right Upper: UltraVision 4K Curved Display (Placed below navbar)
+    // 3. Foreground Hero Anchor Right Upper: Samsung Odyssey G5 Curved Display (Moved down for navbar clearance, increased mobile size)
     {
       id: 'monitor',
-      name: 'UltraVision 4K Studio Display',
-      spec: 'Frameless Curved IPS · 99% DCI-P3 Color Accuracy',
+      name: 'Samsung Odyssey G5 Curved Display',
+      spec: '1000R Curvature · 165Hz Refresh Rate · 1ms Response HDR10',
       category: 'Displays',
       status: '● Verified In Stock',
-      image: '/assets/pro_monitor.png',
+      image: '/assets/monitorherocurved.webp',
       className:
-        'top-[12%] xs:top-[11.5%] sm:top-[11%] lg:top-[12%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[90px] xs:w-[112px] sm:w-[185px] md:w-[255px] lg:w-[320px] -rotate-2 opacity-100',
+        'top-[17%] xs:top-[16%] sm:top-[12%] lg:top-[12%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[118px] xs:w-[136px] sm:w-[185px] md:w-[255px] lg:w-[320px] -rotate-2 opacity-100',
       depth: 0.05,
-      hotspotLabel: 'UltraVision 4K',
+      hotspotLabel: 'Samsung Odyssey G5',
       hotspotStyle: { top: '-10px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-monitor',
       animationClass: 'animate-float-2',
     },
-    // 4. Foreground Hero Anchor Right Lower: Mechanical Keyboard (Placed below buttons)
+    // 4. Foreground Hero Anchor Right Lower: Compact Mechanical Keyboard (Moved down & increased mobile size)
     {
       id: 'keyboard',
-      name: 'AeroCNC Mechanical Keyboard',
-      spec: 'Anodized Solid Aluminum Frame · Red Enter Accent',
+      name: 'Mechanical RGB Gaming Keyboard',
+      spec: 'RGB Backlit · Tactile Mechanical Switches · Anti-Ghosting',
       category: 'Peripherals',
       status: '● In Stock',
-      image: '/assets/mech_keyboard.png',
+      image: '/assets/keyboardhero.webp',
       className:
-        'top-[74%] xs:top-[71%] sm:top-[55%] lg:top-[52%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[82px] xs:w-[102px] sm:w-[160px] md:w-[215px] lg:w-[265px] rotate-2 opacity-100',
+        'top-[78%] xs:top-[76%] sm:top-[64%] lg:top-[62%] right-[2%] sm:right-[3%] lg:right-[4.5%] w-[104px] xs:w-[120px] sm:w-[155px] md:w-[205px] lg:w-[255px] rotate-2 opacity-100',
       depth: 0.08,
-      hotspotLabel: 'AeroCNC Keyboard',
+      hotspotLabel: 'Mechanical RGB',
       hotspotStyle: { bottom: '-10px', right: '12%' },
       dropShadowClass: 'drop-shadow-keyboard',
       animationClass: 'animate-float-1',

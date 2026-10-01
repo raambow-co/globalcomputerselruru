@@ -8,6 +8,10 @@
   --color-gc-orange-hover: #D94814;
   --color-gc-orange-active: #C03C0D;
   --color-gc-orange-tint: #FFF2EB;
+  --color-gc-yellow: #F59E0B;
+  --color-gc-yellow-hover: #EAB308;
+  --color-gc-yellow-light: #FEF3C7;
+  --color-gc-yellow-dark: #B45309;
   --color-gc-charcoal: #0E1117;
   --color-gc-charcoal-muted: #1C2028;
   --color-gc-charcoal-secondary: #4A5364;
@@ -129,6 +133,53 @@
   box-shadow: 0 14px 34px -4px rgba(241, 90, 36, 0.52);
 }
 
+.shadow-yellow-cta {
+  box-shadow: 0 10px 26px -4px rgba(245, 158, 11, 0.42), 0 2px 8px rgba(245, 158, 11, 0.2);
+}
+
+.shadow-yellow-hover {
+  box-shadow: 0 14px 34px -4px rgba(245, 158, 11, 0.58), 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
 .shadow-glass-card {
   box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.05), 0 0 0 1px rgba(15, 23, 42, 0.04);
 }
+
+/* Category Vibrant Glow & Ambient Utilities */
+.glow-cyan {
+  box-shadow: 0 0 35px -5px rgba(6, 182, 212, 0.35);
+}
+
+.glow-purple {
+  box-shadow: 0 0 35px -5px rgba(168, 85, 247, 0.35);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.35);
+}
+
+.glow-amber {
+  box-shadow: 0 0 35px -5px rgba(245, 158, 11, 0.35);
+}
+
+.glow-orange {
+  box-shadow: 0 0 35px -5px rgba(241, 90, 36, 0.35);
+}
+
+.bg-radial-aurora {
+  background: radial-gradient(circle at 20% 30%, rgba(241, 90, 36, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 50% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 50%);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient-text {
+  background-size: 200% auto;
+  animation: gradientShift 4s ease infinite;
+}
+

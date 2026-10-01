@@ -62,11 +62,11 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'hp',
       name: 'HP',
-      logo: '/assets/brands/01_HP.png',
+      logo: '/assets/brands/01_HP.webp',
       categories: ['pcs', 'laptops'],
       categoryLabel: "PC & Laptop Services",
       tagline: 'Desktops, ProBooks, Pavilion, EliteBook & OMEN Servicing & Upgrades',
-      warrantyBadge: 'Authorized Spares & Support',
+      warrantyBadge: 'Genuine Spares & Certified Support',
       serviceOfferings: ['Motherboard Chip-Level Repair', 'Screen & Hinge Replacement', 'High-Speed NVMe SSD Upgrade', 'Thermal Paste Re-pasting'],
       posAll: { top: '34%', left: '50%', depth: 0.04, anim: 'animate-float-1' },
       posCategory: { pcs: { top: '26%', left: '28%' }, laptops: { top: '26%', left: '28%' } },
@@ -75,7 +75,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'dell',
       name: 'Dell',
-      logo: '/assets/brands/02_Dell.png',
+      logo: '/assets/brands/02_Dell.webp',
       categories: ['pcs', 'laptops'],
       categoryLabel: "PC & Laptop Services",
       tagline: 'OptiPlex, Inspiron, Vostro, Latitude & Alienware Diagnostics',
@@ -88,7 +88,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'lenovo',
       name: 'Lenovo',
-      logo: '/assets/brands/03_Lenovo.png',
+      logo: '/assets/brands/03_Lenovo.webp',
       categories: ['pcs', 'laptops'],
       categoryLabel: "PC & Laptop Services",
       tagline: 'ThinkPad, IdeaPad, Legion & ThinkCentre Commercial Maintenance',
@@ -101,7 +101,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'apple',
       name: 'Apple',
-      logo: '/assets/brands/04_Apple.png',
+      logo: '/assets/brands/04_Apple.webp',
       categories: ['pcs'],
       categoryLabel: "Mac & Apple Desktop Services",
       tagline: 'iMac, Mac mini, Mac Studio & Mac Pro Precision Troubleshooting',
@@ -114,11 +114,11 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'epson',
       name: 'Epson',
-      logo: '/assets/brands/08_Epson.png',
+      logo: '/assets/brands/08_Epson.webp',
       categories: ['printers'],
       categoryLabel: "Printer & Printhead Services",
       tagline: 'EcoTank, L-Series, WorkForce & Commercial Plotters Servicing',
-      warrantyBadge: 'Direct PrecisionCore Support',
+      warrantyBadge: 'Authorized Epson Partner',
       serviceOfferings: ['Printhead Ultrasonic Cleaning', 'Waste Ink Pad Reset & Replacement', 'Paper Feed Roller Alignment', 'Continuous Ink Tank Overhaul'],
       posAll: { top: '62%', left: '22%', depth: 0.09, anim: 'animate-float-main' },
       posCategory: { printers: { top: '28%', left: '28%' } },
@@ -127,7 +127,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'hikvision',
       name: 'Hikvision',
-      logo: '/assets/brands/15_Hikvision.png',
+      logo: '/assets/brands/15_Hikvision.webp',
       categories: ['cameras'],
       categoryLabel: "CCTV & IP Surveillance",
       tagline: 'ColorVu, Turbo HD, 4K IP Dome & Bullet Surveillance Systems',
@@ -140,7 +140,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'asus',
       name: 'ASUS',
-      logo: '/assets/brands/06_ASUS.png',
+      logo: '/assets/brands/06_ASUS.webp',
       categories: ['laptops'],
       categoryLabel: "Laptop & Gaming Services",
       tagline: 'ROG, TUF Gaming, ZenBook & VivoBook Performance Tuning',
@@ -153,7 +153,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'acer',
       name: 'Acer',
-      logo: '/assets/brands/07_Acer.png',
+      logo: '/assets/brands/07_Acer.webp',
       categories: ['laptops'],
       categoryLabel: "Laptop Services",
       tagline: 'Predator, Nitro, Aspire & Swift Professional Care',
@@ -166,7 +166,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'canon',
       name: 'Canon',
-      logo: '/assets/brands/10_Canon.png',
+      logo: '/assets/brands/10_Canon.webp',
       categories: ['printers'],
       categoryLabel: "Laser & Inkjet Printer Services",
       tagline: 'PIXMA, imageCLASS, MAXIFY & Laser Multi-Function Printers',
@@ -179,7 +179,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'brother',
       name: 'Brother',
-      logo: '/assets/brands/11_Brother.png',
+      logo: '/assets/brands/11_Brother.webp',
       categories: ['printers'],
       categoryLabel: "Monochrome & Color Printers",
       tagline: 'DCP Series, High-Speed Duplex Laser & Network Printers',
@@ -192,11 +192,11 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'tvs',
       name: 'TVS Electronics',
-      logo: '/assets/brands/09_TVS_Electronics.png',
+      logo: '/assets/brands/09_TVS_Electronics.webp',
       categories: ['printers'],
       categoryLabel: "POS & Dot Matrix Printers",
       tagline: 'Dot Matrix, Thermal Receipt Printers & Commercial POS Systems',
-      warrantyBadge: 'Billing & POS Specialist',
+      warrantyBadge: 'Authorized TVS Partner',
       serviceOfferings: ['Ribbon Mechanism Replacement', 'Printhead Pin Alignment', 'Thermal Head Calibration', 'Commercial POS Maintenance'],
       posAll: { top: '12%', left: '24%', depth: 0.04, anim: 'animate-float-1' },
       posCategory: { printers: { top: '28%', left: '72%' } },
@@ -205,7 +205,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'cpplus',
       name: 'CP Plus',
-      logo: '/assets/brands/16_CP_Plus.png',
+      logo: '/assets/brands/16_CP_Plus.webp',
       categories: ['cameras'],
       categoryLabel: "Smart Security & CCTV",
       tagline: 'EzyKam Wi-Fi, HD Analog & Commercial 16/32-Channel NVRs',
@@ -218,7 +218,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'toshiba',
       name: 'Toshiba',
-      logo: '/assets/brands/05_Toshiba.png',
+      logo: '/assets/brands/05_Toshiba.webp',
       categories: ['pcs'],
       categoryLabel: "PC & Storage Services",
       tagline: 'Desktop Systems, Hard Drives & Industrial Storage Solutions',
@@ -231,7 +231,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'essl',
       name: 'eSSL',
-      logo: '/assets/brands/12_eSSL.png',
+      logo: '/assets/brands/12_eSSL.webp',
       categories: ['biometrics'],
       categoryLabel: "Biometric & Attendance Solutions",
       tagline: 'Fingerprint, Face Recognition & RFID Access Control Terminals',
@@ -244,7 +244,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'biomax',
       name: 'BioMax',
-      logo: '/assets/brands/13_BioMax.png',
+      logo: '/assets/brands/13_BioMax.webp',
       categories: ['biometrics'],
       categoryLabel: "Biometrics & Time-Trackers",
       tagline: 'AI Face Attendance, Palm Scanners & Enterprise Turnstiles',
@@ -257,7 +257,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'intercom',
       name: 'Intercom',
-      logo: '/assets/brands/14_Intercom.png',
+      logo: '/assets/brands/14_Intercom.webp',
       categories: ['biometrics'],
       categoryLabel: "Communication & Access Devices",
       tagline: 'Video Door Phones, Commercial Intercoms & Multi-Unit Systems',
@@ -270,7 +270,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'dahua',
       name: 'Dahua',
-      logo: '/assets/brands/17_Dahua.png',
+      logo: '/assets/brands/17_Dahua.webp',
       categories: ['cameras'],
       categoryLabel: "Commercial Video Surveillance",
       tagline: 'Full-Color AI Detection, Thermal Cameras & Smart Security Solutions',
@@ -283,7 +283,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     {
       id: 'dlink',
       name: 'D-Link',
-      logo: '/assets/brands/18_D_Link.png',
+      logo: '/assets/brands/18_D_Link.webp',
       categories: ['cameras'],
       categoryLabel: "Surveillance & Networking",
       tagline: 'PoE Switches, Wi-Fi Cloud Cameras, Routers & Network Racks',
@@ -344,12 +344,102 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
   }, []);
 
   const categories = [
-    { id: 'all', label: 'All Services & Brands', icon: Layers, count: 18 },
-    { id: 'pcs', label: "PC's", icon: Monitor, count: 5 },
-    { id: 'laptops', label: 'Laptops', icon: Laptop, count: 5 },
-    { id: 'cameras', label: 'CC Cameras', icon: Camera, count: 4 },
-    { id: 'biometrics', label: 'Bio Metric', icon: Fingerprint, count: 3 },
-    { id: 'printers', label: 'Printers', icon: Printer, count: 4 },
+    { 
+      id: 'all', 
+      label: 'All Services & Brands', 
+      icon: Layers, 
+      count: 18, 
+      activeBg: 'bg-gradient-to-r from-[#F15A24] to-[#EA580C] text-white shadow-[0_4px_18px_rgba(241,90,36,0.35)]', 
+      iconColor: 'text-[#F15A24]',
+      glowClass: 'glow-orange',
+      ringColor: '#F15A24',
+      accentGradient: 'from-[#F15A24] via-[#FF7844] to-[#F15A24]',
+      badgeBg: 'bg-[#FFF2EB] text-[#F15A24] border-[#F15A24]/20',
+      activeRing: 'border-[#F15A24] bg-[#FFF9F6] shadow-[0_12px_32px_rgba(241,90,36,0.25)] ring-2 ring-[#F15A24]/30',
+      activeBorder: 'text-[#F15A24]',
+      verifiedBg: 'bg-[#F15A24]',
+      buttonBg: 'bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] shadow-orange-cta hover:shadow-orange-hover',
+    },
+    { 
+      id: 'pcs', 
+      label: "PC's", 
+      icon: Monitor, 
+      count: 5, 
+      activeBg: 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-[0_4px_18px_rgba(6,182,212,0.35)]', 
+      iconColor: 'text-cyan-600',
+      glowClass: 'glow-cyan',
+      ringColor: '#06B6D4',
+      accentGradient: 'from-cyan-500 via-blue-500 to-indigo-600',
+      badgeBg: 'bg-cyan-50 text-cyan-700 border-cyan-300',
+      activeRing: 'border-cyan-500 bg-cyan-50/40 shadow-[0_12px_32px_rgba(6,182,212,0.25)] ring-2 ring-cyan-400/40',
+      activeBorder: 'text-cyan-600',
+      verifiedBg: 'bg-cyan-600',
+      buttonBg: 'bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white shadow-[0_6px_20px_rgba(6,182,212,0.35)]',
+    },
+    { 
+      id: 'laptops', 
+      label: 'Laptops', 
+      icon: Laptop, 
+      count: 5, 
+      activeBg: 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-[0_4px_18px_rgba(37,99,235,0.35)]', 
+      iconColor: 'text-blue-600',
+      glowClass: 'glow-purple',
+      ringColor: '#3B82F6',
+      accentGradient: 'from-blue-600 via-indigo-600 to-purple-600',
+      badgeBg: 'bg-blue-50 text-blue-700 border-blue-300',
+      activeRing: 'border-blue-600 bg-blue-50/40 shadow-[0_12px_32px_rgba(37,99,235,0.25)] ring-2 ring-blue-400/40',
+      activeBorder: 'text-blue-600',
+      verifiedBg: 'bg-blue-600',
+      buttonBg: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-[0_6px_20px_rgba(37,99,235,0.35)]',
+    },
+    { 
+      id: 'cameras', 
+      label: 'CC Cameras', 
+      icon: Camera, 
+      count: 4, 
+      activeBg: 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-[0_4px_18px_rgba(16,185,129,0.35)]', 
+      iconColor: 'text-emerald-600',
+      glowClass: 'glow-emerald',
+      ringColor: '#10B981',
+      accentGradient: 'from-emerald-500 via-teal-500 to-emerald-600',
+      badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-300',
+      activeRing: 'border-emerald-500 bg-emerald-50/40 shadow-[0_12px_32px_rgba(16,185,129,0.25)] ring-2 ring-emerald-400/40',
+      activeBorder: 'text-emerald-600',
+      verifiedBg: 'bg-emerald-600',
+      buttonBg: 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white shadow-[0_6px_20px_rgba(16,185,129,0.35)]',
+    },
+    { 
+      id: 'biometrics', 
+      label: 'Bio Metric', 
+      icon: Fingerprint, 
+      count: 3, 
+      activeBg: 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-[0_4px_18px_rgba(168,85,247,0.35)]', 
+      iconColor: 'text-purple-600',
+      glowClass: 'glow-purple',
+      ringColor: '#A855F7',
+      accentGradient: 'from-purple-500 via-indigo-600 to-pink-500',
+      badgeBg: 'bg-purple-50 text-purple-700 border-purple-300',
+      activeRing: 'border-purple-500 bg-purple-50/40 shadow-[0_12px_32px_rgba(168,85,247,0.25)] ring-2 ring-purple-400/40',
+      activeBorder: 'text-purple-600',
+      verifiedBg: 'bg-purple-600',
+      buttonBg: 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white shadow-[0_6px_20px_rgba(168,85,247,0.35)]',
+    },
+    { 
+      id: 'printers', 
+      label: 'Printers', 
+      icon: Printer, 
+      count: 4, 
+      activeBg: 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-[0_4px_18px_rgba(245,158,11,0.35)]', 
+      iconColor: 'text-amber-600',
+      glowClass: 'glow-amber',
+      ringColor: '#F59E0B',
+      accentGradient: 'from-amber-500 via-orange-500 to-amber-600',
+      badgeBg: 'bg-amber-50 text-amber-800 border-amber-300',
+      activeRing: 'border-amber-500 bg-amber-50/40 shadow-[0_12px_32px_rgba(245,158,11,0.25)] ring-2 ring-amber-400/40',
+      activeBorder: 'text-amber-600',
+      verifiedBg: 'bg-amber-600',
+      buttonBg: 'bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white shadow-[0_6px_20px_rgba(245,158,11,0.35)]',
+    },
   ];
 
   // Filtered brands: in 'all', every brand appears exactly once without duplicates
@@ -358,6 +448,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
     : brands.filter((b) => b.categories.includes(activeTab as any));
 
   const activeSelectedBrand = brands.find((b) => b.id === (hoveredBrandId || selectedBrandId)) || brands[0];
+  const activeCategoryTheme = categories.find((c) => c.id === activeTab) || categories[0];
 
   return (
     <section
@@ -365,9 +456,11 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
       ref={containerRef}
       className="relative bg-white text-[#0E1117] py-8 sm:py-12 min-h-[calc(100vh-60px)] flex flex-col justify-center overflow-hidden border-t border-black/[0.05] selection:bg-[#F15A24] selection:text-white"
     >
-      {/* 1. Spatial Linework & Coordinate Architecture Background (Clean Studio White Theme) */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
-        <div className="absolute top-1/4 left-1/3 w-[750px] h-[750px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.025)_0%,rgba(255,255,255,0)_100%)]" />
+      {/* 1. Spatial Linework & Multi-Color Aurora Ambient Lighting Background */}      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden select-none">
+        {/* Soft Warm Ambient Light Blooms */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-amber-400/8 to-transparent blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-to-tl from-orange-500/8 to-transparent blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.035)_0%,rgba(255,255,255,0)_100%)]" />
         
         {/* Spatial Grid Pattern */}
         <svg className="absolute inset-0 w-full h-full opacity-60" xmlns="http://www.w3.org/2000/svg">
@@ -379,33 +472,33 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
           </defs>
           <rect width="100%" height="100%" fill="url(#brandsGrid)" />
           
-          <circle cx="50%" cy="50%" r="360" fill="none" stroke="rgba(241, 90, 36, 0.035)" strokeWidth="1.2" strokeDasharray="8 8" />
-          <circle cx="50%" cy="50%" r="560" fill="none" stroke="rgba(15, 23, 42, 0.02)" strokeWidth="1" />
+          <circle cx="50%" cy="50%" r="360" fill="none" stroke="rgba(241, 90, 36, 0.04)" strokeWidth="1.2" strokeDasharray="8 8" />
+          <circle cx="50%" cy="50%" r="560" fill="none" stroke="rgba(245, 158, 11, 0.03)" strokeWidth="1" />
         </svg>
 
         {/* Minimal Precision Corner Accents */}
         <div className="absolute top-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M1 13V1H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="1" cy="1" r="1.5" fill="#F15A24" />
+            <circle cx="1" cy="1" r="2" fill="#06B6D4" />
           </svg>
         </div>
         <div className="absolute top-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M13 13V1H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="13" cy="1" r="1.5" fill="#F15A24" />
+            <circle cx="13" cy="1" r="2" fill="#F59E0B" />
           </svg>
         </div>
         <div className="absolute bottom-6 left-6 sm:left-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M1 1V13H13" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="1" cy="13" r="1.5" fill="#F15A24" />
+            <circle cx="1" cy="1" r="2" fill="#10B981" />
           </svg>
         </div>
         <div className="absolute bottom-6 right-6 sm:right-10 text-black/15 pointer-events-none select-none">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M13 1V13H1" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-            <circle cx="13" cy="13" r="1.5" fill="#F15A24" />
+            <circle cx="13" cy="1" r="2" fill="#F15A24" />
           </svg>
         </div>
       </div>
@@ -416,7 +509,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
         <div className="max-w-3xl mb-4 sm:mb-5 text-left">
           
           {/* Eyebrow Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#FAFBFD] px-3 py-1 rounded-full border border-black/[0.08] shadow-2xs mb-2">
+          <div className="inline-flex items-center gap-2 bg-orange-50/90 px-3.5 py-1 rounded-full border border-orange-200/80 shadow-2xs mb-2">
             <span className="w-2 h-[2px] bg-[#F15A24] rounded-full" />
             <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
               SERVICES &amp; SUPPORTED BRANDS
@@ -426,9 +519,9 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
           {/* Main Headline */}
           <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.4rem)] text-[#0E1117] leading-[1.1] tracking-tight mb-2 select-none">
             Expert Multi-Brand<br />
-            <span className="text-[#F15A24] relative inline-block">
+            <span className="text-[#F15A24] relative inline-block font-black">
               Sales, Services &amp; Solutions.
-              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/15 rounded-full" />
+              <span className="absolute left-0 bottom-0.5 w-full h-1 bg-[#F15A24]/20 rounded-full" />
             </span>
           </h2>
         </div>
@@ -453,11 +546,11 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 }}
                 className={`px-3.5 py-1.5 rounded-lg font-heading text-[0.80rem] sm:text-[0.84rem] font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer flex items-center gap-2 ${
                   isSelected
-                    ? 'bg-[#F15A24] text-white shadow-orange-cta scale-[1.02]'
+                    ? `${cat.activeBg} scale-[1.02]`
                     : 'bg-[#FAFBFD] hover:bg-slate-100 text-[#4A5364] hover:text-[#0E1117] border border-black/[0.06] hover:border-black/15 shadow-2xs'
                 }`}
               >
-                <Icon size={14} className={isSelected ? 'text-white' : 'text-[#F15A24]'} />
+                <Icon size={14} className={isSelected ? 'text-white' : cat.iconColor} />
                 <span>{cat.label}</span>
                 <span
                   className={`font-mono text-[0.66rem] px-1.5 py-0.2 rounded-full ${
@@ -475,10 +568,12 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
           {/* LEFT/CENTER: 3D Spatial Floating in Air Canvas (8 Columns on LG) */}
-          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] relative min-h-0 md:min-h-[520px] p-4 sm:p-5 flex flex-col justify-between select-none">
+          <div className="lg:col-span-8 bg-[#FAFBFD] rounded-2xl border border-black/[0.08] shadow-[0_12px_40px_rgba(15,23,42,0.04)] relative min-h-0 md:min-h-[520px] p-4 sm:p-5 flex flex-col justify-between select-none overflow-hidden">
             
-            {/* Ambient Radial Ring Lighting inside the Arena */}
-            <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.04)_0%,rgba(250,251,253,0)_100%)] pointer-events-none rounded-3xl" />
+            {/* Ambient Dynamic Glow inside the Arena */}
+            <div className="absolute inset-0 bg-[radial-gradient(50%_50%_at_50%_50%,rgba(241,90,36,0.05)_0%,rgba(250,251,253,0)_100%)] pointer-events-none rounded-3xl" />
+            <div className="absolute -top-10 -right-10 w-48 h-48 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="absolute -bottom-10 -left-10 w-48 h-48 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none" />
 
             {/* Arena Header Coordinates */}
             <div className="flex items-center justify-between gap-4 z-20 mb-3 pb-3 border-b border-black/[0.05]">
@@ -493,7 +588,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
               </div>
 
               <div className="font-mono text-[0.68rem] text-[#828E9E] flex items-center gap-1.5">
-                <Sparkles size={12} className="text-[#F15A24]" />
+                <Sparkles size={12} className="text-[#F15A24] animate-spin" style={{ animationDuration: '4s' }} />
                 <span>Hover / Click Any Logo to Inspect Services</span>
               </div>
             </div>
@@ -509,7 +604,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 <div className="absolute w-[320px] h-[320px] sm:w-[440px] sm:h-[440px] md:w-[500px] md:h-[500px] rounded-full border border-black/[0.035]" />
                 
                 {/* Core Center Emblem */}
-                <div className="bg-white/95 backdrop-blur-md px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-[#F15A24]/20 shadow-[0_4px_20px_rgba(241,90,36,0.10)] flex items-center gap-1.5 sm:gap-2">
+                <div className="bg-white/95 backdrop-blur-md px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-full border border-black/[0.08] shadow-[0_4px_20px_rgba(241,90,36,0.10)] flex items-center gap-1.5 sm:gap-2">
                   <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#F15A24] animate-pulse" />
                   <span className="font-mono text-[0.55rem] sm:text-[0.66rem] md:text-[0.70rem] font-extrabold text-[#0E1117] tracking-wider uppercase whitespace-nowrap">
                     {activeTab === 'all' ? 'CENTRAL TECH HUB' : `${categories.find(c => c.id === activeTab)?.label} CORE`}
@@ -556,7 +651,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                       onMouseEnter={() => setHoveredBrandId(brand.id)}
                       onMouseLeave={() => setHoveredBrandId(null)}
                     >
-                      {/* Floating Brand Card with Crisp White Drop Shadow */}
+                      {/* Floating Brand Card with Crisp White Drop Shadow & Category Glow */}
                       <div
                         className={`relative bg-white border transition-all duration-300 flex flex-col items-center justify-center text-center ${
                           activeTab === 'all'
@@ -564,8 +659,8 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                             : 'p-2 sm:p-4 md:p-6 rounded-xl sm:rounded-2xl md:rounded-3xl min-w-[95px] sm:min-w-[145px] md:min-w-[210px] max-w-[130px] sm:max-w-[185px] md:max-w-[240px]'
                         } ${
                           isHovered
-                            ? 'border-[#F15A24] bg-[#FFF9F6] shadow-[0_12px_32px_rgba(241,90,36,0.25)] ring-2 ring-[#F15A24]/30'
-                            : 'border-black/[0.08] shadow-[0_6px_18px_rgba(15,23,42,0.06)] hover:border-[#F15A24]/40 hover:shadow-[0_10px_28px_rgba(241,90,36,0.14)]'
+                            ? activeCategoryTheme.activeRing
+                            : 'border-black/[0.08] shadow-[0_6px_18px_rgba(15,23,42,0.06)] hover:border-black/20 hover:shadow-[0_10px_28px_rgba(15,23,42,0.12)]'
                         }`}
                       >
                         {/* Logo Image Container */}
@@ -578,7 +673,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                         >
                           <img
                             src={brand.logo}
-                            alt={`${brand.name} Authorized Service & Sales`}
+                            alt={`${brand.name} Service & Sales`}
                             className="max-h-full max-w-full object-contain select-none transition-transform duration-200"
                             loading="lazy"
                           />
@@ -591,22 +686,22 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                               ? 'text-[0.58rem] sm:text-[0.72rem] md:text-[0.78rem] mt-0.5 sm:mt-1'
                               : 'text-[0.78rem] sm:text-[0.96rem] md:text-[1.12rem] font-extrabold mt-1 sm:mt-2.5'
                           } ${
-                            isHovered ? 'text-[#F15A24]' : 'text-[#0E1117]'
+                            isHovered ? activeCategoryTheme.activeBorder : 'text-[#0E1117]'
                           }`}
                         >
                           {brand.name}
                         </span>
 
-                        {/* Category-Specific Badge */}
+                        {/* Category-Specific Badge (Only Epson and TVS are Authorized) */}
                         {activeTab !== 'all' && (
                           <span className="font-mono text-[0.52rem] sm:text-[0.62rem] md:text-[0.68rem] text-slate-400 mt-0.5 sm:mt-1 uppercase tracking-wider hidden sm:block">
-                            Authorized Spares
+                            {['epson', 'tvs'].includes(brand.id.toLowerCase()) ? 'Authorized Partner' : 'Genuine Spares'}
                           </span>
                         )}
 
                         {/* Mini Verified Dot */}
                         {isHovered && (
-                          <div className="absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 bg-[#F15A24] text-white rounded-full flex items-center justify-center shadow-xs text-[0.52rem] sm:text-[0.65rem] font-bold animate-pulse">
+                          <div className={`absolute -top-1 -right-1 sm:-top-1.5 sm:-right-1.5 w-3.5 h-3.5 sm:w-4.5 sm:h-4.5 ${activeCategoryTheme.verifiedBg} text-white rounded-full flex items-center justify-center shadow-xs text-[0.52rem] sm:text-[0.65rem] font-bold animate-pulse`}>
                             ✓
                           </div>
                         )}
@@ -620,7 +715,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
             {/* Floating Arena Footer Status Bar */}
             <div className="pt-3 mt-2 border-t border-black/[0.05] flex items-center justify-between text-[0.78rem] text-slate-500 z-20">
               <span className="flex items-center gap-1.5">
-                <ShieldCheck size={14} className="text-[#F15A24]" />
+                <ShieldCheck size={14} className="text-emerald-600" />
                 <span className="font-medium text-[#0E1117]">100% Genuine Box-Pack &amp; Certified Component Spares</span>
               </span>
               <span className="font-mono text-[0.7rem] text-[#F15A24] font-semibold hidden sm:inline">
@@ -637,7 +732,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
             <div className="bg-white rounded-3xl border border-black/[0.08] p-6 sm:p-7 shadow-[0_12px_40px_rgba(15,23,42,0.05)] text-left relative overflow-hidden transition-all duration-300">
               
               {/* Brand Top Highlight Accent */}
-              <div className="h-1 w-full bg-gradient-to-r from-[#F15A24] via-[#FF7844] to-[#F15A24] absolute top-0 left-0 right-0" />
+              <div className={`h-1.5 w-full bg-gradient-to-r ${activeCategoryTheme.accentGradient} absolute top-0 left-0 right-0`} />
 
               {/* Logo Header Banner */}
               <div className="flex items-center justify-between gap-4 mb-5 pt-2">
@@ -650,7 +745,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 </div>
 
                 <div className="text-right">
-                  <span className="font-mono text-[0.64rem] font-bold tracking-wider bg-[#FFF2EB] text-[#F15A24] px-2.5 py-1 rounded-full uppercase border border-[#F15A24]/15 block">
+                  <span className={`font-mono text-[0.64rem] font-bold tracking-wider ${activeCategoryTheme.badgeBg} px-2.5 py-1 rounded-full uppercase border block`}>
                     {activeSelectedBrand.warrantyBadge}
                   </span>
                   <span className="font-mono text-[0.66rem] text-slate-400 mt-1 block">
@@ -677,7 +772,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 <div className="space-y-2.5">
                   {activeSelectedBrand.serviceOfferings.map((offering, i) => (
                     <div key={i} className="flex items-start gap-2.5 text-[0.85rem] text-[#0E1117] font-medium">
-                      <CheckCircle2 size={15} className="text-[#F15A24] flex-shrink-0 mt-0.5" />
+                      <CheckCircle2 size={15} className="text-emerald-600 flex-shrink-0 mt-0.5" />
                       <span>{offering}</span>
                     </div>
                   ))}
@@ -689,7 +784,7 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenAvailability(`${activeSelectedBrand.name} ${activeSelectedBrand.categoryLabel}`)}
-                  className="w-full py-3.5 bg-[#F15A24] hover:bg-[#D94814] active:bg-[#C03C0D] text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-orange-cta transition-all duration-200 hover:shadow-orange-hover hover:-translate-y-0.5 cursor-pointer"
+                  className={`w-full py-3.5 ${activeCategoryTheme.buttonBg} text-white font-semibold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:-translate-y-0.5 cursor-pointer`}
                 >
                   <span>Book {activeSelectedBrand.name} Service / Enquiry</span>
                   <ArrowRight size={15} />
@@ -704,21 +799,6 @@ export const ProductVisualShowcase: React.FC<ProductVisualShowcaseProps> = ({
                 </a>
               </div>
 
-            </div>
-
-            {/* Quick Consultation Badge */}
-            <div className="bg-[#FAFBFD] rounded-2xl border border-black/[0.06] p-4 flex items-center gap-3.5 text-left shadow-2xs">
-              <div className="w-10 h-10 rounded-xl bg-[#FFF2EB] text-[#F15A24] flex items-center justify-center flex-shrink-0">
-                <PhoneCall size={18} />
-              </div>
-              <div className="leading-tight">
-                <span className="font-heading font-bold text-[0.88rem] text-[#0E1117] block">
-                  Need Immediate Technical Assistance?
-                </span>
-                <span className="text-[0.78rem] text-slate-500 mt-0.5 block">
-                  Call or visit our direct tech desk on Main Road, Powerpet, Eluru.
-                </span>
-              </div>
             </div>
 
           </div>
