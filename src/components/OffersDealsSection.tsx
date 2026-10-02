@@ -1,18 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ChevronLeft, 
   ChevronRight, 
   Sparkles, 
-  Tag, 
   ArrowRight, 
-  Plus, 
-  Upload, 
-  Trash2, 
-  Flame,
-  CheckCircle2,
-  X
+  Flame
 } from 'lucide-react';
-
 import { db, collection, onSnapshot } from '../firebase';
 
 export interface OfferSlide {
@@ -72,14 +65,6 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
-
-  // Upload Form State
-  const [newImage, setNewImage] = useState('');
-  const [newTitle, setNewTitle] = useState('');
-  const [newBadge, setNewBadge] = useState('SPECIAL OFFER');
-  const [newDescription, setNewDescription] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Real-time Cloud Sync from Firebase Firestore
   useEffect(() => {
@@ -106,7 +91,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
           }
         },
         () => {
-          // Fallback gracefully to local storage if Firestore isn't created yet
+          // Fallback gracefully to local storage if Firestore isn't reachable
         }
       );
       return () => unsub();
@@ -145,54 +130,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
     setCurrentIndex((prev) => (prev + 1) % offers.length);
   };
 
-  const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setNewImage(event.target.result as string);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleAddOffer = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newImage || !newDescription) return;
-
-    const newOffer: OfferSlide = {
-      id: Date.now().toString(),
-      image: newImage,
-      badge: newBadge.trim() || 'LATEST OFFER',
-      offerTitle: newTitle.trim() || 'Special Showroom Deal',
-      description: newDescription.trim(),
-    };
-
-    const updated = [newOffer, ...offers];
-    setOffers(updated);
-    localStorage.setItem('gc_offers_slides', JSON.stringify(updated));
-    setCurrentIndex(0);
-    setIsUploadOpen(false);
-    setNewImage('');
-    setNewTitle('');
-    setNewBadge('SPECIAL OFFER');
-    setNewDescription('');
-  };
-
-  const handleDeleteCurrent = () => {
-    if (offers.length <= 1) {
-      alert('You must keep at least one active offer in the slider.');
-      return;
-    }
-    const updated = offers.filter((_, idx) => idx !== currentIndex);
-    setOffers(updated);
-    localStorage.setItem('gc_offers_slides', JSON.stringify(updated));
-    setCurrentIndex(0);
-  };
-
-  const currentOffer = offers[currentIndex] || offers[0];
+  const currentOffer = offers[currentIndex] || offers[0] || DEFAULT_OFFERS[0];
 
   // Dynamic colorful badge styling based on badge keyword
   const getBadgeStyle = (badgeText?: string) => {
@@ -240,44 +178,19 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
       <div className="relative z-10 max-w-[1140px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Clean Minimal Header */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-2.5 mb-4 sm:mb-5 text-center sm:text-left">
-          <div>
-            <div className="inline-flex items-center gap-1.5 bg-orange-50/90 px-3.5 py-0.5 rounded-full border border-orange-200/80 shadow-2xs mb-1">
-              <Flame className="w-3.5 h-3.5 text-[#F15A24] animate-bounce" />
-              <span className="font-mono text-[0.64rem] font-bold tracking-[0.14em] text-[#F15A24] uppercase">
-                SHOWROOM EXCLUSIVES &amp; PROMOS
-              </span>
-            </div>
-            <h2 className="font-heading font-extrabold text-[clamp(1.4rem,2.4vw,1.9rem)] text-[#0E1117] tracking-tight leading-tight">
-              Latest Offers &amp;{' '}
-              <span className="text-[#F15A24] font-black">
-                Special Deals.
-              </span>
-            </h2>
+        <div className="flex flex-col items-center justify-center mb-5 sm:mb-6 text-center">
+          <div className="inline-flex items-center gap-1.5 bg-orange-50/90 px-3.5 py-0.5 rounded-full border border-orange-200/80 shadow-2xs mb-1.5">
+            <Flame className="w-3.5 h-3.5 text-[#F15A24] animate-bounce" />
+            <span className="font-mono text-[0.64rem] font-bold tracking-[0.14em] text-[#F15A24] uppercase">
+              SHOWROOM EXCLUSIVES &amp; PROMOS
+            </span>
           </div>
-
-          {/* Upload New Offer Action */}
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setIsUploadOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-50 hover:bg-amber-100/90 text-amber-900 border border-amber-300/80 hover:border-amber-400 font-semibold text-[0.76rem] rounded-lg shadow-2xs transition-all duration-200 hover:-translate-y-0.5 cursor-pointer"
-            >
-              <Upload size={12} className="text-amber-700" />
-              <span>Upload Offer</span>
-            </button>
-
-            {offers.length > 1 && (
-              <button
-                type="button"
-                onClick={handleDeleteCurrent}
-                title="Remove this offer"
-                className="p-1.5 bg-white hover:bg-red-50 text-slate-400 hover:text-red-500 border border-black/10 rounded-lg transition-colors cursor-pointer"
-              >
-                <Trash2 size={14} />
-              </button>
-            )}
-          </div>
+          <h2 className="font-heading font-extrabold text-[clamp(1.5rem,2.5vw,2.1rem)] text-[#0E1117] tracking-tight leading-tight">
+            Latest Offers &amp;{' '}
+            <span className="text-[#F15A24] font-black">
+              Special Deals.
+            </span>
+          </h2>
         </div>
 
         {/* 3. Main Featured Slider Container */}
@@ -342,7 +255,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             </button>
           </div>
 
-          {/* 4. Small One-Line Description Bar (Below the Image) */}
+          {/* 4. Description Bar (Below the Image) */}
           <div className="p-3.5 sm:p-4 px-5 sm:px-6 bg-white border-t border-black/[0.06] flex flex-col sm:flex-row items-center justify-between gap-3">
             
             {/* Description Text */}
@@ -387,129 +300,6 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
         </div>
 
       </div>
-
-      {/* 6. Upload Offer Modal */}
-      {isUploadOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-black/10 relative text-left">
-            
-            <button
-              type="button"
-              onClick={() => setIsUploadOpen(false)}
-              className="absolute top-5 right-5 p-1.5 text-slate-400 hover:text-black rounded-lg transition-colors cursor-pointer"
-            >
-              <X size={20} />
-            </button>
-
-            <div className="flex items-center gap-2.5 mb-5">
-              <div className="w-9 h-9 rounded-xl bg-[#FFF2EB] text-[#F15A24] flex items-center justify-center">
-                <Upload size={18} />
-              </div>
-              <div>
-                <h3 className="font-heading font-bold text-[1.15rem] text-[#0E1117]">
-                  Upload New Offer Slide
-                </h3>
-                <p className="text-[0.8rem] text-slate-500">
-                  Select any promotional image and write a one-line description.
-                </p>
-              </div>
-            </div>
-
-            <form onSubmit={handleAddOffer} className="space-y-4">
-              {/* Image Input */}
-              <div>
-                <label className="block text-[0.82rem] font-semibold text-[#0E1117] mb-1.5">
-                  Offer Image <span className="text-[#F15A24]">*</span>
-                </label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={fileInputRef}
-                  onChange={handleImageFile}
-                  className="hidden"
-                />
-                <button
-                  type="button"
-                  onClick={() => fileInputRef.current?.click()}
-                  className="w-full border-2 border-dashed border-black/15 hover:border-[#F15A24]/50 rounded-xl p-4 text-center bg-slate-50/60 hover:bg-[#FFF2EB]/30 transition-all cursor-pointer flex flex-col items-center justify-center gap-2"
-                >
-                  {newImage ? (
-                    <div className="relative w-full h-32 flex items-center justify-center">
-                      <img src={newImage} alt="Preview" className="max-h-full max-w-full object-contain rounded-lg" />
-                      <span className="absolute bottom-1 bg-black/75 text-white text-[0.65rem] px-2 py-0.5 rounded">
-                        Click to change
-                      </span>
-                    </div>
-                  ) : (
-                    <>
-                      <Upload className="w-6 h-6 text-[#F15A24]" />
-                      <span className="text-[0.84rem] text-slate-600 font-medium">
-                        Click to select image file from computer
-                      </span>
-                    </>
-                  )}
-                </button>
-              </div>
-
-              {/* Title Input */}
-              <div>
-                <label className="block text-[0.82rem] font-semibold text-[#0E1117] mb-1">
-                  Offer Title
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Weekend Mega Workstation Sale"
-                  value={newTitle}
-                  onChange={(e) => setNewTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.9rem] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
-                />
-              </div>
-
-              {/* Badge Input */}
-              <div>
-                <label className="block text-[0.82rem] font-semibold text-[#0E1117] mb-1">
-                  Offer Tag / Badge
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. FLAT 25% OFF · LIMITED STOCK"
-                  value={newBadge}
-                  onChange={(e) => setNewBadge(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.9rem] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
-                />
-              </div>
-
-              {/* One-line Description */}
-              <div>
-                <label className="block text-[0.82rem] font-semibold text-[#0E1117] mb-1">
-                  One-Line Description <span className="text-[#F15A24]">*</span>
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="e.g. Save ₹10,000 on custom workstation builds with 3-year on-site warranty."
-                  value={newDescription}
-                  onChange={(e) => setNewDescription(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-black/15 bg-white text-[0.9rem] focus:border-[#F15A24] focus:ring-2 focus:ring-[#F15A24]/10 outline-none transition-all"
-                />
-              </div>
-
-              {/* Submit Button */}
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={!newImage || !newDescription}
-                  className="w-full py-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 disabled:opacity-50 disabled:cursor-not-allowed text-[#0E1117] font-bold text-[0.92rem] rounded-xl flex items-center justify-center gap-2 shadow-yellow-cta transition-all cursor-pointer"
-                >
-                  <Plus size={16} />
-                  <span>Publish Slide to Offers Section</span>
-                </button>
-              </div>
-            </form>
-
-          </div>
-        </div>
-      )}
 
     </section>
   );
