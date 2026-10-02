@@ -54,7 +54,7 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const randomCode = Math.floor(10000 + Math.random() * 90000);
     const catPrefix = category.slice(0, 3).toUpperCase();
@@ -75,8 +75,13 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
 
     // Save lead into Firebase Cloud Firestore
     try {
-      addDoc(collection(db, 'enquiries'), newLead).catch(() => {});
-    } catch (err) {}
+      if (db) {
+        await addDoc(collection(db, 'enquiries'), newLead);
+        console.log("✅ Availability enquiry synced to Firebase Firestore:", newLead);
+      }
+    } catch (err) {
+      console.error("❌ Firestore save error:", err);
+    }
 
     // Also save into localStorage
     try {

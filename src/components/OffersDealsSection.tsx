@@ -22,17 +22,17 @@ interface OffersDealsSectionProps {
 
 const DEFAULT_OFFERS: OfferSlide[] = [
   {
-    id: 'offer-1',
+    id: 'offer-banner-1',
     badge: 'EXCLUSIVE SHOWROOM DEAL',
-    offerTitle: 'Next-Gen Performance Rig & Workstation Specials',
-    image: '/assets/special_offer_1.jpg',
+    offerTitle: 'Next-Gen Custom Rig & Hardware Mega Specials',
+    image: '/assets/special_offer_1.png',
     description: 'Special Launch Offer: Premium Custom PC Builds with Genuine Warranty, High-Speed Performance & Zero-Cost Assembly.',
   },
   {
-    id: 'offer-2',
+    id: 'offer-banner-2',
     badge: 'FESTIVE COMBO OFFER',
     offerTitle: 'Ultra Pro Computing & Accessories Showcase',
-    image: '/assets/special_offer_2.jpg',
+    image: '/assets/special_offer_2.png',
     description: 'Limited Period Clearance: Best Price Guarantee on Gaming Monitors, Mechanical Keyboards, and Enterprise Hardware in Eluru.',
   },
   {
@@ -68,7 +68,7 @@ const DEFAULT_OFFERS: OfferSlide[] = [
 export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEnquiry }) => {
   const [offers, setOffers] = useState<OfferSlide[]>(() => {
     try {
-      const saved = localStorage.getItem('gc_offers_slides');
+      const saved = localStorage.getItem('gc_offers_slides_v3');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -100,7 +100,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
             });
             if (remoteOffers.length > 0) {
               setOffers(remoteOffers);
-              localStorage.setItem('gc_offers_slides', JSON.stringify(remoteOffers));
+              localStorage.setItem('gc_offers_slides_v3', JSON.stringify(remoteOffers));
             }
           }
         },
@@ -217,7 +217,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
           <div className="h-1.5 w-full bg-gradient-to-r from-[#F15A24] via-amber-400 to-[#F15A24]" />
 
           {/* Image Slide Area */}
-          <div className="relative w-full h-[210px] sm:h-[260px] md:h-[290px] bg-[#FAFBFD] flex items-center justify-center p-3 sm:p-6 overflow-hidden select-none">
+          <div className="relative w-full h-[280px] sm:h-[380px] md:h-[480px] lg:h-[520px] bg-[#FAFBFD] flex items-center justify-center p-2 sm:p-4 overflow-hidden select-none">
             
             {/* Background Multi-Color Gradient Glow */}
             <div className="absolute inset-0 bg-radial-aurora pointer-events-none opacity-60" />
@@ -228,7 +228,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
                 key={currentOffer.id}
                 src={currentOffer.image}
                 alt={currentOffer.offerTitle || 'Latest Offer'}
-                className="max-h-full max-w-full object-contain drop-shadow-[0_16px_28px_rgba(15,23,42,0.1)] animate-in fade-in zoom-in-95 duration-400"
+                className="max-h-full max-w-full w-auto object-contain rounded-xl drop-shadow-[0_16px_28px_rgba(15,23,42,0.1)] animate-in fade-in zoom-in-95 duration-400"
                 loading="eager"
               />
             </div>
