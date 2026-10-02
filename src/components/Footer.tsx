@@ -45,7 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
               </div>
               <div className="flex items-center gap-2.5">
                 <Phone size={15} className="text-[#FF7844] flex-shrink-0" />
-                <span className="text-white font-bold tracking-wide">+91 98481 23456</span>
+                <span className="text-white font-bold tracking-wide">+91 70938 97614</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Clock size={15} className="text-[#FF7844] flex-shrink-0" />

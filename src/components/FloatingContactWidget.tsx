@@ -10,8 +10,8 @@ const WhatsAppIcon: React.FC<{ size?: number; className?: string }> = ({ size = 
 export const FloatingContactWidget: React.FC = () => {
   const [hoveredBtn, setHoveredBtn] = useState<'call' | 'whatsapp' | null>(null);
 
-  const phoneNumber = '+919848123456';
-  const whatsappUrl = 'https://wa.me/919848123456?text=Hi%20Global%20Computers,%20I%20would%20like%20to%20inquire%20about%20products,%20pricing%20and%20tech%20support';
+  const phoneNumber = '+917093897614';
+  const whatsappUrl = 'https://wa.me/917093897614?text=Hi%20Global%20Computers,%20I%20would%20like%20to%20inquire%20about%20products,%20pricing%20and%20tech%20support';
 
   return (
     <aside aria-label="Quick contact links" className="fixed bottom-5 right-5 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3 pointer-events-auto select-none">
@@ -25,14 +25,14 @@ export const FloatingContactWidget: React.FC = () => {
             hoveredBtn === 'call' ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2'
           }`}
         >
-          <span>Call: <strong className="font-semibold text-blue-400">+91 98481 23456</strong></span>
+          <span>Call: <strong className="font-semibold text-blue-400">+91 70938 97614</strong></span>
           <div className="absolute right-[-4px] top-1/2 -translate-y-1/2 w-2 h-2 bg-[#0E1117] rotate-45" />
         </div>
 
         {/* Button */}
         <a
           href={`tel:${phoneNumber}`}
-          aria-label="Call Global Computers at +91 98481 23456"
+          aria-label="Call Global Computers at +91 70938 97614"
           onMouseEnter={() => setHoveredBtn('call')}
           onMouseLeave={() => setHoveredBtn(null)}
           className="group w-12 h-12 sm:w-13 sm:h-13 rounded-full bg-[#0066FF] hover:bg-[#0055DD] text-white flex items-center justify-center shadow-[0_8px_20px_rgba(0,102,255,0.32)] hover:shadow-[0_12px_24px_rgba(0,102,255,0.42)] hover:scale-105 active:scale-95 transition-all duration-200 border-2 border-white focus:outline-hidden focus:ring-3 focus:ring-blue-300"

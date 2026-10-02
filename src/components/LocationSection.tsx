@@ -128,7 +128,7 @@ export const LocationSection: React.FC<LocationSectionProps> = ({
                     DIRECT DESK &amp; ASSISTANCE
                   </div>
                   <div className="font-heading font-bold text-[1rem] text-[#0E1117]">
-                    +91 98481 23456
+                    +91 70938 97614
                   </div>
                   <div className="text-[0.82rem] text-[#64748B] mt-0.5">
                     Available during showroom operational hours
