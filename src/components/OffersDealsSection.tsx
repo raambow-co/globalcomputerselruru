@@ -22,6 +22,20 @@ interface OffersDealsSectionProps {
 
 const DEFAULT_OFFERS: OfferSlide[] = [
   {
+    id: 'offer-1',
+    badge: 'EXCLUSIVE SHOWROOM DEAL',
+    offerTitle: 'Next-Gen Performance Rig & Workstation Specials',
+    image: '/assets/special_offer_1.jpg',
+    description: 'Special Launch Offer: Premium Custom PC Builds with Genuine Warranty, High-Speed Performance & Zero-Cost Assembly.',
+  },
+  {
+    id: 'offer-2',
+    badge: 'FESTIVE COMBO OFFER',
+    offerTitle: 'Ultra Pro Computing & Accessories Showcase',
+    image: '/assets/special_offer_2.jpg',
+    description: 'Limited Period Clearance: Best Price Guarantee on Gaming Monitors, Mechanical Keyboards, and Enterprise Hardware in Eluru.',
+  },
+  {
     id: '1',
     badge: 'MEGA COMBO DEAL',
     offerTitle: 'Creator Studio 4K Workstation Bundle',

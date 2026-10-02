@@ -68,7 +68,7 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
 
@@ -89,8 +89,13 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
 
     // Save lead into Firebase Cloud Firestore
     try {
-      addDoc(collection(db, 'enquiries'), newLead).catch(() => {});
-    } catch (err) {}
+      if (db) {
+        await addDoc(collection(db, 'enquiries'), newLead);
+        console.log("✅ Enquiry synced to Firebase Firestore:", newLead);
+      }
+    } catch (err) {
+      console.error("❌ Firestore save error:", err);
+    }
 
     // Also save into localStorage for instant local reflection
     try {
