@@ -37,7 +37,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
               Delivering verified genuine computer hardware, enterprise workstation setups, high-efficiency print fleets, and dependable technology support in Eluru.
             </p>
 
-            {/* Quick Showroom Metadata (Hidden on Mobile for a clean minimal footer) */}
+            {/* Quick Showroom Metadata */}
             <div className="hidden sm:grid sm:grid-cols-3 gap-3 text-[0.84rem] text-slate-200 pt-4 border-t border-white/10">
               <div className="flex items-start gap-2.5">
                 <MapPin size={15} className="text-[#FF7844] flex-shrink-0 mt-0.5" />
@@ -98,7 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
 
       </div>
 
-      {/* 3. Bottom Legal & Architectural Coordinate Strip (Deep Dark Theme) */}
+      {/* 3. Bottom Legal & Architectural Coordinate Strip */}
       <div className="border-t border-white/15 bg-[#05070B] py-8">
         <div className="max-w-[1360px] mx-auto px-6 sm:px-10 lg:px-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           

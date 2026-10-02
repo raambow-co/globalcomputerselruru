@@ -17,6 +17,7 @@ interface ProductItem {
   hotspotLabel?: string;
   dropShadowClass: string;
   animationClass: string;
+  shadowAnimationClass: string;
 }
 
 export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
@@ -149,7 +150,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
   }, [activeTooltip]);
 
   const products: ProductItem[] = [
-    // 1. Background Anchor Left Upper: Motherboard (Moved down for navbar clearance, increased mobile size)
+    // 1. Background Anchor Left Upper: Motherboard
     {
       id: 'motherboard',
       name: 'Gigabyte B760M Motherboard',
@@ -164,8 +165,9 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       hotspotStyle: { top: '35%', right: '-15px' },
       dropShadowClass: 'drop-shadow-motherboard',
       animationClass: 'animate-float-1',
+      shadowAnimationClass: 'animate-shadow-1',
     },
-    // 2. Foreground Hero Anchor Left Lower: Epson EcoTank All-in-One Printer (Increased mobile size)
+    // 2. Foreground Hero Anchor Left Lower: Epson EcoTank All-in-One Printer
     {
       id: 'printer',
       name: 'Epson EcoTank All-in-One Series',
@@ -180,8 +182,9 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       hotspotStyle: { bottom: '-10px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-printer',
       animationClass: 'animate-float-main',
+      shadowAnimationClass: 'animate-shadow-main',
     },
-    // 3. Foreground Hero Anchor Right Upper: Samsung Odyssey G5 Curved Display (Moved down for navbar clearance, increased mobile size)
+    // 3. Foreground Hero Anchor Right Upper: Samsung Odyssey G5 Curved Display
     {
       id: 'monitor',
       name: 'Samsung Odyssey G5 Curved Display',
@@ -196,8 +199,9 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       hotspotStyle: { top: '-10px', left: '50%', transform: 'translateX(-50%)' },
       dropShadowClass: 'drop-shadow-monitor',
       animationClass: 'animate-float-2',
+      shadowAnimationClass: 'animate-shadow-2',
     },
-    // 4. Foreground Hero Anchor Right Lower: Compact Mechanical Keyboard (Moved down & increased mobile size)
+    // 4. Foreground Hero Anchor Right Lower: Compact Mechanical Keyboard
     {
       id: 'keyboard',
       name: 'Mechanical RGB Gaming Keyboard',
@@ -212,6 +216,7 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
       hotspotStyle: { bottom: '-10px', right: '12%' },
       dropShadowClass: 'drop-shadow-keyboard',
       animationClass: 'animate-float-1',
+      shadowAnimationClass: 'animate-shadow-1',
     },
   ];
 
@@ -255,15 +260,28 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
               onMouseLeave={() => setActiveTooltip(null)}
               className={`absolute cursor-pointer pointer-events-auto transition-transform duration-300 ease-out hover:scale-105 hover:z-30 group ${prod.className}`}
             >
-              {/* Product Image with clean transparency and drop shadow */}
-              <div className={prod.animationClass}>
-                <img
-                  src={prod.image}
-                  alt={prod.name}
-                  className={`w-full h-auto select-none pointer-events-auto ${prod.dropShadowClass} transition-all duration-300`}
-                  loading="eager"
-                  decoding="async"
-                />
+              {/* Product Structure with Hardware & 3D Ground Shadow */}
+              <div className="relative flex flex-col items-center">
+                
+                {/* 1. Hardware Image Floating Layer */}
+                <div className={prod.animationClass}>
+                  <img
+                    src={prod.image}
+                    alt={prod.name}
+                    className={`w-full h-auto select-none pointer-events-auto ${prod.dropShadowClass} transition-all duration-300`}
+                    loading="eager"
+                    decoding="async"
+                  />
+                </div>
+
+                {/* 2. Realistic 3D Ground Floating Ambient Shadow beneath Hardware */}
+                <div className={`w-[85%] h-3 sm:h-4.5 mx-auto -mt-2 sm:-mt-3 pointer-events-none ${prod.shadowAnimationClass}`}>
+                  {/* Deep core elliptical contact shadow */}
+                  <div className="w-full h-full rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.48)_0%,rgba(15,23,42,0.22)_45%,transparent_75%)] blur-[3px] sm:blur-[5px]" />
+                  {/* Diffused wider ambient floor shadow */}
+                  <div className="w-[110%] -ml-[5%] h-full -mt-2 rounded-[100%] bg-[radial-gradient(ellipse_at_center,rgba(241,90,36,0.14)_0%,rgba(15,23,42,0.09)_50%,transparent_75%)] blur-[6px] sm:blur-[10px]" />
+                </div>
+
               </div>
 
               {/* Hotspot Pulse Badge */}

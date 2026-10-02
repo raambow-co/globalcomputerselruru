@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { db, collection, addDoc } from '../firebase';
 
 interface AvailabilityModalProps {
   isOpen: boolean;
@@ -58,6 +59,33 @@ export const AvailabilityModal: React.FC<AvailabilityModalProps> = ({
     const randomCode = Math.floor(10000 + Math.random() * 90000);
     const catPrefix = category.slice(0, 3).toUpperCase();
     setTrackingId(`GC-${randomCode}-${catPrefix}`);
+
+    const newLead = {
+      id: 'enq_' + Date.now(),
+      fullName: name.trim(),
+      phoneNumber: phone.trim(),
+      emailAddress: email.trim() || '',
+      requirementType: `Availability Check (${category})`,
+      productRequirement: model.trim() || `${category} - General Requirement`,
+      quantity: `${quantity} unit(s) (${timeline})`,
+      message: company.trim() ? `Company: ${company.trim()}` : '',
+      createdAt: new Date().toISOString(),
+      status: 'NEW',
+    };
+
+    // Save lead into Firebase Cloud Firestore
+    try {
+      addDoc(collection(db, 'enquiries'), newLead).catch(() => {});
+    } catch (err) {}
+
+    // Also save into localStorage
+    try {
+      const stored = localStorage.getItem('gc_customer_enquiries');
+      const list = stored ? JSON.parse(stored) : [];
+      list.unshift(newLead);
+      localStorage.setItem('gc_customer_enquiries', JSON.stringify(list));
+    } catch (err) {}
+
     setIsSubmitted(true);
   };
 

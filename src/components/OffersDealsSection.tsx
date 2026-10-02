@@ -13,6 +13,8 @@ import {
   X
 } from 'lucide-react';
 
+import { db, collection, onSnapshot } from '../firebase';
+
 export interface OfferSlide {
   id: string;
   image: string;
@@ -58,15 +60,13 @@ const DEFAULT_OFFERS: OfferSlide[] = [
 
 export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEnquiry }) => {
   const [offers, setOffers] = useState<OfferSlide[]>(() => {
-    const saved = localStorage.getItem('gc_offers_slides');
-    if (saved) {
-      try {
+    try {
+      const saved = localStorage.getItem('gc_offers_slides');
+      if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-      } catch (e) {
-        // use default
       }
-    }
+    } catch (e) {}
     return DEFAULT_OFFERS;
   });
 
@@ -81,10 +81,52 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
   const [newDescription, setNewDescription] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Save to localStorage when offers change
+  // Real-time Cloud Sync from Firebase Firestore
   useEffect(() => {
-    localStorage.setItem('gc_offers_slides', JSON.stringify(offers));
-  }, [offers]);
+    try {
+      const unsub = onSnapshot(
+        collection(db, 'offers'),
+        (snapshot) => {
+          if (!snapshot.empty) {
+            const remoteOffers: OfferSlide[] = [];
+            snapshot.forEach((doc) => {
+              const data = doc.data();
+              remoteOffers.push({
+                id: doc.id,
+                image: data.image || '',
+                badge: data.badge || 'SPECIAL OFFER',
+                offerTitle: data.offerTitle || '',
+                description: data.description || '',
+              });
+            });
+            if (remoteOffers.length > 0) {
+              setOffers(remoteOffers);
+              localStorage.setItem('gc_offers_slides', JSON.stringify(remoteOffers));
+            }
+          }
+        },
+        () => {
+          // Fallback gracefully to local storage if Firestore isn't created yet
+        }
+      );
+      return () => unsub();
+    } catch (e) {}
+  }, []);
+
+  // Sync with storage changes
+  useEffect(() => {
+    const handleStorage = () => {
+      try {
+        const saved = localStorage.getItem('gc_offers_slides');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) setOffers(parsed);
+        }
+      } catch (e) {}
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
 
   // Auto-play timer
   useEffect(() => {
@@ -128,7 +170,9 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
       description: newDescription.trim(),
     };
 
-    setOffers((prev) => [newOffer, ...prev]);
+    const updated = [newOffer, ...offers];
+    setOffers(updated);
+    localStorage.setItem('gc_offers_slides', JSON.stringify(updated));
     setCurrentIndex(0);
     setIsUploadOpen(false);
     setNewImage('');
@@ -144,6 +188,7 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
     }
     const updated = offers.filter((_, idx) => idx !== currentIndex);
     setOffers(updated);
+    localStorage.setItem('gc_offers_slides', JSON.stringify(updated));
     setCurrentIndex(0);
   };
 

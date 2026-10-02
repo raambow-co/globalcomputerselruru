@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle2, ChevronDown, Check, ShieldCheck, PhoneCall, Sparkles } from 'lucide-react';
+import { db, collection, addDoc } from '../firebase';
 
 interface EnquirySectionProps {
   initialProduct?: string;
@@ -72,6 +73,33 @@ export const EnquirySection: React.FC<EnquirySectionProps> = ({
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+
+    const newLead = {
+      id: 'enq_' + Date.now(),
+      fullName: fullName.trim(),
+      phoneNumber: phoneNumber.trim(),
+      emailAddress: emailAddress.trim() || '',
+      requirementType: requirementType || selectedQuickCategory,
+      productRequirement: productRequirement.trim(),
+      quantity: quantity.trim() || '',
+      message: message.trim() || '',
+      createdAt: new Date().toISOString(),
+      status: 'NEW',
+    };
+
+    // Save lead into Firebase Cloud Firestore
+    try {
+      addDoc(collection(db, 'enquiries'), newLead).catch(() => {});
+    } catch (err) {}
+
+    // Also save into localStorage for instant local reflection
+    try {
+      const stored = localStorage.getItem('gc_customer_enquiries');
+      const list = stored ? JSON.parse(stored) : [];
+      list.unshift(newLead);
+      localStorage.setItem('gc_customer_enquiries', JSON.stringify(list));
+    } catch (err) {}
+
     setTimeout(() => {
       setIsSubmitting(false);
       setIsSubmitted(true);

@@ -89,6 +89,40 @@
   will-change: opacity, transform;
 }
 
+/* Dynamic 3D Ground Floating Shadows */
+@keyframes shadowFloat1 {
+  0% { transform: scale(1, 1); opacity: 0.42; }
+  50% { transform: scale(0.80, 0.75); opacity: 0.22; }
+  100% { transform: scale(1.08, 1.05); opacity: 0.48; }
+}
+
+@keyframes shadowFloat2 {
+  0% { transform: scale(1, 1); opacity: 0.40; }
+  50% { transform: scale(0.82, 0.78); opacity: 0.20; }
+  100% { transform: scale(1.06, 1.04); opacity: 0.45; }
+}
+
+@keyframes shadowFloatMain {
+  0% { transform: scale(1, 1); opacity: 0.46; }
+  50% { transform: scale(0.82, 0.78); opacity: 0.24; }
+  100% { transform: scale(1.08, 1.05); opacity: 0.52; }
+}
+
+.animate-shadow-1 {
+  animation: shadowFloat1 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-shadow-2 {
+  animation: shadowFloat2 10s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-shadow-main {
+  animation: shadowFloatMain 11s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+  will-change: transform, opacity;
+}
+
 /* Accessible Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
   .animate-float-1,
