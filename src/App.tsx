@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { OffersDealsSection } from './components/OffersDealsSection';
 import { CustomerReviewsSection } from './components/CustomerReviewsSection';
+import { ShowroomGallerySection } from './components/ShowroomGallerySection';
 import { RatingsTrustSection } from './components/RatingsTrustSection';
 import { LeadershipSection } from './components/LeadershipSection';
 import { FAQSection } from './components/FAQSection';
@@ -48,7 +49,12 @@ export const App: React.FC = () => {
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Customer Feedback Inquiry')}
         />
 
-        {/* 3. Connect with Us on Social Media (4 QR Codes) */}
+        {/* 3. Showroom & Hardware Experience Showcase Gallery Slideshow */}
+        <ShowroomGallerySection
+          onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Showroom Hardware Inquiry')}
+        />
+
+        {/* 4. Connect with Us on Social Media (4 QR Codes) */}
         <RatingsTrustSection
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Social Channels Inquiry')}
         />
