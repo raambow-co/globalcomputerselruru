@@ -171,12 +171,8 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
             </span>
           </h2>
 
-          <p className="text-[0.84rem] sm:text-[0.94rem] text-slate-300 max-w-2xl font-normal leading-relaxed">
-            Explore authentic workstation assemblies, certified high-speed hardware, and flagship peripherals available for live demo at our Powerpet, Eluru showroom.
-          </p>
-
           {/* Category Filter Pills */}
-          <div className="flex items-center gap-1.5 sm:gap-2 mt-5 sm:mt-6 overflow-x-auto max-w-full pb-1 no-scrollbar">
+          <div className="flex items-center gap-1.5 sm:gap-2 mt-4 sm:mt-5 overflow-x-auto max-w-full pb-1 no-scrollbar">
             {categories.map((cat) => {
               const isActive = activeCategory === cat;
               return (
