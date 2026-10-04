@@ -247,12 +247,12 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
               style={{ backgroundImage: `url(${currentSlide.image})` }}
             />
 
-            {/* Fully Occupied Edge-to-Edge Image */}
+            {/* Fully Visible Uncropped Image with Ambient Background Glow */}
             <img
               key={currentSlide.id}
               src={currentSlide.image}
               alt={currentSlide.title}
-              className="relative z-10 w-full h-full object-cover animate-in fade-in zoom-in-95 duration-500 select-none"
+              className="relative z-10 max-h-full max-w-full object-contain animate-in fade-in zoom-in-95 duration-500 select-none"
               loading="eager"
             />
 
@@ -291,46 +291,28 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
             </button>
 
             {/* 4. Bottom Dark Gradient Shade / Scrim with Big White Text & Tagline */}
-            <div className="absolute inset-x-0 bottom-0 pt-32 pb-6 sm:pb-8 px-6 sm:px-10 bg-gradient-to-t from-black/95 via-black/80 to-transparent flex flex-col justify-end z-20 text-left">
+            <div className="absolute inset-x-0 bottom-0 pt-24 pb-5 sm:pb-6 px-6 sm:px-10 bg-gradient-to-t from-black/95 via-black/80 to-transparent flex flex-col justify-end z-20 text-left">
               
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                
-                {/* Text Content */}
-                <div className="max-w-3xl">
-                  
-                  {/* Eyebrow Tag */}
-                  {currentSlide.tag && (
-                    <div className="inline-flex items-center gap-2 mb-2 font-mono text-[0.66rem] sm:text-[0.72rem] font-extrabold tracking-widest uppercase px-3 py-0.5 rounded-full bg-white/10 text-amber-300 border border-white/15 backdrop-blur-md">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-                      <span>{currentSlide.tag}</span>
-                    </div>
-                  )}
+              <div className="max-w-4xl">
+                {/* Eyebrow Tag */}
+                {currentSlide.tag && (
+                  <div className="inline-flex items-center gap-2 mb-1.5 font-mono text-[0.66rem] sm:text-[0.72rem] font-extrabold tracking-widest uppercase px-3 py-0.5 rounded-full bg-white/10 text-amber-300 border border-white/15 backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                    <span>{currentSlide.tag}</span>
+                  </div>
+                )}
 
-                  {/* Big Headline Title in White */}
-                  <h3 className="font-heading font-black text-[1.35rem] sm:text-[1.8rem] md:text-[2.2rem] text-white leading-tight tracking-tight mb-2 drop-shadow-md">
-                    {currentSlide.title}
-                  </h3>
+                {/* Big Headline Title in White */}
+                <h3 className="font-heading font-black text-[1.35rem] sm:text-[1.8rem] md:text-[2.2rem] text-white leading-tight tracking-tight mb-1 drop-shadow-md">
+                  {currentSlide.title}
+                </h3>
 
-                  {/* Tagline / Subtitle in White */}
-                  {currentSlide.subtitle && (
-                    <p className="text-[0.85rem] sm:text-[0.95rem] text-slate-200 font-normal leading-relaxed drop-shadow max-w-2xl">
-                      {currentSlide.subtitle}
-                    </p>
-                  )}
-                </div>
-
-                {/* Direct Action Button on Bottom Right */}
-                <div className="flex items-center gap-3 flex-shrink-0 pt-2 md:pt-0">
-                  <button
-                    type="button"
-                    onClick={() => onOpenEnquiry && onOpenEnquiry(currentSlide.title)}
-                    className="px-6 py-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-slate-950 font-heading font-extrabold text-[0.88rem] rounded-xl flex items-center justify-center gap-2 shadow-yellow-cta transition-all duration-200 hover:scale-105 active:scale-95 cursor-pointer"
-                  >
-                    <span>Inquire Availability &amp; Price</span>
-                    <ArrowUpRight size={16} className="stroke-[2.5]" />
-                  </button>
-                </div>
-
+                {/* Tagline / Subtitle in White */}
+                {currentSlide.subtitle && (
+                  <p className="text-[0.85rem] sm:text-[0.95rem] text-slate-200 font-normal leading-relaxed drop-shadow max-w-3xl">
+                    {currentSlide.subtitle}
+                  </p>
+                )}
               </div>
 
             </div>
