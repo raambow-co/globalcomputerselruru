@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ShieldCheck, 
   Sparkles, 
@@ -10,8 +10,11 @@ import {
   Network, 
   PhoneCall, 
   CheckCircle2,
-  Plus
+  Plus,
+  Crown,
+  Star
 } from 'lucide-react';
+import { db, doc, onSnapshot } from '../firebase';
 
 interface LeadershipSectionProps {
   onOpenEnquiry?: (topic?: string) => void;
@@ -29,6 +32,50 @@ interface TeamMember {
 export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
   onOpenEnquiry,
 }) => {
+  const [bestEmployeeId, setBestEmployeeId] = useState<string | null>(() => {
+    try {
+      return localStorage.getItem('gc_best_employee_id');
+    } catch (e) {
+      return null;
+    }
+  });
+
+  // Real-time Firestore sync for Employee of the Month
+  useEffect(() => {
+    try {
+      const unsub = onSnapshot(doc(db, 'team_settings', 'employee_of_the_month'), (docSnap) => {
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          const id = data?.employeeId || null;
+          setBestEmployeeId(id);
+          if (id) {
+            localStorage.setItem('gc_best_employee_id', id);
+          } else {
+            localStorage.removeItem('gc_best_employee_id');
+          }
+        } else {
+          setBestEmployeeId(null);
+          localStorage.removeItem('gc_best_employee_id');
+        }
+      });
+      return () => unsub();
+    } catch (e) {
+      console.warn('Firestore employee of month listener error:', e);
+    }
+  }, []);
+
+  // Cross-tab storage sync
+  useEffect(() => {
+    const handleStorage = () => {
+      try {
+        const id = localStorage.getItem('gc_best_employee_id');
+        setBestEmployeeId(id);
+      } catch (e) {}
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
   const teamMembers: TeamMember[] = [
     {
       id: 'team-kamal',
@@ -246,39 +293,82 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
           <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
             {teamMembers.map((member) => {
               const Icon = member.icon;
+              const isBest = bestEmployeeId === member.id;
 
               return (
                 <div
                   key={member.id}
-                  className="min-w-[260px] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center group bg-white rounded-2xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-[#F15A24]/30 hover:shadow-[0_12px_30px_rgba(241,90,36,0.08)] flex flex-col justify-between text-left relative overflow-hidden"
+                  className={`min-w-[260px] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center group rounded-2xl p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between text-left relative overflow-hidden ${
+                    isBest
+                      ? 'bg-gradient-to-b from-[#FFFDF0] via-[#FFFBEB] to-[#FEF3C7] border-2 border-amber-400 shadow-[0_12px_35px_rgba(245,158,11,0.25)] ring-2 ring-amber-300/70'
+                      : 'bg-white border border-black/[0.08] shadow-2xs hover:border-[#F15A24]/30 hover:shadow-[0_12px_30px_rgba(241,90,36,0.08)]'
+                  }`}
                 >
-                  {/* Top Category Tag */}
+                  {/* Gold Top Accent Bar if Employee of the Month */}
+                  {isBest && (
+                    <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 animate-pulse" />
+                  )}
+
+                  {/* Top Category Tag / Award Badge */}
                   <div>
                     <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="font-mono text-[0.60rem] font-bold tracking-wider bg-slate-100 text-slate-600 px-2 py-0.5 rounded uppercase group-hover:bg-[#FFF2EB] group-hover:text-[#F15A24] transition-colors">
-                        {member.tag}
-                      </span>
-                      <Icon size={14} className="text-slate-400 group-hover:text-[#F15A24] transition-colors" />
+                      {isBest ? (
+                        <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 px-2.5 py-0.5 rounded-full shadow-xs">
+                          <Crown size={12} className="text-slate-950 fill-slate-950" />
+                          <span className="font-mono text-[0.60rem] font-black tracking-wider uppercase">
+                            EMPLOYEE OF THE MONTH
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="font-mono text-[0.60rem] font-bold tracking-wider bg-slate-100 text-slate-600 px-2 py-0.5 rounded uppercase group-hover:bg-[#FFF2EB] group-hover:text-[#F15A24] transition-colors">
+                          {member.tag}
+                        </span>
+                      )}
+
+                      {isBest ? (
+                        <Sparkles size={16} className="text-amber-500 animate-bounce" />
+                      ) : (
+                        <Icon size={14} className="text-slate-400 group-hover:text-[#F15A24] transition-colors" />
+                      )}
                     </div>
 
                     {/* Circular Photo Frame for Team Member */}
                     <div className="flex items-center gap-4">
                       {/* Avatar Frame */}
-                      <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full border-2 border-[#F15A24]/30 group-hover:border-[#F15A24] bg-slate-100 overflow-hidden relative flex-shrink-0 transition-all shadow-md">
+                      <div className={`w-18 h-18 sm:w-20 sm:h-20 rounded-full overflow-hidden relative flex-shrink-0 transition-all shadow-md ${
+                        isBest
+                          ? 'ring-4 ring-amber-400 ring-offset-2 border-2 border-amber-500 bg-amber-50'
+                          : 'border-2 border-[#F15A24]/30 group-hover:border-[#F15A24] bg-slate-100'
+                      }`}>
                         <img
                           src={member.image}
                           alt={member.name}
                           className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-300"
                         />
-                        <div className="absolute bottom-1 right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
+                        {isBest ? (
+                          <div className="absolute bottom-1 right-1 w-4 h-4 bg-amber-500 rounded-full border-2 border-white shadow-sm flex items-center justify-center">
+                            <Star size={9} className="text-white fill-white" />
+                          </div>
+                        ) : (
+                          <div className="absolute bottom-1 right-1 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white shadow-sm" />
+                        )}
                       </div>
 
                       {/* Name & Department */}
                       <div>
-                        <h5 className="font-heading font-extrabold text-[1.1rem] sm:text-[1.18rem] text-[#0E1117] leading-tight group-hover:text-[#F15A24] transition-colors">
-                          {member.name}
-                        </h5>
-                        <span className="font-mono text-[0.68rem] sm:text-[0.72rem] font-semibold text-slate-500 block mt-1">
+                        <div className="flex items-center gap-1.5">
+                          <h5 className={`font-heading leading-tight transition-colors ${
+                            isBest
+                              ? 'font-black text-[1.12rem] sm:text-[1.20rem] text-amber-950'
+                              : 'font-extrabold text-[1.1rem] sm:text-[1.18rem] text-[#0E1117] group-hover:text-[#F15A24]'
+                          }`}>
+                            {member.name}
+                          </h5>
+                          {isBest && <Award size={16} className="text-amber-600 fill-amber-400 flex-shrink-0" />}
+                        </div>
+                        <span className={`font-mono text-[0.68rem] sm:text-[0.72rem] block mt-1 ${
+                          isBest ? 'font-bold text-amber-800' : 'font-semibold text-slate-500'
+                        }`}>
                           {member.department}
                         </span>
                       </div>
