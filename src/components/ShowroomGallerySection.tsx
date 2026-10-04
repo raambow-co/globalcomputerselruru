@@ -23,10 +23,25 @@ export interface GallerySlide {
   accentColor?: string;
   category: string;
   order?: number;
+  buttonText?: string;
+  stockStatus?: string;
 }
+
+export interface GalleryHeaderInfo {
+  eyebrow: string;
+  titlePrefix: string;
+  titleHighlight: string;
+}
+
+export const DEFAULT_GALLERY_HEADER: GalleryHeaderInfo = {
+  eyebrow: 'SHOWROOM SHOWCASE & HARDWARE GALLERY',
+  titlePrefix: 'Experience The Craft of',
+  titleHighlight: 'Next-Gen Computing.'
+};
 
 interface ShowroomGallerySectionProps {
   onOpenEnquiry?: (productName?: string) => void;
+  onOpenAdmin?: () => void;
 }
 
 export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
@@ -38,7 +53,9 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     subtitle: 'Hand-crafted precision assemblies built with Intel Core i9 / AMD Ryzen 9, custom liquid cooling loops, and ultra-quiet airflow dynamics.',
     image: '/assets/special_offer_1.png',
     specs: ['Intel Core i9 14th Gen', 'RTX 4080 / 4090 Super', '64GB DDR5 RGB RAM', '3-Year On-Site Warranty'],
-    accentColor: '#F15A24'
+    accentColor: '#F15A24',
+    buttonText: 'Inquire Availability & Price',
+    stockStatus: 'Verified In Stock @ Eluru'
   },
   {
     id: 'ultrawide-display',
@@ -48,7 +65,9 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     subtitle: 'Immersive panoramic canvas featuring 99% DCI-P3 wide color gamut, 10-bit color depth, and anti-glare IPS black panel technology.',
     image: '/assets/pro_monitor.webp',
     specs: ['4K UHD Curved Panel', '10-Bit Studio Color', '144Hz Refresh Rate', 'Thunderbolt 4 / Type-C'],
-    accentColor: '#0284C7'
+    accentColor: '#0284C7',
+    buttonText: 'Inquire Availability & Price',
+    stockStatus: 'Verified In Stock @ Eluru'
   },
   {
     id: 'creator-ecosystem',
@@ -58,7 +77,9 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     subtitle: 'From elite esports peripherals to heavy-duty multi-monitor creator suites, discover top-tier computing setups tuned for maximum productivity.',
     image: '/assets/special_offer_2.png',
     specs: ['Zero-Lag Latency', 'Acoustic Sound Treatment', 'Ergonomic Desk Fit', 'Instant Showroom Demo'],
-    accentColor: '#D97706'
+    accentColor: '#D97706',
+    buttonText: 'Inquire Availability & Price',
+    stockStatus: 'Verified In Stock @ Eluru'
   },
   {
     id: 'rtx-gpu',
@@ -68,7 +89,9 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     subtitle: 'Powerhouse graphics acceleration engineered for 4K ray-traced gaming, 3D Blender rendering, and local AI model execution.',
     image: '/assets/gpu_card.webp',
     specs: ['16GB GDDR6X VRAM', 'DLSS 3.5 Frame Gen', 'IceStorm 2.0 Cooling', 'PCIe 4.0 Super-Fast'],
-    accentColor: '#059669'
+    accentColor: '#059669',
+    buttonText: 'Inquire Availability & Price',
+    stockStatus: 'Verified In Stock @ Eluru'
   },
   {
     id: 'z790-board',
@@ -78,7 +101,9 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     subtitle: 'Military-grade power stages, quad Gen5 M.2 NVMe thermal heatsinks, and ultra-high frequency DDR5 XMP 3.0 memory overclocking.',
     image: '/assets/motherboard.webp',
     specs: ['20+1 Power Stages', 'PCIe 5.0 x16 Slot', 'WiFi 7 & 2.5G LAN', 'Reinforced Metal Armor'],
-    accentColor: '#7C3AED'
+    accentColor: '#7C3AED',
+    buttonText: 'Inquire Availability & Price',
+    stockStatus: 'Verified In Stock @ Eluru'
   },
   {
     id: 'mech-keyboard',
@@ -88,11 +113,13 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     subtitle: 'CNC-machined anodized aluminum chassis with custom factory-lubed mechanical switches, hot-swappable sockets, and acoustic foam dampening.',
     image: '/assets/mech_keyboard.webp',
     specs: ['Hot-Swappable PCB', 'Per-Key RGB Matrix', 'Gasket Mount Feel', 'Detachable Aviator Cable'],
-    accentColor: '#DB2777'
+    accentColor: '#DB2777',
+    buttonText: 'Inquire Availability & Price',
+    stockStatus: 'Verified In Stock @ Eluru'
   }
 ];
 
-export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ onOpenEnquiry }) => {
+export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ onOpenEnquiry, onOpenAdmin }) => {
   const [slides, setSlides] = useState<GallerySlide[]>(() => {
     try {
       const saved = localStorage.getItem('gc_gallery_slides_v1');
@@ -104,6 +131,14 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
     return DEFAULT_GALLERY_SLIDES;
   });
 
+  const [headerInfo, setHeaderInfo] = useState<GalleryHeaderInfo>(() => {
+    try {
+      const saved = localStorage.getItem('gc_gallery_header_v1');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {}
+    return DEFAULT_GALLERY_HEADER;
+  });
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
@@ -112,6 +147,7 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
   // Real-time Firestore sync
   useEffect(() => {
     try {
+      // 1. Gallery Slides Listener
       const unsub = onSnapshot(
         collection(db, 'gallery_slides'),
         (snapshot) => {
@@ -127,8 +163,10 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
                 image: data.image || '/assets/special_offer_1.png',
                 specs: Array.isArray(data.specs) ? data.specs : (typeof data.specs === 'string' ? data.specs.split(',').map((s: string) => s.trim()) : []),
                 accentColor: data.accentColor || '#F15A24',
-                category: data.category || 'WORKSTATIONS',
-                order: typeof data.order === 'number' ? data.order : 0
+                category: data.category || 'CUSTOM WORKSTATIONS',
+                order: typeof data.order === 'number' ? data.order : 0,
+                buttonText: data.buttonText || 'Inquire Availability & Price',
+                stockStatus: data.stockStatus || 'Verified In Stock @ Eluru'
               });
             });
             if (remoteSlides.length > 0) {
@@ -142,7 +180,31 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
           console.warn('Firestore gallery listener error:', error);
         }
       );
-      return () => unsub();
+
+      // 2. Header Info Listener
+      const unsubHeader = onSnapshot(
+        collection(db, 'site_settings'),
+        (snapshot) => {
+          snapshot.forEach((docSnap) => {
+            if (docSnap.id === 'gallery_header') {
+              const d = docSnap.data();
+              const newHeader = {
+                eyebrow: d.eyebrow || DEFAULT_GALLERY_HEADER.eyebrow,
+                titlePrefix: d.titlePrefix || DEFAULT_GALLERY_HEADER.titlePrefix,
+                titleHighlight: d.titleHighlight || DEFAULT_GALLERY_HEADER.titleHighlight,
+              };
+              setHeaderInfo(newHeader);
+              localStorage.setItem('gc_gallery_header_v1', JSON.stringify(newHeader));
+            }
+          });
+        },
+        (err) => console.warn('Header listener notice:', err)
+      );
+
+      return () => {
+        unsub();
+        unsubHeader();
+      };
     } catch (e) {
       console.warn('Firestore subscription failed:', e);
     }
@@ -156,6 +218,10 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) setSlides(parsed);
+        }
+        const savedHeader = localStorage.getItem('gc_gallery_header_v1');
+        if (savedHeader) {
+          setHeaderInfo(JSON.parse(savedHeader));
         }
       } catch (e) {}
     };
@@ -227,21 +293,34 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
       <div className="relative z-10 max-w-[1240px] mx-auto px-4 sm:px-6 w-full">
         
         {/* 2. Header & Filter Badges */}
-        <div className="flex flex-col items-center justify-center text-center mb-7 sm:mb-9">
+        <div className="flex flex-col items-center justify-center text-center mb-7 sm:mb-9 relative">
           
-          {/* Eyebrow Pill */}
-          <div className="inline-flex items-center gap-1.5 bg-orange-50/90 px-3.5 py-1 rounded-full border border-orange-200/80 shadow-2xs mb-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#F15A24] animate-bounce" />
-            <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
-              SHOWROOM SHOWCASE &amp; HARDWARE GALLERY
-            </span>
+          {/* Eyebrow Pill & Quick Admin Edit */}
+          <div className="flex items-center gap-2 mb-2">
+            <div className="inline-flex items-center gap-1.5 bg-orange-50/90 px-3.5 py-1 rounded-full border border-orange-200/80 shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#F15A24] animate-bounce" />
+              <span className="font-mono text-[0.66rem] font-bold tracking-[0.16em] text-[#F15A24] uppercase">
+                {headerInfo.eyebrow}
+              </span>
+            </div>
+
+            {onOpenAdmin && (
+              <button
+                type="button"
+                onClick={onOpenAdmin}
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0E1117] font-mono text-[0.62rem] font-bold border border-black/10 transition-all cursor-pointer shadow-2xs"
+                title="Edit this Gallery in Admin Panel"
+              >
+                <span>⚙ Edit Slideshow</span>
+              </button>
+            )}
           </div>
 
           {/* Main Title */}
           <h2 className="font-heading font-extrabold text-[clamp(1.6rem,2.8vw,2.3rem)] text-[#0E1117] tracking-tight leading-tight">
-            Experience The Craft of{' '}
+            {headerInfo.titlePrefix}{' '}
             <span className="text-[#F15A24] font-black">
-              Next-Gen Computing.
+              {headerInfo.titleHighlight}
             </span>
           </h2>
 
@@ -340,12 +419,12 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
                   onClick={() => onOpenEnquiry && onOpenEnquiry(currentSlide.title)}
                   className="py-3 px-5 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-yellow-300 hover:to-amber-400 text-[#0E1117] font-heading font-bold text-[0.86rem] rounded-xl flex items-center justify-center gap-2 shadow-yellow-cta transition-all duration-200 hover:scale-102 active:scale-98 cursor-pointer"
                 >
-                  <span>Inquire Availability &amp; Price</span>
+                  <span>{currentSlide.buttonText || 'Inquire Availability & Price'}</span>
                   <ArrowUpRight size={15} />
                 </button>
 
                 <div className="text-center sm:text-left text-[0.72rem] text-slate-500 font-mono">
-                  Verified In Stock @ Eluru
+                  {currentSlide.stockStatus || 'Verified In Stock @ Eluru'}
                 </div>
               </div>
             </div>
