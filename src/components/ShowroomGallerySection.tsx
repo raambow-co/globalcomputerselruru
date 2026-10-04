@@ -31,6 +31,16 @@ interface ShowroomGallerySectionProps {
 
 export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
   {
+    id: 'team-gce',
+    category: 'OUR TEAM',
+    tag: 'GLOBAL COMPUTERS ELURU',
+    title: 'Certified Engineers & Dedicated Hardware Specialists',
+    subtitle: 'Meet the passionate technology experts behind Eluru’s premier computer showroom and service center, dedicated to powering your digital lifestyle.',
+    image: '/assets/gce_team.jpg',
+    specs: ['Certified Engineers', 'Expert Consultation', 'On-Site Showroom Support', '100% Genuine Care'],
+    accentColor: '#F15A24'
+  },
+  {
     id: 'custom-rigs',
     category: 'CUSTOM WORKSTATIONS',
     tag: 'FLAGSHIP RIG ARCHITECTURE',
@@ -41,61 +51,21 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     accentColor: '#F15A24'
   },
   {
-    id: 'ultrawide-display',
-    category: 'CREATOR DISPLAYS',
-    tag: 'STUDIO COLOR ACCURACY',
-    title: '34" Curved 4K HDR Ultra-Wide Workflow Display',
-    subtitle: 'Immersive panoramic canvas featuring 99% DCI-P3 wide color gamut, 10-bit color depth, and anti-glare IPS black panel technology.',
-    image: '/assets/pro_monitor.webp',
-    specs: ['4K UHD Curved Panel', '10-Bit Studio Color', '144Hz Refresh Rate', 'Thunderbolt 4 / Type-C'],
-    accentColor: '#0284C7'
-  },
-  {
     id: 'creator-ecosystem',
-    category: 'STUDIO GEAR',
+    category: 'SHOWROOM SHOWCASE',
     tag: 'COMPLETE COMPUTING ECOSYSTEM',
     title: 'Ultra Pro Computing & Gaming Showcase',
     subtitle: 'From elite esports peripherals to heavy-duty multi-monitor creator suites, discover top-tier computing setups tuned for maximum productivity.',
     image: '/assets/special_offer_2.png',
     specs: ['Zero-Lag Latency', 'Acoustic Sound Treatment', 'Ergonomic Desk Fit', 'Instant Showroom Demo'],
-    accentColor: '#D97706'
-  },
-  {
-    id: 'rtx-gpu',
-    category: 'GRAPHICS & AI',
-    tag: 'EXTREME RAY TRACING',
-    title: 'GeForce RTX 4080 Super 16GB Triple-Fan Edition',
-    subtitle: 'Powerhouse graphics acceleration engineered for 4K ray-traced gaming, 3D Blender rendering, and local AI model execution.',
-    image: '/assets/gpu_card.webp',
-    specs: ['16GB GDDR6X VRAM', 'DLSS 3.5 Frame Gen', 'IceStorm 2.0 Cooling', 'PCIe 4.0 Super-Fast'],
-    accentColor: '#059669'
-  },
-  {
-    id: 'z790-board',
-    category: 'MOTHERBOARDS',
-    tag: 'EXTREME VRM THERMALS',
-    title: 'Z790 PCIe 5.0 Extreme Workstation Motherboard',
-    subtitle: 'Military-grade power stages, quad Gen5 M.2 NVMe thermal heatsinks, and ultra-high frequency DDR5 XMP 3.0 memory overclocking.',
-    image: '/assets/motherboard.webp',
-    specs: ['20+1 Power Stages', 'PCIe 5.0 x16 Slot', 'WiFi 7 & 2.5G LAN', 'Reinforced Metal Armor'],
-    accentColor: '#7C3AED'
-  },
-  {
-    id: 'mech-keyboard',
-    category: 'PERIPHERALS',
-    tag: 'CNC ALUMINUM CRAFTSMANSHIP',
-    title: 'AeroCNC Solid Aluminum Mechanical Keyboard',
-    subtitle: 'CNC-machined anodized aluminum chassis with custom factory-lubed mechanical switches, hot-swappable sockets, and acoustic foam dampening.',
-    image: '/assets/mech_keyboard.webp',
-    specs: ['Hot-Swappable PCB', 'Per-Key RGB Matrix', 'Gasket Mount Feel', 'Detachable Aviator Cable'],
-    accentColor: '#DB2777'
+    accentColor: '#0284C7'
   }
 ];
 
 export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ onOpenEnquiry }) => {
   const [slides, setSlides] = useState<GallerySlide[]>(() => {
     try {
-      const saved = localStorage.getItem('gc_gallery_slides_v1');
+      const saved = localStorage.getItem('gc_gallery_slides_v2');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -134,7 +104,7 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
             if (remoteSlides.length > 0) {
               remoteSlides.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
               setSlides(remoteSlides);
-              localStorage.setItem('gc_gallery_slides_v1', JSON.stringify(remoteSlides));
+              localStorage.setItem('gc_gallery_slides_v2', JSON.stringify(remoteSlides));
             }
           }
         },
@@ -152,7 +122,7 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
   useEffect(() => {
     const handleStorage = () => {
       try {
-        const saved = localStorage.getItem('gc_gallery_slides_v1');
+        const saved = localStorage.getItem('gc_gallery_slides_v2');
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) setSlides(parsed);
