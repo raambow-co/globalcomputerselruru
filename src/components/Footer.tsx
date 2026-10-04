@@ -57,9 +57,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
 
           {/* Quick Navigation & Direct Action Column (5 Columns on LG) */}
           <div className="lg:col-span-5 text-left flex flex-col justify-between">
-            <h4 className="font-mono text-[0.74rem] font-bold text-white tracking-[0.18em] uppercase mb-4 pb-2 border-b border-white/10">
+            <h2 className="font-mono text-[0.74rem] font-bold text-white tracking-[0.18em] uppercase mb-4 pb-2 border-b border-white/10">
               QUICK NAVIGATION
-            </h4>
+            </h2>
             
             <div className="grid grid-cols-2 gap-2.5 mb-6 text-[0.88rem]">
               {[

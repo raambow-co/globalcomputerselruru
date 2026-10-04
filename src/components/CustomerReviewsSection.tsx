@@ -169,6 +169,7 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
                 <iframe
                   src={video.embedUrl}
                   title={video.title}
+                  loading="lazy"
                   className="w-full h-[460px] sm:h-[500px] border-0"
                   frameBorder="0"
                   scrolling="no"
@@ -195,19 +196,19 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
               {/* Video Card Footer Info */}
               <div className="p-4 sm:p-5 bg-white flex flex-col justify-between flex-grow text-left">
                 <div>
-                  <h3 className="font-heading font-bold text-[1.02rem] text-[#0E1117] leading-snug mb-1.5 group-hover:text-[#F15A24] transition-colors">
+                  <h3 className="font-heading font-bold text-[1.02rem] text-[#0E1117] leading-snug mb-1.5 group-hover:text-[#D94814] transition-colors">
                     {video.title}
                   </h3>
 
                   {video.description && (
-                    <p className="text-[0.82rem] text-[#64748B] leading-relaxed mb-3">
+                    <p className="text-[0.82rem] text-[#475569] leading-relaxed mb-3">
                       {video.description}
                     </p>
                   )}
                 </div>
 
                 <div className="pt-3 border-t border-black/[0.05] flex items-center justify-between text-[0.76rem]">
-                  <div className="flex items-center gap-1.5 text-emerald-600 font-medium">
+                  <div className="flex items-center gap-1.5 text-emerald-700 font-semibold">
                     <ShieldCheck size={14} />
                     <span>Verified Customer Story</span>
                   </div>
@@ -216,7 +217,8 @@ export const CustomerReviewsSection: React.FC<CustomerReviewsSectionProps> = ({
                     href={video.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-heading font-bold text-[#F15A24] hover:underline inline-flex items-center gap-1"
+                    aria-label={`Open Instagram review: ${video.title}`}
+                    className="font-heading font-bold text-[#D94814] hover:underline inline-flex items-center gap-1"
                   >
                     <span>Open on Instagram</span>
                     <ArrowUpRight size={13} />

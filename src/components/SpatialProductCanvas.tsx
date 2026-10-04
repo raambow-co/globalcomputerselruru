@@ -268,9 +268,13 @@ export const SpatialProductCanvas: React.FC<SpatialProductCanvasProps> = ({
                   <img
                     src={prod.image}
                     alt={prod.name}
+                    width={240}
+                    height={240}
                     className={`w-full h-auto select-none pointer-events-auto ${prod.dropShadowClass} transition-all duration-300`}
                     loading="eager"
                     decoding="async"
+                    // @ts-ignore
+                    fetchpriority="high"
                   />
                 </div>
 

@@ -10,6 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- Preload LCP Hero Product Images -->
+    <link rel="preload" as="image" href="/assets/monitorherocurved.webp" fetchpriority="high" type="image/webp" />
+    <link rel="preload" as="image" href="/assets/motherboardhero.webp" fetchpriority="high" type="image/webp" />
+
     <!-- Google Fonts Non-Blocking Load with Font-Display Swap -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" media="print" onload="this.media='all'" />
@@ -17,18 +21,28 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" />
     </noscript>
 
-    <!-- Google tag (gtag.js) - Google Analytics Deferred Execution -->
+    <!-- Google tag (gtag.js) - Google Analytics Idle Execution -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-QBRCMSQV0P', { send_page_view: true });
 
-      window.addEventListener('load', function() {
+      function initGA() {
+        if (window.__ga_initialized) return;
+        window.__ga_initialized = true;
         var s = document.createElement('script');
         s.async = true;
         s.src = 'https://www.googletagmanager.com/gtag/js?id=G-QBRCMSQV0P';
         document.head.appendChild(s);
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(function() { setTimeout(initGA, 2500); });
+      } else {
+        window.addEventListener('load', function() { setTimeout(initGA, 2500); });
+      }
+      ['scroll', 'touchstart', 'click'].forEach(function(ev) {
+        window.addEventListener(ev, initGA, { once: true, passive: true });
       });
     </script>
 

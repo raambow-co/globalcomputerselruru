@@ -321,19 +321,23 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
 
           {/* 5. Minimal Bottom Pagination Indicators */}
           <div className="py-3 bg-slate-950 border-t border-white/10 flex items-center justify-between px-6">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1">
               {filteredSlides.map((_, idx) => (
                 <button
                   key={idx}
                   type="button"
                   onClick={() => setCurrentIndex(idx)}
                   aria-label={`Go to slide ${idx + 1}`}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${
-                    idx === currentIndex
-                      ? 'w-8 h-2 bg-[#F15A24]'
-                      : 'w-2 h-2 bg-white/30 hover:bg-white/60'
-                  }`}
-                />
+                  className="p-2 flex items-center justify-center cursor-pointer group"
+                >
+                  <span
+                    className={`transition-all duration-300 rounded-full ${
+                      idx === currentIndex
+                        ? 'w-8 h-2 bg-[#F15A24]'
+                        : 'w-2 h-2 bg-white/30 group-hover:bg-white/60'
+                    }`}
+                  />
+                </button>
               ))}
             </div>
 

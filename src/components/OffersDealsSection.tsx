@@ -297,19 +297,23 @@ export const OffersDealsSection: React.FC<OffersDealsSectionProps> = ({ onOpenEn
           </div>
 
           {/* 5. Pagination Indicator Dots */}
-          <div className="py-2 bg-slate-50/80 border-t border-black/[0.04] flex items-center justify-center gap-1.5">
+          <div className="py-2 bg-slate-50/80 border-t border-black/[0.04] flex items-center justify-center gap-1">
             {offers.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
                 onClick={() => setCurrentIndex(idx)}
                 aria-label={`Go to slide ${idx + 1}`}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  idx === currentIndex
-                    ? 'w-6 h-1.5 bg-[#F15A24]'
-                    : 'w-1.5 h-1.5 bg-black/20 hover:bg-black/40'
-                }`}
-              />
+                className="p-2 flex items-center justify-center cursor-pointer group"
+              >
+                <span
+                  className={`transition-all duration-300 rounded-full ${
+                    idx === currentIndex
+                      ? 'w-6 h-1.5 bg-[#F15A24]'
+                      : 'w-1.5 h-1.5 bg-black/20 group-hover:bg-black/40'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>
