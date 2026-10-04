@@ -227,10 +227,10 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
           </div>
         </div>
 
-        {/* 4. Team Specialists Section (Frames with Role Badges for Future Emp Details) */}
+        {/* 4. Team Specialists Section */}
         <div>
           {/* Subheader */}
-          <div className="flex items-center justify-between gap-4 mb-4 pb-2 border-b border-black/[0.06]">
+          <div className="flex items-center justify-between gap-4 mb-5 pb-2 border-b border-black/[0.06]">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#F15A24]" />
               <h4 className="font-mono text-[0.74rem] font-bold text-[#0E1117] tracking-wider uppercase">
@@ -242,61 +242,41 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
             </span>
           </div>
 
-          {/* 4 Side-by-Side Team Placeholder Frames (Touch-Swipeable on Mobile, Grid on Desktop) */}
-          <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
-            {teamMembers.map((member) => {
-              const Icon = member.icon;
-
-              return (
-                <div
-                  key={member.id}
-                  className="min-w-[260px] sm:min-w-0 flex-shrink-0 sm:flex-shrink snap-center group bg-white rounded-2xl p-4 sm:p-5 border border-black/[0.08] shadow-2xs transition-all duration-200 hover:-translate-y-1 hover:border-[#F15A24]/30 hover:shadow-[0_12px_30px_rgba(241,90,36,0.08)] flex flex-col justify-between text-left relative overflow-hidden"
-                >
-                  {/* Top Category Tag */}
-                  <div>
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="font-mono text-[0.60rem] font-bold tracking-wider bg-slate-100 text-slate-600 px-2 py-0.5 rounded uppercase group-hover:bg-[#FFF2EB] group-hover:text-[#F15A24] transition-colors">
-                        {member.tag}
-                      </span>
-                      <Icon size={14} className="text-slate-400 group-hover:text-[#F15A24] transition-colors" />
-                    </div>
-
-                    {/* Circular Photo Frame for Team Member */}
-                    <div className="flex items-center gap-3.5 mb-3">
-                      {/* Avatar Frame */}
-                      <div className="w-14 h-14 rounded-full border-2 border-[#F15A24]/30 group-hover:border-[#F15A24] bg-slate-100 overflow-hidden relative flex-shrink-0 transition-all shadow-sm">
-                        <img
-                          src={member.image}
-                          alt={member.name}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
-                      </div>
-
-                      {/* Name & Department */}
-                      <div>
-                        <h5 className="font-heading font-extrabold text-[1.05rem] text-[#0E1117] leading-tight group-hover:text-[#F15A24] transition-colors">
-                          {member.name}
-                        </h5>
-                        <span className="font-mono text-[0.66rem] font-semibold text-slate-500 block mt-0.5">
-                          {member.department}
-                        </span>
-                      </div>
-                    </div>
+          {/* 4 Side-by-Side Team Cards with Big Photos */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {teamMembers.map((member) => (
+              <div
+                key={member.id}
+                className="group bg-white rounded-3xl p-3 sm:p-3.5 border border-black/[0.08] shadow-2xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#F15A24]/30 hover:shadow-[0_16px_35px_rgba(241,90,36,0.1)] flex flex-col text-left relative overflow-hidden"
+              >
+                {/* Big Portrait Image Container */}
+                <div className="w-full h-64 sm:h-72 rounded-2xl overflow-hidden relative bg-slate-100 shadow-inner">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Subtle Gradient Shadow at bottom of photo on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Category Pill Overlaid Top-Left */}
+                  <div className="absolute top-3 left-3 bg-black/70 backdrop-blur-md text-amber-300 border border-white/15 px-2.5 py-1 rounded-full font-mono text-[0.60rem] font-bold tracking-wider uppercase shadow-md">
+                    {member.tag}
                   </div>
-
-                  {/* Frame Status Badge */}
-                  <div className="pt-3 mt-3 border-t border-black/[0.05] flex items-center justify-between text-[0.70rem] text-slate-400 font-mono">
-                    <span className="flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                      Showroom Active
-                    </span>
-                    <span className="text-[#F15A24] font-semibold">Eluru Lab</span>
-                  </div>
-
                 </div>
-              );
-            })}
+
+                {/* Name & Department Below Image */}
+                <div className="px-1 py-3">
+                  <h5 className="font-heading font-extrabold text-[1.15rem] sm:text-[1.2rem] text-[#0E1117] leading-tight group-hover:text-[#F15A24] transition-colors">
+                    {member.name}
+                  </h5>
+                  <span className="font-mono text-[0.68rem] font-bold text-[#F15A24] block mt-1 uppercase tracking-wide">
+                    {member.department}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
