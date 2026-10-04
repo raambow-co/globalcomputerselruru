@@ -3,10 +3,9 @@ import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react';
 
 interface FooterProps {
   onOpenEnquiry: (topic?: string) => void;
-  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry, onOpenAdmin }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
   return (
     <footer
       id="footer"
@@ -116,7 +115,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry, onOpenAdmin }) =>
             <span className="text-white font-semibold">ELURU.AP // AUTHENTIC HARDWARE DESK</span>
           </div>
 
-          {/* Legal / Admin Access Links */}
+          {/* Legal / Policy Links */}
           <div className="flex items-center gap-5 text-[0.88rem] text-slate-300 font-medium">
             <a href="#faq" className="hover:text-white transition-colors">
               Privacy Info
@@ -125,18 +124,6 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry, onOpenAdmin }) =>
             <a href="#faq" className="hover:text-white transition-colors">
               Support Policy
             </a>
-            {onOpenAdmin && (
-              <>
-                <span className="text-white/30">·</span>
-                <button
-                  type="button"
-                  onClick={onOpenAdmin}
-                  className="text-amber-400 hover:text-amber-300 font-mono text-[0.76rem] font-bold underline transition-colors cursor-pointer"
-                >
-                  Admin Portal ⚙
-                </button>
-              </>
-            )}
           </div>
 
         </div>

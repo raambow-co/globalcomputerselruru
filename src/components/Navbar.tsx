@@ -3,10 +3,9 @@ import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   onOpenEnquiry: () => void;
-  onOpenAdmin?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry, onOpenAdmin }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -68,19 +67,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry, onOpenAdmin }) =>
         {/* Action Buttons */}
         <div className="flex items-center gap-2 sm:gap-3">
           
-          {/* Admin Portal Button */}
-          {onOpenAdmin && (
-            <button
-              type="button"
-              onClick={onOpenAdmin}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0E1117] font-mono text-[0.72rem] font-bold border border-black/10 transition-all cursor-pointer hover:scale-102 active:scale-98"
-              title="Open Admin Desk (Alt+A)"
-            >
-              <ShieldCheck size={13} className="text-[#F15A24]" />
-              <span className="hidden lg:inline">Admin Desk</span>
-            </button>
-          )}
-
           {/* Enquire CTA */}
           <button
             type="button"
@@ -131,20 +117,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry, onOpenAdmin }) =>
                 {item.label}
               </a>
             ))}
-            
-            {onOpenAdmin && (
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenAdmin();
-                }}
-                className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-[#0E1117] rounded-xl font-mono text-[0.82rem] font-bold flex items-center justify-center gap-2 border border-black/10 cursor-pointer"
-              >
-                <ShieldCheck size={16} className="text-[#F15A24]" />
-                <span>Admin Management Desk</span>
-              </button>
-            )}
 
             <div className="pt-2 border-t border-black/10">
               <button
