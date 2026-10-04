@@ -277,12 +277,12 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
               style={{ backgroundImage: `url(${currentSlide.image})` }}
             />
 
-            {/* Fully Occupied Image */}
+            {/* Fully Occupied Edge-to-Edge Image */}
             <img
               key={currentSlide.id}
               src={currentSlide.image}
               alt={currentSlide.title}
-              className="relative z-10 w-full h-full object-contain p-2 sm:p-6 animate-in fade-in zoom-in-95 duration-500 select-none"
+              className="relative z-10 w-full h-full object-cover animate-in fade-in zoom-in-95 duration-500 select-none"
               loading="eager"
             />
 
