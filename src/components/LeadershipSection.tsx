@@ -20,7 +20,6 @@ interface LeadershipSectionProps {
 interface TeamMember {
   id: string;
   name: string;
-  role: string;
   department: string;
   image: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
@@ -34,7 +33,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
     {
       id: 'team-kamal',
       name: 'Kamal',
-      role: 'Custom Workstation Builds & Performance Tuning',
       department: 'Custom PC & Gaming Division',
       image: '/assets/Kamal.jpg',
       icon: Cpu,
@@ -43,7 +41,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
     {
       id: 'team-krupamani',
       name: 'Krupamani',
-      role: 'Micro-Soldering, GPU Rework & Motherboard Repair',
       department: 'Laptop & Hardware Service Lab',
       image: '/assets/Krupamani.jpg',
       icon: Wrench,
@@ -52,7 +49,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
     {
       id: 'team-phani',
       name: 'Phani',
-      role: 'Corporate Fleet Hardware, AMC & School Labs',
       department: 'Commercial & B2B Sales',
       image: '/assets/Phani.jpg',
       icon: Briefcase,
@@ -61,7 +57,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
     {
       id: 'team-srinu',
       name: 'Srinu',
-      role: 'Commercial CCTV, Biometrics & Structured Cabling',
       department: 'Surveillance & Infrastructure',
       image: '/assets/Srinu.jpg',
       icon: Network,
@@ -285,9 +280,6 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                         </h5>
                         <span className="font-mono text-[0.66rem] font-semibold text-slate-500 block mt-0.5">
                           {member.department}
-                        </span>
-                        <span className="text-[0.70rem] text-slate-400 block mt-0.5 line-clamp-1">
-                          {member.role}
                         </span>
                       </div>
                     </div>
