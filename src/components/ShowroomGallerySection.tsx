@@ -11,6 +11,8 @@ import {
   HardDrive
 } from 'lucide-react';
 
+import { db, collection, onSnapshot } from '../firebase';
+
 export interface GallerySlide {
   id: string;
   tag: string;
@@ -20,13 +22,14 @@ export interface GallerySlide {
   specs: string[];
   accentColor?: string;
   category: string;
+  order?: number;
 }
 
 interface ShowroomGallerySectionProps {
   onOpenEnquiry?: (productName?: string) => void;
 }
 
-const GALLERY_SLIDES: GallerySlide[] = [
+export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
   {
     id: 'custom-rigs',
     category: 'CUSTOM WORKSTATIONS',
@@ -90,18 +93,83 @@ const GALLERY_SLIDES: GallerySlide[] = [
 ];
 
 export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ onOpenEnquiry }) => {
+  const [slides, setSlides] = useState<GallerySlide[]>(() => {
+    try {
+      const saved = localStorage.getItem('gc_gallery_slides_v1');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {}
+    return DEFAULT_GALLERY_SLIDES;
+  });
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [activeCategory, setActiveCategory] = useState<string>('ALL');
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const categories = ['ALL', ...Array.from(new Set(GALLERY_SLIDES.map(s => s.category)))];
+  // Real-time Firestore sync
+  useEffect(() => {
+    try {
+      const unsub = onSnapshot(
+        collection(db, 'gallery_slides'),
+        (snapshot) => {
+          if (!snapshot.empty) {
+            const remoteSlides: GallerySlide[] = [];
+            snapshot.forEach((docSnap) => {
+              const data = docSnap.data();
+              remoteSlides.push({
+                id: docSnap.id,
+                tag: data.tag || 'FLAGSHIP HARDWARE',
+                title: data.title || 'Showroom Specimen',
+                subtitle: data.subtitle || '',
+                image: data.image || '/assets/special_offer_1.png',
+                specs: Array.isArray(data.specs) ? data.specs : (typeof data.specs === 'string' ? data.specs.split(',').map((s: string) => s.trim()) : []),
+                accentColor: data.accentColor || '#F15A24',
+                category: data.category || 'WORKSTATIONS',
+                order: typeof data.order === 'number' ? data.order : 0
+              });
+            });
+            if (remoteSlides.length > 0) {
+              remoteSlides.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+              setSlides(remoteSlides);
+              localStorage.setItem('gc_gallery_slides_v1', JSON.stringify(remoteSlides));
+            }
+          }
+        },
+        (error) => {
+          console.warn('Firestore gallery listener error:', error);
+        }
+      );
+      return () => unsub();
+    } catch (e) {
+      console.warn('Firestore subscription failed:', e);
+    }
+  }, []);
+
+  // Listen for local storage cross-tab sync
+  useEffect(() => {
+    const handleStorage = () => {
+      try {
+        const saved = localStorage.getItem('gc_gallery_slides_v1');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) setSlides(parsed);
+        }
+      } catch (e) {}
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, []);
+
+  const categories = ['ALL', ...Array.from(new Set(slides.map(s => s.category || 'GENERAL')))];
 
   const filteredSlides = activeCategory === 'ALL' 
-    ? GALLERY_SLIDES 
-    : GALLERY_SLIDES.filter(s => s.category === activeCategory);
+    ? slides 
+    : slides.filter(s => s.category === activeCategory);
 
-  const currentSlide = filteredSlides[currentIndex] || filteredSlides[0] || GALLERY_SLIDES[0];
+  const currentSlide = filteredSlides[currentIndex] || filteredSlides[0] || DEFAULT_GALLERY_SLIDES[0];
 
   // Auto-play timer (5.5 seconds per slide)
   useEffect(() => {

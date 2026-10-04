@@ -14,13 +14,14 @@ export interface OfferSlide {
   badge?: string;
   description: string;
   offerTitle?: string;
+  order?: number;
 }
 
 interface OffersDealsSectionProps {
   onOpenEnquiry: (dealName?: string) => void;
 }
 
-const DEFAULT_OFFERS: OfferSlide[] = [
+export const DEFAULT_OFFERS: OfferSlide[] = [
   {
     id: 'offer-banner-1',
     badge: 'EXCLUSIVE SHOWROOM DEAL',

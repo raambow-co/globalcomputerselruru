@@ -3,9 +3,10 @@ import { ArrowUpRight, Clock, MapPin, Phone } from 'lucide-react';
 
 interface FooterProps {
   onOpenEnquiry: (topic?: string) => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry, onOpenAdmin }) => {
   return (
     <footer
       id="footer"
@@ -65,7 +66,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
               {[
                 { label: 'Home', href: '#' },
                 { label: 'Offers & Deals', href: '#deals' },
-                { label: 'Client Video Reviews', href: '#reviews' },
+                { label: 'Brands We Service', href: '#technology-showcase' },
+                { label: 'Client Reviews', href: '#reviews' },
+                { label: 'Hardware Gallery', href: '#gallery' },
                 { label: 'Social Media & QRs', href: '#social-media' },
                 { label: 'Founder & Team', href: '#leadership' },
                 { label: 'Product Enquiry', href: '#enquiry' },
@@ -113,15 +116,27 @@ export const Footer: React.FC<FooterProps> = ({ onOpenEnquiry }) => {
             <span className="text-white font-semibold">ELURU.AP // AUTHENTIC HARDWARE DESK</span>
           </div>
 
-          {/* Legal / Policy Links */}
+          {/* Legal / Admin Access Links */}
           <div className="flex items-center gap-5 text-[0.88rem] text-slate-300 font-medium">
             <a href="#faq" className="hover:text-white transition-colors">
-              Privacy Information
+              Privacy Info
             </a>
             <span className="text-white/30">·</span>
             <a href="#faq" className="hover:text-white transition-colors">
-              Terms &amp; Support Policy
+              Support Policy
             </a>
+            {onOpenAdmin && (
+              <>
+                <span className="text-white/30">·</span>
+                <button
+                  type="button"
+                  onClick={onOpenAdmin}
+                  className="text-amber-400 hover:text-amber-300 font-mono text-[0.76rem] font-bold underline transition-colors cursor-pointer"
+                >
+                  Admin Portal ⚙
+                </button>
+              </>
+            )}
           </div>
 
         </div>

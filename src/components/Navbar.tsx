@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
 
 interface NavbarProps {
   onOpenEnquiry: () => void;
+  onOpenAdmin?: () => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry, onOpenAdmin }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -36,11 +37,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-5">
           {[
             { label: 'Home', href: '#' },
             { label: 'Offers & Deals', href: '#deals', highlight: true, badge: 'OFFERS' },
+            { label: 'Brands We Service', href: '#technology-showcase' },
             { label: 'Client Reviews', href: '#reviews' },
+            { label: 'Showroom Gallery', href: '#gallery' },
             { label: 'Social & QRs', href: '#social-media' },
             { label: 'Founder & Team', href: '#leadership' },
             { label: 'Enquiry', href: '#enquiry' },
@@ -62,8 +65,23 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
           ))}
         </nav>
 
-        {/* Action Button */}
-        <div className="flex items-center gap-3">
+        {/* Action Buttons */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          
+          {/* Admin Portal Button */}
+          {onOpenAdmin && (
+            <button
+              type="button"
+              onClick={onOpenAdmin}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-200 text-[#0E1117] font-mono text-[0.72rem] font-bold border border-black/10 transition-all cursor-pointer hover:scale-102 active:scale-98"
+              title="Open Admin Desk (Alt+A)"
+            >
+              <ShieldCheck size={13} className="text-[#F15A24]" />
+              <span className="hidden lg:inline">Admin Desk</span>
+            </button>
+          )}
+
+          {/* Enquire CTA */}
           <button
             type="button"
             onClick={onOpenEnquiry}
@@ -93,7 +111,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
             {[
               { label: 'Home', href: '#' },
               { label: 'Special Offers & Deals', href: '#deals' },
+              { label: 'Brands We Service', href: '#technology-showcase' },
               { label: 'Client Video Reviews', href: '#reviews' },
+              { label: 'Showroom Hardware Gallery', href: '#gallery' },
               { label: 'Connect on Social Media', href: '#social-media' },
               { label: 'Founder & Leadership', href: '#leadership' },
               { label: 'Consultation & Enquiry', href: '#enquiry' },
@@ -111,7 +131,22 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenEnquiry }) => {
                 {item.label}
               </a>
             ))}
-            <div className="pt-4 border-t border-black/10">
+            
+            {onOpenAdmin && (
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenAdmin();
+                }}
+                className="w-full py-2 bg-slate-100 hover:bg-slate-200 text-[#0E1117] rounded-xl font-mono text-[0.82rem] font-bold flex items-center justify-center gap-2 border border-black/10 cursor-pointer"
+              >
+                <ShieldCheck size={16} className="text-[#F15A24]" />
+                <span>Admin Management Desk</span>
+              </button>
+            )}
+
+            <div className="pt-2 border-t border-black/10">
               <button
                 type="button"
                 onClick={() => {
