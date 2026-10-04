@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage & Main Showroom Landing -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.globalcomputerseluru.com/assets/gce_logo.webp</image:loc>
+      <image:title>Global Computers Eluru - Premium Technology Showroom</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.globalcomputerseluru.com/assets/gce_team.jpg</image:loc>
+      <image:title>Global Computers Eluru Team</image:title>
+    </image:image>
+  </url>
+
+  <!-- Hardware Showcase & Gallery -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/#gallery</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Special Offers & Discounts -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/#offers</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Chip-Level Services & Repairs -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/#services</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Founder & Team Leadership -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/#leadership</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Showroom Store Location & Contact -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/#location</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Frequently Asked Questions -->
+  <url>
+    <loc>https://www.globalcomputerseluru.com/#faq</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

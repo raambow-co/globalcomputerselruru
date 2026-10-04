@@ -1,0 +1,6 @@
+# robots.txt for https://www.globalcomputerseluru.com/
+User-agent: *
+Allow: /
+
+# Sitemap Location
+Sitemap: https://www.globalcomputerseluru.com/sitemap.xml
