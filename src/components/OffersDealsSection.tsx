@@ -26,14 +26,14 @@ export const DEFAULT_OFFERS: OfferSlide[] = [
     id: 'offer-banner-1',
     badge: 'EXCLUSIVE SHOWROOM DEAL',
     offerTitle: 'Next-Gen Custom Rig & Hardware Mega Specials',
-    image: '/assets/special_offer_1.png',
+    image: '/assets/special_offer_1.webp',
     description: 'Special Launch Offer: Premium Custom PC Builds with Genuine Warranty, High-Speed Performance & Zero-Cost Assembly.',
   },
   {
     id: 'offer-banner-2',
     badge: 'FESTIVE COMBO OFFER',
     offerTitle: 'Ultra Pro Computing & Accessories Showcase',
-    image: '/assets/special_offer_2.png',
+    image: '/assets/special_offer_2.webp',
     description: 'Limited Period Clearance: Best Price Guarantee on Gaming Monitors, Mechanical Keyboards, and Enterprise Hardware in Eluru.',
   },
   {

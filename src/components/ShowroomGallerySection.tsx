@@ -36,7 +36,7 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     tag: 'GLOBAL COMPUTERS ELURU',
     title: 'Certified Engineers & Dedicated Hardware Specialists',
     subtitle: 'Meet the passionate technology experts behind Eluru’s premier computer showroom and service center, dedicated to powering your digital lifestyle.',
-    image: '/assets/gce_team.jpg',
+    image: '/assets/gce_team.webp',
     specs: ['Certified Engineers', 'Expert Consultation', 'On-Site Showroom Support', '100% Genuine Care'],
     accentColor: '#F15A24'
   },
@@ -46,7 +46,7 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     tag: 'FLAGSHIP RIG ARCHITECTURE',
     title: 'Custom High-End Rigs & Creator Workstations',
     subtitle: 'Hand-crafted precision assemblies built with Intel Core i9 / AMD Ryzen 9, custom liquid cooling loops, and ultra-quiet airflow dynamics.',
-    image: '/assets/special_offer_1.png',
+    image: '/assets/special_offer_1.webp',
     specs: ['Intel Core i9 14th Gen', 'RTX 4080 / 4090 Super', '64GB DDR5 RGB RAM', '3-Year On-Site Warranty'],
     accentColor: '#F15A24'
   },
@@ -56,7 +56,7 @@ export const DEFAULT_GALLERY_SLIDES: GallerySlide[] = [
     tag: 'COMPLETE COMPUTING ECOSYSTEM',
     title: 'Ultra Pro Computing & Gaming Showcase',
     subtitle: 'From elite esports peripherals to heavy-duty multi-monitor creator suites, discover top-tier computing setups tuned for maximum productivity.',
-    image: '/assets/special_offer_2.png',
+    image: '/assets/special_offer_2.webp',
     specs: ['Zero-Lag Latency', 'Acoustic Sound Treatment', 'Ergonomic Desk Fit', 'Instant Showroom Demo'],
     accentColor: '#0284C7'
   }
@@ -94,7 +94,7 @@ export const ShowroomGallerySection: React.FC<ShowroomGallerySectionProps> = ({ 
                 tag: data.tag || 'FLAGSHIP HARDWARE',
                 title: data.title || 'Showroom Specimen',
                 subtitle: data.subtitle || '',
-                image: data.image || '/assets/special_offer_1.png',
+                image: data.image || '/assets/special_offer_1.webp',
                 specs: Array.isArray(data.specs) ? data.specs : (typeof data.specs === 'string' ? data.specs.split(',').map((s: string) => s.trim()) : []),
                 accentColor: data.accentColor || '#F15A24',
                 category: data.category || 'WORKSTATIONS',
