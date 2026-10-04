@@ -17,11 +17,12 @@ interface LeadershipSectionProps {
   onOpenEnquiry?: (topic?: string) => void;
 }
 
-interface TeamMemberPlaceholder {
+interface TeamMember {
   id: string;
+  name: string;
   role: string;
   department: string;
-  placeholderName: string;
+  image: string;
   icon: React.ComponentType<{ size?: number; className?: string }>;
   tag: string;
 }
@@ -29,36 +30,40 @@ interface TeamMemberPlaceholder {
 export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
   onOpenEnquiry,
 }) => {
-  const teamMembers: TeamMemberPlaceholder[] = [
+  const teamMembers: TeamMember[] = [
     {
-      id: 'team-1',
-      placeholderName: 'Senior Hardware Architect',
+      id: 'team-kamal',
+      name: 'Kamal',
       role: 'Custom Workstation Builds & Performance Tuning',
       department: 'Custom PC & Gaming Division',
+      image: '/assets/Kamal.jpg',
       icon: Cpu,
       tag: 'PC ARCHITECTURE',
     },
     {
-      id: 'team-2',
-      placeholderName: 'Chip-Level Service Specialist',
+      id: 'team-krupamani',
+      name: 'Krupamani',
       role: 'Micro-Soldering, GPU Rework & Motherboard Repair',
       department: 'Laptop & Hardware Service Lab',
+      image: '/assets/Krupamani.jpg',
       icon: Wrench,
       tag: 'CHIP-LEVEL LAB',
     },
     {
-      id: 'team-3',
-      placeholderName: 'Enterprise Solutions Lead',
+      id: 'team-phani',
+      name: 'Phani',
       role: 'Corporate Fleet Hardware, AMC & School Labs',
       department: 'Commercial & B2B Sales',
+      image: '/assets/Phani.jpg',
       icon: Briefcase,
       tag: 'ENTERPRISE FLEETS',
     },
     {
-      id: 'team-4',
-      placeholderName: 'Network & Security Engineer',
+      id: 'team-srinu',
+      name: 'Srinu',
       role: 'Commercial CCTV, Biometrics & Structured Cabling',
       department: 'Surveillance & Infrastructure',
+      image: '/assets/Srinu.jpg',
       icon: Network,
       tag: 'SECURITY & CCTV',
     },
@@ -261,23 +266,28 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
                       <Icon size={14} className="text-slate-400 group-hover:text-[#F15A24] transition-colors" />
                     </div>
 
-                    {/* Circular Placeholder Frame for Future Employee Photo */}
+                    {/* Circular Photo Frame for Team Member */}
                     <div className="flex items-center gap-3.5 mb-3">
                       {/* Avatar Frame */}
-                      <div className="w-13 h-13 rounded-full border-2 border-dashed border-black/15 group-hover:border-[#F15A24]/60 bg-[#FAFBFD] flex items-center justify-center relative flex-shrink-0 transition-colors shadow-inner">
-                        <User size={20} className="text-slate-400 group-hover:text-[#F15A24] transition-colors" />
-                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-500 rounded-full border border-white flex items-center justify-center">
-                          <span className="w-1.5 h-1.5 bg-white rounded-full" />
-                        </div>
+                      <div className="w-14 h-14 rounded-full border-2 border-[#F15A24]/30 group-hover:border-[#F15A24] bg-slate-100 overflow-hidden relative flex-shrink-0 transition-all shadow-sm">
+                        <img
+                          src={member.image}
+                          alt={member.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                        <div className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 rounded-full border-2 border-white" />
                       </div>
 
                       {/* Name & Department */}
                       <div>
-                        <h5 className="font-heading font-extrabold text-[0.96rem] text-[#0E1117] leading-tight group-hover:text-[#F15A24] transition-colors">
-                          {member.placeholderName}
+                        <h5 className="font-heading font-extrabold text-[1.05rem] text-[#0E1117] leading-tight group-hover:text-[#F15A24] transition-colors">
+                          {member.name}
                         </h5>
-                        <span className="font-mono text-[0.66rem] text-slate-400 block mt-0.5">
+                        <span className="font-mono text-[0.66rem] font-semibold text-slate-500 block mt-0.5">
                           {member.department}
+                        </span>
+                        <span className="text-[0.70rem] text-slate-400 block mt-0.5 line-clamp-1">
+                          {member.role}
                         </span>
                       </div>
                     </div>
