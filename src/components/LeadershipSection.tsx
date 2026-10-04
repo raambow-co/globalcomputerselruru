@@ -46,7 +46,7 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
       const unsub = onSnapshot(doc(db, 'team_settings', 'employee_of_the_month'), (docSnap) => {
         if (docSnap.exists()) {
           const data = docSnap.data();
-          const id = data?.employeeId || null;
+          const id = data?.employeeId || data?.id || data?.employeeName || null;
           setBestEmployeeId(id);
           if (id) {
             localStorage.setItem('gc_best_employee_id', id);
@@ -293,7 +293,14 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = ({
           <div className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 overflow-x-auto sm:overflow-visible pb-3 sm:pb-0 snap-x snap-mandatory no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 items-stretch">
             {teamMembers.map((member) => {
               const Icon = member.icon;
-              const isBest = bestEmployeeId === member.id;
+              const isBest = Boolean(
+                bestEmployeeId && (
+                  bestEmployeeId === member.id ||
+                  bestEmployeeId.toLowerCase() === member.name.toLowerCase() ||
+                  bestEmployeeId.toLowerCase().includes(member.name.toLowerCase()) ||
+                  member.id.toLowerCase().includes(bestEmployeeId.toLowerCase())
+                )
+              );
 
               return (
                 <div
