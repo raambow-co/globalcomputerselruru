@@ -40,7 +40,7 @@ import {
   onSnapshot, 
   serverTimestamp 
 } from '../firebase';
-import { GallerySlide, DEFAULT_GALLERY_SLIDES, GalleryHeaderInfo, DEFAULT_GALLERY_HEADER } from './ShowroomGallerySection';
+import { GallerySlide, DEFAULT_GALLERY_SLIDES } from './ShowroomGallerySection';
 import { OfferSlide, DEFAULT_OFFERS } from './OffersDealsSection';
 
 interface AdminPanelProps {
@@ -60,10 +60,10 @@ interface CustomerEnquiry {
 }
 
 const PRESET_IMAGES = [
-  { label: 'RTX 4080 Super GPU', url: '/assets/gpu_card.webp' },
-  { label: 'Curved 4K Ultra-Wide Monitor', url: '/assets/pro_monitor.webp' },
   { label: 'Custom Gaming Rig / Workstation', url: '/assets/special_offer_1.png' },
   { label: 'Showroom Setup / Pro Accessories', url: '/assets/special_offer_2.png' },
+  { label: 'Curved 4K Ultra-Wide Monitor', url: '/assets/pro_monitor.webp' },
+  { label: 'RTX 4080 Super Triple-Fan GPU', url: '/assets/gpu_card.webp' },
   { label: 'Z790 Extreme Motherboard', url: '/assets/motherboard.webp' },
   { label: 'AeroCNC Aluminum Keyboard', url: '/assets/mech_keyboard.webp' },
   { label: 'Epson EcoTank Heavy-Duty Printer', url: '/assets/epson_printer.webp' },
@@ -105,15 +105,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   // Active Tab
   const [activeTab, setActiveTab] = useState<'gallery' | 'offers' | 'enquiries'>('gallery');
 
-  // Gallery Header Settings State
-  const [galleryHeader, setGalleryHeader] = useState<GalleryHeaderInfo>(() => {
-    try {
-      const saved = localStorage.getItem('gc_gallery_header_v1');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {}
-    return DEFAULT_GALLERY_HEADER;
-  });
-
   // Gallery Slides State
   const [gallerySlides, setGallerySlides] = useState<GallerySlide[]>(() => {
     try {
@@ -145,7 +136,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   const [editingOffer, setEditingOffer] = useState<OfferSlide | null>(null);
   const [isOfferModalOpen, setIsOfferModalOpen] = useState(false);
 
-  const [showLivePreview, setShowLivePreview] = useState(true);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Auto show toast
@@ -170,16 +161,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
             const data = docSnap.data();
             list.push({
               id: docSnap.id,
-              tag: data.tag || 'FLAGSHIP HARDWARE',
+              tag: data.tag || 'HARDWARE SPEC',
               title: data.title || '',
               subtitle: data.subtitle || '',
               image: data.image || '/assets/special_offer_1.png',
               specs: Array.isArray(data.specs) ? data.specs : [],
               accentColor: data.accentColor || '#F15A24',
               category: data.category || 'CUSTOM WORKSTATIONS',
-              order: typeof data.order === 'number' ? data.order : 0,
-              buttonText: data.buttonText || 'Inquire Availability & Price',
-              stockStatus: data.stockStatus || 'Verified In Stock @ Eluru'
+              order: typeof data.order === 'number' ? data.order : 0
             });
           });
           list.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -190,27 +179,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
       (err) => console.warn('Gallery snapshot notice:', err)
     );
 
-    // 2. Header Info Listener
-    const unsubHeader = onSnapshot(
-      collection(db, 'site_settings'),
-      (snapshot) => {
-        snapshot.forEach((docSnap) => {
-          if (docSnap.id === 'gallery_header') {
-            const d = docSnap.data();
-            const newHeader = {
-              eyebrow: d.eyebrow || DEFAULT_GALLERY_HEADER.eyebrow,
-              titlePrefix: d.titlePrefix || DEFAULT_GALLERY_HEADER.titlePrefix,
-              titleHighlight: d.titleHighlight || DEFAULT_GALLERY_HEADER.titleHighlight,
-            };
-            setGalleryHeader(newHeader);
-            localStorage.setItem('gc_gallery_header_v1', JSON.stringify(newHeader));
-          }
-        });
-      },
-      (err) => console.warn('Header listener notice:', err)
-    );
-
-    // 3. Offers Listener
+    // 2. Offers Listener
     const unsubOffers = onSnapshot(
       collection(db, 'offers'),
       (snapshot) => {
@@ -235,7 +204,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
       (err) => console.warn('Offers snapshot notice:', err)
     );
 
-    // 4. Enquiries Listener
+    // 3. Enquiries Listener
     const unsubEnquiries = onSnapshot(
       collection(db, 'enquiries'),
       (snapshot) => {
@@ -260,7 +229,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
 
     return () => {
       unsubGallery();
-      unsubHeader();
       unsubOffers();
       unsubEnquiries();
     };
@@ -332,53 +300,25 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
   };
 
   // ==========================================
-  // GALLERY HEADER SETTINGS HANDLERS
-  // ==========================================
-  const handleSaveGalleryHeader = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await setDoc(doc(db, 'site_settings', 'gallery_header'), {
-        ...galleryHeader,
-        updatedAt: serverTimestamp()
-      });
-      localStorage.setItem('gc_gallery_header_v1', JSON.stringify(galleryHeader));
-      showToast('Showroom Gallery Section Header Updated & Synced!');
-    } catch (err) {
-      console.error('Header save error:', err);
-      localStorage.setItem('gc_gallery_header_v1', JSON.stringify(galleryHeader));
-      showToast('Saved to local storage');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // ==========================================
   // GALLERY SLIDESHOW HANDLERS
   // ==========================================
   const handleOpenAddSlide = () => {
     setEditingSlide({
       id: `slide_${Date.now()}`,
       category: 'CUSTOM WORKSTATIONS',
-      tag: 'FLAGSHIP RIG ARCHITECTURE',
+      tag: 'FLAGSHIP HARDWARE',
       title: '',
       subtitle: '',
       image: '/assets/special_offer_1.png',
-      specs: ['High Performance Cooling', 'Official Brand Warranty', 'Ready Showroom Unit', 'Ultra-Fast NVMe SSD'],
+      specs: ['High Performance Cooling', 'Official Brand Warranty', 'Ready Showroom Unit'],
       accentColor: '#F15A24',
-      order: gallerySlides.length,
-      buttonText: 'Inquire Availability & Price',
-      stockStatus: 'Verified In Stock @ Eluru'
+      order: gallerySlides.length
     });
     setIsSlideModalOpen(true);
   };
 
   const handleOpenEditSlide = (slide: GallerySlide) => {
-    setEditingSlide({ 
-      ...slide,
-      buttonText: slide.buttonText || 'Inquire Availability & Price',
-      stockStatus: slide.stockStatus || 'Verified In Stock @ Eluru'
-    });
+    setEditingSlide({ ...slide });
     setIsSlideModalOpen(true);
   };
 
@@ -401,8 +341,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
         specs: editingSlide.specs.filter(s => s.trim().length > 0),
         accentColor: editingSlide.accentColor || '#F15A24',
         order: editingSlide.order ?? 0,
-        buttonText: editingSlide.buttonText?.trim() || 'Inquire Availability & Price',
-        stockStatus: editingSlide.stockStatus?.trim() || 'Verified In Stock @ Eluru',
         updatedAt: serverTimestamp()
       };
 
@@ -426,6 +364,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
       showToast('Hardware Gallery Slide Saved & Synced to Cloud!');
     } catch (err: any) {
       console.error('Error saving slide:', err);
+      // Even if offline, update local storage
       const updatedList = [...gallerySlides];
       const existingIdx = updatedList.findIndex(s => s.id === editingSlide.id);
       if (existingIdx >= 0) {
@@ -867,87 +806,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
               {/* TAB 1: HARDWARE GALLERY SLIDESHOW MANAGER             */}
               {/* ==================================================== */}
               {activeTab === 'gallery' && (
-                <div className="space-y-6">
-                  
-                  {/* 1. Gallery Section Title & Header Customizer Box */}
-                  <div className="bg-white rounded-2xl border border-black/10 p-4 sm:p-5 shadow-sm">
-                    <div className="flex items-center justify-between mb-3 pb-2 border-b border-black/5">
-                      <div className="flex items-center gap-2">
-                        <Sparkles size={16} className="text-[#F15A24]" />
-                        <h4 className="font-heading font-bold text-[0.95rem] text-[#0E1117]">
-                          Showroom Section Header &amp; Titles
-                        </h4>
-                      </div>
-                      <span className="font-mono text-[0.66rem] text-slate-400">
-                        Section-Level Headings
-                      </span>
-                    </div>
-
-                    <form onSubmit={handleSaveGalleryHeader} className="space-y-3">
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <div>
-                          <label className="block text-[0.68rem] font-mono font-bold text-slate-500 uppercase mb-1">
-                            Eyebrow Badge Pill
-                          </label>
-                          <input
-                            type="text"
-                            value={galleryHeader.eyebrow}
-                            onChange={(e) => setGalleryHeader({ ...galleryHeader, eyebrow: e.target.value.toUpperCase() })}
-                            placeholder="e.g. SHOWROOM SHOWCASE & HARDWARE GALLERY"
-                            className="w-full px-3 py-2 bg-slate-50 border border-black/15 rounded-xl text-[0.80rem] font-mono outline-none focus:border-[#F15A24]"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-[0.68rem] font-mono font-bold text-slate-500 uppercase mb-1">
-                            Headline Prefix
-                          </label>
-                          <input
-                            type="text"
-                            value={galleryHeader.titlePrefix}
-                            onChange={(e) => setGalleryHeader({ ...galleryHeader, titlePrefix: e.target.value })}
-                            placeholder="e.g. Experience The Craft of"
-                            className="w-full px-3 py-2 bg-slate-50 border border-black/15 rounded-xl text-[0.82rem] font-semibold outline-none focus:border-[#F15A24]"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="block text-[0.68rem] font-mono font-bold text-slate-500 uppercase mb-1">
-                            Headline Highlight (Orange)
-                          </label>
-                          <input
-                            type="text"
-                            value={galleryHeader.titleHighlight}
-                            onChange={(e) => setGalleryHeader({ ...galleryHeader, titleHighlight: e.target.value })}
-                            placeholder="e.g. Next-Gen Computing."
-                            className="w-full px-3 py-2 bg-slate-50 border border-black/15 rounded-xl text-[0.82rem] font-bold text-[#F15A24] outline-none focus:border-[#F15A24]"
-                          />
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between pt-1">
-                        <div className="text-[0.70rem] text-slate-500 font-mono">
-                          Live Header Preview: <span className="font-bold text-[#0E1117]">{galleryHeader.titlePrefix} </span><span className="font-bold text-[#F15A24]">{galleryHeader.titleHighlight}</span>
-                        </div>
-                        <button
-                          type="submit"
-                          disabled={loading}
-                          className="px-4 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-mono text-[0.74rem] font-bold transition-all shadow-sm cursor-pointer"
-                        >
-                          {loading ? 'Saving...' : 'Update Section Title'}
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-
-                  {/* 2. Slides List Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="space-y-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                     <div>
                       <h3 className="font-heading font-extrabold text-[1.1rem] text-[#0E1117]">
-                        Active Hardware Slideshow Items
+                        Active Hardware Showcase Slides
                       </h3>
                       <p className="text-[0.78rem] text-slate-500">
-                        Edit, reorder, change images, specifications, CTA labels, and theme accent colors.
+                        Changes sync in real-time to the main website showroom gallery section.
                       </p>
                     </div>
 
@@ -1004,7 +870,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                           </div>
 
                           {/* Specs Tags Preview */}
-                          <div className="flex flex-wrap gap-1 mb-3">
+                          <div className="flex flex-wrap gap-1 mb-4">
                             {slide.specs.slice(0, 3).map((spec, i) => (
                               <span
                                 key={i}
@@ -1018,12 +884,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                                 +{slide.specs.length - 3} more
                               </span>
                             )}
-                          </div>
-
-                          {/* Button CTA & Status Preview */}
-                          <div className="flex items-center justify-between text-[0.68rem] font-mono text-slate-400 bg-slate-50 p-2 rounded-lg border border-black/5 mb-3">
-                            <span className="truncate text-slate-700 font-semibold">{slide.buttonText || 'Inquire Price'}</span>
-                            <span className="text-[0.62rem] text-emerald-600 font-bold truncate">{slide.stockStatus || 'In Stock'}</span>
                           </div>
                         </div>
 
@@ -1578,61 +1438,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                 </div>
               </div>
 
-              {/* CTA Button Text & Stock Status Tag */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-[0.72rem] font-mono font-bold text-slate-600 uppercase mb-1">
-                    CTA Action Button Label
-                  </label>
-                  <input
-                    type="text"
-                    value={editingSlide.buttonText || 'Inquire Availability & Price'}
-                    onChange={(e) => setEditingSlide({ ...editingSlide, buttonText: e.target.value })}
-                    placeholder="e.g. Inquire Availability & Price"
-                    required
-                    className="w-full px-3.5 py-2.5 bg-white border border-black/15 rounded-xl text-[0.84rem] text-[#0E1117] font-semibold outline-none focus:border-[#F15A24]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[0.72rem] font-mono font-bold text-slate-600 uppercase mb-1">
-                    Stock &amp; Location Tag
-                  </label>
-                  <input
-                    type="text"
-                    value={editingSlide.stockStatus || 'Verified In Stock @ Eluru'}
-                    onChange={(e) => setEditingSlide({ ...editingSlide, stockStatus: e.target.value })}
-                    placeholder="e.g. Verified In Stock @ Eluru"
-                    required
-                    className="w-full px-3.5 py-2.5 bg-white border border-black/15 rounded-xl text-[0.84rem] font-mono text-[#0E1117] outline-none focus:border-[#F15A24]"
-                  />
-                </div>
-              </div>
-
-              {/* Accent Color Picker with Custom HEX input */}
+              {/* Accent Color Picker */}
               <div>
-                <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-[0.72rem] font-mono font-bold text-slate-600 uppercase">
-                    Visual Glow &amp; Theme Color Accent
-                  </label>
-                  <div className="flex items-center gap-1.5">
-                    <input
-                      type="color"
-                      value={editingSlide.accentColor || '#F15A24'}
-                      onChange={(e) => setEditingSlide({ ...editingSlide, accentColor: e.target.value })}
-                      className="w-5 h-5 rounded cursor-pointer border-0 bg-transparent"
-                      title="Pick custom color"
-                    />
-                    <input
-                      type="text"
-                      value={editingSlide.accentColor || '#F15A24'}
-                      onChange={(e) => setEditingSlide({ ...editingSlide, accentColor: e.target.value })}
-                      placeholder="#F15A24"
-                      className="w-20 px-2 py-0.5 bg-slate-50 border border-black/15 rounded font-mono text-[0.68rem] text-[#0E1117]"
-                    />
-                  </div>
-                </div>
-
+                <label className="block text-[0.72rem] font-mono font-bold text-slate-600 uppercase mb-1.5">
+                  Visual Glow &amp; Theme Color Accent
+                </label>
                 <div className="flex items-center gap-2 flex-wrap">
                   {COLOR_ACCENTS.map((col) => (
                     <button
@@ -1642,7 +1452,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                       className={`px-3 py-1.5 rounded-xl font-mono text-[0.70rem] font-bold flex items-center gap-1.5 border transition-all cursor-pointer ${
                         editingSlide.accentColor === col.value
                           ? 'border-black ring-2 ring-black/20 text-[#0E1117] bg-white shadow-sm'
-                          : 'border-black/10 text-slate-600 bg-slate-50 hover:bg-slate-100'
+                          : 'border-black/10 text-slate-600 bg-slate-50'
                       }`}
                     >
                       <span
@@ -1652,70 +1462,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ isOpen, onClose }) => {
                       <span>{col.label}</span>
                     </button>
                   ))}
-                </div>
-              </div>
-
-              {/* Live Preview Card in Admin Modal */}
-              <div className="p-4 bg-slate-50 rounded-2xl border border-black/10">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="font-mono text-[0.66rem] font-bold text-slate-500 uppercase flex items-center gap-1.5">
-                    <Eye size={13} className="text-[#F15A24]" />
-                    <span>Live Slide Preview (What visitors will see)</span>
-                  </span>
-                  <span className="font-mono text-[0.62rem] text-slate-400">
-                    Category: {editingSlide.category || 'WORKSTATIONS'}
-                  </span>
-                </div>
-
-                <div className="bg-white rounded-xl border border-black/10 p-4 shadow-sm relative overflow-hidden flex flex-col sm:flex-row gap-4 items-center">
-                  <div 
-                    className="absolute top-0 left-0 right-0 h-1"
-                    style={{ backgroundColor: editingSlide.accentColor || '#F15A24' }}
-                  />
-
-                  <div className="flex-grow space-y-1.5 text-left w-full sm:w-auto">
-                    <span 
-                      className="font-mono text-[0.58rem] font-bold px-2 py-0.5 rounded-full uppercase inline-block border"
-                      style={{
-                        backgroundColor: `${editingSlide.accentColor || '#F15A24'}15`,
-                        color: editingSlide.accentColor || '#F15A24',
-                        borderColor: `${editingSlide.accentColor || '#F15A24'}40`
-                      }}
-                    >
-                      {editingSlide.tag || 'FLAGSHIP HARDWARE'}
-                    </span>
-                    <h5 className="font-heading font-extrabold text-[1rem] text-[#0E1117] leading-tight">
-                      {editingSlide.title || 'Product Headline'}
-                    </h5>
-                    <p className="text-[0.74rem] text-slate-500 line-clamp-2">
-                      {editingSlide.subtitle || 'Product description will appear here...'}
-                    </p>
-
-                    <div className="flex flex-wrap gap-1 pt-1">
-                      {editingSlide.specs.map((spec, i) => (
-                        <span key={i} className="bg-slate-100 text-slate-700 font-mono text-[0.60rem] px-2 py-0.5 rounded">
-                          ✓ {spec}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="pt-2 flex items-center gap-3">
-                      <span className="px-3 py-1.5 bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 font-bold text-[0.72rem] rounded-lg shadow-sm">
-                        {editingSlide.buttonText || 'Inquire Availability & Price'}
-                      </span>
-                      <span className="text-[0.64rem] font-mono text-slate-400">
-                        {editingSlide.stockStatus || 'Verified In Stock @ Eluru'}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="w-28 h-24 bg-slate-50 rounded-xl p-1.5 border border-black/5 flex items-center justify-center flex-shrink-0">
-                    <img
-                      src={editingSlide.image}
-                      alt="Preview"
-                      className="max-h-full max-w-full object-contain"
-                    />
-                  </div>
                 </div>
               </div>
 

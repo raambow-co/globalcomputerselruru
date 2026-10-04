@@ -94,7 +94,6 @@ export const App: React.FC = () => {
         {/* 3. Showroom & Hardware Experience Showcase Gallery Slideshow */}
         <ShowroomGallerySection
           onOpenEnquiry={(topic) => handleOpenEnquiry(topic || 'Showroom Hardware Inquiry')}
-          onOpenAdmin={() => setAdminOpen(true)}
         />
 
         {/* 4. Connect with Us on Social Media (4 QR Codes) */}
