@@ -98,8 +98,43 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = () => {
     }
   });
 
-  // 1. Real-time Firestore sync for dynamic Team Members
+  // 1. Robust Dual-Engine (REST + Real-Time) Sync for Team Members
   useEffect(() => {
+    const fetchTeamFromRest = async () => {
+      try {
+        const res = await fetch("https://firestore.googleapis.com/v1/projects/globalcomputerseluru-dddd3/databases/(default)/documents/team_members");
+        if (res.ok) {
+          const data = await res.json();
+          if (data && Array.isArray(data.documents) && data.documents.length > 0) {
+            const list: TeamMemberData[] = data.documents.map((doc: any) => {
+              const f = doc.fields || {};
+              const id = f.id?.stringValue || doc.name.split("/").pop();
+              return {
+                id,
+                name: f.name?.stringValue || "",
+                department: f.department?.stringValue || "",
+                image: f.image?.stringValue || "/assets/Kamal.webp",
+                tag: f.tag?.stringValue || "SHOWROOM SPECIALIST",
+                badgeType: f.badgeType?.stringValue || "none",
+                badgeTitle: f.badgeTitle?.stringValue || "",
+                bio: f.bio?.stringValue || "",
+                order: parseInt(f.order?.integerValue || "0", 10)
+              };
+            });
+            list.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+            setTeamList(list);
+            try {
+              localStorage.setItem("gc_team_members_v2", JSON.stringify(list));
+            } catch (e) {}
+          }
+        }
+      } catch (e) {
+        console.warn("Team REST fetch fallback notice:", e);
+      }
+    };
+
+    fetchTeamFromRest();
+
     try {
       if (!db) return;
       const unsub = onSnapshot(collection(db, "team_members"), (snapshot) => {
@@ -114,6 +149,9 @@ export const LeadershipSection: React.FC<LeadershipSectionProps> = () => {
             localStorage.setItem("gc_team_members_v2", JSON.stringify(list));
           } catch (e) {}
         }
+      }, (err) => {
+        console.warn("Firestore snapshot error, re-fetching via REST:", err);
+        fetchTeamFromRest();
       });
       return () => unsub();
     } catch (e) {
